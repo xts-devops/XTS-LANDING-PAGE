@@ -1,0 +1,49 @@
+---
+import Section from '../ui/Section.astro';
+import Icon from '../ui/Icon.astro';
+import Placeholder from '../ui/Placeholder.astro';
+import Chip from '../ui/Chip.astro';
+import { industries } from '../../content/industries';
+import { site } from '../../content/site';
+import '../../styles/industries.css';
+---
+
+<Section id="industries" {...site.industries}>
+  <div class="industries-layout">
+    <ul class="industry-directory">
+      {industries.map((industry, index) => (
+        <li>
+          <a href={`#industry-${industry.id}`}>
+            <Icon name={industry.icon} />
+            <span>{industry.name}</span>
+            <span class="industry-number" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="industry-panels">
+      {industries.map((industry) => (
+        <article
+          class="industry-panel"
+          id={`industry-${industry.id}`}
+          aria-labelledby={`industry-${industry.id}-title`}
+        >
+          <Placeholder icon={industry.icon} />
+          <div class="industry-copy">
+            <h3 id={`industry-${industry.id}-title`}>{industry.name}</h3>
+            <p>{industry.summary}</p>
+            <ul>
+              {industry.examples.map((example) => (
+                <li>
+                  <Chip>{example}</Chip>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Section>

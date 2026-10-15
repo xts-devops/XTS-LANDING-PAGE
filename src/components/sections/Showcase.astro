@@ -1,0 +1,38 @@
+---
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import Placeholder from '../ui/Placeholder.astro';
+import { showcases } from '../../content/showcase';
+import { site } from '../../content/site';
+import '../../styles/showcase.css';
+---
+
+<Section id="showcase" {...site.showcase}>
+  <div class="showcase-grid">
+    {showcases.map((item, index) => (
+      <Card class={`showcase-card showcase-card-${index}`}>
+        <Placeholder
+          icon={index === 0 ? 'store' : index === 1 ? 'truck' : 'bot'}
+        />
+        <div class="showcase-content">
+          <p class="showcase-tags">{item.tags.join(' / ')}</p>
+          <h3>{item.title}</h3>
+          <ul>
+            {item.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+          <Button
+            href="#contact"
+            variant="text"
+            label={`${site.showcase.cta}: ${item.title}`}
+          >
+            {site.showcase.cta}
+          </Button>
+          <p class="showcase-note">{site.showcase.label}</p>
+        </div>
+      </Card>
+    ))}
+  </div>
+</Section>

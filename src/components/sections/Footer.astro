@@ -1,0 +1,43 @@
+---
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import { brand } from '../../content/brand';
+import { navigation, site, contact } from '../../content/site';
+---
+
+<footer class="site-footer">
+  <Container>
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="brand-link" aria-label={site.homeLabel}>
+          <img
+            src={brand.whiteLogo.src}
+            width={brand.whiteLogo.width}
+            height={brand.whiteLogo.height}
+            alt={brand.whiteLogo.alt}
+            loading="lazy"
+          />
+        </a>
+        <p class="footer-tagline">{site.footer.summary}</p>
+      </div>
+      <nav aria-label={site.footerNavLabel}>
+        {navigation.map(({ href, label }) => (
+          <a href={href}>{label}</a>
+        ))}
+      </nav>
+      <div class="footer-contact">
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        © {new Date().getFullYear()} {site.footer.copyright}
+      </p>
+      <a href="#top">
+        {site.footer.backTop}
+        <Icon name="arrow-up" />
+      </a>
+    </div>
+  </Container>
+</footer>

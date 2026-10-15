@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { site } from '../content/site';
+import displayFont from '@fontsource/michroma/files/michroma-latin-400-normal.woff2?url';
+interface Props {
+  title?: string;
+}
+const { title = site.title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={site.description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="preload"
+      href={displayFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      {site.skipLink}
+    </a>
+    <slot />
+  </body>
+</html>
