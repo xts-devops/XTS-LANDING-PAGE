@@ -1,4 +1,3 @@
-import tonal from '../assets/images/draft/tonal.svg';
 import type { Pillar } from './types';
 
 export const pillars: Pillar[] = [
@@ -9,7 +8,7 @@ export const pillars: Pillar[] = [
       'Configured, integrated POS, CRM, ERP and WMS — for growing teams up to enterprise scale.',
     chips: ['POS', 'CRM', 'ERP', 'WMS', 'Inventory'],
     icon: 'layers',
-    image: { src: tonal, alt: '' },
+    art: 'platforms',
   },
   {
     id: 'custom-software',
@@ -18,7 +17,7 @@ export const pillars: Pillar[] = [
       'Web, mobile and internal tools built around how you actually work.',
     chips: ['Web apps', 'Mobile', 'Portals', 'Internal tools'],
     icon: 'code',
-    image: { src: tonal, alt: '' },
+    art: 'software',
   },
   {
     id: 'automation',
@@ -27,7 +26,7 @@ export const pillars: Pillar[] = [
       'Connect your systems, automate processes, and remove manual work.',
     chips: ['APIs', 'Workflows', 'Data pipelines', 'AI'],
     icon: 'workflow',
-    image: { src: tonal, alt: '' },
+    art: 'automation',
   },
   {
     id: 'robotics',
@@ -36,6 +35,6 @@ export const pillars: Pillar[] = [
       'Research, engineering and rapid prototyping for advanced technology.',
     chips: ['Robotics', 'IoT', 'Hardware', 'PoC'],
     icon: 'bot',
-    image: { src: tonal, alt: '' },
+    art: 'robotics',
   },
 ];

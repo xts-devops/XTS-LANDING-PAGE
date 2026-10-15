@@ -1,4 +1,3 @@
-import tonal from '../assets/images/draft/tonal.svg';
 import type { Showcase } from './types';
 
 export const showcases: Showcase[] = [
@@ -7,7 +6,7 @@ export const showcases: Showcase[] = [
     title: 'Unified Retail Operations',
     tags: ['Business Platforms', 'Retail'],
     bullets: ['Multi-branch POS', 'Real-time inventory', 'Sales dashboards'],
-    image: { src: tonal, alt: '' },
+    art: 'retail-ops',
     need: 'business-platforms',
   },
   {
@@ -19,7 +18,7 @@ export const showcases: Showcase[] = [
       'Pick-path automation',
       'Live stock visibility',
     ],
-    image: { src: tonal, alt: '' },
+    art: 'warehouse',
     need: 'automation',
   },
   {
@@ -27,7 +26,7 @@ export const showcases: Showcase[] = [
     title: 'Automated Production Cell',
     tags: ['Robotics', 'Manufacturing'],
     bullets: ['Robotic handling', 'Sensor monitoring', 'Line dashboards'],
-    image: { src: tonal, alt: '' },
+    art: 'production-cell',
     need: 'robotics',
   },
 ];

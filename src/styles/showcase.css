@@ -114,3 +114,11 @@
     font-size: 1.4rem;
   }
 }
+
+@media (max-width: 900px) {
+  .showcase-card .placeholder,
+  .showcase-card-0 .placeholder {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+}

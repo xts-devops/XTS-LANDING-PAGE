@@ -3,11 +3,17 @@ import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
 import { brand } from '../../content/brand';
 import { navigation, site } from '../../content/site';
+const onHome = Astro.url.pathname === '/';
+const base = onHome ? '' : '/';
 ---
 
 <header class="site-header">
   <Container class="header-inner">
-    <a href="#top" aria-label={site.homeLabel} class="brand-link">
+    <a
+      href={onHome ? '#top' : '/'}
+      aria-label={site.homeLabel}
+      class="brand-link"
+    >
       <img
         src={brand.goldLogo.src}
         width={brand.goldLogo.width}
@@ -17,10 +23,10 @@ import { navigation, site } from '../../content/site';
     </a>
     <nav class="desktop-nav" aria-label={site.navLabel}>
       {navigation.map(({ href, label }) => (
-        <a href={href}>{label}</a>
+        <a href={base + href}>{label}</a>
       ))}
     </nav>
-    <Button href="#contact" variant="outline" class="header-cta">
+    <Button href={`${base}#contact`} variant="outline" class="header-cta">
       {site.buildCta}
     </Button>
     <details class="mobile-menu">
@@ -30,7 +36,7 @@ import { navigation, site } from '../../content/site';
       </summary>
       <nav aria-label={site.navLabel}>
         {navigation.map(({ href, label }) => (
-          <a href={href}>{label}</a>
+          <a href={base + href}>{label}</a>
         ))}
       </nav>
     </details>

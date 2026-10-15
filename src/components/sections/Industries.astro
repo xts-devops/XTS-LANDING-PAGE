@@ -1,7 +1,7 @@
 ---
 import Section from '../ui/Section.astro';
 import Icon from '../ui/Icon.astro';
-import Placeholder from '../ui/Placeholder.astro';
+import Visual from '../ui/Visual.astro';
 import Chip from '../ui/Chip.astro';
 import { industries } from '../../content/industries';
 import { site } from '../../content/site';
@@ -9,11 +9,11 @@ import '../../styles/industries.css';
 ---
 
 <Section id="industries" {...site.industries}>
-  <div class="industries-layout">
-    <ul class="industry-directory">
+  <div class="industries-layout" data-industries>
+    <ul class="industry-directory" data-tablist>
       {industries.map((industry, index) => (
         <li>
-          <a href={`#industry-${industry.id}`}>
+          <a href={`#industry-${industry.id}`} data-tab={industry.id}>
             <Icon name={industry.icon} />
             <span>{industry.name}</span>
             <span class="industry-number" aria-hidden="true">
@@ -23,14 +23,24 @@ import '../../styles/industries.css';
         </li>
       ))}
     </ul>
-    <div class="industry-panels">
+    <div
+      class="industry-panels"
+      tabindex="0"
+      role="region"
+      aria-label={site.industries.panelsLabel}
+    >
       {industries.map((industry) => (
         <article
           class="industry-panel"
+          data-panel={industry.id}
           id={`industry-${industry.id}`}
           aria-labelledby={`industry-${industry.id}-title`}
         >
-          <Placeholder icon={industry.icon} />
+          <Visual
+            art={industry.art}
+            image={industry.image}
+            sizes="(min-width: 1024px) 55vw, 100vw"
+          />
           <div class="industry-copy">
             <h3 id={`industry-${industry.id}-title`}>{industry.name}</h3>
             <p>{industry.summary}</p>

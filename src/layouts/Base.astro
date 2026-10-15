@@ -1,20 +1,27 @@
 ---
 import '../styles/global.css';
+import Seo from '../components/seo/Seo.astro';
 import { site } from '../content/site';
 import displayFont from '@fontsource/michroma/files/michroma-latin-400-normal.woff2?url';
+
 interface Props {
+  /** Page title without the brand suffix; omit on the home page. */
   title?: string;
+  description?: string;
+  noindex?: boolean;
 }
-const { title = site.title } = Astro.props;
+const { title, description, noindex } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={site.description} />
-    <meta name="robots" content="noindex, nofollow" />
+    <!-- Flip to .js before first paint so reveal states never flash; no-JS keeps everything visible. -->
+    <script is:inline>
+      document.documentElement.classList.replace('no-js', 'js');
+    </script>
     <link
       rel="preload"
       href={displayFont}
@@ -22,12 +29,19 @@ const { title = site.title } = Astro.props;
       type="font/woff2"
       crossorigin
     />
-    <title>{title}</title>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Seo title={title} description={description} noindex={noindex} />
   </head>
   <body>
     <a class="skip-link" href="#main-content">
       {site.skipLink}
     </a>
     <slot />
+    <script>
+      import '../scripts/motion/index';
+      import '../scripts/ui/index';
+    </script>
   </body>
 </html>

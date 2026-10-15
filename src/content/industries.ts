@@ -1,4 +1,3 @@
-import tonal from '../assets/images/draft/tonal.svg';
 import type { Industry } from './types';
 
 export const industries: Industry[] = [
@@ -9,7 +8,7 @@ export const industries: Industry[] = [
     summary:
       'Bring your sales channels, stock and customer experience together. Give every branch a clearer view of the business.',
     examples: ['Point of sale', 'Inventory management', 'Customer platforms'],
-    image: { src: tonal, alt: '' },
+    art: 'industry-retail',
   },
   {
     id: 'manufacturing',
@@ -22,7 +21,7 @@ export const industries: Industry[] = [
       'Robotic handling',
       'Sensor integration',
     ],
-    image: { src: tonal, alt: '' },
+    art: 'industry-manufacturing',
   },
   {
     id: 'logistics',
@@ -31,7 +30,7 @@ export const industries: Industry[] = [
     summary:
       'Keep goods and information moving together. Connect warehouse operations with the people who depend on them.',
     examples: ['Warehouse management', 'Barcode and RFID', 'Stock visibility'],
-    image: { src: tonal, alt: '' },
+    art: 'industry-logistics',
   },
   {
     id: 'healthcare',
@@ -44,7 +43,7 @@ export const industries: Industry[] = [
       'Inventory systems',
       'Internal tools',
     ],
-    image: { src: tonal, alt: '' },
+    art: 'industry-healthcare',
   },
   {
     id: 'government',
@@ -53,6 +52,6 @@ export const industries: Industry[] = [
     summary:
       'Build practical digital services for institutions and the people they serve. Simplify the work behind public service.',
     examples: ['Service portals', 'Document workflows', 'System integration'],
-    image: { src: tonal, alt: '' },
+    art: 'industry-government',
   },
 ];

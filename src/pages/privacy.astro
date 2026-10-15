@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/sections/Header.astro';
+import Footer from '../components/sections/Footer.astro';
+import Container from '../components/ui/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import { privacy } from '../content/privacy';
+import { contact } from '../content/site';
+import '../styles/hero.css';
+import '../styles/contact.css';
+const slug = (t: string) => `p-${t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<Base title={privacy.title} description={privacy.description}>
+  <Header />
+  <main id="main-content" class="legal">
+    <Container>
+      <article class="legal-article">
+        <Eyebrow>XZEN TECH SOLUTIONS</Eyebrow>
+        <h1>{privacy.title}</h1>
+        <p class="legal-updated">Last updated {privacy.updated}</p>
+        <p class="legal-intro">{privacy.intro}</p>
+        {privacy.sections.map((section) => (
+          <section aria-labelledby={slug(section.heading)}>
+            <h2 id={slug(section.heading)}>{section.heading}</h2>
+            {section.body.map((p) => (
+              <p>{p}</p>
+            ))}
+          </section>
+        ))}
+        <section aria-labelledby="p-contact">
+          <h2 id="p-contact">{privacy.contactHeading}</h2>
+          <p>{privacy.contactBody}</p>
+          <p>
+            <a href={`mailto:${contact.email}`}>{contact.email}</a> ·{' '}
+            <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
+          </p>
+        </section>
+        <Button href="/" variant="outline">
+          {privacy.back}
+        </Button>
+      </article>
+    </Container>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal {
+    padding-block: 5rem 6rem;
+  }
+  .legal-article {
+    max-width: 44rem;
+  }
+  .legal h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .legal-updated {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+  .legal-intro {
+    margin-top: 2rem;
+    font-size: 1.05rem;
+  }
+  .legal section {
+    margin-top: 2.75rem;
+  }
+  .legal h2 {
+    font-size: 1.35rem;
+    white-space: normal;
+    margin-bottom: 0.75rem;
+  }
+  .legal section p {
+    color: var(--color-muted);
+    margin-top: 0.75rem;
+  }
+  .legal a:not(.button) {
+    color: var(--color-gold-hi);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal .button {
+    margin-top: 3rem;
+  }
+</style>

@@ -2,7 +2,7 @@
 import Section from '../ui/Section.astro';
 import Card from '../ui/Card.astro';
 import Button from '../ui/Button.astro';
-import Placeholder from '../ui/Placeholder.astro';
+import Visual from '../ui/Visual.astro';
 import { showcases } from '../../content/showcase';
 import { site } from '../../content/site';
 import '../../styles/showcase.css';
@@ -12,8 +12,10 @@ import '../../styles/showcase.css';
   <div class="showcase-grid">
     {showcases.map((item, index) => (
       <Card class={`showcase-card showcase-card-${index}`}>
-        <Placeholder
-          icon={index === 0 ? 'store' : index === 1 ? 'truck' : 'bot'}
+        <Visual
+          art={item.art}
+          image={item.image}
+          sizes="(min-width: 900px) 45vw, 100vw"
         />
         <div class="showcase-content">
           <p class="showcase-tags">{item.tags.join(' / ')}</p>
@@ -26,6 +28,7 @@ import '../../styles/showcase.css';
           <Button
             href="#contact"
             variant="text"
+            data-need={item.need}
             label={`${site.showcase.cta}: ${item.title}`}
           >
             {site.showcase.cta}

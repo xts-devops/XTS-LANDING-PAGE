@@ -241,3 +241,101 @@ ol {
     letter-spacing: 0.21em;
   }
 }
+
+/* ---- Interaction states (built into primitives) ---- */
+.button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+.button .icon {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.button:hover .icon {
+  transform: translate(2px, -2px);
+}
+.button:active {
+  transform: translateY(1px) scale(0.99);
+}
+.button-primary::before {
+  /* one-pass gold sheen on hover */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    color-mix(in srgb, #fff 45%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+}
+.button-primary:hover {
+  background: var(--color-gold);
+}
+.button-outline:hover {
+  background: color-mix(in srgb, var(--color-gold-hi) 10%, transparent);
+}
+.button-text:hover {
+  color: var(--color-text);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .button-primary:hover::before {
+    transition: transform 0.7s var(--ease-out);
+    transform: translateX(120%);
+  }
+}
+.desktop-nav a,
+.footer-nav a,
+.contact-details a {
+  transition: color var(--dur-2) var(--ease-out);
+}
+.desktop-nav a:hover,
+.contact-details a:hover {
+  color: var(--color-gold-hi);
+}
+.card {
+  transition:
+    border-color var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+}
+.card .visual > svg {
+  transition: transform 1.2s var(--ease-out);
+}
+@media (hover: hover) {
+  .card:hover {
+    border-color: color-mix(in srgb, var(--color-gold) 40%, var(--color-line));
+  }
+  .card:hover .visual > svg {
+    transform: scale(1.04);
+  }
+}
+/* Cursor spotlight on card grids (pointer position set by scripts/ui) */
+@media (hover: hover) {
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mx, -500px) var(--my, -500px),
+      color-mix(in srgb, var(--color-gold-hi) 7%, transparent),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity var(--dur-3) var(--ease-out);
+  }
+  .card:hover::after {
+    opacity: 1;
+  }
+}
+.card {
+  position: relative;
+}

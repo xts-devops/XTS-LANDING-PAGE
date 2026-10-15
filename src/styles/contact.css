@@ -104,22 +104,87 @@
   color: var(--color-muted);
   opacity: 1;
 }
+.form-field :is(input, select, textarea) {
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.form-field :is(input, select, textarea):hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-gold) 35%, var(--color-line));
+}
+.form-field :is(input, select, textarea):focus-visible {
+  outline: none;
+  border-color: var(--color-gold-hi);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-gold-hi) 22%, transparent);
+}
+.form-field [aria-invalid='true'],
+.form-consent [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+.field-error {
+  font-size: 0.72rem;
+  color: var(--color-error);
+}
 .form-consent {
-  display: flex;
-  gap: 0.7rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.7rem;
   align-items: start;
   color: var(--color-muted);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
 }
 .form-consent input {
-  margin-top: 0.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.1rem 0 0;
   accent-color: var(--color-gold);
+}
+.form-consent a {
+  color: var(--color-gold-hi);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-consent .field-error {
+  grid-column: 2;
+}
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .form-submit {
   width: 100%;
   margin-top: 1.5rem;
-  opacity: 0.6;
+  cursor: pointer;
+}
+.form-submit:disabled,
+fieldset:disabled .form-submit {
+  opacity: 0.55;
   cursor: not-allowed;
+}
+fieldset:disabled :is(input, select, textarea, label) {
+  cursor: not-allowed;
+}
+[data-state='sending'] .form-submit {
+  cursor: progress;
+  opacity: 0.8;
+}
+[data-state='sending'] .form-submit .icon {
+  animation: form-spin 0.9s linear infinite;
+}
+@keyframes form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.contact-form-card:has([data-state='success']) .form-notice {
+  color: var(--color-gold-hi);
+}
+.contact-form-card:has([data-state='error']) .form-notice {
+  color: var(--color-error);
 }
 .site-footer {
   border-top: var(--border);

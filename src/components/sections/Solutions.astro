@@ -3,7 +3,7 @@ import Section from '../ui/Section.astro';
 import Card from '../ui/Card.astro';
 import Chip from '../ui/Chip.astro';
 import Icon from '../ui/Icon.astro';
-import Placeholder from '../ui/Placeholder.astro';
+import Visual from '../ui/Visual.astro';
 import { pillars } from '../../content/pillars';
 import { site } from '../../content/site';
 import '../../styles/solutions.css';
@@ -13,7 +13,11 @@ import '../../styles/solutions.css';
   <div class="solutions-grid">
     {pillars.map((pillar, index) => (
       <Card class="solution-card">
-        <Placeholder icon={pillar.icon} />
+        <Visual
+          art={pillar.art}
+          image={pillar.image}
+          sizes="(min-width: 900px) 40vw, 100vw"
+        />
         <div class="solution-content">
           <div class="solution-title">
             <Icon name={pillar.icon} />

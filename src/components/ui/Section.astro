@@ -17,7 +17,7 @@ const { id, eyebrow, heading, summary, class: className } = Astro.props;
   class:list={['section', className]}
 >
   <Container>
-    <div class="section-heading">
+    <div class="section-heading" data-reveal="up">
       <div>
         <Eyebrow>{eyebrow}</Eyebrow>
         <h2 id={`${id}-heading`}>{heading}</h2>

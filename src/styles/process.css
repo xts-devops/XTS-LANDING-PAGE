@@ -122,3 +122,36 @@
     padding-bottom: 2.5rem;
   }
 }
+
+/* ---- Scroll-linked progress (scripts/motion sets --fill 0→1 per connector) ---- */
+.process-timeline li:not(:last-child)::after {
+  background:
+    linear-gradient(var(--color-gold-hi), var(--color-gold-hi)) left /
+      calc(var(--fill, 0) * 100%) 100% no-repeat,
+    var(--color-line);
+}
+.process-node > span {
+  transition:
+    background-color var(--dur-3) var(--ease-out),
+    color var(--dur-3) var(--ease-out),
+    box-shadow var(--dur-3) var(--ease-out);
+}
+.process-timeline li.is-reached .process-node > span {
+  background: var(--color-gold-hi);
+  color: var(--color-bg);
+  box-shadow: 0 0 0 6px
+    color-mix(in srgb, var(--color-gold-hi) 14%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-timeline li {
+    --fill: 1;
+  }
+}
+@media (max-width: 800px) {
+  .process-timeline li:not(:last-child)::after {
+    background:
+      linear-gradient(var(--color-gold-hi), var(--color-gold-hi)) top / 100%
+        calc(var(--fill, 0) * 100%) no-repeat,
+      var(--color-line);
+  }
+}

@@ -2,69 +2,32 @@
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
-import Icon from '../ui/Icon.astro';
+import HeroConsole from './HeroConsole.astro';
 import { site } from '../../content/site';
 ---
 
-<section id="top" class="hero" aria-labelledby="hero-heading">
+<section id="top" class="hero" aria-labelledby="hero-heading" data-hero>
   <Container class="hero-inner">
     <div class="hero-copy">
-      <Eyebrow>{site.hero.eyebrow}</Eyebrow>
-      <h1 id="hero-heading">
+      <div data-hero-part="eyebrow">
+        <Eyebrow>{site.hero.eyebrow}</Eyebrow>
+      </div>
+      <h1 id="hero-heading" data-hero-part="title">
         {site.hero.heading} <span>{site.hero.emphasis}</span>
       </h1>
-      <p class="hero-summary">{site.hero.summary}</p>
-      <div class="hero-actions">
+      <p class="hero-summary" data-hero-part="copy">
+        {site.hero.summary}
+      </p>
+      <div class="hero-actions" data-hero-part="copy">
         <Button href="#contact">{site.hero.primaryCta}</Button>
         <Button href="#solutions" variant="outline">
           {site.hero.secondaryCta}
         </Button>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="draft-dashboard">
-        <div class="dashboard-top">
-          <span class="dashboard-symbol">
-            <Icon name="workflow" />
-          </span>
-          <span>{site.hero.dashboardTitle}</span>
-          <span class="dashboard-dots">•••</span>
-        </div>
-        <div class="dashboard-grid">
-          <div class="dashboard-chart">
-            <div class="chart-heading"></div>
-            <div class="chart-bars">
-              {Array.from({ length: 7 }, () => (
-                <span></span>
-              ))}
-            </div>
-          </div>
-          <div class="dashboard-system">
-            <div class="system-node">
-              <Icon name="layers" />
-            </div>
-            <div class="system-line"></div>
-            <div class="system-node">
-              <Icon name="code" />
-            </div>
-            <div class="system-line"></div>
-            <div class="system-node">
-              <Icon name="bot" />
-            </div>
-          </div>
-        </div>
-        <div class="dashboard-labels">
-          {site.hero.dashboardSections.map((label) => (
-            <span>
-              {label}
-              <i></i>
-            </span>
-          ))}
-        </div>
-      </div>
-      <div class="hero-visual-caption">
-        <span>{site.hero.visualLabel}</span>
-        <span>{site.hero.visualNote}</span>
+    <div class="hero-visual">
+      <div class="hero-parallax">
+        <HeroConsole />
       </div>
     </div>
   </Container>

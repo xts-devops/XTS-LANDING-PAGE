@@ -1,18 +1,26 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 import Icon from './Icon.astro';
-interface Props {
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
   href: string;
   variant?: 'primary' | 'outline' | 'text';
   class?: string;
   label?: string;
 }
-const { href, variant = 'primary', class: className, label } = Astro.props;
+const {
+  href,
+  variant = 'primary',
+  class: className,
+  label,
+  ...rest
+} = Astro.props;
 ---
 
 <a
   href={href}
   class:list={['button', `button-${variant}`, className]}
   aria-label={label}
+  {...rest}
 >
   <slot />
   <Icon name="arrow-up-right" />

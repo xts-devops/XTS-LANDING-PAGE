@@ -6,7 +6,7 @@
 }
 .industry-directory {
   position: sticky;
-  top: 2rem;
+  top: 8.5rem;
 }
 .industry-directory li {
   border-bottom: var(--border);
@@ -102,5 +102,70 @@
   }
   .industry-copy h3 {
     font-size: 1.25rem;
+  }
+}
+
+/* ---- Enhanced: tabs (scripts/ui/industries.ts adds .is-tabs) ---- */
+.industry-directory a {
+  position: relative;
+  color: var(--color-muted);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.industry-directory a:hover,
+.industry-directory a[aria-selected='true'] {
+  color: var(--color-text);
+}
+.industry-directory a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--color-gold-hi);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.industry-directory a[aria-selected='true']::after {
+  transform: scaleX(1);
+}
+.is-tabs .industry-panels {
+  display: grid;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+}
+.is-tabs .industry-panel {
+  grid-area: 1 / 1;
+}
+.is-tabs .industry-panel[hidden] {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-tabs .industry-panel.is-entering .visual {
+    animation: industry-wipe var(--dur-3) var(--ease-inout) both;
+  }
+  .is-tabs .industry-panel.is-entering .industry-copy {
+    animation: industry-copy var(--dur-3) var(--ease-out) both;
+  }
+}
+@keyframes industry-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes industry-copy {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (max-width: 900px) {
+  .is-tabs .industry-directory a::after {
+    bottom: 0.4rem;
   }
 }

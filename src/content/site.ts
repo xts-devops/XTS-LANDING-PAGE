@@ -51,10 +51,28 @@ export const site = {
       'We engineer, build, and implement intelligent systems — from business platforms and custom software to automation and robotics.',
     primaryCta: 'Book a Consultation',
     secondaryCta: 'Explore Solutions',
-    visualLabel: 'Connected technology. One partner.',
-    visualNote: 'Strategy / Systems / Support',
-    dashboardTitle: 'Business in sync',
-    dashboardSections: ['Platforms', 'Software', 'Automation'],
+    /** Illustrative operations console — decorative, no real client data or figures. */
+    console: {
+      title: 'Operations overview',
+      status: 'All systems connected',
+      hub: 'XTS',
+      nodes: ['Platforms', 'Software', 'Automation', 'Robotics'],
+      throughput: 'Orders processed',
+      health: 'System health',
+      checks: [
+        ['POS · Branch network', 'Synced'],
+        ['Warehouse system', 'Synced'],
+        ['Production line 2', 'Running'],
+      ],
+      feed: [
+        ['09:41', 'Inventory synced across branches'],
+        ['09:42', 'New order routed to warehouse'],
+        ['09:42', 'Pick path updated · Aisle C'],
+        ['09:43', 'Robot cell 2 · cycle complete'],
+        ['09:44', 'Daily sales report generated'],
+        ['09:45', 'Supplier invoice matched to PO'],
+      ],
+    },
   },
   solutions: {
     eyebrow: 'Our solutions',
@@ -78,6 +96,7 @@ export const site = {
     summary:
       'Different industries. Different challenges. Technology shaped around the way you work.',
     cta: 'Explore this industry',
+    panelsLabel: 'Industry details',
   },
   process: {
     eyebrow: 'Our process',
@@ -106,7 +125,26 @@ export const site = {
     emailPlaceholder: 'you@company.com',
     companyPlaceholder: 'Your company',
     messagePlaceholder: 'What would you like to build, connect or improve?',
-    consent: 'I agree to the use of my details to respond to this inquiry.',
+    consent:
+      'I agree to XTS using these details to reply to my inquiry, as described in the',
+    privacyLink: 'privacy notice',
+    honeypot: 'Leave this field empty',
+    errors: {
+      name: 'Enter your name.',
+      email: 'Enter an email address like you@company.com.',
+      need: 'Choose what you need help with.',
+      message: 'Tell us a little more — at least 10 characters.',
+      consent: 'Tick the box so we can reply to you.',
+      company: 'Company name is too long.',
+    },
+    sending: 'Sending your inquiry…',
+    success: 'Inquiry sent. We’ll reply to the email address you gave us.',
+    invalid: 'Some details need fixing. Check the highlighted fields.',
+    tooFast: 'That was quick — please check your details and send again.',
+    failed:
+      'Your inquiry didn’t send. Email info@xzentechsolutions.com or call 0969 244 2557 instead.',
+    emailSubject: 'New inquiry from the XTS website',
+    fromName: 'XTS Website',
     submit: 'Send inquiry',
     unavailable: 'Online inquiries are not enabled yet.',
   },

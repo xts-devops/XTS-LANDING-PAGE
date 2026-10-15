@@ -68,6 +68,7 @@ for (const route of PATHS) {
         path: path.join(dir, 'page.png'),
         fullPage: true,
         animations: 'disabled',
+        style: '.skip-link { visibility: hidden !important; }',
       });
 
       // One image per landmark section that has an id (e.g. #solutions) — easier to review than a 10k-px page.
@@ -80,6 +81,7 @@ for (const route of PATHS) {
         await section.screenshot({
           path: path.join(dir, `${id}.png`),
           animations: 'disabled',
+          style: '.skip-link { visibility: hidden !important; }',
         });
       }
     });

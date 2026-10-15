@@ -3,13 +3,19 @@ import Container from '../ui/Container.astro';
 import Icon from '../ui/Icon.astro';
 import { brand } from '../../content/brand';
 import { navigation, site, contact } from '../../content/site';
+const onHome = Astro.url.pathname === '/';
+const base = onHome ? '' : '/';
 ---
 
 <footer class="site-footer">
   <Container>
     <div class="footer-top">
       <div>
-        <a href="#top" class="brand-link" aria-label={site.homeLabel}>
+        <a
+          href={onHome ? '#top' : '/'}
+          class="brand-link"
+          aria-label={site.homeLabel}
+        >
           <img
             src={brand.whiteLogo.src}
             width={brand.whiteLogo.width}
@@ -22,7 +28,7 @@ import { navigation, site, contact } from '../../content/site';
       </div>
       <nav aria-label={site.footerNavLabel}>
         {navigation.map(({ href, label }) => (
-          <a href={href}>{label}</a>
+          <a href={base + href}>{label}</a>
         ))}
       </nav>
       <div class="footer-contact">
@@ -34,7 +40,7 @@ import { navigation, site, contact } from '../../content/site';
       <p>
         © {new Date().getFullYear()} {site.footer.copyright}
       </p>
-      <a href="#top">
+      <a href={onHome ? '#top' : '#main-content'}>
         {site.footer.backTop}
         <Icon name="arrow-up" />
       </a>
