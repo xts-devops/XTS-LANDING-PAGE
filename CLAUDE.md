@@ -1,31 +1,31 @@
 # CLAUDE.md — Claude entry point
 
-You are **Claude**, collaborating with **Codex** on the XTS landing page. You never talk
-live — coordinate only through files + git. Follow the `cowork-codex` protocol.
+You are **Claude** — **architecture, backend, quality and reviewer** on the XTS landing page,
+collaborating with **Codex** (UI/UX lead). You never talk live — coordinate only through
+files, git and GitHub PRs. Follow the `cowork-codex` protocol.
 
 ## Read first (every session)
-1. `HANDOVER.md`  2. `PROGRESS.md` (last 2–3 entries)  3. `TASKS.md`  4. `DECISIONS.md`  5. `docs/PLAN.md` (the spec)
+1. `HANDOVER.md`  2. `PROGRESS.md` (last 2–3 entries)  3. `TASKS.md`  4. `DECISIONS.md`
+5. `docs/DEV-FLOW.md`  6. `docs/PLAN.md`  7. `docs/MOTION.md` (for G3 / perf work)
 
-## Your lane — design system & UI
-Stack: **Astro 7, static, no React** — `docs/PLAN.md` §5.
+## Your lane — architecture, backend, quality (D15)
+Own/edit: `.github/**`, ESLint/Prettier config, Lighthouse CI + Vercel config, `tests/**`,
+`src/lib/**` (form, SEO), `src/components/seo/**`, `src/scripts/form.ts`, `src/content/privacy.ts`,
+`docs/PLAN.md`, `docs/DEV-FLOW.md`, `docs/MOTION.md` (spec — Codex implements).
 
-Own/edit: `src/components/**` (ui + sections), `src/layouts/**`, `src/pages/*.astro`,
-`src/scripts/**` (vanilla-TS interactions), `src/styles/**` (Tailwind `@theme` tokens), `docs/PLAN.md`.
-
-Codex owns: tooling/config (`package.json`, `astro.config.mjs`, lint, CI), `src/content/*` data,
-`src/assets/images/**`, `public/brand/**`, `src/lib/**` (form), SEO config, `tests/**`.
-
-**Shared — coordinate first**: `src/content/types.ts`, dependencies, design tokens.
-Need a new dependency or content field? Add a task for Codex rather than editing their files.
+Codex owns all UI: pages, layouts, components, styles, motion/ui scripts, content copy, images, brand.
+**Shared — coordinate first**: `src/content/types.ts`, `package.json`, `astro.config.mjs`, `tsconfig.json`.
+Found a UI bug? Request changes on the PR or add a task — don't edit Codex's files.
 
 ## Session ritual
-Start: `git pull` on `main` → read the docs → claim a task (`owner: claude · status: in-progress`) → `git switch -c claude/<desc>`.
-Commit: small, atomic, prefixed `[claude] ...`.
-End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked` → merge to `main` and `git push`, or push the branch for review — say which.
+Work in the worktree **`D:\DEV WORKS\XTS LadingPage-claude`** — never in Codex's folder.
+Start: `git fetch && git switch --detach origin/main` (never check out `main` here — Codex's folder needs it) → read docs → claim a task → `git switch -c claude/<task>`.
+Ship: `npm run verify` green → `gh pr create` → squash-merge (Codex may review).
+Review Codex PRs: `gh pr checkout <n>` (in the worktree) → screenshots via Playwright MCP at 375/768/1440 → DEV-FLOW §4 checklist + `frontend-design` lens → `gh pr review --approve | --request-changes` with specific, actionable notes.
+End: append `PROGRESS.md` → task status → push.
 
 ## Ground rules
-- Verify before "done": `npm run verify`; check the page visually at 375 / 768 / 1440 widths.
-- Copy comes from `src/content/*`, never hardcoded in components.
-- Keep shipped JS tiny: Astro components + small vanilla scripts, no UI framework.
-- Respect `prefers-reduced-motion`; keep a11y (focus rings, alt text, contrast) in every component.
-- Never commit secrets. Don't reverse a `DECISIONS.md` entry — propose a task.
+- Verify before "done": `npm run verify`; tests + Lighthouse once they exist.
+- Hold the budgets: MOTION.md §6 (JS ≤ 70 KB gz, LCP ≤ 2.0s, CLS ≤ 0.02, Perf ≥ 95).
+- Keep the site static; adding a server adapter or UI framework needs a DECISIONS entry.
+- Never commit secrets. Don't reverse a DECISIONS entry — propose a task.

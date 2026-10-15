@@ -44,3 +44,15 @@ Keeps the site fully static; no secrets. Provider (Web3Forms vs Formspree) picke
 
 ### D14 · 2026-10-16 · claude · Privacy compliance: consent + /privacy, cookie-free analytics
 Form has a consent checkbox linking to `/privacy` (PH Data Privacy Act, RA 10173). Vercel Web Analytics only, so no cookie banner. **Why:** the form collects personal data.
+
+### D15 · 2026-10-16 · user + claude · Lanes swapped: Codex = UI/UX lead, Claude = architecture/backend/quality (supersedes lane split in D5)
+Codex builds all UI (pages, layouts, components, styles, motion, images, copy). Claude owns form, SEO, tests, CI, perf, deploy, specs, and reviews every UI PR. Content/UI seam from D5 stays (`src/content/types.ts` shared). **Why:** user wants top-down, UI-first development; the backend is small.
+
+### D16 · 2026-10-16 · claude · Top-down flow with gates; one folder per agent; PR reviews
+Phases P0–P5 with gates G1 (composition), G2 (visual), G3 (motion) — `docs/DEV-FLOW.md`. Codex works in the main folder, Claude in worktree `XTS LadingPage-claude`. Work lands via small PRs reviewed with `gh pr review`; `PROGRESS.md` uses union merge. **Why:** two agents in one checkout switch branches under each other; gates stop polishing a layout that will change.
+
+### D17 · 2026-10-16 · claude · Motion stack: GSAP 3.15 (ScrollTrigger, SplitText, DrawSVG) + Lenis; coded hero dashboard
+Spec + budget in `docs/MOTION.md` (JS ≤ 70 KB gz, Perf ≥ 95, reduced-motion branch). Hero dashboard is coded SVG/HTML over a photo backdrop, not a flat image. No WebGL in v1. **Why:** top-tier, controllable motion at a small, predictable cost; a coded dashboard stays crisp and can animate.
+
+### D18 · 2026-10-16 · claude · Form provider: Web3Forms (free), browser-side submit (resolves D13)
+250 submissions/mo, JSON POST from the browser, public access key. Spam: honeypot + minimum fill time; hCaptcha (free, zero-config) only if spam appears, lazy-loaded. No captcha site key env var needed. Details + upgrade paths: `docs/spikes/T07-form-provider.md`. **Why:** 5× Formspree's free volume, built for static sites, nothing secret to hold.

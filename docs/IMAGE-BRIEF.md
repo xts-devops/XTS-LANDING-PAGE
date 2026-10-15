@@ -10,7 +10,7 @@ Shared prompt suffix:
 
 | File (`src/assets/images/…`) | Ratio / min size | Subject |
 |---|---|---|
-| `hero/dashboard.jpg` | 16:9 · 2400w | Curved ultrawide monitor with gold-on-black analytics dashboard + world map, laptop beside it, desk at night, skyline behind |
+| `hero/backdrop.jpg` | 16:9 · 2400w | Dark desk at night, floor-to-ceiling window, skyline bokeh; **no screen content** (the dashboard is coded on top) |
 | `solutions/business-platforms.jpg` | 16:10 · 1200w | Tablet POS terminal + receipt printer on a dark wood counter, dashboard monitor behind |
 | `solutions/custom-software.jpg` | 16:10 · 1200w | Two monitors with code and UI mockups, developer silhouette, city at night |
 | `solutions/automation.jpg` | 16:10 · 1200w | Large screen showing connected node/flow diagram in gold lines |

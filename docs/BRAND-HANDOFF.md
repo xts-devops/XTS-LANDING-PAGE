@@ -1,3 +1,7 @@
+# Historical brand handoff — updated for D15
+
+D15 supersedes the original ownership below: Codex now owns UI implementation, Claude owns backend/SEO/quality. Theme source is src/styles/tokens.css. Follow the current TASKS and DEV-FLOW.
+
 # Brand integration — Codex → Claude
 
 The user supplied the homepage theme and both logo images on 2026-10-16.
@@ -9,7 +13,7 @@ Originals are preserved without recolouring, tracing, cropping, or background re
 - `public/brand/logo-gold-original.png`: primary logo, 426 × 204, dark textured background baked in.
 - `public/brand/logo-white-original.png`: alternate logo, 411 × 225, dark textured background baked in.
 - `src/content/brand.ts`: reusable logo paths, intrinsic dimensions, accessible name.
-- `public/brand/theme.css`: Tailwind v4 theme source matching PLAN §4. This is build input, not a standalone browser stylesheet.
+- `src/styles/tokens.css`: Tailwind v4 theme source matching PLAN §4. This is build input, not a standalone browser stylesheet.
 
 Claude T03: import these from `src/styles/global.css`:
 
@@ -17,7 +21,7 @@ Claude T03: import these from `src/styles/global.css`:
 @import 'tailwindcss';
 @import '@fontsource/michroma';
 @import '@fontsource-variable/manrope';
-@import '../../public/brand/theme.css';
+@import './tokens.css';
 ```
 
 Use `bg-bg`, `text-text`, `text-gold`, `font-display`, `font-sans`, etc.

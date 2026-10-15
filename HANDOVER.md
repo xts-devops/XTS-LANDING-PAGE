@@ -8,7 +8,7 @@ Claude and Codex together. Marketing site only (no app/portal planned), English 
 text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**Astro scaffold + supplied brand foundation implemented on `codex/brand-platform-setup` (review branch). UI has not been built yet.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Next: Claude T02/T03 and UI work. See `TASKS.md` and `docs/BRAND-HANDOFF.md`.
+**Astro scaffold and brand assets: PR #5; Codex is implementing P1 draft UI.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Follow D15 ownership and docs/DEV-FLOW.md.
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
@@ -22,11 +22,13 @@ text edited in code (no CMS).
 | `docs/PLAN.md` | **The spec.** Structure, section specs, tokens, **stack & source layout (§5)**, content model, milestones. Read first. |
 | `docs/IMAGE-BRIEF.md` | Every image the page needs, with prompts/ratios, brand assets, licence log. |
 | `docs/reference/mockup-v1.webp` | Original visual mockup (look reference; structure superseded by PLAN.md). |
-| `AGENTS.md` / `CLAUDE.md` | Per-agent entry points, lanes, rules. |
+| `docs/DEV-FLOW.md` | **How we work**: phases, gates, PR + review loop, tooling. |
+| `docs/MOTION.md` | Motion system, choreography, perf budget. |
+| `AGENTS.md` / `CLAUDE.md` | Per-agent entry points, lanes, rules. **Codex = UI/UX lead · Claude = architecture/backend/quality** (D15). |
 | `TASKS.md` · `PROGRESS.md` · `DECISIONS.md` | Board · session log · locked decisions. |
 
 ## Stack (summary — details in PLAN §5)
-Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) · `@lucide/astro` · Fontsource (Michroma + Manrope) · `astro:assets` images · client-side form → no-DNS email provider + captcha · Vercel (hosting + Web Analytics) · GitHub + Actions CI · Playwright + Lighthouse CI.
+Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) · GSAP + Lenis motion · `@lucide/astro` · Fontsource (Michroma + Manrope) · `astro:assets` images · client-side form → no-DNS email provider + captcha · Vercel (hosting + Web Analytics) · GitHub + Actions CI · Playwright + Lighthouse CI.
 
 ## Build / run / verify (once scaffolded)
 ```

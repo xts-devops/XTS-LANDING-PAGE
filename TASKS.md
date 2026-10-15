@@ -1,58 +1,75 @@
 # TASKS — board
 
-Statuses: todo · in-progress · blocked · review · done
-Rule: set owner + `status: in-progress` before editing. Keep tasks small & file-scoped.
-Lanes: **claude** = components, layouts, pages, scripts, styles/tokens · **codex** = tooling/CI, content data, images, brand assets, form logic, SEO config, tests.
-Spec: `docs/PLAN.md` (v1.2, stack in §5). `→` = depends on.
+Statuses: todo · in-progress · review · blocked · done
+Rule: set owner + `status: in-progress` before editing. One section/concern per task & branch.
+Lanes (D15): **codex** = UI/UX, motion, images, copy · **claude** = architecture, backend, tests, CI, perf, reviews.
+Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends on.
 
 ## In flight
-_(none — Codex foundation branch ready for review; Claude T02/T03 next)_
+- **T01** scaffold + dependencies — owner: codex · status: in-progress
+- **T05** supplied brand assets — owner: codex · status: in-progress
+- **T08** theme foundation — owner: codex · status: in-progress
 
-## Backlog
+## P0 · Foundation (codex)
+- [ ] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: review (PR #5; verification passed)
+- [ ] **T05 Brand assets** → `public/brand/` + favicon set (originals are raster — vector still wanted before launch) ... owner: codex · status: blocked (originals ready; favicon derivatives await vector)
+- [ ] **T08 Theme foundation** — tokens from PLAN §4 + motion tokens from MOTION §2. Move `public/brand/theme.css` → `src/styles/tokens.css` (files in `public/` aren't processed by Tailwind) ... owner: codex · status: review (PR #5; moved to src/styles)
+- [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 ... owner: codex · status: todo (shared — Claude reviews)
 
-### M0 · Setup
-- [x] **T00 GitHub repo** — private `BFC-XZEN/xts-landing-page`, `main` pushed ... owner: claude · status: done
-- [x] **T01 Scaffold Astro 7 + TS strict + Tailwind v4** (`@tailwindcss/vite`), `@lucide/astro`, Fontsource fonts, `@astrojs/sitemap`, zod; ESLint (`eslint-plugin-astro`) + Prettier (`prettier-plugin-astro`); `.nvmrc`; scripts `dev/build/check/lint/format/verify`; `.env.example` (`PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`) ... owner: codex · status: done
-- [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 → T01 ... owner: claude · status: todo (shared — Codex reviews)
-- [ ] **T03 Tokens + fonts + Base layout** (`styles/global.css` `@theme`, `layouts/Base.astro`) → T01 ... owner: claude · status: todo
-- [ ] **T04 Content** for all sections in `src/content/*.ts`, canonical contact + proof values from PLAN §6 → T02 ... owner: codex · status: todo
-- [ ] **T05 Brand assets**: XTS logo → `public/brand/` per IMAGE-BRIEF §Brand; favicon set ... owner: codex · status: blocked (originals integrated; vector/transparent mark needed for favicon derivatives)
-- [ ] **T06 CI**: GitHub Actions — `npm ci` → `verify` → Playwright, on push + PR → T00, T01 ... owner: codex · status: review (workflow added; Playwright activates with T22; hosted run pending)
-- [ ] **T07 Form provider spike**: compare Web3Forms vs Formspree (free limits, client-side POST, captcha support, delivery to info@), record pick in DECISIONS ... owner: codex · status: todo
+## P1 · Draft UI (codex) — layout, type, real copy, placeholder images, no motion
+- [ ] **T10 Base layout + UI primitives** (Base.astro, Container, Section, Eyebrow, Button, Card, Chip, Icon) → T01, T08 ... owner: codex · status: todo
+- [ ] **T11 Header + Hero + ProofBar** (hero dashboard as static blocks for now) → T10 ... owner: codex · status: todo
+- [ ] **T12 Solutions** → T10 ... owner: codex · status: todo
+- [ ] **T13 Showcase** → T10 ... owner: codex · status: todo
+- [ ] **T14 Industries** (static first; selector logic in P2) → T10 ... owner: codex · status: todo
+- [ ] **T15 Process** → T10 ... owner: codex · status: todo
+- [ ] **T16 Contact + Footer** (form markup only) → T10 ... owner: codex · status: todo
+- [ ] **T04 Content** for all sections in `src/content/*.ts` (canonical values PLAN §6) → T02 ... owner: codex · status: todo
+- [ ] **G1 Composition gate** — screenshots 375/768/1440, Claude review + user approval ... owner: user + claude · status: todo
 
-- [x] **T08 Theme foundation + agent handoff** — supplied originals, brand module, PLAN tokens and docs/BRAND-HANDOFF.md ... owner: codex · status: done
-- [ ] **T09 Lint dependency audit** — npm audit reports five high dev-tool findings through braces/fast-glob/astro-eslint-parser. No production findings during initial runtime install; review upstream fix without forced dependency downgrades ... owner: codex · status: blocked (upstream fix/compatible resolution pending)
+## P2 · Hi-fi UI (codex)
+- [ ] **T18 Generated image set v1** per IMAGE-BRIEF → `src/assets/images/` ... owner: codex · status: todo
+- [ ] **T19 Hero living dashboard** (coded SVG/HTML panels over backdrop, static) ... owner: codex · status: todo
+- [ ] **T21 States pass** — hover, focus-visible, active, form states, industries selector (keyboard tabs pattern) ... owner: codex · status: todo
+- [ ] **T17 Privacy page** layout (codex) + copy `content/privacy.ts` (claude) ... owner: codex + claude · status: todo
+- [ ] **G2 Visual gate** — pixel review + a11y/contrast/semantics pass ... owner: user + claude · status: todo
 
-### M1 · Skeleton (6 sections, placeholder images)
-- [ ] **T10 UI primitives**: Container, Section, Eyebrow, Button, Card, Chip, Icon → T03 ... owner: claude · status: todo
-- [ ] **T11 Header + Hero + ProofBar** (count + text proofs) → T10 ... owner: claude · status: todo
-- [ ] **T12 Solutions (4 pillars)** → T10 ... owner: claude · status: todo
-- [ ] **T13 Showcase** (3 anonymised cards, CTA prefills form need) → T10 ... owner: claude · status: todo
-- [ ] **T14 Industries selector** (accessible tabs pattern, vanilla TS) → T10 ... owner: claude · status: todo
-- [ ] **T15 Process** (3 principles + 5-step timeline) → T10 ... owner: claude · status: todo
-- [ ] **T16 Contact section + Footer** (form UI + states + consent checkbox, contact block) → T10 ... owner: claude · status: todo
-- [ ] **T17 Privacy page** layout (claude) + copy in `content/privacy.ts` (codex), RA 10173 basics ... owner: claude + codex · status: todo
-- [ ] **T18 Generated image set v1** per `docs/IMAGE-BRIEF.md` → `src/assets/images/`, source log ... owner: codex · status: todo
+## P3 · Motion (codex)
+- [ ] **T20 Motion foundation** — GSAP + plugins + Lenis, `scripts/motion/index.ts`, tokens, `gsap.matchMedia` reduced-motion branch, `.js` reveal guard ... owner: codex · status: todo
+- [ ] **T25 Hero sequence + dashboard animation + proof count-up** ... owner: codex · status: todo
+- [ ] **T26 Section reveals** (heads, card batches, image clip reveals, showcase parallax/tilt) ... owner: codex · status: todo
+- [ ] **T27 Industries transitions + process line scrub** ... owner: codex · status: todo
+- [ ] **T28 Micro-interactions** (buttons sheen/magnetic, cursor spotlight, inputs, submit states) ... owner: codex · status: todo
+- [ ] **G3 Motion gate** — recording/preview + Claude perf check vs MOTION §6 ... owner: user + claude · status: todo
 
-### M2 · Polish
-- [ ] **T20 Motion pass** (reveals, count-up, process line draw, reduced-motion) ... owner: claude · status: todo
-- [ ] **T21 Responsive + a11y pass** (375/768/1440, keyboard, contrast) ... owner: claude · status: todo
-- [ ] **T22 Playwright smoke** (sections render, nav anchors, selector, form validation, tel/mailto) ... owner: codex · status: todo
+## Claude parallel track (during P1–P3, no UI files)
+- [x] **T07 Form provider spike** → **Web3Forms** (D18, `docs/spikes/T07-form-provider.md`) ... owner: claude · status: done
+- [ ] **U1 Create Web3Forms access key** with info@xzentechsolutions.com → `.env` `PUBLIC_FORM_ACCESS_KEY` ... owner: user · status: todo
+- [ ] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) → PR #2 (stacked on Codex's scaffold) ... owner: claude · status: review
+- [ ] **T06 CI on PRs** — browser job (e2e + screenshot artifact `review-shots-pr<N>`) → PR #2 ... owner: claude · status: review
+- [ ] **T30 Form logic** `src/lib/form.ts` + `scripts/form.ts` (zod, honeypot, captcha, provider POST) → T07 ... owner: claude · status: todo
+- [ ] **T31 SEO** — `<Seo />`, JSON-LD, robots, indexing gate (`PUBLIC_ALLOW_INDEXING`), Vercel URL fallback → PR #3 ... owner: claude · status: review (OG image file itself = Codex T18)
+- [ ] **T24 Test harness** — e2e smoke + axe a11y + Lighthouse budgets, wired into CI → PR #4 ... owner: claude · status: review
+- [ ] **T38 Launch switch**: set `PUBLIC_ALLOW_INDEXING=true` on the production deploy only ... owner: user + claude · status: todo (at P5)
 
-### M3 · Ship
-- [ ] **T30 Form wiring** `src/lib/form.ts`: zod, honeypot, captcha, provider POST → info@xzentechsolutions.com → T07 ... owner: codex · status: todo
-- [ ] **T31 SEO**: meta/OG values, OG image, sitemap, robots, JSON-LD Organization (PH, email, phone); `site` from `PUBLIC_SITE_URL` ... owner: codex · status: todo
-- [ ] **T32 Lighthouse CI budget** (Perf ≥95, A11y ≥95, SEO 100) + fixes ... owner: codex · status: todo
-- [ ] **T33 Vercel**: connect GitHub repo, preview per branch, prod from `main`, Web Analytics on ... owner: user + codex · status: todo
+## P4 · Harden (claude; codex fixes UI findings)
+- [ ] **T32 Wire form + SEO into Codex's layout/contact** (small PR, Codex reviews) ... owner: claude · status: todo
+- [ ] **T34 Visual-regression baselines** after G3 ... owner: claude · status: todo
+- [ ] **T35 Perf + a11y audit & fix list** ... owner: claude · status: todo
+- [ ] **T33 Vercel** — connect repo, previews per PR, prod from `main`, Web Analytics ... owner: user + claude · status: todo
 
-### Later
-- [ ] **T40 Domain cutover** to xzentechsolutions.com — DNS, switch form to Resend with verified sender, canonical URL. Only when XTS says the domain is free ... owner: user + codex · status: blocked
+## P5 · Launch (both)
+- [ ] **T36 Cross-browser + real-device pass** (Chrome, iOS Safari, Firefox, Samsung Internet) ... owner: both · status: todo
+- [ ] **T37 Production deploy** on Vercel URL ... owner: claude · status: todo
 
-### Waiting on XTS (user)
-- [x] **Q4** raster logos received and preserved; vector/transparent mark remains a launch-polish follow-up ... owner: user · status: done
+## Later
+- [ ] **T40 Domain cutover** to xzentechsolutions.com — DNS, Resend sender, canonical URL. Only when XTS says the domain is free ... owner: user + claude · status: blocked
+
+## Waiting on XTS (user)
+- [ ] Vector (SVG) logo before launch — raster originals received ... owner: user · status: todo
 
 ## Done (recent)
+- [x] T00 GitHub repo `BFC-XZEN/xts-landing-page` (claude)
+- [x] Dev flow, motion system, lane swap (claude + user)
 - [x] Stack decided: Astro, no CMS, GitHub, English only (claude + user)
-- [x] Plan v1.1: XTS answers applied (claude)
-- [x] Plan v1: IA rework, section specs, tokens, image brief (claude)
-- [x] Coordination scaffold + git init (claude)
+- [x] Plan v1–v1.1, coordination scaffold, git init (claude)
