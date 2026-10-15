@@ -1,0 +1,118 @@
+---
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+import { contact, site } from '../../content/site';
+import { pillars } from '../../content/pillars';
+import '../../styles/contact.css';
+const copy = site.contactSection;
+---
+
+<section
+  id="contact"
+  class="section contact-section"
+  aria-labelledby="contact-heading"
+>
+  <Container class="contact-layout">
+    <div class="contact-intro">
+      <Eyebrow>{copy.eyebrow}</Eyebrow>
+      <h2 id="contact-heading">{copy.heading}</h2>
+      <p class="contact-summary">{copy.summary}</p>
+      <address class="contact-details">
+        <a href={`mailto:${contact.email}`}>
+          <Icon name="mail" />
+          <span>{contact.email}</span>
+        </a>
+        <a href={contact.phoneHref}>
+          <Icon name="phone" />
+          <span>{contact.phoneDisplay}</span>
+        </a>
+        <p>
+          <Icon name="map-pin" />
+          <span>{contact.location}</span>
+        </p>
+      </address>
+      <Button href={`mailto:${contact.email}`} variant="text">
+        {copy.emailCta}
+      </Button>
+    </div>
+    <div class="contact-form-card">
+      <h3>{copy.formHeading}</h3>
+      <p id="form-status" class="form-notice">
+        {copy.formNote}
+      </p>
+      <form id="inquiry-form" aria-describedby="form-status">
+        <fieldset disabled>
+          <legend class="sr-only">{copy.unavailable}</legend>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">{copy.name}</label>
+              <input
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                placeholder={copy.namePlaceholder}
+              />
+            </div>
+            <div class="form-field">
+              <label for="email">{copy.email}</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                placeholder={copy.emailPlaceholder}
+              />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="company">
+              {copy.company} <span>({copy.optional})</span>
+            </label>
+            <input
+              id="company"
+              name="company"
+              autocomplete="organization"
+              placeholder={copy.companyPlaceholder}
+            />
+          </div>
+          <div class="form-field">
+            <label for="need">{copy.need}</label>
+            <select id="need" name="need" required>
+              <option value="">{copy.choose}</option>
+              {pillars.map((pillar) => (
+                <option value={pillar.id}>{pillar.title}</option>
+              ))}
+              <option value="other">{copy.other}</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="message">{copy.message}</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              placeholder={copy.messagePlaceholder}
+            ></textarea>
+          </div>
+          <label class="form-consent">
+            <input type="checkbox" name="consent" required />
+            <span>{copy.consent}</span>
+          </label>
+          <button
+            type="button"
+            class="button button-primary form-submit"
+            disabled
+          >
+            {copy.submit}
+            <Icon name="arrow-up-right" />
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </Container>
+</section>
