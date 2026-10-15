@@ -11,9 +11,9 @@ Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends 
 - **T08** theme foundation — owner: codex · status: in-progress
 
 ## P0 · Foundation (codex)
-- [ ] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: in-progress
-- [ ] **T05 Brand assets** → `public/brand/` + favicon set (originals are raster — vector still wanted before launch) ... owner: codex · status: in-progress
-- [ ] **T08 Theme foundation** — tokens from PLAN §4 + motion tokens from MOTION §2. Move `public/brand/theme.css` → `src/styles/tokens.css` (files in `public/` aren't processed by Tailwind) ... owner: codex · status: in-progress
+- [ ] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: review (PR #5; verification passed)
+- [ ] **T05 Brand assets** → `public/brand/` + favicon set (originals are raster — vector still wanted before launch) ... owner: codex · status: blocked (originals ready; favicon derivatives await vector)
+- [ ] **T08 Theme foundation** — tokens from PLAN §4 + motion tokens from MOTION §2. Move `public/brand/theme.css` → `src/styles/tokens.css` (files in `public/` aren't processed by Tailwind) ... owner: codex · status: review (PR #5; moved to src/styles)
 - [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 ... owner: codex · status: todo (shared — Claude reviews)
 
 ## P1 · Draft UI (codex) — layout, type, real copy, placeholder images, no motion
