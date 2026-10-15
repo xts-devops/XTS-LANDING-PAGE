@@ -19,9 +19,9 @@ Codex owns: tooling/config (`package.json`, `astro.config.mjs`, lint, CI), `src/
 Need a new dependency or content field? Add a task for Codex rather than editing their files.
 
 ## Session ritual
-Start: read the docs → claim a task (`owner: claude · status: in-progress`) → `git switch -c claude/<desc>`.
+Start: `git pull` on `main` → read the docs → claim a task (`owner: claude · status: in-progress`) → `git switch -c claude/<desc>`.
 Commit: small, atomic, prefixed `[claude] ...`.
-End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked` → merge or leave branch, say which.
+End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked` → merge to `main` and `git push`, or push the branch for review — say which.
 
 ## Ground rules
 - Verify before "done": `npm run verify`; check the page visually at 375 / 768 / 1440 widths.

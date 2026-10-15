@@ -11,7 +11,7 @@ _(none)_
 ## Backlog
 
 ### M0 · Setup
-- [ ] **T00 GitHub repo** (private), push `main` ... owner: claude · status: todo (awaiting user go-ahead)
+- [x] **T00 GitHub repo** — private `BFC-XZEN/xts-landing-page`, `main` pushed ... owner: claude · status: done
 - [ ] **T01 Scaffold Astro 7 + TS strict + Tailwind v4** (`@tailwindcss/vite`), `@lucide/astro`, Fontsource fonts, `@astrojs/sitemap`, zod; ESLint (`eslint-plugin-astro`) + Prettier (`prettier-plugin-astro`); `.nvmrc`; scripts `dev/build/check/lint/format/verify`; `.env.example` (`PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`) ... owner: codex · status: todo
 - [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 → T01 ... owner: claude · status: todo (shared — Codex reviews)
 - [ ] **T03 Tokens + fonts + Base layout** (`styles/global.css` `@theme`, `layouts/Base.astro`) → T01 ... owner: claude · status: todo

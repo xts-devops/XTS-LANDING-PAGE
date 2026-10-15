@@ -8,7 +8,7 @@ Claude and Codex together. Marketing site only (no app/portal planned), English 
 text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**Plan v1.2 done (stack = Astro), no code yet.** Next: M0 — GitHub repo + scaffold. See `TASKS.md`.
+**Plan v1.2 done (stack = Astro), no code yet.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Next: M0 — scaffold (T01). See `TASKS.md`.
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.

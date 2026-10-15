@@ -23,9 +23,9 @@ Claude owns: `src/components/**`, `src/layouts/**`, `src/pages/*.astro`, `src/sc
 `src/content/types.ts` (the content contract), adding/removing dependencies, design tokens.
 
 ## Session ritual
-Start: read the docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<desc>`.
+Start: `git pull` on `main` → read the docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<desc>`.
 Commit: small, atomic, prefixed `[codex] ...`.
-End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked` → merge to `main` or leave branch, say which.
+End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked` → merge to `main` and `git push`, or push the branch for review — say which.
 
 ## Ground rules
 - Verify before "done": `npm run verify` (astro check + eslint + prettier --check + build); `npm run test:e2e` when tests exist.
