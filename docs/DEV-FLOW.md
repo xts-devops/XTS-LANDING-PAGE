@@ -79,9 +79,13 @@ frequent commits. `PROGRESS.md` uses git's union merge (`.gitattributes`), so tw
 appending at once won't conflict.
 
 ### 3 · Screenshots for every UI PR
-`npm run shots` (Claude adds it in T23) → Playwright captures the page at 375 / 768 / 1440 into
-`docs/review/<branch>/`. Until it exists, Codex uses its browser tool and saves screenshots
-there by hand. Reviewers look at the images first, code second.
+`npm run shots` → builds, serves the production build, and captures a full-page PNG **plus one
+PNG per section** (`main section[id]`, `header`, `footer`) at 375 / 768 / 1440 into
+`docs/review/<branch>/<page>/<width>/`. Every `<section>` needs an `id` for this.
+- `docs/review/` is **git-ignored** — screenshots never go into history.
+- CI runs the same script on every PR and uploads artifact **`review-shots-pr<N>`** (14 days).
+  Link it in the PR body; reviewers look at the images first, code second.
+- Extra pages: `SHOTS_PATHS=/,/privacy npm run shots`.
 
 ### 4 · Review checklist (Claude applies at each gate)
 - **Composition**: hierarchy, rhythm (120/72px), alignment to grid, density, CTA prominence.

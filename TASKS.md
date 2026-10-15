@@ -45,8 +45,8 @@ Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends 
 ## Claude parallel track (during P1–P3, no UI files)
 - [x] **T07 Form provider spike** → **Web3Forms** (D18, `docs/spikes/T07-form-provider.md`) ... owner: claude · status: done
 - [ ] **U1 Create Web3Forms access key** with info@xzentechsolutions.com → `.env` `PUBLIC_FORM_ACCESS_KEY` ... owner: user · status: todo
-- [ ] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) ... owner: claude · status: todo
-- [ ] **T06 CI on PRs** — `npm ci` → `verify` → Playwright → upload screenshots artifact ... owner: claude · status: todo
+- [ ] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) → PR #2 (stacked on Codex's scaffold) ... owner: claude · status: review
+- [ ] **T06 CI on PRs** — browser job (e2e + screenshot artifact `review-shots-pr<N>`) → PR #2 ... owner: claude · status: review
 - [ ] **T30 Form logic** `src/lib/form.ts` + `scripts/form.ts` (zod, honeypot, captcha, provider POST) → T07 ... owner: claude · status: todo
 - [ ] **T31 SEO** — `components/seo/Seo.astro` + `JsonLd.astro` (Organization, PH, email, phone), OG image, robots, sitemap ... owner: claude · status: todo
 - [ ] **T24 Test harness** — Playwright smoke + axe a11y + Lighthouse CI config with MOTION §6 budgets ... owner: claude · status: todo

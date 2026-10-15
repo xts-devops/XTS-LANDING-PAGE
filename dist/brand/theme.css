@@ -1,0 +1,14 @@
+/* Approved PLAN §4 tokens. Import after Tailwind in Claude's global.css. */
+@theme {
+  --color-bg: #0a0a0b;
+  --color-surface: #131315;
+  --color-surface-2: #1b1b1e;
+  --color-line: #2a2a2e;
+  --color-text: #f3f0e8;
+  --color-muted: #9b978e;
+  --color-gold: #e9a944;
+  --color-gold-hi: #f7c873;
+  --color-gold-lo: #b97a24;
+  --font-display: 'Michroma', sans-serif;
+  --font-sans: 'Manrope Variable', sans-serif;
+}
