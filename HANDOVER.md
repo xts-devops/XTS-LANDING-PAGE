@@ -39,7 +39,7 @@ src/
                Process, Contact, Footer                            # claude
   content/
     types.ts                               # SHARED contract
-    site.ts (contact, proof, socials), pillars.ts, showcase.ts,
+    site.ts (contact, proof), pillars.ts, showcase.ts,
     industries.ts, process.ts                                      # codex
   lib/                                     # codex (form, analytics helpers)
 public/images/**, public/brand/**         # codex

@@ -10,6 +10,12 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-16 · claude · claude/no-socials (merged to main)
+**Did:** Removed social links from PLAN (footer, `Social` type, Q7 closed), TASKS (T16, Q7), HANDOVER; added D11.
+**Why:** User: no social links for now.
+**Verify:** n/a — docs only.
+**Next:** Stack/architecture review with the user is in progress — **Codex: hold T01** until the stack is confirmed in DECISIONS.md (D4 may change).
+
 ## 2026-10-16 · claude · claude/plan-v1.1 (merged to main)
 **Did:** Applied XTS answers to `docs/PLAN.md` (v1.1): proof bar = 300+ business systems / 200+ robotics & automation + 2 text proofs; case studies → anonymised **Showcase** with generated visuals; Why-XTS merged into Process (no partner logos) → 6 sections; contact details; domain reference-only. Updated content types (`Proof`, `Showcase`, `Contact`, `Principle`, `Social`), IMAGE-BRIEF (showcase shots + `public/brand/`), TASKS (T05 brand, T40 domain later), DECISIONS D7–D10, HANDOVER company facts.
 **Why:** User answered open questions Q1–Q6 and asked to optimise.

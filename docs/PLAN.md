@@ -100,7 +100,7 @@ Left: eyebrow `LET'S BUILD WHAT'S NEXT` · H2 `Your technology partner for a sma
 Right: form card — Name, Email, Company (optional), "What do you need?" (select: 4 pillars + Other), Message, `Send inquiry →`. States: idle / sending / success / error (error shows the email as fallback). Spam: honeypot + rate limit.
 
 ### 7 · Footer
-Logo + one-liner · section links · contact block (same 3 lines) · socials (LinkedIn, YouTube, Instagram — hidden until URLs exist) · © 2026 XZEN TECH SOLUTIONS · Privacy · Terms.
+Logo + one-liner · section links · contact block (same 3 lines) · © 2026 XZEN TECH SOLUTIONS · Privacy · Terms.
 
 ---
 
@@ -153,7 +153,6 @@ export type Principle = { title: string; summary: string; icon: string };
 export type Proof     = { kind: 'count'; value: number; suffix: string; label: string }
                       | { kind: 'text'; value: string; label: string };
 export type Contact   = { email: string; phoneDisplay: string; phoneHref: string; location: string };
-export type Social    = { label: 'LinkedIn' | 'YouTube' | 'Instagram'; href: string };
 ```
 
 Canonical values (Codex puts these in `src/content/site.ts`):
@@ -184,4 +183,4 @@ proof   = [ {kind:'count', value:300, suffix:'+', label:'Business systems delive
 | Q4 | Logo | XTS sending to Codex → `public/brand/`. ⏳ |
 | Q5 | Partner logos | None → logo strip removed. ✅ |
 | Q6 | Domain | xzentechsolutions.com, **reference only** — no DNS/config changes until cutover. ✅ |
-| Q7 | Social URLs | Not provided — icons hidden until given. ⏳ |
+| Q7 | Social links | Not shown for now — no social icons on the site. ✅ |

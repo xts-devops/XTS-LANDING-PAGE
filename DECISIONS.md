@@ -32,3 +32,6 @@ Three anonymised solution showcases with generated visuals, capability bullets o
 
 ### D10 · 2026-10-16 · claude · Domain is reference-only for now
 xzentechsolutions.com is live elsewhere. Don't change its DNS or hardcode it: site URL via `NEXT_PUBLIC_SITE_URL`, deploy to a Vercel preview URL, form delivery must work without domain verification. **Why:** user instruction; cutover is task T40.
+
+### D11 · 2026-10-16 · claude · No social links for now
+Footer and contact show no social icons; no `Social` content type. **Why:** user decision; add later as a task if XTS wants them.

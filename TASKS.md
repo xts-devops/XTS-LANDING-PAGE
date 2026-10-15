@@ -11,7 +11,7 @@ _(none)_
 ## Backlog
 
 ### M0 · Setup
-- [ ] **T01 Scaffold Next.js 15 + TS + Tailwind v4**, add Motion, lucide-react, zod; scripts `dev/build/lint/typecheck/verify`; `.env.example` (`NEXT_PUBLIC_SITE_URL`, form provider key); Prettier ... owner: codex · status: todo
+- [ ] **T01 (HOLD — stack under review, see PROGRESS) Scaffold Next.js 15 + TS + Tailwind v4**, add Motion, lucide-react, zod; scripts `dev/build/lint/typecheck/verify`; `.env.example` (`NEXT_PUBLIC_SITE_URL`, form provider key); Prettier ... owner: codex · status: todo
 - [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 → T01 ... owner: claude · status: todo (shared — Codex reviews)
 - [ ] **T03 Design tokens + fonts** in `globals.css` `@theme` + `layout.tsx` (Michroma, Manrope) → T01 ... owner: claude · status: todo
 - [ ] **T04 Content** for all sections in `src/content/*.ts`, using the canonical contact + proof values in PLAN §6 → T02 ... owner: codex · status: todo
@@ -24,7 +24,7 @@ _(none)_
 - [ ] **T13 Showcase** (3 anonymised cards, CTA prefills form need) → T10 ... owner: claude · status: todo
 - [ ] **T14 Industries selector** → T10 ... owner: claude · status: todo
 - [ ] **T15 Process** (3 principles + 5-step timeline) → T10 ... owner: claude · status: todo
-- [ ] **T16 Contact section + Footer** (form UI + states, contact block, socials hidden when empty) → T10 ... owner: claude · status: todo
+- [ ] **T16 Contact section + Footer** (form UI + states, contact block, no social links) → T10 ... owner: claude · status: todo
 - [ ] **T18 Generated image set v1** per `docs/IMAGE-BRIEF.md`, AVIF/WebP, source log ... owner: codex · status: todo
 
 ### M2 · Polish
@@ -42,7 +42,7 @@ _(none)_
 - [ ] **T40 Domain cutover** to xzentechsolutions.com — DNS, verified email sender, canonical URL. Only when XTS says the domain is free ... owner: user + codex · status: blocked
 
 ### Waiting on XTS (user)
-- [ ] **Q4** logo file (being sent to Codex) · **Q7** social profile URLs ... owner: user · status: blocked
+- [ ] **Q4** logo file (being sent to Codex) ... owner: user · status: blocked
 
 ## Done (recent)
 - [x] Plan v1.1: XTS answers applied — 2 proof figures, Showcase, Why-XTS merged into Process, contact details (claude)
