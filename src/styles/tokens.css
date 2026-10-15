@@ -18,6 +18,6 @@
   --dur-2: 320ms;
   --dur-3: 640ms;
   --dur-4: 1100ms;
-  --ease-out: cubic-bezier(.16, 1, .3, 1);
-  --ease-inout: cubic-bezier(.65, 0, .35, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
 }
