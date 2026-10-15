@@ -6,9 +6,7 @@ Lanes (D15): **codex** = UI/UX, motion, images, copy · **claude** = architectur
 Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends on.
 
 ## In flight
-- **T01** scaffold + dependencies — owner: codex · status: in-progress
-- **T05** supplied brand assets — owner: codex · status: in-progress
-- **T08** theme foundation — owner: codex · status: in-progress
+- **T02/T04/T10–T16** P1 responsive draft — owner: codex · status: in-progress (stacked section PRs; G1 next)
 
 ## P0 · Foundation (codex)
 - [ ] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: review (PR #5; verification passed)
@@ -18,12 +16,12 @@ Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends 
 
 ## P1 · Draft UI (codex) — layout, type, real copy, placeholder images, no motion
 - [ ] **T10 Base layout + UI primitives** (Base.astro, Container, Section, Eyebrow, Button, Card, Chip, Icon) → T01, T08 ... owner: codex · status: in-progress
-- [ ] **T11 Header + Hero + ProofBar** (hero dashboard as static blocks for now) → T10 ... owner: codex · status: todo
-- [ ] **T12 Solutions** → T10 ... owner: codex · status: todo
-- [ ] **T13 Showcase** → T10 ... owner: codex · status: todo
-- [ ] **T14 Industries** (static first; selector logic in P2) → T10 ... owner: codex · status: todo
-- [ ] **T15 Process** → T10 ... owner: codex · status: todo
-- [ ] **T16 Contact + Footer** (form markup only) → T10 ... owner: codex · status: todo
+- [ ] **T11 Header + Hero + ProofBar** (hero dashboard as static blocks for now) → T10 ... owner: codex · status: in-progress
+- [ ] **T12 Solutions** → T10 ... owner: codex · status: in-progress
+- [ ] **T13 Showcase** → T10 ... owner: codex · status: in-progress
+- [ ] **T14 Industries** (static first; selector logic in P2) → T10 ... owner: codex · status: in-progress
+- [ ] **T15 Process** → T10 ... owner: codex · status: in-progress
+- [ ] **T16 Contact + Footer** (form markup only) → T10 ... owner: codex · status: in-progress
 - [ ] **T04 Content** for all sections in `src/content/*.ts` (canonical values PLAN §6) → T02 ... owner: codex · status: in-progress
 - [ ] **G1 Composition gate** — screenshots 375/768/1440, Claude review + user approval ... owner: user + claude · status: todo
 
