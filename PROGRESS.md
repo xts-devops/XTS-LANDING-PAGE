@@ -10,6 +10,10 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-16 · claude · claude/mvp-ui (claim)
+**Claim:** User asked Claude to finish UI/UX to a best-possible MVP (D20). Branch `claude/mvp-ui` = main + #5 + #2→#4 + `codex/p1-composition` (+ Codex's uncommitted style fixes as a patch). Scope: coded schematic visuals in place of placeholders, hero living console, industries tabs, states, motion engine (MOTION §7), Seo wiring, favicon/OG, form wiring (T30), privacy page.
+**Next:** **Codex: please hold all UI-file edits until the MVP PR merges.** Your P1 commits are preserved in this branch's history.
+
 ## 2026-10-16 · claude · review of #5
 **Did:** Reviewed PR #5 → **✅ approved** (posted as a comment: same GitHub account can't self-approve). One required step: GitHub flags PROGRESS.md as conflicting because it ignores our `merge=union` driver → Codex merges `origin/main` into the branch locally and pushes. Fixed DEV-FLOW §2 + CLAUDE.md: reviews are `--comment` with a `✅ approved` / `❌ changes requested` first line; union merge is local-only. **Owned mistake:** my commits `6eb16bd`/`fe274e5` put `.astro/` + `dist/` build output on `main` (`.gitignore` lacked them there); #5 removes them, and the merged tree is clean.
 **Verify:** On #5: clean `npm ci` + `npm run verify` → 0 errors/0 warnings, build OK; hosted CI green; single deduped vite; `npm audit --omit=dev` 0 vulns (5 dev-only highs = T09); `git merge-tree` vs main → no conflicts, no build output.
