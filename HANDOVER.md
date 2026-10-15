@@ -6,7 +6,13 @@ business platforms (POS/CRM/ERP/WMS), custom software, automation & integration,
 robotics/R&D. Single page, dark + gold brand, built by Claude and Codex together.
 
 ## Status (2026-10-16)
-**Planning done, no code yet.** Next step is M0 (scaffold). See `TASKS.md`.
+**Plan v1.1 done, no code yet.** Next step is M0 (scaffold). See `TASKS.md`.
+
+## Company facts (approved for the site)
+- Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
+- Public figures: **300+** business systems, **200+** robotics & automation projects. Nothing else.
+- Client projects are confidential — no names, logos, or results. No partner logos.
+- Domain `xzentechsolutions.com` is for later; it's live elsewhere now — don't touch DNS or hardcode it.
 
 ## Where things are
 | Path | What |
@@ -18,7 +24,7 @@ robotics/R&D. Single page, dark + gold brand, built by Claude and Codex together
 | `TASKS.md` · `PROGRESS.md` · `DECISIONS.md` | Board · session log · locked decisions. |
 
 ## Planned stack
-Next.js 15 (App Router, TS) · Tailwind CSS v4 · Motion · lucide-react · next/font (Michroma + Manrope) · zod + Resend for the inquiry form · Playwright · Vercel.
+Next.js 15 (App Router, TS) · Tailwind CSS v4 · Motion · lucide-react · next/font (Michroma + Manrope) · zod + a no-DNS email provider for the inquiry form · Playwright · Vercel.
 
 ## Planned source layout
 ```
@@ -29,13 +35,14 @@ src/
     sitemap.ts, robots.ts, opengraph-image # codex
   components/
     ui/        Button, Card, Chip, Eyebrow, Container, Section     # claude
-    sections/  Header, Hero, ProofBar, Solutions, Work, Industries,
-               Process, WhyXts, Contact, Footer                    # claude
+    sections/  Header, Hero, ProofBar, Solutions, Showcase, Industries,
+               Process, Contact, Footer                            # claude
   content/
     types.ts                               # SHARED contract
-    site.ts, pillars.ts, work.ts, industries.ts, process.ts, stats.ts  # codex
+    site.ts (contact, proof, socials), pillars.ts, showcase.ts,
+    industries.ts, process.ts                                      # codex
   lib/                                     # codex (form, analytics helpers)
-public/images/**                           # codex
+public/images/**, public/brand/**         # codex
 tests/e2e/**                               # codex
 ```
 
@@ -48,4 +55,4 @@ npm run test:e2e       # Playwright smoke
 ```
 
 ## Secrets
-`.env.local` only (e.g. `RESEND_API_KEY`, `CONTACT_TO_EMAIL`). Git-ignored. Commit `.env.example` with empty values.
+`.env.local` only (e.g. form provider key, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`). Git-ignored. Commit `.env.example` with empty values.

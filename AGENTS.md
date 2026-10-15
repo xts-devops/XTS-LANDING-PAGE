@@ -10,7 +10,7 @@ live — coordinate only through files + git.
 Own/edit:
 - Tooling & config: `package.json`, lockfile, `next.config.*`, `tsconfig.json`, ESLint/Prettier, `.github/**`
 - Content data: `src/content/*.ts` (everything except `types.ts`)
-- Assets: `public/images/**`, `docs/IMAGE-BRIEF.md` licence log
+- Assets: `public/images/**`, `public/brand/**` (logo from XTS), `docs/IMAGE-BRIEF.md` licence log
 - Server/backend: `src/app/api/**`, `src/lib/**`
 - SEO: `src/app/sitemap.ts`, `robots.ts`, `opengraph-image.*`, metadata values
 - Tests: `tests/**`, `playwright.config.*`
@@ -32,3 +32,4 @@ End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked`
 - Never commit secrets (`.env*` except `.env.example`).
 - Don't reverse a `DECISIONS.md` entry — propose a task instead.
 - Images: follow `docs/IMAGE-BRIEF.md` grade; log every source + licence.
+- Company facts are fixed (HANDOVER §Company facts): don't invent figures, clients, or results. Don't touch xzentechsolutions.com DNS (D10).
