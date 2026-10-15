@@ -30,10 +30,11 @@ import '../../styles/industries.css';
       aria-label={site.industries.panelsLabel}
     >
       {industries.map((industry) => (
-        <article
+        <div
           class="industry-panel"
           data-panel={industry.id}
           id={`industry-${industry.id}`}
+          role="group"
           aria-labelledby={`industry-${industry.id}-title`}
         >
           <Visual
@@ -52,7 +53,7 @@ import '../../styles/industries.css';
               ))}
             </ul>
           </div>
-        </article>
+        </div>
       ))}
     </div>
   </div>

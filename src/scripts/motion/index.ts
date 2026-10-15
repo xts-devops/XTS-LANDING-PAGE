@@ -9,10 +9,26 @@
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (!reduce) {
-  const start = () => void boot().catch(() => {});
-  if ('requestIdleCallback' in window)
-    requestIdleCallback(start, { timeout: 1500 });
-  else setTimeout(start, 200);
+  // Boot on first interaction (or after 3.5s): no JS cost for the first paint/LCP, and below-fold
+  // elements are still below the fold when the first scroll arrives.
+  const events = [
+    'scroll',
+    'pointermove',
+    'keydown',
+    'touchstart',
+    'wheel',
+  ] as const;
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    events.forEach((ev) => removeEventListener(ev, start));
+    void boot().catch(() => {});
+  };
+  events.forEach((ev) =>
+    addEventListener(ev, start, { passive: true, once: true }),
+  );
+  setTimeout(start, 3500);
 }
 
 async function boot() {
@@ -30,18 +46,20 @@ async function boot() {
 
   await initSmoothScroll(gsap, ScrollTrigger);
 
-  // ---- data-reveal: up | fade | clip (batched, once) --------------------------------------
+  // ---- data-reveal: up | fade | clip (batched, once) ----------------------------------------
+
+  // opacity (not autoAlpha): visibility:hidden would drop headings from the accessibility tree.
   const reveals = gsap.utils
     .toArray<HTMLElement>('[data-reveal]')
     .filter(belowFold);
   const from: Record<string, gsap.TweenVars> = {
-    up: { autoAlpha: 0, y: 24 },
-    fade: { autoAlpha: 0 },
+    up: { opacity: 0, y: 24 },
+    fade: { opacity: 0 },
     clip: { clipPath: 'inset(0 0 100% 0)' },
   };
   const to: Record<string, gsap.TweenVars> = {
-    up: { autoAlpha: 1, y: 0 },
-    fade: { autoAlpha: 1 },
+    up: { opacity: 1, y: 0 },
+    fade: { opacity: 1 },
     clip: { clipPath: 'inset(0 0 0% 0)', duration: DUR[4], ease: EASE.inout },
   };
   for (const el of reveals)

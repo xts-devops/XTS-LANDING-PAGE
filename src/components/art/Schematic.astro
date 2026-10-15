@@ -1,8 +1,8 @@
 ---
 /**
  * Gold-line system schematics — XTS draws the systems it builds instead of using stock photos.
- * Canvas 600×400, `slice` scaling. Subjects stay inside the safe area x 140–460 / y 70–330, so
- * every crop the layout uses (16:7 … 4:5) keeps them whole. `data-draw` paths animate in (MOTION §7).
+ * Drawn on a 600×400 canvas, framed to the subject box (viewBox 120 45 360 310) with `meet` scaling so the subject is always whole in any slot shape (16:7 … 4:5);
+ * the blueprint grid is a CSS background on .visual, so it fills the slot edge to edge. `data-draw` paths animate in (MOTION §7).
  */
 import '../../styles/art.css';
 
@@ -12,7 +12,6 @@ interface Props {
   name: ArtName;
 }
 const { name } = Astro.props;
-const uid = `sx-${name}`;
 
 // Small helpers keep repeated marks declarative.
 const range = (n: number) => Array.from({ length: n }, (_, i) => i);
@@ -21,24 +20,12 @@ const bars = [38, 62, 48, 84, 70, 104, 92];
 
 <svg
   class="sx"
-  viewBox="0 0 600 400"
-  preserveAspectRatio="xMidYMid slice"
+  viewBox="120 45 360 310"
+  preserveAspectRatio="xMidYMid meet"
   role="presentation"
   aria-hidden="true"
   focusable="false"
 >
-  <defs>
-    <pattern
-      id={`${uid}-grid`}
-      width="24"
-      height="24"
-      patternUnits="userSpaceOnUse"
-    >
-      <path class="sx-grid" d="M24 0H0V24" />
-    </pattern>
-  </defs>
-  <rect width="600" height="400" fill={`url(#${uid}-grid)`} opacity="0.55" />
-
   {name === 'platforms' && (
     <g>
       {/* POS tablet */}

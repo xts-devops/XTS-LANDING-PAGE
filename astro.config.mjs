@@ -21,6 +21,8 @@ if (site && !/^https?:\/\//.test(site)) {
 
 export default defineConfig({
   output: 'static',
+  // Inline CSS: removes render-blocking requests (LCP budget, MOTION §6).
+  build: { inlineStylesheets: 'always' },
   site,
   integrations: site ? [sitemap()] : [],
   vite: { plugins: [tailwindcss()] },

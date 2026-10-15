@@ -22,11 +22,11 @@ function initMobileMenu() {
     .forEach((a) => a.addEventListener('click', () => (menu.open = false)));
 }
 
-/** Pause ambient CSS loops (console feed, data flows) while they're off-screen. */
-function initOffscreenPause() {
+/** Run ambient CSS loops (console feed, data flows) only while they're on screen. */
+function initLiveLoops() {
   const io = new IntersectionObserver((entries) => {
     for (const e of entries)
-      e.target.classList.toggle('is-offscreen', !e.isIntersecting);
+      e.target.classList.toggle('is-live', e.isIntersecting);
   });
   document
     .querySelectorAll('.console, .visual')
@@ -48,6 +48,6 @@ function initSpotlight() {
 initHeader();
 initSpotlight();
 initMobileMenu();
-initOffscreenPause();
+initLiveLoops();
 initIndustries();
 initForm();

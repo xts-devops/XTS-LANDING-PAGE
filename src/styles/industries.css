@@ -130,16 +130,18 @@
 .industry-directory a[aria-selected='true']::after {
   transform: scaleX(1);
 }
-.is-tabs .industry-panels {
+/* Laid out by .js (set before first paint) so enhancing to tabs never shifts the page (CLS). */
+.js .industry-panels {
   display: grid;
   overflow: visible;
   padding: 0;
   margin: 0;
 }
-.is-tabs .industry-panel {
+.js .industry-panel {
   grid-area: 1 / 1;
 }
-.is-tabs .industry-panel[hidden] {
+.js .industry-panel[hidden],
+.js .industries-layout:not(.is-tabs) .industry-panel:not(:first-child) {
   display: none;
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -165,7 +167,7 @@
   }
 }
 @media (max-width: 900px) {
-  .is-tabs .industry-directory a::after {
+  .js .industry-directory a::after {
     bottom: 0.4rem;
   }
 }

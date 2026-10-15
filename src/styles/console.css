@@ -194,9 +194,13 @@
   .console-live i {
     animation: console-live 2.2s ease-out infinite;
   }
-  .is-offscreen .console-feed ul,
-  .is-offscreen .console-live i {
+  .console-feed ul,
+  .console-live i {
     animation-play-state: paused;
+  }
+  .is-live .console-feed ul,
+  .is-live .console-live i {
+    animation-play-state: running;
   }
 }
 @keyframes console-feed {

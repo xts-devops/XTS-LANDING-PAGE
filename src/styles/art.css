@@ -6,12 +6,16 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  /* Blueprint grid lives here (not in the SVG) so it fills any slot shape edge to edge. */
+  --grid: color-mix(in srgb, var(--color-line) 55%, transparent);
   background:
     radial-gradient(
       60% 70% at 50% 55%,
       color-mix(in srgb, var(--color-gold-lo) 16%, transparent),
       transparent 70%
     ),
+    linear-gradient(var(--grid) 1px, transparent 1px) center / 24px 24px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) center / 24px 24px,
     var(--color-surface);
 }
 .visual > svg {
@@ -127,9 +131,14 @@
     transform-origin: center;
     animation: sx-pulse 2.8s ease-out infinite;
   }
-  .is-offscreen .sx-flow,
-  .is-offscreen .sx-pulse {
+  /* Loops run only while their frame is on screen (.is-live set by scripts/ui). */
+  .sx-flow,
+  .sx-pulse {
     animation-play-state: paused;
+  }
+  .is-live .sx-flow,
+  .is-live .sx-pulse {
+    animation-play-state: running;
   }
 }
 @keyframes sx-travel {

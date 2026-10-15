@@ -1,6 +1,8 @@
 ---
 import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo-gold.png';
 import { brand } from '../../content/brand';
 import { navigation, site } from '../../content/site';
 const onHome = Astro.url.pathname === '/';
@@ -14,11 +16,15 @@ const base = onHome ? '' : '/';
       aria-label={site.homeLabel}
       class="brand-link"
     >
-      <img
-        src={brand.goldLogo.src}
-        width={brand.goldLogo.width}
-        height={brand.goldLogo.height}
+      <Image
+        src={logo}
         alt={brand.goldLogo.alt}
+        width={184}
+        densities={[1, 2]}
+        format="webp"
+        quality={82}
+        loading="eager"
+        fetchpriority="high"
       />
     </a>
     <nav class="desktop-nav" aria-label={site.navLabel}>
