@@ -57,12 +57,14 @@ jobs:
         if: steps.pages.outputs.found == 'true' && steps.pw-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: E2E smoke tests (when T24 adds them)
-        if: steps.pages.outputs.found == 'true' && hashFiles('tests/e2e/**') != ''
-        run: npm run build && npx playwright test --project=e2e
+      - name: E2E smoke + axe a11y
+        id: e2e
+        if: steps.pages.outputs.found == 'true'
+        run: npm run test:e2e
 
+      # Screenshots still run when tests fail — reviewers need them most then.
       - name: Review screenshots (375 / 768 / 1440)
-        if: steps.pages.outputs.found == 'true' && github.event_name == 'pull_request'
+        if: steps.pages.outputs.found == 'true' && github.event_name == 'pull_request' && !cancelled()
         run: npm run shots
         env:
           SHOTS_DIR: review-shots
@@ -72,6 +74,22 @@ jobs:
         with:
           name: review-shots-pr${{ github.event.pull_request.number }}
           path: review-shots/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Lighthouse budgets (MOTION §6)
+        id: lighthouse
+        if: steps.pages.outputs.found == 'true' && github.event_name == 'pull_request' && !cancelled()
+        run: npm run build && npm run test:lighthouse
+        env:
+          # Build as the launch site would be, so the SEO crawlability audit is meaningful.
+          PUBLIC_ALLOW_INDEXING: 'true'
+      - name: Upload Lighthouse reports
+        if: steps.pages.outputs.found == 'true' && github.event_name == 'pull_request' && !cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-pr${{ github.event.pull_request.number }}
+          path: .lighthouseci/
           retention-days: 14
           if-no-files-found: ignore
 

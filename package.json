@@ -15,7 +15,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify": "npm run check && npm run lint && npm run format:check && npm run build",
-    "shots": "astro build && playwright test --project=shots"
+    "shots": "astro build && playwright test --project=shots",
+    "test:e2e": "astro build && playwright test --project=e2e",
+    "test:lighthouse": "npx -y @lhci/cli@0.15.1 autorun"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.1",
     "eslint": "^10.12.0",

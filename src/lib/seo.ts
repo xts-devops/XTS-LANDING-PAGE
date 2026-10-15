@@ -1,17 +1,12 @@
 import { brand } from '../content/brand';
+import { contact } from './contact';
 
 /**
  * Site-wide SEO facts and JSON-LD builders (Claude's lane — D15).
  * Company facts are fixed by HANDOVER "Company facts"; don't add figures, clients or socials here.
- * TODO(T04): import `contact` from `src/content/site.ts` once it exists, so contact details have one source.
  */
 
-export const contact = {
-  email: 'info@xzentechsolutions.com',
-  phoneDisplay: '0969 244 2557',
-  phoneE164: '+639692442557',
-  country: 'PH',
-} as const;
+export { contact };
 
 export const siteMeta = {
   name: brand.name,

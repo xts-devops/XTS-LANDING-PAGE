@@ -18,3 +18,4 @@ dist/
 
 # Review screenshots (npm run shots) — local + CI artifact, never committed
 docs/review/
+.lighthouseci/
