@@ -1,58 +1,40 @@
 # HANDOVER — XTS Landing Page
 
 ## What this is
-Marketing landing page for **XZEN TECH SOLUTIONS (XTS)** — a technology partner offering
-business platforms (POS/CRM/ERP/WMS), custom software, automation & integration, and
-robotics/R&D. Single page, dark + gold brand, built by Claude and Codex together.
+Marketing landing page for **XZEN TECH SOLUTIONS (XTS)** — a Philippines-based technology
+partner offering business platforms (POS/CRM/ERP/WMS), custom software, automation &
+integration, and robotics/R&D. Single page + privacy page, dark + gold brand, built by
+Claude and Codex together. Marketing site only (no app/portal planned), English only,
+text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**Plan v1.1 done, no code yet.** Next step is M0 (scaffold). See `TASKS.md`.
+**Plan v1.2 done (stack = Astro), no code yet.** Next: M0 — GitHub repo + scaffold. See `TASKS.md`.
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
 - Public figures: **300+** business systems, **200+** robotics & automation projects. Nothing else.
-- Client projects are confidential — no names, logos, or results. No partner logos.
+- Client projects are confidential — no names, logos, or results. No partner logos. No social links.
 - Domain `xzentechsolutions.com` is for later; it's live elsewhere now — don't touch DNS or hardcode it.
 
 ## Where things are
 | Path | What |
 |---|---|
-| `docs/PLAN.md` | **The spec.** Page structure, section specs, design tokens, content model, milestones, open questions. Read this first. |
-| `docs/IMAGE-BRIEF.md` | Every image the page needs, with prompts/ratios + licence log. |
+| `docs/PLAN.md` | **The spec.** Structure, section specs, tokens, **stack & source layout (§5)**, content model, milestones. Read first. |
+| `docs/IMAGE-BRIEF.md` | Every image the page needs, with prompts/ratios, brand assets, licence log. |
 | `docs/reference/mockup-v1.webp` | Original visual mockup (look reference; structure superseded by PLAN.md). |
 | `AGENTS.md` / `CLAUDE.md` | Per-agent entry points, lanes, rules. |
 | `TASKS.md` · `PROGRESS.md` · `DECISIONS.md` | Board · session log · locked decisions. |
 
-## Planned stack
-Next.js 15 (App Router, TS) · Tailwind CSS v4 · Motion · lucide-react · next/font (Michroma + Manrope) · zod + a no-DNS email provider for the inquiry form · Playwright · Vercel.
-
-## Planned source layout
-```
-src/
-  app/
-    layout.tsx, page.tsx, globals.css      # claude (page composition, tokens)
-    api/contact/route.ts                   # codex
-    sitemap.ts, robots.ts, opengraph-image # codex
-  components/
-    ui/        Button, Card, Chip, Eyebrow, Container, Section     # claude
-    sections/  Header, Hero, ProofBar, Solutions, Showcase, Industries,
-               Process, Contact, Footer                            # claude
-  content/
-    types.ts                               # SHARED contract
-    site.ts (contact, proof), pillars.ts, showcase.ts,
-    industries.ts, process.ts                                      # codex
-  lib/                                     # codex (form, analytics helpers)
-public/images/**, public/brand/**         # codex
-tests/e2e/**                               # codex
-```
+## Stack (summary — details in PLAN §5)
+Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) · `@lucide/astro` · Fontsource (Michroma + Manrope) · `astro:assets` images · client-side form → no-DNS email provider + captcha · Vercel (hosting + Web Analytics) · GitHub + Actions CI · Playwright + Lighthouse CI.
 
 ## Build / run / verify (once scaffolded)
 ```
 npm install
-npm run dev            # http://localhost:3000
-npm run verify         # = lint + typecheck + build (the gate both agents use)
+npm run dev            # http://localhost:4321
+npm run verify         # astro check + eslint + prettier --check + astro build  (the gate both agents use)
 npm run test:e2e       # Playwright smoke
 ```
 
 ## Secrets
-`.env.local` only (e.g. form provider key, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`). Git-ignored. Commit `.env.example` with empty values.
+None expected — all keys are public-by-design (`PUBLIC_*`). Values in `.env` (git-ignored); `.env.example` committed with empty values. If a truly secret key becomes necessary, that needs a server endpoint — raise it as a task first.

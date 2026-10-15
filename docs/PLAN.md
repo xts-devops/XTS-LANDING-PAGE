@@ -1,10 +1,10 @@
-# XTS Landing Page — Plan v1.1
+# XTS Landing Page — Plan v1.2
 
 Source mockup: [`docs/reference/mockup-v1.webp`](reference/mockup-v1.webp). We keep its
 look (black + warm gold, cinematic night-office photography, wide display type) and fix its
 structure.
 
-> **v1.1 (2026-10-16)** — updated with XTS answers: only two public figures, no client
+> **v1.2 (2026-10-16)** — stack switched to Astro (§5). **v1.1** — updated with XTS answers: only two public figures, no client
 > projects disclosed, no partner logos, contact details confirmed, domain reserved for later.
 > Result: one fewer section, a "Showcase" instead of case studies, shorter nav.
 
@@ -129,13 +129,64 @@ Dark-only. Gold on `--bg` for large text and accents; body text stays `--text`/`
 
 ---
 
-## 5. Tech stack
-- **Next.js 15 (App Router) + TypeScript**, static-first; one route handler for the form.
-- **Tailwind CSS v4** (`@theme` tokens), **Motion**, **lucide-react**, `next/image`, `next/font`.
-- Form: route handler + zod. Delivery provider must **not require DNS changes to xzentechsolutions.com** for now (domain is live elsewhere) — see D10.
-- Site URL from `NEXT_PUBLIC_SITE_URL` (Vercel preview URL now; `https://xzentechsolutions.com` at launch).
-- Quality: ESLint, Prettier, Playwright smoke, Lighthouse (Perf ≥ 90, A11y ≥ 95, SEO 100).
-- Deploy: Vercel (preview URL until domain cutover).
+## 5. Stack & architecture
+
+**Scope:** marketing site only (landing page, later maybe blog/careers/service pages) · English only · text edited in code by devs/agents (no CMS) · repo on GitHub.
+
+```
+Browser ──► Vercel CDN (static HTML/CSS, near-zero JS)
+             ├─ index.html   — Astro-rendered sections
+             │    └─ tiny vanilla-TS scripts: header blur, industries selector,
+             │       count-up, reveals, form submit
+             ├─ privacy/     — Privacy Notice (RA 10173)
+             └─ form ──► email provider (no-DNS) ──► info@xzentechsolutions.com
+                         + Cloudflare Turnstile (spam)
+```
+
+| Concern | Choice | Notes |
+|---|---|---|
+| Framework | **Astro 7** + TypeScript (strict) | `output: 'static'`. Add `@astrojs/vercel` only if a server endpoint is needed. |
+| Interactivity | Astro components + inline `<script>` (vanilla TS) | **No UI framework** (no React). Each interaction is a few dozen lines. |
+| Styling | **Tailwind CSS v4** via `@tailwindcss/vite`, tokens in `@theme` | `src/styles/global.css` |
+| Motion | CSS transitions + `IntersectionObserver`; `motion` (vanilla) only if needed | `prefers-reduced-motion` respected |
+| Icons | Lucide via `@lucide/astro` | Rendered as inline SVG, zero JS |
+| Fonts | Fontsource, self-hosted: `@fontsource/michroma`, `@fontsource-variable/manrope` | Preload display font; `font-display: swap` |
+| Images | `astro:assets` `<Image>/<Picture>` → AVIF + WebP, responsive `srcset` | Sources in `src/assets/images/**` (not `public/`) so they're optimised |
+| Content | Typed TS modules `src/content/*.ts` | Plain modules; contract in §6 |
+| Form | **Client-side POST to a no-DNS provider** (Web3Forms or Formspree — Codex verifies free-tier limits + Turnstile/hCaptcha support) | Keeps the site 100% static. Swap to Resend at domain cutover (T40). |
+| Spam | Honeypot + Turnstile/hCaptcha (whatever the provider supports) | |
+| Privacy | Consent checkbox on form + `/privacy` page | PH Data Privacy Act (RA 10173) |
+| Analytics | Vercel Web Analytics (cookie-free) | No cookie banner needed |
+| SEO | `@astrojs/sitemap`, meta/OG in `Base.astro`, JSON-LD `Organization` | `site` from `PUBLIC_SITE_URL` |
+| Quality gate | `npm run verify` = `astro check` + ESLint (`eslint-plugin-astro`) + Prettier check + `astro build` | |
+| Tests | Playwright smoke; Lighthouse CI (Perf ≥ 95, A11y ≥ 95, SEO 100) | |
+| CI/CD | GitHub Actions runs `verify` + Playwright on every push/PR; Vercel deploys a preview per branch, production from `main` | Production = Vercel URL until T40 |
+| Node | 22 LTS+ (`.nvmrc`), npm | Local machine has Node 24 |
+
+**Env vars** (`.env.example` committed, `.env` ignored): `PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`. All are public-by-design keys; anything secret means we need a server endpoint — flag it first.
+
+### Source layout
+```
+astro.config.mjs, package.json, tsconfig.json, eslint/prettier, .github/   # codex
+src/
+  pages/
+    index.astro                 # claude — composes sections
+    privacy.astro               # claude (layout) · codex (copy in content/privacy.ts)
+  layouts/Base.astro            # claude — <head>, fonts, meta/OG slots, header/footer
+  components/
+    ui/        Container, Section, Eyebrow, Button, Card, Chip, Icon   # claude
+    sections/  Header, Hero, ProofBar, Solutions, Showcase, Industries,
+               Process, Contact, Footer                                # claude
+  scripts/     header.ts, industries.ts, countup.ts, reveal.ts         # claude
+  styles/global.css             # claude — Tailwind @theme tokens
+  content/
+    types.ts                    # SHARED contract
+    site.ts, pillars.ts, showcase.ts, industries.ts, process.ts, privacy.ts   # codex
+  lib/form.ts                   # codex — submit, validation (zod), provider call
+  assets/images/**              # codex — optimised by astro:assets
+public/brand/**, favicon        # codex
+tests/e2e/**                    # codex
+```
 
 ---
 
@@ -144,7 +195,9 @@ Dark-only. Gold on `--bg` for large text and accents; body text stays `--text`/`
 All copy lives in `src/content/*.ts`, typed by `src/content/types.ts`. Components never hardcode copy.
 
 ```ts
-export type Img       = { src: string; alt: string; width: number; height: number };
+import type { ImageMetadata } from 'astro';
+export type Img       = { src: ImageMetadata; alt: string };   // import from src/assets/images
+// `icon` fields are Lucide icon names (kebab-case), resolved by components/ui/Icon.astro
 export type Pillar    = { id: string; title: string; summary: string; chips: string[]; icon: string; image: Img };
 export type Showcase  = { id: string; title: string; tags: string[]; bullets: string[]; image: Img; need: Pillar['id'] };
 export type Industry  = { id: string; name: string; icon: string; summary: string; examples: string[]; image: Img };
@@ -168,7 +221,7 @@ proof   = [ {kind:'count', value:300, suffix:'+', label:'Business systems delive
 ---
 
 ## 7. Milestones
-1. **M0 Setup** — scaffold, tokens, fonts, content types, logo in place.
+1. **M0 Setup** — GitHub repo + CI, Astro scaffold, tokens, fonts, content types, logo in place.
 2. **M1 Skeleton** — all 6 sections with placeholder content + images.
 3. **M2 Polish** — generated image set, motion, responsive + a11y pass.
 4. **M3 Ship** — form live, SEO/OG, Lighthouse budget, Vercel preview.

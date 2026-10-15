@@ -35,3 +35,12 @@ xzentechsolutions.com is live elsewhere. Don't change its DNS or hardcode it: si
 
 ### D11 · 2026-10-16 · claude · No social links for now
 Footer and contact show no social icons; no `Social` content type. **Why:** user decision; add later as a task if XTS wants them.
+
+### D12 · 2026-10-16 · claude + user · Astro 7, static, no UI framework (supersedes D4)
+Marketing-only site, English only, text edited in code (no CMS), repo on GitHub. Astro + TS strict + Tailwind v4, vanilla-TS interactions, `astro:assets` images, Vercel hosting. Full stack in PLAN §5. **Why:** ~95% static content; Astro ships near-zero JS for the best speed. No portal/app planned, so Next.js's strengths aren't needed.
+
+### D13 · 2026-10-16 · claude · Form = client-side POST to a no-DNS provider
+Keeps the site fully static; no secrets. Provider (Web3Forms vs Formspree) picked in T07. Switch to Resend at domain cutover (T40). **Why:** D10 forbids DNS changes for now.
+
+### D14 · 2026-10-16 · claude · Privacy compliance: consent + /privacy, cookie-free analytics
+Form has a consent checkbox linking to `/privacy` (PH Data Privacy Act, RA 10173). Vercel Web Analytics only, so no cookie banner. **Why:** the form collects personal data.

@@ -8,7 +8,7 @@ then export AVIF + WebP.
 Shared prompt suffix:
 `cinematic night photography, dark moody interior, warm amber and gold accent lighting, deep shadows, shallow depth of field, city lights bokeh through floor-to-ceiling windows, photorealistic, 35mm, no text, no logos`
 
-| File (`public/images/…`) | Ratio / min size | Subject |
+| File (`src/assets/images/…`) | Ratio / min size | Subject |
 |---|---|---|
 | `hero/dashboard.jpg` | 16:9 · 2400w | Curved ultrawide monitor with gold-on-black analytics dashboard + world map, laptop beside it, desk at night, skyline behind |
 | `solutions/business-platforms.jpg` | 16:10 · 1200w | Tablet POS terminal + receipt printer on a dark wood counter, dashboard monitor behind |
