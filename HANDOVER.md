@@ -22,11 +22,13 @@ text edited in code (no CMS).
 | `docs/PLAN.md` | **The spec.** Structure, section specs, tokens, **stack & source layout (§5)**, content model, milestones. Read first. |
 | `docs/IMAGE-BRIEF.md` | Every image the page needs, with prompts/ratios, brand assets, licence log. |
 | `docs/reference/mockup-v1.webp` | Original visual mockup (look reference; structure superseded by PLAN.md). |
-| `AGENTS.md` / `CLAUDE.md` | Per-agent entry points, lanes, rules. |
+| `docs/DEV-FLOW.md` | **How we work**: phases, gates, PR + review loop, tooling. |
+| `docs/MOTION.md` | Motion system, choreography, perf budget. |
+| `AGENTS.md` / `CLAUDE.md` | Per-agent entry points, lanes, rules. **Codex = UI/UX lead · Claude = architecture/backend/quality** (D15). |
 | `TASKS.md` · `PROGRESS.md` · `DECISIONS.md` | Board · session log · locked decisions. |
 
 ## Stack (summary — details in PLAN §5)
-Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) · `@lucide/astro` · Fontsource (Michroma + Manrope) · `astro:assets` images · client-side form → no-DNS email provider + captcha · Vercel (hosting + Web Analytics) · GitHub + Actions CI · Playwright + Lighthouse CI.
+Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) · GSAP + Lenis motion · `@lucide/astro` · Fontsource (Michroma + Manrope) · `astro:assets` images · client-side form → no-DNS email provider + captcha · Vercel (hosting + Web Analytics) · GitHub + Actions CI · Playwright + Lighthouse CI.
 
 ## Build / run / verify (once scaffolded)
 ```

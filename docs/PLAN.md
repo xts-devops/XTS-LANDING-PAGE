@@ -1,10 +1,10 @@
-# XTS Landing Page — Plan v1.2
+# XTS Landing Page — Plan v1.3
 
 Source mockup: [`docs/reference/mockup-v1.webp`](reference/mockup-v1.webp). We keep its
 look (black + warm gold, cinematic night-office photography, wide display type) and fix its
 structure.
 
-> **v1.2 (2026-10-16)** — stack switched to Astro (§5). **v1.1** — updated with XTS answers: only two public figures, no client
+> **v1.3 (2026-10-16)** — UI-first dev flow ([`DEV-FLOW.md`](DEV-FLOW.md)), motion system ([`MOTION.md`](MOTION.md)), lanes swapped (D15). **v1.2** — stack switched to Astro (§5). **v1.1** — updated with XTS answers: only two public figures, no client
 > projects disclosed, no partner logos, contact details confirmed, domain reserved for later.
 > Result: one fewer section, a "Showcase" instead of case studies, shorter nav.
 
@@ -48,7 +48,7 @@ Net: 8 content sections → **6**, ~22 tiles → ~11.
 - H1: `Technology solutions built for` **`real growth`** (gold gradient on last two words).
 - Sub: *We engineer, build, and implement intelligent systems — from business platforms and custom software to automation and robotics.*
 - CTAs: `Book a Consultation →` (solid gold → #contact) · `Explore Solutions` (outline → #solutions).
-- Visual: generated dashboard-on-desk night-city image (right 55%), fades into bg at bottom.
+- Visual: **living dashboard** — coded SVG/HTML glass panels (KPIs, bar + line charts, world map) layered over a blurred night-city/desk photo (right 55%), fades into bg at bottom. Animated per MOTION.md §3.
 
 ### 3.1 · Proof bar (under hero)
 | Value | Label | Type |
@@ -148,12 +148,12 @@ Browser ──► Vercel CDN (static HTML/CSS, near-zero JS)
 | Framework | **Astro 7** + TypeScript (strict) | `output: 'static'`. Add `@astrojs/vercel` only if a server endpoint is needed. |
 | Interactivity | Astro components + inline `<script>` (vanilla TS) | **No UI framework** (no React). Each interaction is a few dozen lines. |
 | Styling | **Tailwind CSS v4** via `@tailwindcss/vite`, tokens in `@theme` | `src/styles/global.css` |
-| Motion | CSS transitions + `IntersectionObserver`; `motion` (vanilla) only if needed | `prefers-reduced-motion` respected |
+| Motion | **GSAP 3.15** (ScrollTrigger, SplitText, DrawSVG) + **Lenis** smooth scroll (desktop) + CSS micro-interactions | Full spec + budget: [`MOTION.md`](MOTION.md) |
 | Icons | Lucide via `@lucide/astro` | Rendered as inline SVG, zero JS |
 | Fonts | Fontsource, self-hosted: `@fontsource/michroma`, `@fontsource-variable/manrope` | Preload display font; `font-display: swap` |
 | Images | `astro:assets` `<Image>/<Picture>` → AVIF + WebP, responsive `srcset` | Sources in `src/assets/images/**` (not `public/`) so they're optimised |
 | Content | Typed TS modules `src/content/*.ts` | Plain modules; contract in §6 |
-| Form | **Client-side POST to a no-DNS provider** (Web3Forms or Formspree — Codex verifies free-tier limits + Turnstile/hCaptcha support) | Keeps the site 100% static. Swap to Resend at domain cutover (T40). |
+| Form | **Client-side POST to a no-DNS provider** (Web3Forms or Formspree — Claude verifies in T07 free-tier limits + Turnstile/hCaptcha support) | Keeps the site 100% static. Swap to Resend at domain cutover (T40). |
 | Spam | Honeypot + Turnstile/hCaptcha (whatever the provider supports) | |
 | Privacy | Consent checkbox on form + `/privacy` page | PH Data Privacy Act (RA 10173) |
 | Analytics | Vercel Web Analytics (cookie-free) | No cookie banner needed |
@@ -166,26 +166,31 @@ Browser ──► Vercel CDN (static HTML/CSS, near-zero JS)
 **Env vars** (`.env.example` committed, `.env` ignored): `PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`. All are public-by-design keys; anything secret means we need a server endpoint — flag it first.
 
 ### Source layout
+Ownership per D15 — **codex** = UI/UX, **claude** = architecture/backend/quality.
 ```
-astro.config.mjs, package.json, tsconfig.json, eslint/prettier, .github/   # codex
+astro.config.mjs, package.json, tsconfig.json   # SHARED (claude after T01; codex may add deps approved in MOTION.md)
+eslint/prettier, .github/, lighthouserc, vercel # claude
 src/
-  pages/
-    index.astro                 # claude — composes sections
-    privacy.astro               # claude (layout) · codex (copy in content/privacy.ts)
-  layouts/Base.astro            # claude — <head>, fonts, meta/OG slots, header/footer
+  pages/index.astro, privacy.astro              # codex
+  layouts/Base.astro                            # codex (claude supplies <Seo/> + JSON-LD components)
   components/
-    ui/        Container, Section, Eyebrow, Button, Card, Chip, Icon   # claude
-    sections/  Header, Hero, ProofBar, Solutions, Showcase, Industries,
-               Process, Contact, Footer                                # claude
-  scripts/     header.ts, industries.ts, countup.ts, reveal.ts         # claude
-  styles/global.css             # claude — Tailwind @theme tokens
+    ui/        Container, Section, Eyebrow, Button, Card, Chip, Icon   # codex
+    sections/  Header, Hero, HeroDashboard, ProofBar, Solutions, Showcase,
+               Industries, Process, Contact, Footer                   # codex
+    seo/       Seo.astro, JsonLd.astro                                # claude
+  scripts/
+    motion/    index.ts, tokens.ts, hero.ts, reveals.ts, process.ts, lenis.ts   # codex
+    ui/        header.ts, industries.ts, countup.ts, pointer.ts                # codex
+    form.ts                                     # claude — wires Contact form to src/lib/form
+  styles/global.css, tokens.css                 # codex — Tailwind @theme + motion tokens
   content/
-    types.ts                    # SHARED contract
-    site.ts, pillars.ts, showcase.ts, industries.ts, process.ts, privacy.ts   # codex
-  lib/form.ts                   # codex — submit, validation (zod), provider call
-  assets/images/**              # codex — optimised by astro:assets
-public/brand/**, favicon        # codex
-tests/e2e/**                    # codex
+    types.ts                                    # SHARED contract
+    site.ts, pillars.ts, showcase.ts, industries.ts, process.ts   # codex
+    privacy.ts                                  # claude
+  lib/form.ts, seo.ts                           # claude
+  assets/images/**                              # codex
+public/brand/**, favicons                       # codex
+tests/**                                        # claude
 ```
 
 ---

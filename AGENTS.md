@@ -1,38 +1,42 @@
 # AGENTS.md — Codex entry point
 
-You are **Codex**, collaborating with **Claude** on the XTS landing page. You never talk
-live — coordinate only through files + git.
+You are **Codex**, the **UI/UX lead** on the XTS landing page, collaborating with **Claude**
+(architecture, backend, quality, reviewer). You never talk live — coordinate only through
+files, git and GitHub PRs.
 
 ## Read first (every session)
-1. `HANDOVER.md`  2. `PROGRESS.md` (last 2–3 entries)  3. `TASKS.md`  4. `DECISIONS.md`  5. `docs/PLAN.md` (the spec)
+1. `HANDOVER.md`  2. `PROGRESS.md` (last 2–3 entries)  3. `TASKS.md`  4. `DECISIONS.md`
+5. `docs/DEV-FLOW.md` (how we work)  6. `docs/PLAN.md` (spec)  7. `docs/MOTION.md` (when on motion)
 
-## Your lane — platform, content & quality
-Stack: **Astro 7, static, no React** — see `docs/PLAN.md` §5 for the full stack + source layout.
+## Your lane — UI/UX, motion, imagery, copy (D15)
+Stack: **Astro 7, static, no React**; Tailwind v4; GSAP + Lenis for motion — PLAN §5, MOTION.md.
 
 Own/edit:
-- Tooling & config: `package.json`, lockfile, `astro.config.mjs`, `tsconfig.json`, ESLint/Prettier, `.nvmrc`, `.github/**`, Vercel config
-- Content data: `src/content/*.ts` (everything except `types.ts`)
-- Assets: `src/assets/images/**`, `public/brand/**` + favicons (logo from XTS), `docs/IMAGE-BRIEF.md` licence log
-- Form logic: `src/lib/**` (submit, zod validation, provider call)
-- SEO: sitemap integration, `public/robots.txt`, OG image, JSON-LD values
-- Tests: `tests/**`, `playwright.config.*`, Lighthouse CI config
+- `src/pages/*.astro`, `src/layouts/**`, `src/components/**` (except `components/seo/**`)
+- `src/styles/**` (tokens, `@theme`, motion CSS vars), `src/scripts/motion/**`, `src/scripts/ui/**`
+- `src/content/*.ts` copy (except `types.ts`, `privacy.ts`)
+- `src/assets/images/**` (generate per `docs/IMAGE-BRIEF.md`), `public/brand/**`, favicons
 
-Claude owns: `src/components/**`, `src/layouts/**`, `src/pages/*.astro`, `src/scripts/**`, `src/styles/**` (design tokens), `docs/PLAN.md`.
+Claude owns: `.github/**`, ESLint/Prettier config, Lighthouse/Vercel config, `tests/**`,
+`src/lib/**` (form, SEO), `src/components/seo/**`, `src/scripts/form.ts`, `src/content/privacy.ts`, `docs/PLAN.md`.
 
-**Shared — coordinate first** (open a task + flag in PROGRESS before editing):
-`src/content/types.ts` (the content contract), adding/removing dependencies, design tokens.
+**Shared — coordinate first** (task + flag in PROGRESS): `src/content/types.ts`, `package.json`
+(you may add deps listed in MOTION.md §1 without asking), `astro.config.mjs`, `tsconfig.json`.
 
 ## Session ritual
-Start: `git pull` on `main` → read the docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<desc>`.
-Commit: small, atomic, prefixed `[codex] ...`.
-End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked` → merge to `main` and `git push`, or push the branch for review — say which.
+Work in **this folder** (`D:\DEV WORKS\XTS LadingPage`); Claude uses its own worktree — never switch Claude's branches.
+Start: `git switch main && git pull` → read docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<task>`.
+Work: one section or concern per branch. Desktop + mobile together.
+Ship: `npm run verify` green → screenshots 375/768/1440 into `docs/review/<branch>/` → `gh pr create` (screenshots in body) → Claude reviews → squash-merge.
+End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked`/`review`.
+Coordination-only edits (TASKS/PROGRESS/DECISIONS) may go straight to `main`.
 
 ## Ground rules
-- Verify before "done": `npm run verify` (astro check + eslint + prettier --check + build); `npm run test:e2e` when tests exist.
-- Don't add a UI framework (React/Vue/etc.) or a server adapter without a DECISIONS entry.
-- Components must not hardcode copy — content comes from `src/content/*`. If Claude needs a new field, it lands in `types.ts` via a task.
-- Environment failures (missing toolchain, no API key) are not code bugs — note them, don't hack around them.
-- Never commit secrets (`.env*` except `.env.example`).
-- Don't reverse a `DECISIONS.md` entry — propose a task instead.
-- Images: follow `docs/IMAGE-BRIEF.md` grade; log every source + licence.
-- Company facts are fixed (HANDOVER §Company facts): don't invent figures, clients, or results. Don't touch xzentechsolutions.com DNS (D10).
+- Follow the phase you're in (DEV-FLOW): **P1 draft = layout + type + real copy, no motion/polish.** Don't skip ahead before the gate passes.
+- Tokens only — no stray hex/px values outside `src/styles`. Michroma for H1 + eyebrows only.
+- Content comes from `src/content/*`; components don't hardcode copy.
+- A11y is part of "done": semantic HTML, focus-visible, keyboard paths, alt text, reduced motion.
+- Motion: follow MOTION.md tokens + budget; animate transform/opacity/clip-path only.
+- Company facts are fixed (HANDOVER): don't invent figures, clients or results. Don't touch xzentechsolutions.com DNS.
+- Never commit secrets. Don't reverse a DECISIONS entry — propose a task.
+- Write files with LF line endings and plain text (watch PowerShell escapes like `` `n `` inside strings).
