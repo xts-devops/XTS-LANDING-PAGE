@@ -8,7 +8,9 @@ Claude and Codex together. Marketing site only (no app/portal planned), English 
 text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**Astro scaffold and brand assets: PR #5; Codex is implementing P1 draft UI.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Follow D15 ownership and docs/DEV-FLOW.md.
+**MVP built (D20/D21): PR from `claude/mvp-ui` awaits user review** (supersedes #2–#5). Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Open: Web3Forms key (U1), vector logo (T05), Vercel (T33). D15 lanes resume after the MVP merges; see docs/DEV-FLOW.md.
+
+Visuals are coded schematics (`src/components/art/`); add a photo to any pillar/showcase/industry via its optional `image` in `src/content/*` to replace its schematic. Brand favicons/OG: `node tools/make-brand-assets.mjs`.
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
@@ -35,7 +37,9 @@ Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) 
 npm ci
 npm run dev            # http://localhost:4321
 npm run verify         # astro check + eslint + prettier --check + astro build  (the gate both agents use)
-npm run test:e2e       # available after T22 adds Playwright smoke tests
+npm run test:e2e       # Playwright: smoke, axe a11y, interactions, motion
+npm run shots          # review screenshots → docs/review/<branch>/ (git-ignored)
+npm run test:lighthouse  # after a build with PUBLIC_ALLOW_INDEXING=true
 ```
 
 ## Secrets

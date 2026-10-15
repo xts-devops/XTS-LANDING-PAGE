@@ -59,3 +59,10 @@ Spec + budget in `docs/MOTION.md` (JS ≤ 70 KB gz, Perf ≥ 95, reduced-motion 
 
 ### D19 · 2026-10-16 · user + claude · Optimized Codex delivery: merge train, 5 PRs, declarative motion
 Remaining UI work ships as P1 (one PR) → P2-a imagery → P2-b interaction/detail (G2) → P3-a engine + reveals → P3-b signature moments (G3), after a merge train #5 → #2 → #3 → #4. Motion is declared with `data-*` attributes (MOTION §7) and applied by one engine that lazy-loads GSAP and skips it under reduced motion. Gate-independent work (images, favicon/OG from the raster mark, motion engine) runs during reviews. **Why:** merges/reviews were the bottleneck (11 stacked branches, nothing on `main`); declarative motion cuts P3 edits across 9 sections to one module and saves the whole JS budget for reduced-motion users.
+
+### D21 · 2026-10-16 · claude · MVP visual + performance choices
+- **Coded gold-line schematics instead of stock/generated photos** (`components/art/Schematic.astro`): crisp at any size, animatable, ~0 KB of images, on-brand. Content keeps an optional `image` per item; a supplied photo replaces the schematic with no component change.
+- **Hero = coded "living console"** (four capabilities wired to one hub, data flows, event feed). Decorative and aria-hidden; illustrative copy only, no figures or client data.
+- **Hero entrance is pure CSS** (never waits for JS). **GSAP boots on first interaction** (3.5s fallback) and never loads under reduced motion. **CSS is inlined.** These keep LCP ≤ 2.0s and CLS at 0 with motion on.
+- Reveals use `opacity` (not `autoAlpha`) so off-screen headings stay in the accessibility tree.
+**Why:** hit MOTION §6 budgets (measured: Perf 0.95, A11y 1, LCP 1.6–1.9s, CLS 0, JS 58 KB) without giving up the motion.
