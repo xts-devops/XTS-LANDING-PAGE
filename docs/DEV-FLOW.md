@@ -59,6 +59,54 @@ Form provider spike (T07) · `src/lib/form.ts` + zod schema · SEO helper + JSON
 
 ---
 
+## Remaining Codex work: optimized plan (D19, 2026-10-16)
+
+**Situation:** the P1 draft is built, but split over 7 local stacked branches. PR #5 (scaffold) and
+Claude's #2→#3→#4 are open and nothing is on `main`. The bottleneck is **merging and reviewing**,
+not building. So: fewer, bigger, well-tested PRs, and never idle while a gate is open.
+
+### Step 0 · Merge train (do first, ~30 min)
+1. Claude approves **#5** → Codex squash-merges it.
+2. Merge **#2 → #3 → #4** in order (each auto-retargets to `main`; all CI-green). Codex may approve them.
+3. `codex/p1-composition` (it already contains every P1 commit): `git rebase origin/main`. Resolve
+   TASKS/PROGRESS by keeping both sides. **Delete the 6 intermediate `codex/p1-*` branches.**
+4. In `Base.astro`: `<Seo title description />` (from #3), `<html class="no-js">` + inline
+   `document.documentElement.classList.replace('no-js','js')`, and a skip link.
+5. Run the **full local gate** (below) → open **one PR: "P1 draft"** → G1.
+
+### Full local gate (every PR, replaces ad-hoc checks)
+`npm run verify && npm run test:e2e && npm run shots`. Before P3 PRs, also run
+`npm run build && npm run test:lighthouse`. CI repeats all of it; the PR body links the
+`review-shots-pr<N>` artifact.
+
+### Never idle at a gate: work that's safe while G1/G2 are under review
+Nothing below depends on the composition decision:
+- **T18 images**: ratios are fixed in IMAGE-BRIEF. Start the hero backdrop + 4 pillar images during G1.
+- **Favicon + OG (T05 / T18)**: derive from the raster mark now (crop the "A" mark → 512px PNG →
+  `favicon.svg` (raster-embedded is fine) + `favicon.ico` 32px + `apple-touch-icon.png` 180px).
+  Swap in the vector when XTS sends it. Don't stay blocked.
+- **Motion engine (T20)**: build `src/scripts/motion/` against the attribute contract in
+  MOTION §7. It's invisible until sections carry the attributes.
+
+### PR plan after G1: 4 PRs, 2 gates
+| PR | Contents | Gate |
+|---|---|---|
+| **P2-a · Imagery** | T18 image set (AVIF/WebP via `astro:assets`), favicon set, `public/og/og-default.jpg` 1200×630 | — |
+| **P2-b · Interaction & detail** | T19 hero living dashboard (static SVG, animation hooks per MOTION §7), T21 all states (hover / focus-visible / active / disabled / form idle-sending-success-error), industries selector JS (tabs pattern), privacy page layout (T17), **MOTION §7 attributes added to all markup** | **G2** |
+| **P3-a · Motion engine + reveals** | GSAP/Lenis, attribute engine, reduced-motion + no-JS branches, section reveals, count-up, header state | — |
+| **P3-b · Signature moments** | Hero sequence + dashboard animation, process line scrub, industries transitions, showcase tilt/parallax, buttons/spotlight/magnetic, form submit states | **G3** |
+
+That's ~20 task-sized PRs down to **5** (P1 + 4), with gates only where the user's eye is needed.
+
+### Rules that save rework
+- Build states **into the primitives** (Button, Card, Chip, inputs) when they're touched. Don't do a separate states pass.
+- Put motion attributes in the markup in P2-b, so P3 is mostly one engine, not edits to 9 sections.
+- Form markup: keep field `name`s = `name, email, company, need, message, consent, botcheck`
+  (T30 wires them; D18). Leave `<form data-form="inquiry" novalidate>` free of submit logic. Claude owns `scripts/form.ts`.
+- No new deps beyond MOTION §1 without a task.
+
+---
+
 ## Working mechanics
 
 ### 1 · One folder per agent (no shared working tree)

@@ -10,6 +10,12 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-16 · claude · main (docs)
+**Did:** Optimized Codex's remaining work with the user (D19). DEV-FLOW "Remaining Codex work": merge train (#5 → #2 → #3 → #4 → rebase `codex/p1-composition` → one P1 PR), full local gate (`verify && test:e2e && shots`), gate-independent work during reviews, and 4 PRs after G1 (P2-a imagery · P2-b interaction/detail → G2 · P3-a engine + reveals · P3-b signature → G3). MOTION §7: `data-*` attribute contract + lazy GSAP (0 KB under reduced motion).
+**Why:** 11 stacked branches and nothing on `main`; review and merge were the bottleneck, not building.
+**Verify:** n/a — docs only.
+**Next (Codex, in order):** (1) wait for Claude's approval of #5, then merge #5 → #2 → #3 → #4; (2) rebase `codex/p1-composition` on `main`, delete the other `codex/p1-*` branches, wire `<Seo />` + `no-js`→`js` + skip link in `Base.astro`; (3) run the full local gate → open **one** "P1 draft" PR → G1; (4) during G1: favicon/OG from the raster mark, start T18 images, start the motion engine (MOTION §7). **Claude:** review #5, then the P1 PR (G1).
+
 ## 2026-10-16 · claude · claude/t31-seo (#3, review) + claude/t24-test-harness (#4, review)
 **Did:** **T31**: `src/lib/seo.ts` + `components/seo/Seo.astro` / `JsonLd.astro` (title template, description, robots, canonical, OG/Twitter, Organization + WebSite JSON-LD from approved facts only); `robots.txt` endpoint; **indexing off unless `PUBLIC_ALLOW_INDEXING=true`**; `astro.config` falls back to Vercel's production URL for `site`; `.env.example` drops captcha key, adds the indexing flag. **T24**: `tests/e2e/smoke.spec.ts` (page-agnostic invariants) + `a11y.spec.ts` (axe WCAG 2.2 AA, fails on serious/critical); `lighthouserc.cjs` with MOTION §6 budgets (private reports); CI runs e2e + Lighthouse on PRs. `src/lib/contact.ts` = contact facts as plain data.
 **Why:** User continued Claude's parallel track.

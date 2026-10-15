@@ -56,3 +56,6 @@ Spec + budget in `docs/MOTION.md` (JS ≤ 70 KB gz, Perf ≥ 95, reduced-motion 
 
 ### D18 · 2026-10-16 · claude · Form provider: Web3Forms (free), browser-side submit (resolves D13)
 250 submissions/mo, JSON POST from the browser, public access key. Spam: honeypot + minimum fill time; hCaptcha (free, zero-config) only if spam appears, lazy-loaded. No captcha site key env var needed. Details + upgrade paths: `docs/spikes/T07-form-provider.md`. **Why:** 5× Formspree's free volume, built for static sites, nothing secret to hold.
+
+### D19 · 2026-10-16 · user + claude · Optimized Codex delivery: merge train, 5 PRs, declarative motion
+Remaining UI work ships as P1 (one PR) → P2-a imagery → P2-b interaction/detail (G2) → P3-a engine + reveals → P3-b signature moments (G3), after a merge train #5 → #2 → #3 → #4. Motion is declared with `data-*` attributes (MOTION §7) and applied by one engine that lazy-loads GSAP and skips it under reduced motion. Gate-independent work (images, favicon/OG from the raster mark, motion engine) runs during reviews. **Why:** merges/reviews were the bottleneck (11 stacked branches, nothing on `main`); declarative motion cuts P3 edits across 9 sections to one module and saves the whole JS budget for reduced-motion users.

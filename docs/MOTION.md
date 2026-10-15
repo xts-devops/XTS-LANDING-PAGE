@@ -94,3 +94,30 @@ Rule: entrances use `ease-out`; nothing bounces; nothing exceeds 1.2s except the
 - LCP ≤ 2.0s · CLS ≤ 0.02 · INP ≤ 150ms on Lighthouse mobile (Moto G Power, slow 4G).
 - 60 fps on scroll at 1440 (Chrome perf panel, no long tasks > 50ms during scroll).
 - Lighthouse Performance ≥ 95 with motion enabled.
+
+## 7 · Attribute contract (declarative motion, D19)
+Markup **declares** motion and one engine (`src/scripts/motion/index.ts`) applies it. Sections then
+need no motion code of their own, and P3 becomes mostly one module. Attributes are inert until the
+engine loads, so they can go into markup any time (P2-b).
+
+| Attribute | On | Effect |
+|---|---|---|
+| `data-reveal="up \| fade \| clip \| scale"` | any element | Enters on scroll (`up` = 24px + fade; `clip` = inset reveal for images; `scale` = 1.08→1 inside its frame) |
+| `data-reveal-group` | parent | Children with `data-reveal` stagger (`ScrollTrigger.batch`); optional `data-stagger="80"` (ms) |
+| `data-delay="150"` | with `data-reveal` | Extra delay (ms) |
+| `data-split="lines \| words"` | headings | SplitText mask reveal; the real text stays in the DOM for SEO and screen readers |
+| `data-count` | element whose text is the **final** value, e.g. `<span data-count>300+</span>` | Counts up from 0 on enter; the number and suffix are parsed from the text, so no-JS shows the final value |
+| `data-draw` · `data-draw="scrub"` | SVG `path`/`line` | DrawSVG on enter, or scrubbed with scroll (process line) |
+| `data-parallax="0.12"` | element | Moves at (1 − n) × scroll speed; desktop only |
+| `data-tilt` · `data-magnetic` · `data-spotlight` | cards · buttons · card grids | Pointer effects; `(hover: hover)` only |
+| `data-hero` | hero root | Hands off to `hero.ts` for the bespoke sequence (§3.1) |
+| `data-motion="off"` | any subtree | Engine skips it |
+
+**Engine rules**
+- `<html class="no-js">` is replaced by `js` inline in `<head>`. CSS hides `[data-reveal]` **only** under
+  `.js` + `(prefers-reduced-motion: no-preference)`, so no-JS and reduced-motion users never see hidden content.
+- **Load GSAP lazily**: `index.ts` checks `matchMedia('(prefers-reduced-motion: reduce)')`. When it's reduced,
+  it only adds the final state and never downloads GSAP/Lenis (0 KB). Otherwise it `import()`s GSAP plus the plugins
+  in use, and loads Lenis only for `(pointer: fine)`.
+- One `ScrollTrigger.batch` per `data-reveal-group`. Never one trigger per element.
+- `ScrollTrigger.refresh()` after fonts and images settle; kill everything on `astro:before-swap` if view transitions are ever added.
