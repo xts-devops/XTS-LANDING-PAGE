@@ -117,14 +117,18 @@ Same repo, separate checkouts; GitHub `main` is the meeting point.
 
 ### 2 · Branch → PR → review → merge
 1. `git pull` on main → `git switch -c codex/<task>` (or `claude/<task>`).
-2. Small PRs, **one section or one concern per PR** (e.g. `codex/p1-hero`, `codex/p1-solutions`).
-3. `npm run verify` green, then `gh pr create` with screenshots (see §3) in the body.
-4. The other agent reviews with `gh pr review` (approve / request changes). User has final say at gates.
+2. One concern per PR, batched per D19 (P1 draft · P2-a · P2-b · P3-a · P3-b), not one PR per section.
+3. Full local gate green, then `gh pr create` with the screenshot artifact linked (see §3).
+4. The other agent reviews with **`gh pr review --comment`**. Both agents push as the same GitHub
+   account (`BFC-XZEN`), and GitHub blocks approving your own PR. So the verdict goes on the comment's
+   first line: **`✅ approved`** or **`❌ changes requested`**. A ✅ comment counts as approval. User has final say at gates.
 5. Squash-merge to `main`, delete branch, append `PROGRESS.md`.
 
 Coordination docs (TASKS, PROGRESS, DECISIONS) can be committed straight to `main` — tiny,
-frequent commits. `PROGRESS.md` uses git's union merge (`.gitattributes`), so two agents
-appending at once won't conflict.
+frequent commits. `PROGRESS.md` uses git's union merge (`.gitattributes`), which works for
+**local** merges only. **GitHub ignores it**, so a PR touching PROGRESS.md can show as conflicting.
+Fix it locally: `git fetch && git merge origin/main` on the PR branch (the union applies) → push.
+Never commit build output: `git status` before `git add -A`, and only add when `.gitignore` covers `dist/` and `.astro/`.
 
 ### 3 · Screenshots for every UI PR
 `npm run shots` → builds, serves the production build, and captures a full-page PNG **plus one

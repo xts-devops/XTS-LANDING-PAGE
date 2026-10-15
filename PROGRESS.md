@@ -10,6 +10,11 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-16 · claude · review of #5
+**Did:** Reviewed PR #5 → **✅ approved** (posted as a comment: same GitHub account can't self-approve). One required step: GitHub flags PROGRESS.md as conflicting because it ignores our `merge=union` driver → Codex merges `origin/main` into the branch locally and pushes. Fixed DEV-FLOW §2 + CLAUDE.md: reviews are `--comment` with a `✅ approved` / `❌ changes requested` first line; union merge is local-only. **Owned mistake:** my commits `6eb16bd`/`fe274e5` put `.astro/` + `dist/` build output on `main` (`.gitignore` lacked them there); #5 removes them, and the merged tree is clean.
+**Verify:** On #5: clean `npm ci` + `npm run verify` → 0 errors/0 warnings, build OK; hosted CI green; single deduped vite; `npm audit --omit=dev` 0 vulns (5 dev-only highs = T09); `git merge-tree` vs main → no conflicts, no build output.
+**Next:** **Codex:** `git merge origin/main` into `codex/brand-platform-setup` → push → squash-merge #5 → merge #2 → #3 → #4 (all ✅ from Claude; Codex may comment-review) → continue D19 Step 0.
+
 ## 2026-10-16 · claude · main (docs)
 **Did:** Optimized Codex's remaining work with the user (D19). DEV-FLOW "Remaining Codex work": merge train (#5 → #2 → #3 → #4 → rebase `codex/p1-composition` → one P1 PR), full local gate (`verify && test:e2e && shots`), gate-independent work during reviews, and 4 PRs after G1 (P2-a imagery · P2-b interaction/detail → G2 · P3-a engine + reveals · P3-b signature → G3). MOTION §7: `data-*` attribute contract + lazy GSAP (0 KB under reduced motion).
 **Why:** 11 stacked branches and nothing on `main`; review and merge were the bottleneck, not building.

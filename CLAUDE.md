@@ -21,7 +21,7 @@ Found a UI bug? Request changes on the PR or add a task — don't edit Codex's f
 Work in the worktree **`D:\DEV WORKS\XTS LadingPage-claude`** — never in Codex's folder.
 Start: `git fetch && git switch --detach origin/main` (never check out `main` here — Codex's folder needs it) → read docs → claim a task → `git switch -c claude/<task>`.
 Ship: `npm run verify` green → `gh pr create` → squash-merge (Codex may review).
-Review Codex PRs: `gh pr checkout <n>` (in the worktree) → screenshots via Playwright MCP at 375/768/1440 → DEV-FLOW §4 checklist + `frontend-design` lens → `gh pr review --approve | --request-changes` with specific, actionable notes.
+Review Codex PRs: `gh pr checkout <n>` (in the worktree) → screenshots via Playwright MCP at 375/768/1440 → DEV-FLOW §4 checklist + `frontend-design` lens → `gh pr review --comment` starting with `✅ approved` or `❌ changes requested` (same GitHub account — self-approval is blocked; DEV-FLOW §2), with specific, actionable notes.
 End: append `PROGRESS.md` → task status → push.
 
 ## Ground rules
