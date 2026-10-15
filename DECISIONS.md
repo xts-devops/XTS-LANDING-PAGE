@@ -60,6 +60,9 @@ Spec + budget in `docs/MOTION.md` (JS ≤ 70 KB gz, Perf ≥ 95, reduced-motion 
 ### D19 · 2026-10-16 · user + claude · Optimized Codex delivery: merge train, 5 PRs, declarative motion
 Remaining UI work ships as P1 (one PR) → P2-a imagery → P2-b interaction/detail (G2) → P3-a engine + reveals → P3-b signature moments (G3), after a merge train #5 → #2 → #3 → #4. Motion is declared with `data-*` attributes (MOTION §7) and applied by one engine that lazy-loads GSAP and skips it under reduced motion. Gate-independent work (images, favicon/OG from the raster mark, motion engine) runs during reviews. **Why:** merges/reviews were the bottleneck (11 stacked branches, nothing on `main`); declarative motion cuts P3 edits across 9 sections to one module and saves the whole JS budget for reduced-motion users.
 
+### D20 · 2026-10-16 · user · Claude takes over UI/UX to finish the MVP (temporary lane override of D15)
+User asked Claude to continue UI/UX until a best-possible MVP. Claude integrates #5 + #2–#4 + Codex's P1 draft on `claude/mvp-ui`, builds on Codex's components (no rewrite), and ships one MVP PR. **Codex: hold UI edits** (pages, layouts, components, styles, scripts) until that PR merges; non-UI help is welcome (T09 audit). D15 lanes resume after the MVP PR unless the user says otherwise.
+
 ### D21 · 2026-10-16 · claude · MVP visual + performance choices
 - **Coded gold-line schematics instead of stock/generated photos** (`components/art/Schematic.astro`): crisp at any size, animatable, ~0 KB of images, on-brand. Content keeps an optional `image` per item; a supplied photo replaces the schematic with no component change.
 - **Hero = coded "living console"** (four capabilities wired to one hub, data flows, event feed). Decorative and aria-hidden; illustrative copy only, no figures or client data.

@@ -15,6 +15,9 @@ Append-only. Newest at top. Never edit past entries. Format:
 **Why:** User asked Claude to finish UI/UX to the best MVP possible.
 **Verify:** `npm run verify` 0 errors/0 warnings; `npm run test:e2e` 23/23; Lighthouse ×3: Perf 0.95, A11y 1.00, BP 1.00, SEO 1.00, LCP 1.6–1.9s, CLS 0, JS 58 KB. Screenshots reviewed at 375/768/1440.
 **Next:** **User:** review the MVP PR (counts as G1–G3). After merge, close #2–#5 as superseded. **U1** Web3Forms key, **T05** vector logo, **T33** Vercel. **Codex:** D15 lanes resume after merge; good next UI work = T18 photos (optional), polish from user feedback. Git Bash tip: `MSYS_NO_PATHCONV=1 SHOTS_PATHS=/,/privacy npm run shots`.
+## 2026-10-16 · claude · claude/mvp-ui (claim)
+**Claim:** User asked Claude to finish UI/UX to a best-possible MVP (D20). Branch `claude/mvp-ui` = main + #5 + #2→#4 + `codex/p1-composition` (+ Codex's uncommitted style fixes as a patch). Scope: coded schematic visuals in place of placeholders, hero living console, industries tabs, states, motion engine (MOTION §7), Seo wiring, favicon/OG, form wiring (T30), privacy page.
+**Next:** **Codex: please hold all UI-file edits until the MVP PR merges.** Your P1 commits are preserved in this branch's history.
 
 ## 2026-10-16 · claude · review of #5
 **Did:** Reviewed PR #5 → **✅ approved** (posted as a comment: same GitHub account can't self-approve). One required step: GitHub flags PROGRESS.md as conflicting because it ignores our `merge=union` driver → Codex merges `origin/main` into the branch locally and pushes. Fixed DEV-FLOW §2 + CLAUDE.md: reviews are `--comment` with a `✅ approved` / `❌ changes requested` first line; union merge is local-only. **Owned mistake:** my commits `6eb16bd`/`fe274e5` put `.astro/` + `dist/` build output on `main` (`.gitignore` lacked them there); #5 removes them, and the merged tree is clean.
