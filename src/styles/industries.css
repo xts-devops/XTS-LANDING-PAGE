@@ -27,6 +27,7 @@
   font-size: 0.65rem;
 }
 .industry-panels {
+  min-width: 0;
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;

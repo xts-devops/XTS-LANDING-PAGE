@@ -17,7 +17,7 @@
   grid-template-columns: 1fr;
 }
 .showcase-card-0 .placeholder {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
   min-height: 0;
 }
 .showcase-content {
