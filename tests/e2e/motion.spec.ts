@@ -1,4 +1,38 @@
+import { gzipSync } from 'node:zlib';
 import { expect, test } from '@playwright/test';
+
+/** MOTION §6: total JS ≤ 70 KB gzipped, measured with the motion engine actually loaded. */
+const JS_BUDGET_GZ = 70 * 1024;
+
+test('JS budget with motion loaded: ≤ 70 KB gzipped', async ({ browser }) => {
+  // Lighthouse can't measure this: it never interacts, so the lazy motion engine never loads there.
+  const context = await browser.newContext({ reducedMotion: 'no-preference' });
+  const page = await context.newPage();
+  const urls = new Set<string>();
+  page.on('request', (r) => r.resourceType() === 'script' && urls.add(r.url()));
+  await page.goto('/');
+  await page.mouse.move(300, 300);
+  await page.mouse.wheel(0, 1500);
+  await page.waitForFunction(() => document.querySelector('.process-timeline'));
+  await page.waitForLoadState('networkidle');
+
+  let total = 0;
+  const sizes: string[] = [];
+  for (const url of urls) {
+    const body = await (await page.request.get(url)).body();
+    const gz = gzipSync(body, { level: 9 }).length;
+    total += gz;
+    sizes.push(`${url.split('/').pop()} ${(gz / 1024).toFixed(1)} KB`);
+  }
+  expect(
+    [...urls].some((u) => /gsap/i.test(u)),
+    'motion engine should have loaded',
+  ).toBe(true);
+  expect(total, `scripts (gz):\n${sizes.join('\n')}`).toBeLessThanOrEqual(
+    JS_BUDGET_GZ,
+  );
+  await context.close();
+});
 
 /**
  * Motion ON (the project default emulates reduced motion). Guards the failure modes that matter:

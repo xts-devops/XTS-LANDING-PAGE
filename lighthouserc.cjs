@@ -25,7 +25,8 @@ module.exports = {
         'largest-contentful-paint': ['error', { maxNumericValue: 2000 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.02 }],
         'total-blocking-time': ['warn', { maxNumericValue: 150 }],
-        // 70 KB gz of JS (MOTION §6). Transfer size, so compression counts.
+        // Initial-load JS only: Lighthouse never interacts, so the lazy motion engine isn't counted.
+        // The full budget (motion loaded, ≤ 70 KB gz) is enforced by tests/e2e/motion.spec.ts.
         'resource-summary:script:size': ['error', { maxNumericValue: 71680 }],
         'unused-javascript': ['warn', { maxLength: 0 }],
       },
