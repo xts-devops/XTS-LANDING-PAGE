@@ -1,0 +1,38 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import { brand } from '../../content/brand';
+import { navigation, site } from '../../content/site';
+---
+
+<header class="site-header">
+  <Container class="header-inner">
+    <a href="#top" aria-label={site.homeLabel} class="brand-link">
+      <img
+        src={brand.goldLogo.src}
+        width={brand.goldLogo.width}
+        height={brand.goldLogo.height}
+        alt={brand.goldLogo.alt}
+      />
+    </a>
+    <nav class="desktop-nav" aria-label={site.navLabel}>
+      {navigation.map(({ href, label }) => (
+        <a href={href}>{label}</a>
+      ))}
+    </nav>
+    <Button href="#contact" variant="outline" class="header-cta">
+      {site.buildCta}
+    </Button>
+    <details class="mobile-menu">
+      <summary>
+        {site.menuLabel}
+        <span aria-hidden="true">+</span>
+      </summary>
+      <nav aria-label={site.navLabel}>
+        {navigation.map(({ href, label }) => (
+          <a href={href}>{label}</a>
+        ))}
+      </nav>
+    </details>
+  </Container>
+</header>
