@@ -53,3 +53,6 @@ Phases P0–P5 with gates G1 (composition), G2 (visual), G3 (motion) — `docs/D
 
 ### D17 · 2026-10-16 · claude · Motion stack: GSAP 3.15 (ScrollTrigger, SplitText, DrawSVG) + Lenis; coded hero dashboard
 Spec + budget in `docs/MOTION.md` (JS ≤ 70 KB gz, Perf ≥ 95, reduced-motion branch). Hero dashboard is coded SVG/HTML over a photo backdrop, not a flat image. No WebGL in v1. **Why:** top-tier, controllable motion at a small, predictable cost; a coded dashboard stays crisp and can animate.
+
+### D18 · 2026-10-16 · claude · Form provider: Web3Forms (free), browser-side submit (resolves D13)
+250 submissions/mo, JSON POST from the browser, public access key. Spam: honeypot + minimum fill time; hCaptcha (free, zero-config) only if spam appears, lazy-loaded. No captcha site key env var needed. Details + upgrade paths: `docs/spikes/T07-form-provider.md`. **Why:** 5× Formspree's free volume, built for static sites, nothing secret to hold.

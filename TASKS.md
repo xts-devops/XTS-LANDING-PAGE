@@ -43,7 +43,8 @@ Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends 
 - [ ] **G3 Motion gate** — recording/preview + Claude perf check vs MOTION §6 ... owner: user + claude · status: todo
 
 ## Claude parallel track (during P1–P3, no UI files)
-- [ ] **T07 Form provider spike** — Web3Forms vs Formspree: free limits, client-side POST, captcha, delivery to info@; record in DECISIONS ... owner: claude · status: todo
+- [x] **T07 Form provider spike** → **Web3Forms** (D18, `docs/spikes/T07-form-provider.md`) ... owner: claude · status: done
+- [ ] **U1 Create Web3Forms access key** with info@xzentechsolutions.com → `.env` `PUBLIC_FORM_ACCESS_KEY` ... owner: user · status: todo
 - [ ] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) ... owner: claude · status: todo
 - [ ] **T06 CI on PRs** — `npm ci` → `verify` → Playwright → upload screenshots artifact ... owner: claude · status: todo
 - [ ] **T30 Form logic** `src/lib/form.ts` + `scripts/form.ts` (zod, honeypot, captcha, provider POST) → T07 ... owner: claude · status: todo

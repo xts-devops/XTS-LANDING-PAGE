@@ -153,8 +153,8 @@ Browser ──► Vercel CDN (static HTML/CSS, near-zero JS)
 | Fonts | Fontsource, self-hosted: `@fontsource/michroma`, `@fontsource-variable/manrope` | Preload display font; `font-display: swap` |
 | Images | `astro:assets` `<Image>/<Picture>` → AVIF + WebP, responsive `srcset` | Sources in `src/assets/images/**` (not `public/`) so they're optimised |
 | Content | Typed TS modules `src/content/*.ts` | Plain modules; contract in §6 |
-| Form | **Client-side POST to a no-DNS provider** (Web3Forms or Formspree — Claude verifies in T07 free-tier limits + Turnstile/hCaptcha support) | Keeps the site 100% static. Swap to Resend at domain cutover (T40). |
-| Spam | Honeypot + Turnstile/hCaptcha (whatever the provider supports) | |
+| Form | **Web3Forms** (free, 250/mo), JSON POST from the browser — D18, `docs/spikes/T07-form-provider.md` | Keeps the site 100% static. Swap to Resend at domain cutover (T40). |
+| Spam | Honeypot + min fill time; hCaptcha (lazy) only if spam appears | |
 | Privacy | Consent checkbox on form + `/privacy` page | PH Data Privacy Act (RA 10173) |
 | Analytics | Vercel Web Analytics (cookie-free) | No cookie banner needed |
 | SEO | `@astrojs/sitemap`, meta/OG in `Base.astro`, JSON-LD `Organization` | `site` from `PUBLIC_SITE_URL` |
@@ -163,7 +163,7 @@ Browser ──► Vercel CDN (static HTML/CSS, near-zero JS)
 | CI/CD | GitHub Actions runs `verify` + Playwright on every push/PR; Vercel deploys a preview per branch, production from `main` | Production = Vercel URL until T40 |
 | Node | 22 LTS+ (`.nvmrc`), npm | Local machine has Node 24 |
 
-**Env vars** (`.env.example` committed, `.env` ignored): `PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`. All are public-by-design keys; anything secret means we need a server endpoint — flag it first.
+**Env vars** (`.env.example` committed, `.env` ignored): `PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`. All are public-by-design keys; anything secret means we need a server endpoint — flag it first.
 
 ### Source layout
 Ownership per D15 — **codex** = UI/UX, **claude** = architecture/backend/quality.
