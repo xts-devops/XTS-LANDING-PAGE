@@ -14,17 +14,17 @@ Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends 
 - [ ] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: review (PR #5; verification passed)
 - [ ] **T05 Brand assets** → `public/brand/` + favicon set (originals are raster — vector still wanted before launch) ... owner: codex · status: blocked (originals ready; favicon derivatives await vector)
 - [ ] **T08 Theme foundation** — tokens from PLAN §4 + motion tokens from MOTION §2. Move `public/brand/theme.css` → `src/styles/tokens.css` (files in `public/` aren't processed by Tailwind) ... owner: codex · status: review (PR #5; moved to src/styles)
-- [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 ... owner: codex · status: todo (shared — Claude reviews)
+- [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 ... owner: codex · status: in-progress (shared — Claude reviews)
 
 ## P1 · Draft UI (codex) — layout, type, real copy, placeholder images, no motion
-- [ ] **T10 Base layout + UI primitives** (Base.astro, Container, Section, Eyebrow, Button, Card, Chip, Icon) → T01, T08 ... owner: codex · status: todo
+- [ ] **T10 Base layout + UI primitives** (Base.astro, Container, Section, Eyebrow, Button, Card, Chip, Icon) → T01, T08 ... owner: codex · status: in-progress
 - [ ] **T11 Header + Hero + ProofBar** (hero dashboard as static blocks for now) → T10 ... owner: codex · status: todo
 - [ ] **T12 Solutions** → T10 ... owner: codex · status: todo
 - [ ] **T13 Showcase** → T10 ... owner: codex · status: todo
 - [ ] **T14 Industries** (static first; selector logic in P2) → T10 ... owner: codex · status: todo
 - [ ] **T15 Process** → T10 ... owner: codex · status: todo
 - [ ] **T16 Contact + Footer** (form markup only) → T10 ... owner: codex · status: todo
-- [ ] **T04 Content** for all sections in `src/content/*.ts` (canonical values PLAN §6) → T02 ... owner: codex · status: todo
+- [ ] **T04 Content** for all sections in `src/content/*.ts` (canonical values PLAN §6) → T02 ... owner: codex · status: in-progress
 - [ ] **G1 Composition gate** — screenshots 375/768/1440, Claude review + user approval ... owner: user + claude · status: todo
 
 ## P2 · Hi-fi UI (codex)
