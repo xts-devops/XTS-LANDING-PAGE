@@ -12,3 +12,6 @@ next-env.d.ts
 !.env.example
 .DS_Store
 Thumbs.db
+
+.astro/
+dist/
