@@ -35,3 +35,13 @@ Showcase images are **illustrative presentation visuals**: no real client names,
 | File | Source | Licence |
 |---|---|---|
 | _(fill as added)_ | | |
+
+## Supplied assets — 2026-10-16
+
+| File | Source | Licence / usage record |
+|---|---|---|
+| docs/reference/homepage-theme-original.png | User attachment: XZEN Tech Solutions Corporate Homepage.png | Supplied by XTS for this project as visual reference; third-party provenance not supplied. |
+| public/brand/logo-gold-original.png | User gold-logo attachment | XTS-supplied brand asset, authorized for this repo/site by the user; original raster retained. |
+| public/brand/logo-white-original.png | User white-logo attachment | XTS-supplied brand asset, authorized for this repo/site by the user; original raster retained. |
+
+See docs/BRAND-HANDOFF.md for exact integration. Neither raster is transparent. No vector or favicon has been fabricated; those derivatives remain pending a suitable mark source.

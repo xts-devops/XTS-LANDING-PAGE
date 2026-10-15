@@ -6,19 +6,22 @@ Lanes: **claude** = components, layouts, pages, scripts, styles/tokens · **code
 Spec: `docs/PLAN.md` (v1.2, stack in §5). `→` = depends on.
 
 ## In flight
-_(none)_
+_(none — Codex foundation branch ready for review; Claude T02/T03 next)_
 
 ## Backlog
 
 ### M0 · Setup
 - [x] **T00 GitHub repo** — private `BFC-XZEN/xts-landing-page`, `main` pushed ... owner: claude · status: done
-- [ ] **T01 Scaffold Astro 7 + TS strict + Tailwind v4** (`@tailwindcss/vite`), `@lucide/astro`, Fontsource fonts, `@astrojs/sitemap`, zod; ESLint (`eslint-plugin-astro`) + Prettier (`prettier-plugin-astro`); `.nvmrc`; scripts `dev/build/check/lint/format/verify`; `.env.example` (`PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`) ... owner: codex · status: todo
+- [x] **T01 Scaffold Astro 7 + TS strict + Tailwind v4** (`@tailwindcss/vite`), `@lucide/astro`, Fontsource fonts, `@astrojs/sitemap`, zod; ESLint (`eslint-plugin-astro`) + Prettier (`prettier-plugin-astro`); `.nvmrc`; scripts `dev/build/check/lint/format/verify`; `.env.example` (`PUBLIC_SITE_URL`, `PUBLIC_FORM_ACCESS_KEY`, `PUBLIC_CAPTCHA_SITE_KEY`) ... owner: codex · status: done
 - [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 → T01 ... owner: claude · status: todo (shared — Codex reviews)
 - [ ] **T03 Tokens + fonts + Base layout** (`styles/global.css` `@theme`, `layouts/Base.astro`) → T01 ... owner: claude · status: todo
 - [ ] **T04 Content** for all sections in `src/content/*.ts`, canonical contact + proof values from PLAN §6 → T02 ... owner: codex · status: todo
-- [ ] **T05 Brand assets**: XTS logo → `public/brand/` per IMAGE-BRIEF §Brand; favicon set ... owner: codex · status: todo (waiting on logo file)
-- [ ] **T06 CI**: GitHub Actions — `npm ci` → `verify` → Playwright, on push + PR → T00, T01 ... owner: codex · status: todo
+- [ ] **T05 Brand assets**: XTS logo → `public/brand/` per IMAGE-BRIEF §Brand; favicon set ... owner: codex · status: blocked (originals integrated; vector/transparent mark needed for favicon derivatives)
+- [ ] **T06 CI**: GitHub Actions — `npm ci` → `verify` → Playwright, on push + PR → T00, T01 ... owner: codex · status: review (workflow added; Playwright activates with T22; hosted run pending)
 - [ ] **T07 Form provider spike**: compare Web3Forms vs Formspree (free limits, client-side POST, captcha support, delivery to info@), record pick in DECISIONS ... owner: codex · status: todo
+
+- [x] **T08 Theme foundation + agent handoff** — supplied originals, brand module, PLAN tokens and docs/BRAND-HANDOFF.md ... owner: codex · status: done
+- [ ] **T09 Lint dependency audit** — npm audit reports five high dev-tool findings through braces/fast-glob/astro-eslint-parser. No production findings during initial runtime install; review upstream fix without forced dependency downgrades ... owner: codex · status: blocked (upstream fix/compatible resolution pending)
 
 ### M1 · Skeleton (6 sections, placeholder images)
 - [ ] **T10 UI primitives**: Container, Section, Eyebrow, Button, Card, Chip, Icon → T03 ... owner: claude · status: todo
@@ -46,7 +49,7 @@ _(none)_
 - [ ] **T40 Domain cutover** to xzentechsolutions.com — DNS, switch form to Resend with verified sender, canonical URL. Only when XTS says the domain is free ... owner: user + codex · status: blocked
 
 ### Waiting on XTS (user)
-- [ ] **Q4** logo file (being sent to Codex) ... owner: user · status: blocked
+- [x] **Q4** raster logos received and preserved; vector/transparent mark remains a launch-polish follow-up ... owner: user · status: done
 
 ## Done (recent)
 - [x] Stack decided: Astro, no CMS, GitHub, English only (claude + user)

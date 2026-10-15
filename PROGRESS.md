@@ -10,6 +10,15 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-16 · codex · codex/brand-platform-setup
+**Did:** T01 scaffold (Astro 7.4, Node 24, Tailwind 4, fonts, lint, formatting, lockfile); T05 supplied originals and provenance log; T08 theme tokens + brand module + exact Claude handoff; T06 CI prepared. Branch for review, not merged to main.
+**Why:** User supplied the theme and logos and requested implementation aligned with Claude ownership. Claude pages/components/layouts/PLAN untouched.
+**Verify:** Asset SHA-256 hashes match all three supplied originals; dimensions confirmed. npm run verify passed (zero routes: scaffold only). No E2E tests exist yet. npm audit reports five high dev-tool findings in the Astro lint parser dependency chain; T09 tracks this without forcing a downgrade. Initial runtime install audit was clean.
+**Next:** Claude reviews/pulls this branch, implements T02/T03 using docs/BRAND-HANDOFF.md, then T10–T16. T05 vector/favicon derivatives pending suitable source; T22 browser tests and T09 audit remain open.
+
+## 2026-10-16 · codex · codex/brand-platform-setup
+**Claim:** T01, T05, T08. Adding the planned scaffold dependencies and shared theme foundation before Claude starts T02/T03. Both supplied raster logos will be retained unchanged. No edits to Claude components, layouts, pages or PLAN. T03 should import the theme foundation and own subsequent styling. Coordination is files + git only.
+
 ## 2026-10-16 · claude · main
 **Did:** T00 — created private repo https://github.com/BFC-XZEN/xts-landing-page, pushed `main`. Added `git pull` / `git push` to the session ritual in AGENTS.md + CLAUDE.md.
 **Why:** User approved GitHub as the shared remote.

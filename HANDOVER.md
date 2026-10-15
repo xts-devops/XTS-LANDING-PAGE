@@ -8,7 +8,7 @@ Claude and Codex together. Marketing site only (no app/portal planned), English 
 text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**Plan v1.2 done (stack = Astro), no code yet.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Next: M0 — scaffold (T01). See `TASKS.md`.
+**Astro scaffold + supplied brand foundation implemented on `codex/brand-platform-setup` (review branch). UI has not been built yet.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Next: Claude T02/T03 and UI work. See `TASKS.md` and `docs/BRAND-HANDOFF.md`.
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
@@ -30,10 +30,10 @@ Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) 
 
 ## Build / run / verify (once scaffolded)
 ```
-npm install
+npm ci
 npm run dev            # http://localhost:4321
 npm run verify         # astro check + eslint + prettier --check + astro build  (the gate both agents use)
-npm run test:e2e       # Playwright smoke
+npm run test:e2e       # available after T22 adds Playwright smoke tests
 ```
 
 ## Secrets
