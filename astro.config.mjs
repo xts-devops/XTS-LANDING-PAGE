@@ -8,7 +8,13 @@ const env = loadEnv(
   process.cwd(),
   'PUBLIC_',
 );
-const site = process.env.PUBLIC_SITE_URL || env.PUBLIC_SITE_URL || undefined;
+// On Vercel, fall back to the project's production URL so canonical/OG/sitemap work before
+// PUBLIC_SITE_URL is set (D10: the real domain comes later).
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : undefined;
+const site =
+  process.env.PUBLIC_SITE_URL || env.PUBLIC_SITE_URL || vercelUrl || undefined;
 if (site && !/^https?:\/\//.test(site)) {
   throw new Error('PUBLIC_SITE_URL must be an absolute HTTP(S) URL.');
 }

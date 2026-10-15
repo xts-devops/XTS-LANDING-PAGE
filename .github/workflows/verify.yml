@@ -33,7 +33,7 @@ jobs:
       # Skip everything until there is a page to look at.
       - name: Detect pages
         id: pages
-        run: echo "found=$([ -d src/pages ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+        run: echo "found=$([ -f src/pages/index.astro ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-node@v4
         if: steps.pages.outputs.found == 'true'
