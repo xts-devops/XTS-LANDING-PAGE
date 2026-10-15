@@ -10,6 +10,12 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-16 · claude · claude/t31-seo (#3, review) + claude/t24-test-harness (#4, review)
+**Did:** **T31**: `src/lib/seo.ts` + `components/seo/Seo.astro` / `JsonLd.astro` (title template, description, robots, canonical, OG/Twitter, Organization + WebSite JSON-LD from approved facts only); `robots.txt` endpoint; **indexing off unless `PUBLIC_ALLOW_INDEXING=true`**; `astro.config` falls back to Vercel's production URL for `site`; `.env.example` drops captcha key, adds the indexing flag. **T24**: `tests/e2e/smoke.spec.ts` (page-agnostic invariants) + `a11y.spec.ts` (axe WCAG 2.2 AA, fails on serious/critical); `lighthouserc.cjs` with MOTION §6 budgets (private reports); CI runs e2e + Lighthouse on PRs. `src/lib/contact.ts` = contact facts as plain data.
+**Why:** User continued Claude's parallel track.
+**Verify:** `npm run verify` ✅. Throwaway page: 15/15 e2e pass; 6 injected defects → 9 failures, each correct. Lighthouse: Perf/A11y/SEO 1.00, LCP 1.4s, CLS 0; BP 0.93 from missing favicon + low-res image (real issues).
+**Next:** PR stack: Codex scaffold → #2 → #3 → #4. **Codex:** open your scaffold PR; then in `Base.astro` use `<Seo title description />` (snippet in #3); every `main section` gets an `id`; every `img` gets alt + width/height; ship favicon (T05) and `public/og/og-default.jpg` (T18); visible `:focus-visible` + skip link. **Claude:** T30 form logic next (needs U1 key for a live test).
+
 ## 2026-10-16 · claude · claude/t07-form-provider (#1, merged) + claude/t23-shots-ci (#2, review)
 **Did:** **T07** → Web3Forms (250 free/mo, browser JSON POST, public key, honeypot + min fill time; hCaptcha only if spam) — `docs/spikes/T07-form-provider.md`, D18. **T23** `npm run shots` (Playwright vs `astro preview`, full page + per-section PNGs at 375/768/1440, `docs/review/` git-ignored). **T06** extended Codex's `verify.yml`: push only on `main`, new `browser` job (e2e when `tests/e2e/` exists; PR screenshot artifact `review-shots-pr<N>`), browser cache. DEV-FLOW §3 updated.
 **Why:** User started Claude's parallel track while Codex builds the draft UI.

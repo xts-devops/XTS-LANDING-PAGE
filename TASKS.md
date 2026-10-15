@@ -48,8 +48,9 @@ Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends 
 - [ ] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) → PR #2 (stacked on Codex's scaffold) ... owner: claude · status: review
 - [ ] **T06 CI on PRs** — browser job (e2e + screenshot artifact `review-shots-pr<N>`) → PR #2 ... owner: claude · status: review
 - [ ] **T30 Form logic** `src/lib/form.ts` + `scripts/form.ts` (zod, honeypot, captcha, provider POST) → T07 ... owner: claude · status: todo
-- [ ] **T31 SEO** — `components/seo/Seo.astro` + `JsonLd.astro` (Organization, PH, email, phone), OG image, robots, sitemap ... owner: claude · status: todo
-- [ ] **T24 Test harness** — Playwright smoke + axe a11y + Lighthouse CI config with MOTION §6 budgets ... owner: claude · status: todo
+- [ ] **T31 SEO** — `<Seo />`, JSON-LD, robots, indexing gate (`PUBLIC_ALLOW_INDEXING`), Vercel URL fallback → PR #3 ... owner: claude · status: review (OG image file itself = Codex T18)
+- [ ] **T24 Test harness** — e2e smoke + axe a11y + Lighthouse budgets, wired into CI → PR #4 ... owner: claude · status: review
+- [ ] **T38 Launch switch**: set `PUBLIC_ALLOW_INDEXING=true` on the production deploy only ... owner: user + claude · status: todo (at P5)
 
 ## P4 · Harden (claude; codex fixes UI findings)
 - [ ] **T32 Wire form + SEO into Codex's layout/contact** (small PR, Codex reviews) ... owner: claude · status: todo
