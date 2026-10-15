@@ -1,14 +1,17 @@
 name: Verify
 on:
   push:
+    branches: [main]
   pull_request:
 permissions:
   contents: read
 concurrency:
-  group: verify-${{ github.ref }}
+  group: verify-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
 jobs:
   verify:
+    name: verify (check · lint · format · build)
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -19,11 +22,63 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run verify
-      # Enable browser smoke checks as soon as T22 supplies the script/config.
-      - name: Browser smoke tests when configured
-        shell: bash
-        run: |
-          if node -e "process.exit(Object.hasOwn(JSON.parse(require('fs').readFileSync('package.json')), 'scripts') && Object.hasOwn(JSON.parse(require('fs').readFileSync('package.json')).scripts, 'test:e2e') ? 0 : 1)"; then
-            npx playwright install --with-deps chromium
-            npm run test:e2e
-          fi
+
+  browser:
+    name: browser (e2e · review screenshots)
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      # Skip everything until there is a page to look at.
+      - name: Detect pages
+        id: pages
+        run: echo "found=$([ -d src/pages ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        if: steps.pages.outputs.found == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - if: steps.pages.outputs.found == 'true'
+        run: npm ci
+
+      - name: Cache Playwright browsers
+        if: steps.pages.outputs.found == 'true'
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install Chromium
+        if: steps.pages.outputs.found == 'true' && steps.pw-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install Chromium system deps
+        if: steps.pages.outputs.found == 'true' && steps.pw-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - name: E2E smoke tests (when T24 adds them)
+        if: steps.pages.outputs.found == 'true' && hashFiles('tests/e2e/**') != ''
+        run: npm run build && npx playwright test --project=e2e
+
+      - name: Review screenshots (375 / 768 / 1440)
+        if: steps.pages.outputs.found == 'true' && github.event_name == 'pull_request'
+        run: npm run shots
+        env:
+          SHOTS_DIR: review-shots
+      - name: Upload screenshots
+        if: steps.pages.outputs.found == 'true' && github.event_name == 'pull_request' && !cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: review-shots-pr${{ github.event.pull_request.number }}
+          path: review-shots/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: test-results/
+          retention-days: 7
