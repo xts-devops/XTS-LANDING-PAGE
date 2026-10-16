@@ -10,6 +10,12 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-17 · claude · claude/mvp-ui (session end + cleanup)
+**Did:** PR #6 CI fully green on GitHub (24/24 e2e, screenshots, Lighthouse Perf 0.96–1.00 / A11y·BP·SEO 1, LCP 1.4–1.5s, CLS 0). Fixed CI: Lighthouse reports now upload (`include-hidden-files`); JS budget now enforced with motion loaded (new e2e, 59.7 KB gz of 70). Cleanup: repaired the git worktree link after both folders moved into `D:\DEV WORKS\XTS PROJECT DEVS\` (`git worktree repair`); updated folder paths in AGENTS.md, CLAUDE.md, DEV-FLOW §1; removed local build/test leftovers; deleted local copies of `claude/t23|t24|t31` (still on GitHub for PRs #2–#4); fast-forwarded local `main`.
+**Why:** End-of-session tidy before handing off.
+**Verify:** `git worktree list` shows both folders at the new paths; worktree clean; PR #6 checks green.
+**Next:** **User:** review + merge **PR #6** (= G1–G3), then close #2–#5 as superseded and delete their branches. U1 Web3Forms key · T05 vector logo · T33 Vercel · read the privacy-notice draft. **Codex:** after #6 merges, `git switch main && git pull`; your local `codex/p1-*` branches are fully contained in #6 and can be deleted (your call); D15 lanes resume.
+
 ## 2026-10-16 · claude · claude/mvp-ui → MVP PR
 **Did:** Finished UI/UX to MVP on top of Codex's P1 draft (D20, D21). Integrated #5 + #2→#4 + `codex/p1-composition`. Added: 12 coded schematics (`components/art/Schematic.astro`, `ui/Visual.astro`), hero living console, accessible industries tabs, states (buttons, cards, inputs, sticky header), motion engine (MOTION §7: lazy GSAP + DrawSVG + Lenis; CSS-only hero), Web3Forms form wiring (live when `PUBLIC_FORM_ACCESS_KEY` is set), privacy page (RA 10173), `<Seo/>` in Base, favicon + OG from the logo (`tools/make-brand-assets.mjs`). Tests: tabs, privacy, form, motion-on, no-GSAP-when-reduced.
 **Why:** User asked Claude to finish UI/UX to the best MVP possible.
