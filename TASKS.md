@@ -6,7 +6,7 @@ Lanes (D15): **codex** = UI/UX, motion, images, copy · **claude** = architectur
 Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends on.
 
 ## In flight
-_(none)_ — **MVP merged to  (PR #6, 2026-10-18)**. #2–#5 closed/merged; GitHub has only  + Codex's backup .
+_(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged; GitHub has only `main` + Codex's backup `codex/wip-2026-10-18`.
 - Open: **U1** Web3Forms key · **T05** vector logo · **T33** Vercel · **T38** indexing at launch · **T09** dev-dep audit · **T18** extra photos (optional) · XTS review of Privacy + Terms copy.
 
 ## P0 · Foundation (codex)
