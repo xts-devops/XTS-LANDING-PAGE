@@ -7,7 +7,7 @@
     "node": ">=24 <25"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host --port 4381",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
@@ -17,7 +17,8 @@
     "verify": "npm run check && npm run lint && npm run format:check && npm run build",
     "shots": "astro build && playwright test --project=shots",
     "test:e2e": "astro build && playwright test --project=e2e",
-    "test:lighthouse": "npx -y @lhci/cli@0.15.1 autorun"
+    "test:lighthouse": "npx -y @lhci/cli@0.15.1 autorun",
+    "serve": "astro build && astro preview --host --port 4380"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

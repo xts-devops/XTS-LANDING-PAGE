@@ -35,7 +35,8 @@ Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) 
 ## Build / run / verify (once scaffolded)
 ```
 npm ci
-npm run dev            # http://localhost:4321
+npm run serve          # production build + preview → http://localhost:4380 (also on your LAN, e.g. phone)
+npm run dev            # live-reload dev server → http://localhost:4381
 npm run verify         # astro check + eslint + prettier --check + astro build  (the gate both agents use)
 npm run test:e2e       # Playwright: smoke, axe a11y, interactions, motion
 npm run shots          # review screenshots → docs/review/<branch>/ (git-ignored)

@@ -10,6 +10,11 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-18 · claude · claude/mvp-ui (local run)
+**Did:** One-command local run. `npm run serve` = production build + `astro preview --host` on **:4380** (what visitors get: inlined CSS, optimised images, lazy motion; reachable from phones on the LAN). `npm run dev` pinned to **:4381**. `.claude/launch.json` has both (`xts-preview`, `xts-dev`). Ports avoid 4321 (Playwright) and 4173 (another local project).
+**Verify:** served page has all 6 sections, 5 tabs, inline CSS, no console errors. Cold build ~45s (first image optimisation), warm ~6s (cache in node_modules/.astro).
+**Next:** Shared file touched: `package.json` scripts (serve, dev port) — Codex FYI.
+
 ## 2026-10-17 · claude · claude/mvp-ui (session end + cleanup)
 **Did:** PR #6 CI fully green on GitHub (24/24 e2e, screenshots, Lighthouse Perf 0.96–1.00 / A11y·BP·SEO 1, LCP 1.4–1.5s, CLS 0). Fixed CI: Lighthouse reports now upload (`include-hidden-files`); JS budget now enforced with motion loaded (new e2e, 59.7 KB gz of 70). Cleanup: repaired the git worktree link after both folders moved into `D:\DEV WORKS\XTS PROJECT DEVS\` (`git worktree repair`); updated folder paths in AGENTS.md, CLAUDE.md, DEV-FLOW §1; removed local build/test leftovers; deleted local copies of `claude/t23|t24|t31` (still on GitHub for PRs #2–#4); fast-forwarded local `main`.
 **Why:** End-of-session tidy before handing off.
