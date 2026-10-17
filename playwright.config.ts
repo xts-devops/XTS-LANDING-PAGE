@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 4321;
+// Same port as `npm run serve`: Astro allows one preview per project, so tests reuse it locally.
+const PORT = 4380;
 const isCI = Boolean(process.env.CI);
 
 /**

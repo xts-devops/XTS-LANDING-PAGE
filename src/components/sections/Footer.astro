@@ -43,6 +43,10 @@ const base = onHome ? '' : '/';
       <p>
         © {new Date().getFullYear()} {site.footer.copyright}
       </p>
+      <nav class="footer-legal" aria-label={site.footer.legalLabel}>
+        <a href="/privacy">{site.footer.privacy}</a>
+        <a href="/terms">{site.footer.terms}</a>
+      </nav>
       <a href={onHome ? '#top' : '#main-content'}>
         {site.footer.backTop}
         <Icon name="arrow-up" />

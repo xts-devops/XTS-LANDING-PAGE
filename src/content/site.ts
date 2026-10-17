@@ -152,5 +152,8 @@ export const site = {
     summary: 'Technology. People. Real impact.',
     copyright: 'XZEN TECH SOLUTIONS. All rights reserved.',
     backTop: 'Back to top',
+    legalLabel: 'Legal',
+    privacy: 'Privacy notice',
+    terms: 'Website terms',
   },
 };

@@ -98,7 +98,7 @@ test.describe('privacy page', () => {
     await expect(page).toHaveTitle(/Privacy Notice · XZEN TECH SOLUTIONS/);
     // Header/footer anchors must point at the home page from here.
     const hrefs = await page
-      .locator('header nav a, footer nav a')
+      .locator('header nav a, footer nav:not(.footer-legal) a')
       .evaluateAll((as) => as.map((a) => a.getAttribute('href')));
     expect(hrefs.length).toBeGreaterThan(0);
     for (const href of hrefs) expect(href).toMatch(/^\/#/);
@@ -118,5 +118,28 @@ test.describe('privacy page', () => {
       'href',
       '/privacy',
     );
+  });
+});
+
+test.describe('terms page and legal links', () => {
+  test('terms renders and passes axe; footer links to both legal pages', async ({
+    page,
+  }) => {
+    const res = await page.goto('/terms');
+    expect(res?.status()).toBe(200);
+    await expect(page.locator('h1')).toHaveText(/website terms/i);
+    const { violations } = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .analyze();
+    expect(
+      violations
+        .filter((v) => v.impact === 'serious' || v.impact === 'critical')
+        .map((v) => v.id),
+    ).toEqual([]);
+    await page.goto('/');
+    await expect(page.locator('.footer-legal a')).toHaveText([
+      'Privacy notice',
+      'Website terms',
+    ]);
   });
 });

@@ -10,6 +10,11 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-18 · claude · claude/mvp-ui (merged Codex WIP → one output)
+**Did:** Found uncommitted Codex work in the main folder (2026-10-18 01:12–01:29) and saved it untouched to `codex/wip-2026-10-18` (pushed). Folded its **unique** parts into the MVP: hero photo backdrop (`hero-office.png` 1.8 MB → 18–75 KB WebP via astro:assets), **Website Terms page** (Codex copy → `content/terms.ts`), footer Privacy/Terms links, active-section nav highlight, button hover lift. Factored a shared `components/legal/LegalPage.astro` for Privacy + Terms. **Not taken** (duplicates of tested MVP code): Codex's parallel lib/form, lib/seo, scripts/motion, privacy page, global reduced-motion kill switch, `polish.css`. Fixed local tooling: Astro 7 allows one preview per project, so Playwright now shares port **4380** with `npm run serve` (reuses it locally; CI unchanged).
+**Verify:** verify 0/0; e2e **25/25** (new: terms + legal links); Lighthouse ×3: **Perf 0.99**, A11y/BP/SEO 1.00, LCP 1.5s (hero photo), CLS 0. Visual check at 1440 + browser pane.
+**Next:** Merge PR #6 → main; close #2–#5; Codex folder → main. Codex: diff `codex/wip-2026-10-18` against main if you want anything else from your WIP.
+
 ## 2026-10-18 · claude · claude/mvp-ui (local run)
 **Did:** One-command local run. `npm run serve` = production build + `astro preview --host` on **:4380** (what visitors get: inlined CSS, optimised images, lazy motion; reachable from phones on the LAN). `npm run dev` pinned to **:4381**. `.claude/launch.json` has both (`xts-preview`, `xts-dev`). Ports avoid 4321 (Playwright) and 4173 (another local project).
 **Verify:** served page has all 6 sections, 5 tabs, inline CSS, no console errors. Cold build ~45s (first image optimisation), warm ~6s (cache in node_modules/.astro).

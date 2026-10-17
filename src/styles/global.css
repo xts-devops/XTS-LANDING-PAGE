@@ -339,3 +339,31 @@ ol {
 .card {
   position: relative;
 }
+
+/* Active section in the header nav (scripts/ui sets aria-current). */
+.desktop-nav a {
+  position: relative;
+}
+.desktop-nav a[aria-current] {
+  color: var(--color-gold-hi);
+}
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.55rem;
+  height: 1px;
+  background: var(--color-gold-hi);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.desktop-nav a[aria-current]::after {
+  transform: scaleX(1);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .button:not(.button-text):hover {
+    transform: translateY(-2px);
+  }
+}

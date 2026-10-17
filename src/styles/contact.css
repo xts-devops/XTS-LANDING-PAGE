@@ -290,3 +290,16 @@ fieldset:disabled :is(input, select, textarea, label) {
     padding: 1.25rem;
   }
 }
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+}
+.footer-legal a {
+  color: var(--color-muted);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.footer-legal a:hover {
+  color: var(--color-gold-hi);
+}

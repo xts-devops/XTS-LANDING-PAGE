@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import heroBackdrop from '../../assets/images/hero-office.png';
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
@@ -7,6 +9,17 @@ import { site } from '../../content/site';
 ---
 
 <section id="top" class="hero" aria-labelledby="hero-heading" data-hero>
+  <Image
+    src={heroBackdrop}
+    alt=""
+    class="hero-backdrop"
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    format="webp"
+    quality={68}
+    loading="eager"
+    fetchpriority="high"
+  />
   <Container class="hero-inner">
     <div class="hero-copy">
       <div data-hero-part="eyebrow">

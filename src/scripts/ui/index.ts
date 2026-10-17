@@ -45,7 +45,33 @@ function initSpotlight() {
   );
 }
 
+/** Highlight the nav link for the section in view (aria-current). Home page only. */
+function initActiveNav() {
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>(
+      '.desktop-nav a[href^="#"]',
+    ),
+  ];
+  if (!links.length) return;
+  const byId = new Map(links.map((a) => [a.hash.slice(1), a]));
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        links.forEach((a) => a.removeAttribute('aria-current'));
+        byId.get(e.target.id)?.setAttribute('aria-current', 'true');
+      }
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  byId.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) io.observe(section);
+  });
+}
+
 initHeader();
+initActiveNav();
 initSpotlight();
 initMobileMenu();
 initLiveLoops();
