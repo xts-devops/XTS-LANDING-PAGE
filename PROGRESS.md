@@ -10,6 +10,11 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-18 · claude · main (one output)
+**Did:** Merged PR #6 into `main` with a merge commit (0f8d3a7) so both agents' commits stay in history. Closed #2–#5 (superseded; #5 auto-marked merged, #3 auto-closed). Deleted merged branches on GitHub (only `main` + `codex/wip-2026-10-18` remain). Codex folder → `main`; deleted its 9 local branches that were fully in main (verified with merge-base). Claude worktree detached on origin/main.
+**Verify:** CI green on the merged head; main folder: `npm ci` + `npm run verify` 0/0, `npm run test:e2e` 25/25; both folders at 0f8d3a7.
+**Next:** **Codex:** D15 lanes resume — start from `main`. Your 2026-10-18 WIP is on `codex/wip-2026-10-18`; the hero photo, Terms copy, legal links, nav highlight and button lift are already in main. **User:** U1 key, T05 logo, T33 Vercel, legal copy review.
+
 ## 2026-10-18 · claude · claude/mvp-ui (merged Codex WIP → one output)
 **Did:** Found uncommitted Codex work in the main folder (2026-10-18 01:12–01:29) and saved it untouched to `codex/wip-2026-10-18` (pushed). Folded its **unique** parts into the MVP: hero photo backdrop (`hero-office.png` 1.8 MB → 18–75 KB WebP via astro:assets), **Website Terms page** (Codex copy → `content/terms.ts`), footer Privacy/Terms links, active-section nav highlight, button hover lift. Factored a shared `components/legal/LegalPage.astro` for Privacy + Terms. **Not taken** (duplicates of tested MVP code): Codex's parallel lib/form, lib/seo, scripts/motion, privacy page, global reduced-motion kill switch, `polish.css`. Fixed local tooling: Astro 7 allows one preview per project, so Playwright now shares port **4380** with `npm run serve` (reuses it locally; CI unchanged).
 **Verify:** verify 0/0; e2e **25/25** (new: terms + legal links); Lighthouse ×3: **Perf 0.99**, A11y/BP/SEO 1.00, LCP 1.5s (hero photo), CLS 0. Visual check at 1440 + browser pane.

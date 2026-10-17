@@ -8,7 +8,7 @@ Claude and Codex together. Marketing site only (no app/portal planned), English 
 text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**MVP built (D20/D21): PR from `claude/mvp-ui` awaits user review** (supersedes #2–#5). Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Open: Web3Forms key (U1), vector logo (T05), Vercel (T33). D15 lanes resume after the MVP merges; see docs/DEV-FLOW.md.
+**MVP live on `main`** (PR #6 merged 2026-10-18; Claude + Codex combined). Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Open: Web3Forms key (U1), vector logo (T05), Vercel (T33). D15 lanes resume after the MVP merges; see docs/DEV-FLOW.md.
 
 Visuals are coded schematics (`src/components/art/`); add a photo to any pillar/showcase/industry via its optional `image` in `src/content/*` to replace its schematic. Brand favicons/OG: `node tools/make-brand-assets.mjs`.
 

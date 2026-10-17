@@ -6,8 +6,8 @@ Lanes (D15): **codex** = UI/UX, motion, images, copy · **claude** = architectur
 Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends on.
 
 ## In flight
-- **MVP PR** `claude/mvp-ui` (D20): integrates #5 + #2→#4 + Codex's P1 draft and finishes P1–P3 for an MVP. Awaiting **user review = G1 + G2 + G3 in one pass**. Merging it supersedes PRs #2–#5.
-- Still open: **T18** photos (optional — coded schematics ship now; any photo replaces a schematic via `image` in content) · **T05** vector logo from XTS · **U1** Web3Forms key · **T33** Vercel · **T38** indexing at launch · **T09** dev-dep audit.
+_(none)_ — **MVP merged to  (PR #6, 2026-10-18)**. #2–#5 closed/merged; GitHub has only  + Codex's backup .
+- Open: **U1** Web3Forms key · **T05** vector logo · **T33** Vercel · **T38** indexing at launch · **T09** dev-dep audit · **T18** extra photos (optional) · XTS review of Privacy + Terms copy.
 
 ## P0 · Foundation (codex)
 - [x] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: done (MVP PR, D20)
