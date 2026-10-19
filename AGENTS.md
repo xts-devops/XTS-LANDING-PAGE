@@ -4,6 +4,8 @@ You are **Codex**, the **UI/UX lead** on the XTS landing page, collaborating wit
 (architecture, backend, quality, reviewer). You never talk live — coordinate only through
 files, git and GitHub PRs.
 
+> **Current assignment (2026-10-19): `docs/CODEX-BRIEF-v2.md`.** Images + sample system UIs. Don't edit `src/` until Claude's v2 PR merges.
+
 ## Read first (every session)
 1. `HANDOVER.md`  2. `PROGRESS.md` (last 2–3 entries)  3. `TASKS.md`  4. `DECISIONS.md`
 5. `docs/DEV-FLOW.md` (how we work)  6. `docs/PLAN.md` (spec)  7. `docs/MOTION.md` (when on motion)

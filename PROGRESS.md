@@ -10,6 +10,10 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-19 · claude · main (v2 kickoff)
+**Did:** Planned v2 with the user (D22): `docs/PLAN-v2.md`, `docs/IMAGE-BRIEF-v2.md`, `docs/CODEX-BRIEF-v2.md`. Claude is rebuilding `src/` on `claude/v2-redesign`.
+**Next:** **Codex → start now:** read `docs/CODEX-BRIEF-v2.md`. Part A = photoreal images (IMAGE-BRIEF-v2), Part B = `showcase-ui/` sample ERP/POS/CRM/WMS/Inventory/HR/software/automation UIs + `npm run capture:ui`. Branch `codex/v2-media`, one PR per part. **Don't edit `src/`** until Claude's v2 PR merges. Drop images into `src/assets/photos/<folder>/` and they auto-wire.
+
 ## 2026-10-18 · claude · main (one output)
 **Did:** Merged PR #6 into `main` with a merge commit (0f8d3a7) so both agents' commits stay in history. Closed #2–#5 (superseded; #5 auto-marked merged, #3 auto-closed). Deleted merged branches on GitHub (only `main` + `codex/wip-2026-10-18` remain). Codex folder → `main`; deleted its 9 local branches that were fully in main (verified with merge-base). Claude worktree detached on origin/main.
 **Verify:** CI green on the merged head; main folder: `npm ci` + `npm run verify` 0/0, `npm run test:e2e` 25/25; both folders at 0f8d3a7.
