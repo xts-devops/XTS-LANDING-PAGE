@@ -4,7 +4,7 @@ export const contact: Contact = {
   email: 'info@xzentechsolutions.com',
   phoneDisplay: '0969 244 2557',
   phoneHref: 'tel:+639692442557',
-  location: 'Philippines-based · serving clients nationwide',
+  location: 'Philippines-based · working with clients in the PH and abroad',
 };
 export const proof: Proof[] = [
   {
@@ -23,14 +23,13 @@ export const proof: Proof[] = [
   {
     kind: 'text',
     value: 'PH-based',
-    label: 'Serving clients across the Philippines',
+    label: 'Clients in the Philippines and abroad',
   },
 ];
 export const navigation = [
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Showcase', href: '#showcase' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Process', href: '#process' },
+  { label: 'Services', href: '#services' },
+  { label: 'Work', href: '#work' },
+  { label: 'Global', href: '#reach' },
   { label: 'Contact', href: '#contact' },
 ];
 export const site = {
@@ -50,59 +49,28 @@ export const site = {
     summary:
       'We engineer, build, and implement intelligent systems — from business platforms and custom software to automation and robotics.',
     primaryCta: 'Book a Consultation',
-    secondaryCta: 'Explore Solutions',
-    /** Illustrative operations console — decorative, no real client data or figures. */
-    console: {
-      title: 'Operations overview',
-      status: 'All systems connected',
-      hub: 'XTS',
-      nodes: ['Platforms', 'Software', 'Automation', 'Robotics'],
-      throughput: 'Orders processed',
-      health: 'System health',
-      checks: [
-        ['POS · Branch network', 'Synced'],
-        ['Warehouse system', 'Synced'],
-        ['Production line 2', 'Running'],
-      ],
-      feed: [
-        ['09:41', 'Inventory synced across branches'],
-        ['09:42', 'New order routed to warehouse'],
-        ['09:42', 'Pick path updated · Aisle C'],
-        ['09:43', 'Robot cell 2 · cycle complete'],
-        ['09:44', 'Daily sales report generated'],
-        ['09:45', 'Supplier invoice matched to PO'],
-      ],
-    },
+    secondaryCta: 'Explore services',
   },
-  solutions: {
-    eyebrow: 'Our solutions',
-    heading: 'The right technology.\nBuilt around your business.',
-    summary:
-      'From the systems you run today to the possibilities you’re building next. Four connected capabilities, one technology partner.',
-    support:
-      'Implementation, training and long-term support included with every engagement.',
+  services: {
+    eyebrow: 'What we do',
+    heading: 'Four ways we help your business run better',
+    summary: 'Pick a service to see the systems we build, as they look in use.',
+    cta: 'See',
   },
-  showcase: {
-    eyebrow: 'Solution showcase',
-    heading: 'What we build',
-    summary:
-      'Client engagements are confidential — these showcases illustrate the kind of systems we deliver.',
-    cta: 'Discuss a similar project',
-    label: 'Illustrative solution',
-  },
-  industries: {
-    eyebrow: 'Industries we serve',
-    heading: 'Real solutions.\nFor your world.',
-    summary:
-      'Different industries. Different challenges. Technology shaped around the way you work.',
-    cta: 'Explore this industry',
-    panelsLabel: 'Industry details',
-  },
-  process: {
-    eyebrow: 'Our process',
-    heading: 'From vision to\nreal-world impact',
-    summary:
-      'A clear path from your first question to a solution your team can rely on.',
+  servicePage: {
+    back: 'All services',
+    systemsHeading: 'Systems we deliver',
+    systemsLabel: 'Choose a system',
+    sampleNote:
+      'Sample system with fictional data, built to show our standard.',
+    galleryHeading: 'From the bench to the factory floor',
+    explodedHeading: 'Engineered down to every part',
+    explodedSummary:
+      'Scroll to take it apart. We design, source and assemble each component, then put it to work.',
+    cta: 'Start a project like this',
+    prev: 'Previous slide',
+    next: 'Next slide',
+    slideOf: 'of',
   },
   contactSection: {
     eyebrow: 'Let’s build what’s next',

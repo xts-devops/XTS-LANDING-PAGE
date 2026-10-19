@@ -4,8 +4,8 @@ import heroBackdrop from '../../assets/images/hero-office.png';
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
-import HeroConsole from './HeroConsole.astro';
-import { site } from '../../content/site';
+import { proof, site } from '../../content/site';
+import '../../styles/hero.css';
 ---
 
 <section id="top" class="hero" aria-labelledby="hero-heading" data-hero>
@@ -16,7 +16,7 @@ import { site } from '../../content/site';
     widths={[768, 1280, 1920]}
     sizes="100vw"
     format="webp"
-    quality={68}
+    quality={70}
     loading="eager"
     fetchpriority="high"
   />
@@ -33,15 +33,21 @@ import { site } from '../../content/site';
       </p>
       <div class="hero-actions" data-hero-part="copy">
         <Button href="#contact">{site.hero.primaryCta}</Button>
-        <Button href="#solutions" variant="outline">
+        <Button href="#services" variant="outline">
           {site.hero.secondaryCta}
         </Button>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-parallax">
-        <HeroConsole />
-      </div>
-    </div>
+    <dl class="hero-proof">
+      {proof.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd {...(item.kind === 'count' ? { 'data-count': '' } : {})}>
+            {item.value}
+            {item.kind === 'count' && item.suffix}
+          </dd>
+        </div>
+      ))}
+    </dl>
   </Container>
 </section>

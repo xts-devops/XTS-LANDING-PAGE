@@ -1,4 +1,5 @@
-import { initIndustries } from './industries';
+import { initTabs } from './tabs';
+import { initSlides } from './slides';
 import { initForm } from '../form';
 
 /** Header gains its border/backdrop once the page scrolls. */
@@ -20,29 +21,6 @@ function initMobileMenu() {
   menu
     ?.querySelectorAll('a')
     .forEach((a) => a.addEventListener('click', () => (menu.open = false)));
-}
-
-/** Run ambient CSS loops (console feed, data flows) only while they're on screen. */
-function initLiveLoops() {
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries)
-      e.target.classList.toggle('is-live', e.isIntersecting);
-  });
-  document
-    .querySelectorAll('.console, .visual')
-    .forEach((el) => io.observe(el));
-}
-
-/** Cursor spotlight on cards: feed pointer position to CSS (--mx/--my). Fine pointers only. */
-function initSpotlight() {
-  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  document.querySelectorAll<HTMLElement>('.card').forEach((card) =>
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    }),
-  );
 }
 
 /** Highlight the nav link for the section in view (aria-current). Home page only. */
@@ -72,8 +50,7 @@ function initActiveNav() {
 
 initHeader();
 initActiveNav();
-initSpotlight();
 initMobileMenu();
-initLiveLoops();
-initIndustries();
+initTabs();
+initSlides();
 initForm();

@@ -1,0 +1,112 @@
+---
+/**
+ * System switcher (tabs) + per-system slideshow of product screens.
+ * No JS: every system is listed in turn with its slides scrollable. With JS (scripts/ui/tabs.ts,
+ * scripts/ui/slides.ts): one system at a time, laid out before first paint via .js (no CLS).
+ */
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+import Screen from '../media/Screen.astro';
+import type { System } from '../../content/types';
+import { site } from '../../content/site';
+
+interface Props {
+  systems: System[];
+  serviceTitle: string;
+}
+const { systems, serviceTitle } = Astro.props;
+const copy = site.servicePage;
+---
+
+<section class="section systems" id="systems" aria-labelledby="systems-heading">
+  <Container>
+    <div class="systems-head" data-reveal="up">
+      <Eyebrow>{serviceTitle}</Eyebrow>
+      <h2 id="systems-heading">{copy.systemsHeading}</h2>
+    </div>
+
+    <div class="systems-tabs" data-tablist aria-label={copy.systemsLabel}>
+      {systems.map((system) => (
+        <button type="button" class="systems-tab" data-tab={system.id}>
+          {system.name}
+        </button>
+      ))}
+    </div>
+
+    <div class="systems-panels">
+      {systems.map((system) => (
+        <article
+          class="system-panel"
+          id={`system-${system.id}`}
+          data-panel={system.id}
+          aria-labelledby={`system-${system.id}-title`}
+        >
+          <div class="system-info">
+            <h3 id={`system-${system.id}-title`}>{system.name}</h3>
+            <p>{system.summary}</p>
+            <ul class="system-features" role="list">
+              {system.features.map((f) => (
+                <li>
+                  <Icon name="shield-check" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <p class="system-note">{copy.sampleNote}</p>
+          </div>
+
+          <div class="slides" data-slides>
+            <div
+              class="slides-track"
+              data-slides-track
+              tabindex="0"
+              role="region"
+              aria-roledescription="carousel"
+              aria-label={`${system.name} screens`}
+            >
+              {system.slides.map((slide, i) => (
+                <figure
+                  class="slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`${i + 1} ${copy.slideOf} ${system.slides.length}: ${slide.caption}`}
+                >
+                  <Screen
+                    screen={slide.screen}
+                    alt={`${system.name}: ${slide.caption} (sample system)`}
+                    device={slide.device}
+                  />
+                  <figcaption>{slide.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+            {system.slides.length > 1 && (
+              <div class="slides-controls">
+                <button
+                  type="button"
+                  class="slides-btn"
+                  data-prev
+                  aria-label={copy.prev}
+                >
+                  <Icon name="arrow-right" class="flip" />
+                </button>
+                <span class="slides-count" aria-live="polite" data-count-label>
+                  1 / {system.slides.length}
+                </span>
+                <button
+                  type="button"
+                  class="slides-btn"
+                  data-next
+                  aria-label={copy.next}
+                >
+                  <Icon name="arrow-right" />
+                </button>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </Container>
+</section>

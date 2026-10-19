@@ -1,0 +1,108 @@
+/* Site header: sticky, translucent; firms up once the page scrolls (scripts/ui). */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid transparent;
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+  view-transition-name: site-header;
+}
+.site-header.is-scrolled {
+  border-bottom-color: var(--color-line);
+  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 5.5rem;
+}
+.brand-link {
+  display: block;
+  flex-shrink: 0;
+  width: 10.5rem;
+}
+.brand-link img {
+  width: 100%;
+  /* Supplied logo has a textured near-black background: push it to black, then lighten-blend it
+     away. Remove once XTS supplies a transparent/vector logo (T05). */
+  filter: brightness(0.92) contrast(1.5);
+  mix-blend-mode: lighten;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.8rem;
+}
+.desktop-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+.header-cta {
+  padding: 0.65rem 1.15rem;
+  min-height: 2.75rem;
+  font-size: 0.78rem;
+}
+.mobile-menu {
+  display: none;
+}
+@media (max-width: 860px) {
+  .header-cta {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .header-inner {
+    min-height: 4.75rem;
+  }
+  .brand-link {
+    width: 8.5rem;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu {
+    display: block;
+  }
+  .mobile-menu summary {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    min-height: 2.75rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobile-menu summary span {
+    font-size: 1.4rem;
+    color: var(--color-gold-hi);
+    transition: transform var(--dur-2) var(--ease-out);
+  }
+  .mobile-menu[open] summary span {
+    transform: rotate(45deg);
+  }
+  .mobile-menu nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    display: grid;
+    padding: 1rem var(--gutter);
+    background: var(--color-surface);
+    border-block: var(--border);
+  }
+  .mobile-menu nav a {
+    padding: 0.85rem 0.5rem;
+    font-size: 1rem;
+  }
+}

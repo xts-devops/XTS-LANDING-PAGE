@@ -1,0 +1,399 @@
+/* Service pages v2: hero · system showcase · exploded view · gallery. */
+@import './home.css';
+
+/* ---- Hero (photo morphs in from the home tile via view-transition-name) ---- */
+.svc-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(40rem, 78svh);
+  display: flex;
+  align-items: flex-end;
+  padding-block: 8rem 3.5rem;
+}
+.svc-hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  height: 100%;
+}
+.svc-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-bg) 5%,
+      color-mix(in srgb, var(--color-bg) 45%, transparent) 60%,
+      transparent
+    ),
+    linear-gradient(0deg, var(--color-bg) 2%, transparent 55%);
+}
+.svc-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.svc-back:hover {
+  color: var(--color-gold-hi);
+}
+.icon.flip {
+  transform: scaleX(-1);
+}
+.svc-hero h1 {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.svc-intro {
+  max-width: 38rem;
+  margin-top: 1.25rem;
+  font-size: 1.05rem;
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+}
+.svc-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+}
+.svc-highlights li {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 40%, var(--color-line));
+  border-radius: 100vmax;
+  font-size: 0.78rem;
+  background: color-mix(in srgb, var(--color-bg) 50%, transparent);
+}
+
+/* ---- System showcase ---- */
+.systems-head h2 {
+  max-width: 30rem;
+}
+.systems-tabs {
+  display: none; /* no-JS: every system is listed in turn */
+}
+.js .systems-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2.25rem 0 2.5rem;
+}
+.systems-tab {
+  position: relative;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.15rem;
+  border: var(--border);
+  border-radius: 100vmax;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+.systems-tab:hover {
+  color: var(--color-text);
+  border-color: color-mix(in srgb, var(--color-gold) 40%, var(--color-line));
+}
+.systems-tab[aria-selected='true'] {
+  color: var(--color-bg);
+  background: var(--color-gold-hi);
+  border-color: var(--color-gold-hi);
+}
+.systems-panels {
+  display: grid;
+  gap: 4rem;
+  margin-top: 2.5rem;
+}
+.js .systems-panels {
+  margin-top: 0;
+}
+/* JS lays tabs out before first paint (no layout shift); tabs.ts then manages [hidden]. */
+.js .system-panel:not(:first-child),
+.js .system-panel[hidden] {
+  display: none;
+}
+.js .tabs-ready .system-panel:not([hidden]) {
+  display: grid;
+}
+.system-panel {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.75fr) 1.6fr;
+  gap: 3rem;
+  align-items: start;
+}
+.system-info h3 {
+  font-size: 1.6rem;
+}
+.system-info > p:first-of-type {
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+}
+.system-features {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.system-features li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.92rem;
+}
+.system-features .icon {
+  color: var(--color-gold-hi);
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.system-note {
+  margin-top: 1.75rem;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .system-panel.is-entering .slides {
+    animation: sys-wipe var(--dur-3) var(--ease-inout) both;
+  }
+  .system-panel.is-entering .system-info {
+    animation: sys-copy var(--dur-3) var(--ease-out) both;
+  }
+}
+@keyframes sys-wipe {
+  from {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0.4;
+  }
+}
+@keyframes sys-copy {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Slideshow: native scroll-snap (touch swipe for free); slides.ts adds buttons + counter. */
+.slides {
+  min-width: 0;
+}
+.slides-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+.slides-track::-webkit-scrollbar {
+  display: none;
+}
+.slide {
+  flex: 0 0 100%;
+  margin: 0;
+  scroll-snap-align: center;
+}
+.slide figcaption {
+  margin-top: 0.85rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+.slides-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.slides-btn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out);
+}
+.slides-btn:hover:not(:disabled) {
+  border-color: var(--color-gold);
+  color: var(--color-gold-hi);
+}
+.slides-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.slides-btn .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.slides-count {
+  min-width: 3.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 900px) {
+  .system-panel {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ---- Exploded view ---- */
+.exploded {
+  padding-top: var(--section-space);
+  border-top: var(--border);
+}
+.exploded-head p {
+  max-width: 34rem;
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+.exploded-scroll {
+  margin-top: 3rem;
+}
+.exploded-stage {
+  position: relative;
+  width: min(var(--container), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+/* No JS / reduced motion: both states side by side. */
+.exploded-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.exploded-pair .photo {
+  border-radius: var(--radius);
+}
+.exploded-video {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+}
+.exploded-progress {
+  display: none;
+}
+/* Scroll-driven mode: decided before first paint (.js + motion OK), so nothing shifts when the
+   engine boots. Sticky stage, states layered; scripts/motion drives the progress. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .exploded-scroll {
+    height: 260vh;
+  }
+  .js .exploded-stage {
+    position: sticky;
+    top: 6.5rem;
+  }
+  .js .exploded-pair {
+    grid-template-columns: 1fr;
+  }
+  .js .exploded-pair .photo {
+    grid-area: 1 / 1;
+    will-change: opacity, transform, filter;
+  }
+  .js .exploded-b {
+    opacity: 0;
+  }
+  .js .exploded-progress {
+    display: block;
+    height: 2px;
+    margin-top: 1rem;
+    background: var(--color-line);
+  }
+}
+.exploded-progress i {
+  display: block;
+  height: 100%;
+  background: var(--color-gold-hi);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+}
+@media (max-width: 700px) {
+  .exploded-pair {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  .js .exploded-scroll {
+    height: 200vh;
+  }
+}
+
+/* ---- Gallery (bento) ---- */
+.gallery h2 {
+  max-width: 32rem;
+  margin-bottom: 2.5rem;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.gallery-item-0 {
+  grid-row: span 2;
+}
+.gallery-item .photo {
+  height: 100%;
+  border-radius: 0.8rem;
+}
+.gallery-item-0 .photo {
+  aspect-ratio: auto;
+}
+.gallery-item figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2rem 1rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--color-bg) 85%, transparent),
+    transparent
+  );
+}
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-item-0 {
+    grid-row: auto;
+  }
+  .gallery-item-0 .photo {
+    aspect-ratio: 4 / 3;
+  }
+}
+@media (min-width: 901px) {
+  /* 7 photos with a tall first tile: widen the last one so the grid ends flush. */
+  .gallery-item:last-child:nth-child(3n + 1) {
+    grid-column: span 2;
+  }
+  .gallery-item:last-child:nth-child(3n + 1) .photo {
+    aspect-ratio: auto;
+  }
+}

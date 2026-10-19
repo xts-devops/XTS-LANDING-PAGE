@@ -11,6 +11,12 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, noindex } = Astro.props;
+const speculationRules = {
+  prerender: [
+    { where: { href_matches: '/services/*' }, eagerness: 'moderate' },
+  ],
+  prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }],
+};
 ---
 
 <!doctype html>
@@ -33,6 +39,13 @@ const { title, description, noindex } = Astro.props;
     <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <Seo title={title} description={description} noindex={noindex} />
+    <!-- Instant navigation, zero JS: prerender pages the visitor is about to open (hover/pointer-down).
+         Browsers without Speculation Rules just navigate normally. -->
+    <script
+      type="speculationrules"
+      is:inline
+      set:html={JSON.stringify(speculationRules)}
+    />
   </head>
   <body>
     <a class="skip-link" href="#main-content">

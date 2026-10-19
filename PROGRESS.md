@@ -10,6 +10,11 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-19 · claude · claude/v2-redesign (v2 site)
+**Did:** Rebuilt the site per PLAN-v2 / D22 on Codex's photo-led look. Home = Hero (real photo, proof row) → Services (4 photo tiles) → Work (pinned horizontal gallery) → Global reach → Contact. New `/services/<slug>` pages: system switcher (ERP·POS·CRM·WMS·Inventory·HR, software, automation) with slideshows of product screens; robotics = scroll-scrubbed exploded view + photo gallery. Native cross-document view transitions (tile photo morphs into page hero) + speculation-rules prerender: zero JS. `<Photo>`/`<Screen>` auto-wire files from `src/assets/photos|showcase/**` with placeholders. Removed v1 schematics, console, industries, process. Motion engine v2 (no DrawSVG). Tests rewritten for v2.
+**Verify:** `npm run verify` 0/0; e2e 33/33 (4 service pages + axe, tabs/keyboard/deep link, slides, work pinned + moving, exploded progress, JS budget, no GSAP when reduced); Lighthouse home ×3: Perf 0.99–1.00, A11y/BP/SEO 1, LCP 1.5s, CLS 0.
+**Next:** Codex: CODEX-BRIEF-v2 (images + `showcase-ui/`); they drop in with no code changes. User: real projects + countries (PLAN-v2 §6); exploded-view source (PLAN-v2 §4).
+
 ## 2026-10-19 · claude · main (v2 kickoff)
 **Did:** Planned v2 with the user (D22): `docs/PLAN-v2.md`, `docs/IMAGE-BRIEF-v2.md`, `docs/CODEX-BRIEF-v2.md`. Claude is rebuilding `src/` on `claude/v2-redesign`.
 **Next:** **Codex → start now:** read `docs/CODEX-BRIEF-v2.md`. Part A = photoreal images (IMAGE-BRIEF-v2), Part B = `showcase-ui/` sample ERP/POS/CRM/WMS/Inventory/HR/software/automation UIs + `npm run capture:ui`. Branch `codex/v2-media`, one PR per part. **Don't edit `src/`** until Claude's v2 PR merges. Drop images into `src/assets/photos/<folder>/` and they auto-wire.

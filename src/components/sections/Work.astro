@@ -1,0 +1,46 @@
+---
+/**
+ * Selected work: horizontal gallery. Desktop (fine pointer, motion OK): pinned and driven by
+ * vertical scroll (scripts/motion). Everyone else: native horizontal scroll with snap, which is
+ * keyboard-reachable through the focusable region.
+ */
+import Section from '../ui/Section.astro';
+import Photo from '../media/Photo.astro';
+import { work, workIntro } from '../../content/work';
+import { serviceBySlug } from '../../content/services';
+import '../../styles/home.css';
+---
+
+<Section id="work" {...workIntro} class="work-section">
+  <div
+    class="work-track"
+    data-work-track
+    tabindex="0"
+    role="region"
+    aria-label={workIntro.heading}
+  >
+    <ol class="work-list" role="list">
+      {work.map((item) => (
+        <li class="work-card">
+          <Photo
+            photo={item.photo}
+            alt={item.photoAlt}
+            ratio="16 / 11"
+            sizes="(min-width: 1024px) 40vw, 85vw"
+          />
+          <div class="work-body">
+            <p class="work-meta">
+              {item.sector}
+              {item.location && <span> · {item.location}</span>}
+            </p>
+            <h3>{item.title}</h3>
+            <p>{item.summary}</p>
+            <a class="work-service" href={`/services/${item.service}`}>
+              {serviceBySlug(item.service)?.title}
+            </a>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

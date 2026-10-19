@@ -13,7 +13,9 @@ test('JS budget with motion loaded: ≤ 70 KB gzipped', async ({ browser }) => {
   await page.goto('/');
   await page.mouse.move(300, 300);
   await page.mouse.wheel(0, 1500);
-  await page.waitForFunction(() => document.querySelector('.process-timeline'));
+  await page.waitForFunction(() =>
+    document.querySelector('.work-track.is-pinned'),
+  );
   await page.waitForLoadState('networkidle');
 
   let total = 0;
@@ -36,8 +38,8 @@ test('JS budget with motion loaded: ≤ 70 KB gzipped', async ({ browser }) => {
 
 /**
  * Motion ON (the project default emulates reduced motion). Guards the failure modes that matter:
- * content stuck invisible after reveals, counters not landing on the real figures, the process
- * line never completing, and GSAP being downloaded for reduced-motion visitors.
+ * content stuck invisible after reveals, counters not landing on the real figures, the Work gallery
+ * not pinning/moving, the exploded view not separating, and GSAP being downloaded for reduced-motion visitors.
  */
 test.describe('with motion enabled', () => {
   test.use({ reducedMotion: 'no-preference' });
@@ -76,18 +78,12 @@ test.describe('with motion enabled', () => {
 
     await expect(page.locator('[data-count]')).toHaveText(['300+', '200+']);
 
-    const fills = await page
-      .locator('.process-timeline > li')
-      .evaluateAll((lis) =>
-        lis.map((li) => getComputedStyle(li).getPropertyValue('--fill').trim()),
-      );
-    expect(
-      fills.slice(0, -1).every((f) => Number(f) > 0.99),
-      `process connectors: ${fills}`,
-    ).toBe(true);
-    await expect(page.locator('.process-timeline > li.is-reached')).toHaveCount(
-      5,
-    );
+    // Work gallery is pinned on wide fine-pointer screens and has moved sideways by the end.
+    await expect(page.locator('[data-work-track]')).toHaveClass(/is-pinned/);
+    const x = await page
+      .locator('.work-list')
+      .evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m41);
+    expect(x, 'work track should have scrolled sideways').toBeLessThan(-50);
   });
 });
 
@@ -104,5 +100,33 @@ test.describe('with reduced motion', () => {
     expect(
       scripts.filter((u) => /gsap|ScrollTrigger|DrawSVG|lenis/i.test(u)),
     ).toEqual([]);
+  });
+});
+
+test.describe('robotics exploded view', () => {
+  test.use({ reducedMotion: 'no-preference' });
+
+  test('scrolling through separates the two states', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/services/robotics');
+    await page.mouse.move(300, 300);
+    await page.waitForTimeout(400);
+    const scroller = page.locator('.exploded-scroll');
+    const box = await scroller.boundingBox();
+    expect(
+      box?.height ?? 0,
+      'sticky scroll space laid out before paint',
+    ).toBeGreaterThan(900 * 2);
+    for (let i = 0; i < 40; i++) {
+      await page.mouse.wheel(0, 120);
+      await page.waitForTimeout(40);
+    }
+    await page.waitForTimeout(800);
+    const p = await page
+      .locator('.exploded-progress')
+      .evaluate((el) =>
+        Number(getComputedStyle(el).getPropertyValue('--p') || 0),
+      );
+    expect(p, 'scroll progress drives the exploded view').toBeGreaterThan(0.2);
   });
 });
