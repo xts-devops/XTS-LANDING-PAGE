@@ -43,7 +43,7 @@
 .hero-inner {
   display: grid;
   gap: 3.5rem;
-  width: 100%;
+  /* width comes from .container (gutter-aware); don't override it here. */
 }
 .hero-copy {
   max-width: 44rem;
