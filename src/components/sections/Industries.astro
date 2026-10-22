@@ -1,0 +1,60 @@
+---
+import Section from '../ui/Section.astro';
+import Icon from '../ui/Icon.astro';
+import Visual from '../ui/Visual.astro';
+import Chip from '../ui/Chip.astro';
+import { industries } from '../../content/industries';
+import { site } from '../../content/site';
+import '../../styles/industries.css';
+---
+
+<Section id="industries" {...site.industries}>
+  <div class="industries-layout" data-industries>
+    <ul class="industry-directory" data-tablist>
+      {industries.map((industry, index) => (
+        <li>
+          <a href={`#industry-${industry.id}`} data-tab={industry.id}>
+            <Icon name={industry.icon} />
+            <span>{industry.name}</span>
+            <span class="industry-number" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div
+      class="industry-panels"
+      tabindex="0"
+      role="region"
+      aria-label={site.industries.panelsLabel}
+    >
+      {industries.map((industry) => (
+        <div
+          class="industry-panel"
+          data-panel={industry.id}
+          id={`industry-${industry.id}`}
+          role="group"
+          aria-labelledby={`industry-${industry.id}-title`}
+        >
+          <Visual
+            art={industry.art}
+            image={industry.image}
+            sizes="(min-width: 1024px) 55vw, 100vw"
+          />
+          <div class="industry-copy">
+            <h3 id={`industry-${industry.id}-title`}>{industry.name}</h3>
+            <p>{industry.summary}</p>
+            <ul>
+              {industry.examples.map((example) => (
+                <li>
+                  <Chip>{example}</Chip>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import heroBackdrop from '../../assets/images/hero-office.png';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Button from '../ui/Button.astro';
+import HeroConsole from './HeroConsole.astro';
+import { site } from '../../content/site';
+---
+
+<section id="top" class="hero" aria-labelledby="hero-heading" data-hero>
+  <Image
+    src={heroBackdrop}
+    alt=""
+    class="hero-backdrop"
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    format="webp"
+    quality={68}
+    loading="eager"
+    fetchpriority="high"
+  />
+  <Container class="hero-inner">
+    <div class="hero-copy">
+      <div data-hero-part="eyebrow">
+        <Eyebrow>{site.hero.eyebrow}</Eyebrow>
+      </div>
+      <h1 id="hero-heading" data-hero-part="title">
+        {site.hero.heading} <span>{site.hero.emphasis}</span>
+      </h1>
+      <p class="hero-summary" data-hero-part="copy">
+        {site.hero.summary}
+      </p>
+      <div class="hero-actions" data-hero-part="copy">
+        <Button href="#contact">{site.hero.primaryCta}</Button>
+        <Button href="#solutions" variant="outline">
+          {site.hero.secondaryCta}
+        </Button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-parallax">
+        <HeroConsole />
+      </div>
+    </div>
+  </Container>
+</section>

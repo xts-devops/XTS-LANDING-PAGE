@@ -1,0 +1,57 @@
+---
+import {
+  ArrowUpRight,
+  ArrowRight,
+  ArrowUp,
+  Layers,
+  Code,
+  Workflow,
+  Bot,
+  Store,
+  Factory,
+  Truck,
+  Heart,
+  Landmark,
+  ShieldCheck,
+  MessagesSquare,
+  PenTool,
+  Settings,
+  Headphones,
+  Mail,
+  Phone,
+  MapPin,
+  Plus,
+} from '@lucide/astro';
+const icons = {
+  'arrow-up-right': ArrowUpRight,
+  'arrow-right': ArrowRight,
+  'arrow-up': ArrowUp,
+  layers: Layers,
+  code: Code,
+  workflow: Workflow,
+  bot: Bot,
+  store: Store,
+  factory: Factory,
+  truck: Truck,
+  heart: Heart,
+  landmark: Landmark,
+  'shield-check': ShieldCheck,
+  'messages-square': MessagesSquare,
+  'pen-tool': PenTool,
+  settings: Settings,
+  headphones: Headphones,
+  mail: Mail,
+  phone: Phone,
+  'map-pin': MapPin,
+  plus: Plus,
+};
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+const Glyph = icons[name as keyof typeof icons];
+if (!Glyph) throw new Error(`Unknown icon: ${name}`);
+---
+
+<Glyph class:list={['icon', className]} aria-hidden="true" stroke-width={1.5} />

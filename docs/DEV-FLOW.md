@@ -111,8 +111,8 @@ That's ~20 task-sized PRs down to **5** (P1 + 4), with gates only where the user
 
 ### 1 · One folder per agent (no shared working tree)
 Both agents in one folder = one switches branch under the other. So:
-- **Codex** works in `D:\DEV WORKS\XTS LadingPage` (the main folder).
-- **Claude** works in a git worktree: `D:\DEV WORKS\XTS LadingPage-claude`.
+- **Codex** works in `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage` (the main folder).
+- **Claude** works in a git worktree: `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage-claude`.
 Same repo, separate checkouts; GitHub `main` is the meeting point.
 
 ### 2 · Branch → PR → review → merge
@@ -168,3 +168,6 @@ Optional Codex upgrade — add Context7 docs to `~/.codex/config.toml`:
 command = "npx"
 args = ["-y", "@upstash/context7-mcp"]
 ```
+
+> **Moved the folders?** Git worktrees store absolute paths. After moving both folders, run
+> `git -C "<main folder>" worktree repair "<claude worktree>"` once (done 2026-10-17 for the move into `XTS PROJECT DEVS`).

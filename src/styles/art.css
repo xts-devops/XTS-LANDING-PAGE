@@ -1,0 +1,161 @@
+/*
+ * Schematic art — gold-line system drawings in place of stock photography.
+ * Every colour comes from tokens; strokes don't scale with the frame (non-scaling-stroke).
+ */
+.visual {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  /* Blueprint grid lives here (not in the SVG) so it fills any slot shape edge to edge. */
+  --grid: color-mix(in srgb, var(--color-line) 55%, transparent);
+  background:
+    radial-gradient(
+      60% 70% at 50% 55%,
+      color-mix(in srgb, var(--color-gold-lo) 16%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(var(--grid) 1px, transparent 1px) center / 24px 24px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) center / 24px 24px,
+    var(--color-surface);
+}
+.visual > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sx * {
+  vector-effect: non-scaling-stroke;
+}
+.sx-grid {
+  stroke: color-mix(in srgb, var(--color-line) 70%, transparent);
+  stroke-width: 1;
+  fill: none;
+}
+.sx-frame {
+  fill: var(--color-bg);
+  stroke: var(--color-line);
+  stroke-width: 1;
+}
+.sx-panel {
+  fill: var(--color-surface-2);
+  stroke: var(--color-line);
+  stroke-width: 1;
+}
+.sx-gold {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sx-soft {
+  fill: none;
+  stroke: color-mix(in srgb, var(--color-gold) 42%, transparent);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.sx-dash {
+  stroke-dasharray: 4 5;
+}
+.sx-dim {
+  fill: none;
+  stroke: color-mix(in srgb, var(--color-muted) 45%, transparent);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.sx-ink {
+  fill: var(--color-gold);
+}
+.sx-ink-hi {
+  fill: var(--color-gold-hi);
+}
+.sx-tint {
+  fill: color-mix(in srgb, var(--color-gold) 14%, transparent);
+}
+.sx-bar {
+  fill: color-mix(in srgb, var(--color-muted) 32%, transparent);
+}
+.sx-node {
+  fill: var(--color-surface-2);
+  stroke: color-mix(in srgb, var(--color-gold) 55%, transparent);
+  stroke-width: 1;
+}
+.sx-hub {
+  fill: color-mix(in srgb, var(--color-gold) 16%, var(--color-surface-2));
+  stroke: var(--color-gold);
+  stroke-width: 1.5;
+}
+.sx-label {
+  fill: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.sx-label-gold {
+  fill: var(--color-gold-hi);
+}
+
+/*
+ * Subtle life without JS: a short gold dash travels along `.sx-flow` paths (pathLength="100"),
+ * and `.sx-pulse` rings breathe. Both are off under reduced motion, and paused off-screen by the engine.
+ */
+.sx-flow {
+  fill: none;
+  stroke: var(--color-gold-hi);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0 100;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sx-flow {
+    stroke-dasharray: 5 95;
+    animation: sx-travel 3.6s linear infinite;
+  }
+  .sx-flow:nth-of-type(2n) {
+    animation-delay: -1.3s;
+  }
+  .sx-flow:nth-of-type(3n) {
+    animation-delay: -2.4s;
+  }
+  .sx-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: sx-pulse 2.8s ease-out infinite;
+  }
+  /* Loops run only while their frame is on screen (.is-live set by scripts/ui). */
+  .sx-flow,
+  .sx-pulse {
+    animation-play-state: paused;
+  }
+  .is-live .sx-flow,
+  .is-live .sx-pulse {
+    animation-play-state: running;
+  }
+}
+@keyframes sx-travel {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sx-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}

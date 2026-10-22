@@ -12,3 +12,10 @@ next-env.d.ts
 !.env.example
 .DS_Store
 Thumbs.db
+
+.astro/
+dist/
+
+# Review screenshots (npm run shots) — local + CI artifact, never committed
+docs/review/
+.lighthouseci/

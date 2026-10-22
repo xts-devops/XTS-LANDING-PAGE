@@ -6,50 +6,49 @@ Lanes (D15): **codex** = UI/UX, motion, images, copy · **claude** = architectur
 Flow: `docs/DEV-FLOW.md` — phases P0→P5 with gates G1–G3. `→` = depends on.
 
 ## In flight
-- **T01** scaffold + dependencies — owner: codex · status: in-progress
-- **T05** supplied brand assets — owner: codex · status: in-progress
-- **T08** theme foundation — owner: codex · status: in-progress
+- **MVP PR** `claude/mvp-ui` (D20): integrates #5 + #2→#4 + Codex's P1 draft and finishes P1–P3 for an MVP. Awaiting **user review = G1 + G2 + G3 in one pass**. Merging it supersedes PRs #2–#5.
+- Still open: **T18** photos (optional — coded schematics ship now; any photo replaces a schematic via `image` in content) · **T05** vector logo from XTS · **U1** Web3Forms key · **T33** Vercel · **T38** indexing at launch · **T09** dev-dep audit.
 
 ## P0 · Foundation (codex)
-- [ ] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: in-progress
-- [ ] **T05 Brand assets** → `public/brand/` + favicon set (originals are raster — vector still wanted before launch) ... owner: codex · status: in-progress
-- [ ] **T08 Theme foundation** — tokens from PLAN §4 + motion tokens from MOTION §2. Move `public/brand/theme.css` → `src/styles/tokens.css` (files in `public/` aren't processed by Tailwind) ... owner: codex · status: in-progress
-- [ ] **T02 Content contract** `src/content/types.ts` per PLAN §6 ... owner: codex · status: todo (shared — Claude reviews)
+- [x] **T01 Scaffold** Astro 7 + TS strict + Tailwind v4, Fontsource, `@lucide/astro`, sitemap, zod, ESLint/Prettier, `.nvmrc`, `verify` script, `.env.example` ... owner: codex · status: done (MVP PR, D20)
+- [ ] **T05 Brand assets** → `public/brand/` + favicon set (originals are raster — vector still wanted before launch) ... owner: codex · status: blocked (originals ready; favicon derivatives await vector)
+- [x] **T08 Theme foundation** — tokens from PLAN §4 + motion tokens from MOTION §2. Move `public/brand/theme.css` → `src/styles/tokens.css` (files in `public/` aren't processed by Tailwind) ... owner: codex · status: done (MVP PR, D20)
+- [x] **T02 Content contract** `src/content/types.ts` per PLAN §6 ... owner: codex · status: done (MVP PR, D20)
 
 ## P1 · Draft UI (codex) — layout, type, real copy, placeholder images, no motion
-- [ ] **T10 Base layout + UI primitives** (Base.astro, Container, Section, Eyebrow, Button, Card, Chip, Icon) → T01, T08 ... owner: codex · status: todo
-- [ ] **T11 Header + Hero + ProofBar** (hero dashboard as static blocks for now) → T10 ... owner: codex · status: todo
-- [ ] **T12 Solutions** → T10 ... owner: codex · status: todo
-- [ ] **T13 Showcase** → T10 ... owner: codex · status: todo
-- [ ] **T14 Industries** (static first; selector logic in P2) → T10 ... owner: codex · status: todo
-- [ ] **T15 Process** → T10 ... owner: codex · status: todo
-- [ ] **T16 Contact + Footer** (form markup only) → T10 ... owner: codex · status: todo
-- [ ] **T04 Content** for all sections in `src/content/*.ts` (canonical values PLAN §6) → T02 ... owner: codex · status: todo
+- [x] **T10 Base layout + UI primitives** (Base.astro, Container, Section, Eyebrow, Button, Card, Chip, Icon) → T01, T08 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T11 Header + Hero + ProofBar** (hero dashboard as static blocks for now) → T10 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T12 Solutions** → T10 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T13 Showcase** → T10 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T14 Industries** (static first; selector logic in P2) → T10 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T15 Process** → T10 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T16 Contact + Footer** (form markup only) → T10 ... owner: codex · status: done (MVP PR, D20)
+- [x] **T04 Content** for all sections in `src/content/*.ts` (canonical values PLAN §6) → T02 ... owner: codex · status: done (MVP PR, D20)
 - [ ] **G1 Composition gate** — screenshots 375/768/1440, Claude review + user approval ... owner: user + claude · status: todo
 
 ## P2 · Hi-fi UI (codex)
 - [ ] **T18 Generated image set v1** per IMAGE-BRIEF → `src/assets/images/` ... owner: codex · status: todo
-- [ ] **T19 Hero living dashboard** (coded SVG/HTML panels over backdrop, static) ... owner: codex · status: todo
-- [ ] **T21 States pass** — hover, focus-visible, active, form states, industries selector (keyboard tabs pattern) ... owner: codex · status: todo
-- [ ] **T17 Privacy page** layout (codex) + copy `content/privacy.ts` (claude) ... owner: codex + claude · status: todo
+- [x] **T19 Hero living dashboard** (coded SVG/HTML panels over backdrop, static) ... owner: codex · status: done (MVP PR, D20)
+- [x] **T21 States pass** — hover, focus-visible, active, form states, industries selector (keyboard tabs pattern) ... owner: codex · status: done (MVP PR, D20)
+- [x] **T17 Privacy page** layout (codex) + copy `content/privacy.ts` (claude) ... owner: codex + claude · status: done (MVP PR, D20)
 - [ ] **G2 Visual gate** — pixel review + a11y/contrast/semantics pass ... owner: user + claude · status: todo
 
 ## P3 · Motion (codex)
-- [ ] **T20 Motion foundation** — GSAP + plugins + Lenis, `scripts/motion/index.ts`, tokens, `gsap.matchMedia` reduced-motion branch, `.js` reveal guard ... owner: codex · status: todo
-- [ ] **T25 Hero sequence + dashboard animation + proof count-up** ... owner: codex · status: todo
-- [ ] **T26 Section reveals** (heads, card batches, image clip reveals, showcase parallax/tilt) ... owner: codex · status: todo
-- [ ] **T27 Industries transitions + process line scrub** ... owner: codex · status: todo
-- [ ] **T28 Micro-interactions** (buttons sheen/magnetic, cursor spotlight, inputs, submit states) ... owner: codex · status: todo
+- [x] **T20 Motion foundation** — GSAP + plugins + Lenis, `scripts/motion/index.ts`, tokens, `gsap.matchMedia` reduced-motion branch, `.js` reveal guard ... owner: codex · status: done (MVP PR, D20)
+- [x] **T25 Hero sequence + dashboard animation + proof count-up** ... owner: codex · status: done (MVP PR, D20)
+- [x] **T26 Section reveals** (heads, card batches, image clip reveals, showcase parallax/tilt) ... owner: codex · status: done (MVP PR, D20)
+- [x] **T27 Industries transitions + process line scrub** ... owner: codex · status: done (MVP PR, D20)
+- [x] **T28 Micro-interactions** (buttons sheen/magnetic, cursor spotlight, inputs, submit states) ... owner: codex · status: done (MVP PR, D20)
 - [ ] **G3 Motion gate** — recording/preview + Claude perf check vs MOTION §6 ... owner: user + claude · status: todo
 
 ## Claude parallel track (during P1–P3, no UI files)
 - [x] **T07 Form provider spike** → **Web3Forms** (D18, `docs/spikes/T07-form-provider.md`) ... owner: claude · status: done
 - [ ] **U1 Create Web3Forms access key** with info@xzentechsolutions.com → `.env` `PUBLIC_FORM_ACCESS_KEY` ... owner: user · status: todo
-- [ ] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) → PR #2 (stacked on Codex's scaffold) ... owner: claude · status: review
-- [ ] **T06 CI on PRs** — browser job (e2e + screenshot artifact `review-shots-pr<N>`) → PR #2 ... owner: claude · status: review
-- [ ] **T30 Form logic** `src/lib/form.ts` + `scripts/form.ts` (zod, honeypot, captcha, provider POST) → T07 ... owner: claude · status: todo
-- [ ] **T31 SEO** — `<Seo />`, JSON-LD, robots, indexing gate (`PUBLIC_ALLOW_INDEXING`), Vercel URL fallback → PR #3 ... owner: claude · status: review (OG image file itself = Codex T18)
-- [ ] **T24 Test harness** — e2e smoke + axe a11y + Lighthouse budgets, wired into CI → PR #4 ... owner: claude · status: review
+- [x] **T23 Screenshot script** `npm run shots` (Playwright → `docs/review/<branch>/` at 375/768/1440) → PR #2 (stacked on Codex's scaffold) ... owner: claude · status: done (MVP PR, D20)
+- [x] **T06 CI on PRs** — browser job (e2e + screenshot artifact `review-shots-pr<N>`) → PR #2 ... owner: claude · status: done (MVP PR, D20)
+- [x] **T30 Form logic** `src/lib/form.ts` + `scripts/form.ts` (zod, honeypot, captcha, provider POST) → T07 ... owner: claude · status: done (MVP PR, D20)
+- [x] **T31 SEO** — `<Seo />`, JSON-LD, robots, indexing gate (`PUBLIC_ALLOW_INDEXING`), Vercel URL fallback → PR #3 ... owner: claude · status: done (MVP PR, D20)
+- [x] **T24 Test harness** — e2e smoke + axe a11y + Lighthouse budgets, wired into CI → PR #4 ... owner: claude · status: done (MVP PR, D20)
 - [ ] **T38 Launch switch**: set `PUBLIC_ALLOW_INDEXING=true` on the production deploy only ... owner: user + claude · status: todo (at P5)
 
 ## P4 · Harden (claude; codex fixes UI findings)

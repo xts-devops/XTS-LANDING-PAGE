@@ -24,7 +24,7 @@ Claude owns: `.github/**`, ESLint/Prettier config, Lighthouse/Vercel config, `te
 (you may add deps listed in MOTION.md §1 without asking), `astro.config.mjs`, `tsconfig.json`.
 
 ## Session ritual
-Work in **this folder** (`D:\DEV WORKS\XTS LadingPage`); Claude uses its own worktree — never switch Claude's branches.
+Work in **this folder** (`D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage`); Claude uses its own worktree — never switch Claude's branches.
 Start: `git switch main && git pull` → read docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<task>`.
 Work: one section or concern per branch. Desktop + mobile together.
 Ship: `npm run verify` green → screenshots 375/768/1440 into `docs/review/<branch>/` → `gh pr create` (screenshots in body) → Claude reviews → squash-merge.

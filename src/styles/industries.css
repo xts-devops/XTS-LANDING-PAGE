@@ -1,0 +1,173 @@
+.industries-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.industry-directory {
+  position: sticky;
+  top: 8.5rem;
+}
+.industry-directory li {
+  border-bottom: var(--border);
+}
+.industry-directory a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4.5rem;
+  font-size: 0.9rem;
+}
+.industry-directory .icon {
+  color: var(--color-gold-hi);
+}
+.industry-number {
+  color: var(--color-muted);
+  margin-left: auto;
+  font-size: 0.65rem;
+}
+.industry-panels {
+  min-width: 0;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+}
+.industry-panel {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-surface);
+  scroll-margin-top: 2rem;
+}
+.industry-panel .placeholder {
+  aspect-ratio: 3 / 2;
+}
+.industry-copy {
+  padding: 1.5rem;
+}
+.industry-copy > p {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+}
+.industry-copy > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+@media (max-width: 900px) {
+  .industries-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .industry-directory {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  .industry-directory a {
+    min-height: 3rem;
+    font-size: 0.75rem;
+    gap: 0.5rem;
+  }
+  .industry-number {
+    display: none;
+  }
+
+  .industry-panel .placeholder {
+    aspect-ratio: 16 / 7;
+  }
+}
+@media (max-width: 600px) {
+  .industry-panels {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 0.4rem 0.4rem 1rem;
+    margin-inline: -0.4rem;
+  }
+  .industry-panel {
+    flex: 0 0 92%;
+    scroll-snap-align: start;
+  }
+  .industry-copy {
+    padding: 1.25rem;
+  }
+  .industry-copy h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ---- Enhanced: tabs (scripts/ui/industries.ts adds .is-tabs) ---- */
+.industry-directory a {
+  position: relative;
+  color: var(--color-muted);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.industry-directory a:hover,
+.industry-directory a[aria-selected='true'] {
+  color: var(--color-text);
+}
+.industry-directory a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--color-gold-hi);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.industry-directory a[aria-selected='true']::after {
+  transform: scaleX(1);
+}
+/* Laid out by .js (set before first paint) so enhancing to tabs never shifts the page (CLS). */
+.js .industry-panels {
+  display: grid;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+}
+.js .industry-panel {
+  grid-area: 1 / 1;
+}
+.js .industry-panel[hidden],
+.js .industries-layout:not(.is-tabs) .industry-panel:not(:first-child) {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-tabs .industry-panel.is-entering .visual {
+    animation: industry-wipe var(--dur-3) var(--ease-inout) both;
+  }
+  .is-tabs .industry-panel.is-entering .industry-copy {
+    animation: industry-copy var(--dur-3) var(--ease-out) both;
+  }
+}
+@keyframes industry-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes industry-copy {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (max-width: 900px) {
+  .js .industry-directory a::after {
+    bottom: 0.4rem;
+  }
+}

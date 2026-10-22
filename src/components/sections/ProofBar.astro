@@ -1,0 +1,20 @@
+---
+import Container from '../ui/Container.astro';
+import { proof } from '../../content/site';
+---
+
+<div class="proof-bar">
+  <Container>
+    <dl class="proof-grid">
+      {proof.map((item) => (
+        <div class="proof-item">
+          <dt>{item.label}</dt>
+          <dd {...(item.kind === 'count' ? { 'data-count': '' } : {})}>
+            {item.value}
+            {item.kind === 'count' && item.suffix}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </Container>
+</div>

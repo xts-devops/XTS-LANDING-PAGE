@@ -1,0 +1,50 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo-gold.png';
+import { brand } from '../../content/brand';
+import { navigation, site } from '../../content/site';
+const onHome = Astro.url.pathname === '/';
+const base = onHome ? '' : '/';
+---
+
+<header class="site-header">
+  <Container class="header-inner">
+    <a
+      href={onHome ? '#top' : '/'}
+      aria-label={site.homeLabel}
+      class="brand-link"
+    >
+      <Image
+        src={logo}
+        alt={brand.goldLogo.alt}
+        width={184}
+        densities={[1, 2]}
+        format="webp"
+        quality={82}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </a>
+    <nav class="desktop-nav" aria-label={site.navLabel}>
+      {navigation.map(({ href, label }) => (
+        <a href={base + href}>{label}</a>
+      ))}
+    </nav>
+    <Button href={`${base}#contact`} variant="outline" class="header-cta">
+      {site.buildCta}
+    </Button>
+    <details class="mobile-menu">
+      <summary>
+        {site.menuLabel}
+        <span aria-hidden="true">+</span>
+      </summary>
+      <nav aria-label={site.navLabel}>
+        {navigation.map(({ href, label }) => (
+          <a href={base + href}>{label}</a>
+        ))}
+      </nav>
+    </details>
+  </Container>
+</header>

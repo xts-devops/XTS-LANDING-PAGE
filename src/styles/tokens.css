@@ -9,6 +9,16 @@
   --color-gold: #e9a944;
   --color-gold-hi: #f7c873;
   --color-gold-lo: #b97a24;
+  --color-error: #ff8a7a;
   --font-display: 'Michroma', sans-serif;
   --font-sans: 'Manrope Variable', sans-serif;
+}
+
+:root {
+  --dur-1: 160ms;
+  --dur-2: 320ms;
+  --dur-3: 640ms;
+  --dur-4: 1100ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
 }

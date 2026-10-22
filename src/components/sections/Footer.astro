@@ -1,0 +1,56 @@
+---
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import { Image } from 'astro:assets';
+import logoWhite from '../../assets/brand/logo-white.png';
+import { brand } from '../../content/brand';
+import { navigation, site, contact } from '../../content/site';
+const onHome = Astro.url.pathname === '/';
+const base = onHome ? '' : '/';
+---
+
+<footer class="site-footer">
+  <Container>
+    <div class="footer-top">
+      <div>
+        <a
+          href={onHome ? '#top' : '/'}
+          class="brand-link"
+          aria-label={site.homeLabel}
+        >
+          <Image
+            src={logoWhite}
+            alt={brand.whiteLogo.alt}
+            width={184}
+            densities={[1, 2]}
+            format="webp"
+            quality={82}
+          />
+        </a>
+        <p class="footer-tagline">{site.footer.summary}</p>
+      </div>
+      <nav aria-label={site.footerNavLabel}>
+        {navigation.map(({ href, label }) => (
+          <a href={base + href}>{label}</a>
+        ))}
+      </nav>
+      <div class="footer-contact">
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        © {new Date().getFullYear()} {site.footer.copyright}
+      </p>
+      <nav class="footer-legal" aria-label={site.footer.legalLabel}>
+        <a href="/privacy">{site.footer.privacy}</a>
+        <a href="/terms">{site.footer.terms}</a>
+      </nav>
+      <a href={onHome ? '#top' : '#main-content'}>
+        {site.footer.backTop}
+        <Icon name="arrow-up" />
+      </a>
+    </div>
+  </Container>
+</footer>

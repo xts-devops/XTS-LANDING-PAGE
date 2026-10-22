@@ -8,7 +8,9 @@ Claude and Codex together. Marketing site only (no app/portal planned), English 
 text edited in code (no CMS).
 
 ## Status (2026-10-16)
-**Plan v1.2 done (stack = Astro), no code yet.** Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Next: M0 — scaffold (T01). See `TASKS.md`.
+**MVP built (D20/D21): PR from `claude/mvp-ui` awaits user review** (supersedes #2–#5). Repo: https://github.com/BFC-XZEN/xts-landing-page (private). Open: Web3Forms key (U1), vector logo (T05), Vercel (T33). D15 lanes resume after the MVP merges; see docs/DEV-FLOW.md.
+
+Visuals are coded schematics (`src/components/art/`); add a photo to any pillar/showcase/industry via its optional `image` in `src/content/*` to replace its schematic. Brand favicons/OG: `node tools/make-brand-assets.mjs`.
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
@@ -32,10 +34,13 @@ Astro 7 (static, TS strict) · Tailwind CSS v4 · vanilla-TS islands (no React) 
 
 ## Build / run / verify (once scaffolded)
 ```
-npm install
-npm run dev            # http://localhost:4321
+npm ci
+npm run serve          # production build + preview → http://localhost:4380 (also on your LAN, e.g. phone)
+npm run dev            # live-reload dev server → http://localhost:4381
 npm run verify         # astro check + eslint + prettier --check + astro build  (the gate both agents use)
-npm run test:e2e       # Playwright smoke
+npm run test:e2e       # Playwright: smoke, axe a11y, interactions, motion
+npm run shots          # review screenshots → docs/review/<branch>/ (git-ignored)
+npm run test:lighthouse  # after a build with PUBLIC_ALLOW_INDEXING=true
 ```
 
 ## Secrets

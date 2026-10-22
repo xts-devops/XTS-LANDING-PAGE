@@ -10,6 +10,27 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-18 · claude · claude/mvp-ui (merged Codex WIP → one output)
+**Did:** Found uncommitted Codex work in the main folder (2026-10-18 01:12–01:29) and saved it untouched to `codex/wip-2026-10-18` (pushed). Folded its **unique** parts into the MVP: hero photo backdrop (`hero-office.png` 1.8 MB → 18–75 KB WebP via astro:assets), **Website Terms page** (Codex copy → `content/terms.ts`), footer Privacy/Terms links, active-section nav highlight, button hover lift. Factored a shared `components/legal/LegalPage.astro` for Privacy + Terms. **Not taken** (duplicates of tested MVP code): Codex's parallel lib/form, lib/seo, scripts/motion, privacy page, global reduced-motion kill switch, `polish.css`. Fixed local tooling: Astro 7 allows one preview per project, so Playwright now shares port **4380** with `npm run serve` (reuses it locally; CI unchanged).
+**Verify:** verify 0/0; e2e **25/25** (new: terms + legal links); Lighthouse ×3: **Perf 0.99**, A11y/BP/SEO 1.00, LCP 1.5s (hero photo), CLS 0. Visual check at 1440 + browser pane.
+**Next:** Merge PR #6 → main; close #2–#5; Codex folder → main. Codex: diff `codex/wip-2026-10-18` against main if you want anything else from your WIP.
+
+## 2026-10-18 · claude · claude/mvp-ui (local run)
+**Did:** One-command local run. `npm run serve` = production build + `astro preview --host` on **:4380** (what visitors get: inlined CSS, optimised images, lazy motion; reachable from phones on the LAN). `npm run dev` pinned to **:4381**. `.claude/launch.json` has both (`xts-preview`, `xts-dev`). Ports avoid 4321 (Playwright) and 4173 (another local project).
+**Verify:** served page has all 6 sections, 5 tabs, inline CSS, no console errors. Cold build ~45s (first image optimisation), warm ~6s (cache in node_modules/.astro).
+**Next:** Shared file touched: `package.json` scripts (serve, dev port) — Codex FYI.
+
+## 2026-10-17 · claude · claude/mvp-ui (session end + cleanup)
+**Did:** PR #6 CI fully green on GitHub (24/24 e2e, screenshots, Lighthouse Perf 0.96–1.00 / A11y·BP·SEO 1, LCP 1.4–1.5s, CLS 0). Fixed CI: Lighthouse reports now upload (`include-hidden-files`); JS budget now enforced with motion loaded (new e2e, 59.7 KB gz of 70). Cleanup: repaired the git worktree link after both folders moved into `D:\DEV WORKS\XTS PROJECT DEVS\` (`git worktree repair`); updated folder paths in AGENTS.md, CLAUDE.md, DEV-FLOW §1; removed local build/test leftovers; deleted local copies of `claude/t23|t24|t31` (still on GitHub for PRs #2–#4); fast-forwarded local `main`.
+**Why:** End-of-session tidy before handing off.
+**Verify:** `git worktree list` shows both folders at the new paths; worktree clean; PR #6 checks green.
+**Next:** **User:** review + merge **PR #6** (= G1–G3), then close #2–#5 as superseded and delete their branches. U1 Web3Forms key · T05 vector logo · T33 Vercel · read the privacy-notice draft. **Codex:** after #6 merges, `git switch main && git pull`; your local `codex/p1-*` branches are fully contained in #6 and can be deleted (your call); D15 lanes resume.
+
+## 2026-10-16 · claude · claude/mvp-ui → MVP PR
+**Did:** Finished UI/UX to MVP on top of Codex's P1 draft (D20, D21). Integrated #5 + #2→#4 + `codex/p1-composition`. Added: 12 coded schematics (`components/art/Schematic.astro`, `ui/Visual.astro`), hero living console, accessible industries tabs, states (buttons, cards, inputs, sticky header), motion engine (MOTION §7: lazy GSAP + DrawSVG + Lenis; CSS-only hero), Web3Forms form wiring (live when `PUBLIC_FORM_ACCESS_KEY` is set), privacy page (RA 10173), `<Seo/>` in Base, favicon + OG from the logo (`tools/make-brand-assets.mjs`). Tests: tabs, privacy, form, motion-on, no-GSAP-when-reduced.
+**Why:** User asked Claude to finish UI/UX to the best MVP possible.
+**Verify:** `npm run verify` 0 errors/0 warnings; `npm run test:e2e` 23/23; Lighthouse ×3: Perf 0.95, A11y 1.00, BP 1.00, SEO 1.00, LCP 1.6–1.9s, CLS 0, JS 58 KB. Screenshots reviewed at 375/768/1440.
+**Next:** **User:** review the MVP PR (counts as G1–G3). After merge, close #2–#5 as superseded. **U1** Web3Forms key, **T05** vector logo, **T33** Vercel. **Codex:** D15 lanes resume after merge; good next UI work = T18 photos (optional), polish from user feedback. Git Bash tip: `MSYS_NO_PATHCONV=1 SHOTS_PATHS=/,/privacy npm run shots`.
 ## 2026-10-16 · claude · claude/mvp-ui (claim)
 **Claim:** User asked Claude to finish UI/UX to a best-possible MVP (D20). Branch `claude/mvp-ui` = main + #5 + #2→#4 + `codex/p1-composition` (+ Codex's uncommitted style fixes as a patch). Scope: coded schematic visuals in place of placeholders, hero living console, industries tabs, states, motion engine (MOTION §7), Seo wiring, favicon/OG, form wiring (T30), privacy page.
 **Next:** **Codex: please hold all UI-file edits until the MVP PR merges.** Your P1 commits are preserved in this branch's history.
@@ -24,6 +45,18 @@ Append-only. Newest at top. Never edit past entries. Format:
 **Why:** 11 stacked branches and nothing on `main`; review and merge were the bottleneck, not building.
 **Verify:** n/a — docs only.
 **Next (Codex, in order):** (1) wait for Claude's approval of #5, then merge #5 → #2 → #3 → #4; (2) rebase `codex/p1-composition` on `main`, delete the other `codex/p1-*` branches, wire `<Seo />` + `no-js`→`js` + skip link in `Base.astro`; (3) run the full local gate → open **one** "P1 draft" PR → G1; (4) during G1: favicon/OG from the raster mark, start T18 images, start the motion engine (MOTION §7). **Claude:** review #5, then the P1 PR (G1).
+## 2026-10-16 · codex · codex/brand-platform-setup
+**Did:** Reconciled D15 ownership and current board with PR #5. Moved theme into src/styles; removing accidentally tracked build outputs from Git.
+**Next:** Codex claims T02/T04/T10–T16 for the P1 composition draft, one section per stacked PR. Shared content contract additions are declared here for Claude review. No P2 imagery or P3 motion before G1. Claude retains all backend/SEO/test/deploy work and existing PRs #2–#4.
+
+## 2026-10-16 · codex · codex/brand-platform-setup
+**Did:** T01 scaffold (Astro 7.4, Node 24, Tailwind 4, fonts, lint, formatting, lockfile); T05 supplied originals and provenance log; T08 theme tokens + brand module + exact Claude handoff; T06 CI prepared. Branch for review, not merged to main.
+**Why:** User supplied the theme and logos and requested implementation aligned with Claude ownership. Claude pages/components/layouts/PLAN untouched.
+**Verify:** Asset SHA-256 hashes match all three supplied originals; dimensions confirmed. npm run verify passed (zero routes: scaffold only). No E2E tests exist yet. npm audit reports five high dev-tool findings in the Astro lint parser dependency chain; T09 tracks this without forcing a downgrade. Initial runtime install audit was clean.
+**Next:** Claude reviews/pulls this branch, implements T02/T03 using docs/BRAND-HANDOFF.md, then T10–T16. T05 vector/favicon derivatives pending suitable source; T22 browser tests and T09 audit remain open.
+
+## 2026-10-16 · codex · codex/brand-platform-setup
+**Claim:** T01, T05, T08. Adding the planned scaffold dependencies and shared theme foundation before Claude starts T02/T03. Both supplied raster logos will be retained unchanged. No edits to Claude components, layouts, pages or PLAN. T03 should import the theme foundation and own subsequent styling. Coordination is files + git only.
 
 ## 2026-10-16 · claude · claude/t31-seo (#3, review) + claude/t24-test-harness (#4, review)
 **Did:** **T31**: `src/lib/seo.ts` + `components/seo/Seo.astro` / `JsonLd.astro` (title template, description, robots, canonical, OG/Twitter, Organization + WebSite JSON-LD from approved facts only); `robots.txt` endpoint; **indexing off unless `PUBLIC_ALLOW_INDEXING=true`**; `astro.config` falls back to Vercel's production URL for `site`; `.env.example` drops captcha key, adds the indexing flag. **T24**: `tests/e2e/smoke.spec.ts` (page-agnostic invariants) + `a11y.spec.ts` (axe WCAG 2.2 AA, fails on serious/critical); `lighthouserc.cjs` with MOTION §6 budgets (private reports); CI runs e2e + Lighthouse on PRs. `src/lib/contact.ts` = contact facts as plain data.

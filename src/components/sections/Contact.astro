@@ -1,0 +1,182 @@
+---
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+import { contact, site } from '../../content/site';
+import { pillars } from '../../content/pillars';
+import '../../styles/contact.css';
+const copy = site.contactSection;
+// The form goes live only when a Web3Forms access key is configured (D18). Until then it stays
+// disabled and the note points people to email/phone.
+const accessKey = import.meta.env.PUBLIC_FORM_ACCESS_KEY || '';
+const enabled = Boolean(accessKey);
+const describedBy = (field: string) => `${field}-error`;
+---
+
+<section
+  id="contact"
+  class="section contact-section"
+  aria-labelledby="contact-heading"
+>
+  <Container class="contact-layout">
+    <div class="contact-intro">
+      <Eyebrow>{copy.eyebrow}</Eyebrow>
+      <h2 id="contact-heading" data-reveal="up">
+        {copy.heading}
+      </h2>
+      <p class="contact-summary">{copy.summary}</p>
+      <address class="contact-details">
+        <a href={`mailto:${contact.email}`}>
+          <Icon name="mail" />
+          <span>{contact.email}</span>
+        </a>
+        <a href={contact.phoneHref}>
+          <Icon name="phone" />
+          <span>{contact.phoneDisplay}</span>
+        </a>
+        <p>
+          <Icon name="map-pin" />
+          <span>{contact.location}</span>
+        </p>
+      </address>
+      <Button href={`mailto:${contact.email}`} variant="text">
+        {copy.emailCta}
+      </Button>
+    </div>
+    <div class="contact-form-card" data-reveal="up">
+      <h3>{copy.formHeading}</h3>
+      <p id="form-status" class="form-notice" role="status" aria-live="polite">
+        {enabled ? '' : copy.formNote}
+      </p>
+      <form
+        id="inquiry-form"
+        data-form="inquiry"
+        data-state="idle"
+        novalidate
+        aria-describedby="form-status"
+        data-access-key={accessKey || undefined}
+        data-sending={copy.sending}
+        data-success={copy.success}
+        data-invalid={copy.invalid}
+        data-too-fast={copy.tooFast}
+        data-failed={copy.failed}
+        data-subject={copy.emailSubject}
+        data-from-name={copy.fromName}
+      >
+        <fieldset disabled={!enabled}>
+          <legend class="sr-only">
+            {enabled ? copy.formHeading : copy.unavailable}
+          </legend>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">{copy.name}</label>
+              <input
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                maxlength="120"
+                placeholder={copy.namePlaceholder}
+                aria-describedby={describedBy('name')}
+              />
+              <p class="field-error" id="name-error" hidden>
+                {copy.errors.name}
+              </p>
+            </div>
+            <div class="form-field">
+              <label for="email">{copy.email}</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                required
+                placeholder={copy.emailPlaceholder}
+                aria-describedby={describedBy('email')}
+              />
+              <p class="field-error" id="email-error" hidden>
+                {copy.errors.email}
+              </p>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="company">
+              {copy.company} <span>({copy.optional})</span>
+            </label>
+            <input
+              id="company"
+              name="company"
+              autocomplete="organization"
+              maxlength="160"
+              placeholder={copy.companyPlaceholder}
+              aria-describedby={describedBy('company')}
+            />
+            <p class="field-error" id="company-error" hidden>
+              {copy.errors.company}
+            </p>
+          </div>
+          <div class="form-field">
+            <label for="need">{copy.need}</label>
+            <select
+              id="need"
+              name="need"
+              required
+              aria-describedby={describedBy('need')}
+            >
+              <option value="">{copy.choose}</option>
+              {pillars.map((pillar) => (
+                <option value={pillar.id}>{pillar.title}</option>
+              ))}
+              <option value="other">{copy.other}</option>
+            </select>
+            <p class="field-error" id="need-error" hidden>
+              {copy.errors.need}
+            </p>
+          </div>
+          <div class="form-field">
+            <label for="message">{copy.message}</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              maxlength="5000"
+              placeholder={copy.messagePlaceholder}
+              aria-describedby={describedBy('message')}
+            ></textarea>
+            <p class="field-error" id="message-error" hidden>
+              {copy.errors.message}
+            </p>
+          </div>
+          <div class="form-honeypot" aria-hidden="true">
+            <label>
+              {copy.honeypot}
+              <input name="botcheck" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="form-consent">
+            <input
+              id="consent"
+              type="checkbox"
+              name="consent"
+              required
+              aria-describedby={describedBy('consent')}
+            />
+            <label for="consent">
+              {copy.consent} <a href="/privacy">{copy.privacyLink}</a>.
+            </label>
+            <p class="field-error" id="consent-error" hidden>
+              {copy.errors.consent}
+            </p>
+          </div>
+          <button type="submit" class="button button-primary form-submit">
+            <span>{copy.submit}</span>
+            <Icon name="arrow-up-right" />
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </Container>
+</section>

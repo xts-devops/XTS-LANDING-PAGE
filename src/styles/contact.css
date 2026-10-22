@@ -1,0 +1,305 @@
+.contact-section {
+  background: radial-gradient(
+    ellipse at 0% 100%,
+    color-mix(in srgb, var(--color-gold-lo) 8%, transparent),
+    transparent 65%
+  );
+}
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.contact-intro {
+  padding-top: 1.5rem;
+}
+.contact-intro h2 {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  max-width: 31rem;
+}
+.contact-summary {
+  color: var(--color-muted);
+  max-width: 26rem;
+  margin-top: 1.5rem;
+}
+.contact-details {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 2.5rem 1rem;
+  font-style: normal;
+  font-size: 0.9rem;
+}
+.contact-details a,
+.contact-details p {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-height: 2.75rem;
+}
+.contact-details .icon {
+  color: var(--color-gold-hi);
+}
+.contact-details p {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+.contact-details span {
+  overflow-wrap: anywhere;
+}
+.contact-form-card {
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  background: var(--color-surface);
+}
+.contact-form-card h3 {
+  font-size: 1.6rem;
+}
+.form-notice {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-block: 0.75rem 1.5rem;
+}
+.contact-form-card fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-field {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.form-field label {
+  font-size: 0.75rem;
+}
+.form-field label span {
+  color: var(--color-muted);
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  min-width: 0;
+  border: var(--border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: 0.4rem;
+  padding: 0.75rem;
+  min-height: 2.75rem;
+  font-size: 0.8rem;
+  opacity: 1;
+}
+.form-field textarea {
+  resize: vertical;
+}
+.form-field :is(input, textarea)::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+.form-field :is(input, select, textarea) {
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.form-field :is(input, select, textarea):hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-gold) 35%, var(--color-line));
+}
+.form-field :is(input, select, textarea):focus-visible {
+  outline: none;
+  border-color: var(--color-gold-hi);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-gold-hi) 22%, transparent);
+}
+.form-field [aria-invalid='true'],
+.form-consent [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+.field-error {
+  font-size: 0.72rem;
+  color: var(--color-error);
+}
+.form-consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.7rem;
+  align-items: start;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+}
+.form-consent input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.1rem 0 0;
+  accent-color: var(--color-gold);
+}
+.form-consent a {
+  color: var(--color-gold-hi);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-consent .field-error {
+  grid-column: 2;
+}
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-submit {
+  width: 100%;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+.form-submit:disabled,
+fieldset:disabled .form-submit {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+fieldset:disabled :is(input, select, textarea, label) {
+  cursor: not-allowed;
+}
+[data-state='sending'] .form-submit {
+  cursor: progress;
+  opacity: 0.8;
+}
+[data-state='sending'] .form-submit .icon {
+  animation: form-spin 0.9s linear infinite;
+}
+@keyframes form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.contact-form-card:has([data-state='success']) .form-notice {
+  color: var(--color-gold-hi);
+}
+.contact-form-card:has([data-state='error']) .form-notice {
+  color: var(--color-error);
+}
+.site-footer {
+  border-top: var(--border);
+  padding-block: 2.5rem 1rem;
+}
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+.footer-top .brand-link {
+  width: 10rem;
+}
+.footer-tagline {
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin-top: 0.75rem;
+}
+.footer-top nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  max-width: 25rem;
+  font-size: 0.75rem;
+}
+.footer-top nav a,
+.footer-contact a {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: var(--border);
+  font-size: 0.65rem;
+  color: var(--color-muted);
+}
+.footer-bottom a {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 2.75rem;
+}
+.footer-bottom .icon {
+  width: 1rem;
+  height: 1rem;
+}
+@media (max-width: 950px) {
+  .contact-layout {
+    gap: 2rem;
+  }
+  .contact-form-card {
+    padding: 1.5rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .footer-top {
+    flex-wrap: wrap;
+  }
+  .footer-contact {
+    align-items: start;
+  }
+}
+@media (max-width: 700px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .contact-intro {
+    padding-top: 0;
+  }
+  .contact-details {
+    margin-top: 1.5rem;
+  }
+  .footer-top {
+    align-items: start;
+    gap: 1.5rem;
+  }
+  .footer-top nav {
+    width: 100%;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: start;
+    gap: 0;
+  }
+  .contact-form-card {
+    padding: 1.25rem;
+  }
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+}
+.footer-legal a {
+  color: var(--color-muted);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.footer-legal a:hover {
+  color: var(--color-gold-hi);
+}
