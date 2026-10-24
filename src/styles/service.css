@@ -1,192 +1,295 @@
-/* Service pages v2: hero · system showcase · exploded view · gallery. */
+/* Explicit split heroes avoid collisions between generic figure styles and layout. */
 @import './home.css';
-
-/* ---- Hero (photo morphs in from the home tile via view-transition-name) ---- */
 .svc-hero {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  min-height: min(40rem, 78svh);
-  display: flex;
-  align-items: flex-end;
-  padding-block: 8rem 3.5rem;
-}
-.svc-hero-photo {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  height: 100%;
-}
-.svc-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      90deg,
-      var(--color-bg) 5%,
-      color-mix(in srgb, var(--color-bg) 45%, transparent) 60%,
-      transparent
-    ),
-    linear-gradient(0deg, var(--color-bg) 2%, transparent 55%);
+  padding-block: 1.5rem 4rem;
+  background: radial-gradient(
+    ellipse at 85% 25%,
+    color-mix(in srgb, var(--color-gold-lo) 7%, transparent),
+    transparent 60%
+  );
 }
 .svc-back {
   display: inline-flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
   min-height: 2.75rem;
-  font-size: 0.8rem;
   color: var(--color-muted);
-  transition: color var(--dur-2) var(--ease-out);
+  font-size: 0.78rem;
+  margin-bottom: 1.5rem;
 }
 .svc-back:hover {
   color: var(--color-gold-hi);
 }
 .icon.flip {
-  transform: scaleX(-1);
+  transform: rotate(180deg);
+}
+.svc-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.svc-hero-copy {
+  min-width: 0;
 }
 .svc-hero h1 {
-  margin-top: 0.75rem;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2rem, 4.5vw, 3.6rem);
-  letter-spacing: -0.035em;
-  line-height: 1.15;
+  font: 400 clamp(1.8rem, 3.1vw, 2.9rem)/1.2 var(--font-display);
   text-transform: uppercase;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+.svc-hero .eyebrow {
+  font-size: 0.55rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
 }
 .svc-intro {
-  max-width: 38rem;
+  color: var(--color-muted);
+  max-width: 34rem;
   margin-top: 1.25rem;
-  font-size: 1.05rem;
-  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.8;
 }
 .svc-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.6rem;
+  margin-block: 1.5rem 2rem;
 }
 .svc-highlights li {
-  padding: 0.35rem 0.85rem;
-  border: 1px solid color-mix(in srgb, var(--color-gold) 40%, var(--color-line));
-  border-radius: 100vmax;
-  font-size: 0.78rem;
-  background: color-mix(in srgb, var(--color-bg) 50%, transparent);
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  font-size: 0.8rem;
+}
+.svc-highlights .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-gold-hi);
+}
+.svc-visual {
+  position: relative;
+  min-width: 0;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.svc-visual > .photo {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.svc-visual-caption {
+  padding: 1rem 1.25rem;
+  border-top: var(--border);
+}
+.svc-visual-caption > span {
+  font-size: 0.8rem;
+  color: var(--color-gold-hi);
+}
+.svc-visual-caption p {
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+}
+@media (max-width: 1050px) {
+  .svc-hero-grid {
+    gap: 2rem;
+  }
+  .svc-hero h1 {
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+  }
+}
+@media (max-width: 760px) {
+  .svc-hero {
+    padding-block: 1rem 2.5rem;
+  }
+  .svc-back {
+    margin-bottom: 1rem;
+  }
+  .svc-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .svc-hero h1 {
+    font-size: clamp(1.65rem, 6.4vw, 2.6rem);
+  }
+  .svc-intro {
+    font-size: 0.9rem;
+  }
+  .svc-visual > .photo {
+    aspect-ratio: 16 / 10;
+  }
+  .svc-highlights {
+    margin-bottom: 1.5rem;
+  }
+  .svc-visual-caption {
+    padding: 0.8rem 1rem;
+  }
 }
 
-/* ---- System showcase ---- */
+/* Product-specific showcases: selector, view picker, large stage and optional inspection. */
+.systems {
+  padding-block: 4rem;
+}
+.systems-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+}
 .systems-head h2 {
-  max-width: 30rem;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+.systems-head > p {
+  max-width: 24rem;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+.systems-head .eyebrow {
+  margin-bottom: 0.75rem;
 }
 .systems-tabs {
-  display: none; /* no-JS: every system is listed in turn */
+  display: none;
 }
 .js .systems-tabs {
   display: flex;
+  gap: 0.35rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 2.25rem 0 2.5rem;
+  padding: 0.5rem;
+  margin: 2rem 0 0;
+  border: var(--border);
+  border-radius: 0.8rem;
+  background: var(--color-surface);
+  position: sticky;
+  top: calc(var(--header-height) + 0.5rem);
+  z-index: 5;
 }
 .systems-tab {
-  position: relative;
+  border: 0;
+  border-radius: 0.5rem;
   min-height: 2.75rem;
-  padding: 0.55rem 1.15rem;
-  border: var(--border);
-  border-radius: 100vmax;
-  background: transparent;
+  padding: 0.6rem 1.25rem;
   color: var(--color-muted);
-  font-size: 0.85rem;
+  background: transparent;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition:
-    color var(--dur-2) var(--ease-out),
-    border-color var(--dur-2) var(--ease-out),
-    background-color var(--dur-2) var(--ease-out);
+    background-color var(--dur-2),
+    color var(--dur-2);
 }
 .systems-tab:hover {
   color: var(--color-text);
-  border-color: color-mix(in srgb, var(--color-gold) 40%, var(--color-line));
 }
 .systems-tab[aria-selected='true'] {
-  color: var(--color-bg);
   background: var(--color-gold-hi);
-  border-color: var(--color-gold-hi);
+  color: var(--color-bg);
 }
 .systems-panels {
   display: grid;
-  gap: 4rem;
-  margin-top: 2.5rem;
+  gap: 3rem;
+  margin-top: 1.5rem;
 }
-.js .systems-panels {
-  margin-top: 0;
-}
-/* JS lays tabs out before first paint (no layout shift); tabs.ts then manages [hidden]. */
 .js .system-panel:not(:first-child),
 .js .system-panel[hidden] {
   display: none;
 }
 .js .tabs-ready .system-panel:not([hidden]) {
-  display: grid;
+  display: block;
 }
 .system-panel {
-  display: grid;
-  grid-template-columns: minmax(16rem, 0.75fr) 1.6fr;
+  min-width: 0;
+}
+.system-info {
+  display: flex;
   gap: 3rem;
-  align-items: start;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 1.5rem;
+}
+.system-info > div {
+  max-width: 34rem;
 }
 .system-info h3 {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
 }
-.system-info > p:first-of-type {
-  margin-top: 0.75rem;
+.system-info p {
+  margin-top: 0.5rem;
   color: var(--color-muted);
+  font-size: 0.85rem;
 }
 .system-features {
   display: grid;
-  gap: 0.6rem;
-  margin-top: 1.5rem;
+  gap: 0.4rem;
+  flex-shrink: 0;
 }
 .system-features li {
   display: flex;
   gap: 0.6rem;
   align-items: center;
-  font-size: 0.92rem;
-}
-.system-features .icon {
-  color: var(--color-gold-hi);
-  width: 1.1rem;
-  height: 1.1rem;
-}
-.system-note {
-  margin-top: 1.75rem;
-  font-size: 0.72rem;
+  font-size: 0.73rem;
   color: var(--color-muted);
 }
-@media (prefers-reduced-motion: no-preference) {
-  .system-panel.is-entering .slides {
-    animation: sys-wipe var(--dur-3) var(--ease-inout) both;
-  }
-  .system-panel.is-entering .system-info {
-    animation: sys-copy var(--dur-3) var(--ease-out) both;
-  }
+.system-features .icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--color-gold-hi);
 }
-@keyframes sys-wipe {
-  from {
-    clip-path: inset(0 0 0 100%);
-    opacity: 0.4;
-  }
-}
-@keyframes sys-copy {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
-
-/* Slideshow: native scroll-snap (touch swipe for free); slides.ts adds buttons + counter. */
 .slides {
   min-width: 0;
+}
+.slide-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-bottom: 1rem;
+}
+.slide-picker button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.8rem;
+  border: var(--border);
+  border-radius: 0.4rem;
+  font-size: 0.68rem;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+.slide-picker span {
+  font-size: 0.55rem;
+  color: var(--color-gold-lo);
+}
+.slide-picker button[aria-pressed='true'] {
+  border-color: var(--color-gold-lo);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-gold) 6%, transparent);
+}
+.slides-stage {
+  padding: 1.5rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      color-mix(in srgb, var(--color-gold-lo) 8%, transparent),
+      transparent 70%
+    ),
+    var(--color-surface);
+}
+.systems[data-showcase='custom-software'] .slides-stage {
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      color-mix(in srgb, var(--color-text) 6%, transparent),
+      transparent 70%
+    ),
+    var(--color-surface);
+}
+.systems[data-showcase='automation'] .slides-stage {
+  background: var(--color-bg);
 }
 .slides-track {
   display: flex;
@@ -202,21 +305,64 @@
 }
 .slide {
   flex: 0 0 100%;
+  min-width: 0;
   margin: 0;
   scroll-snap-align: center;
 }
+.slide-display {
+  position: relative;
+  width: 100%;
+}
+.slide .screen {
+  max-width: 64rem;
+  margin-inline: auto;
+}
+.slide .screen-mobile {
+  width: min(100%, 15rem);
+}
 .slide figcaption {
-  margin-top: 0.85rem;
-  font-size: 0.8rem;
+  margin-top: 0.8rem;
   color: var(--color-muted);
+  font-size: 0.75rem;
   text-align: center;
+}
+.sample-zoom {
+  position: absolute;
+  right: 0.6rem;
+  top: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.7rem;
+  border: var(--border);
+  border-radius: 0.4rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.65rem;
+  cursor: pointer;
+  box-shadow: 0 0.3rem 1rem var(--color-bg);
+}
+.sample-zoom .icon {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.slides-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.system-note {
+  font-size: 0.65rem;
+  color: var(--color-muted);
+  max-width: 25rem;
 }
 .slides-controls {
   display: flex;
+  gap: 0.8rem;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
 }
 .slides-btn {
   display: grid;
@@ -228,33 +374,196 @@
   background: transparent;
   color: var(--color-text);
   cursor: pointer;
-  transition:
-    border-color var(--dur-2) var(--ease-out),
-    color var(--dur-2) var(--ease-out);
-}
-.slides-btn:hover:not(:disabled) {
-  border-color: var(--color-gold);
-  color: var(--color-gold-hi);
 }
 .slides-btn:disabled {
   opacity: 0.35;
   cursor: default;
 }
 .slides-btn .icon {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1rem;
+  height: 1rem;
 }
 .slides-count {
-  min-width: 3.5rem;
-  text-align: center;
-  font-size: 0.8rem;
+  min-width: 3rem;
+  font-size: 0.75rem;
   color: var(--color-muted);
+  text-align: center;
   font-variant-numeric: tabular-nums;
 }
-@media (max-width: 900px) {
-  .system-panel {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+.screen-dialog {
+  width: min(94vw, 90rem);
+  max-width: none;
+  height: 90svh;
+  max-height: none;
+  padding: 0;
+  border: var(--border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  overflow: hidden;
+}
+.screen-dialog::backdrop {
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+}
+.screen-dialog-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  height: 4.5rem;
+  padding: 1rem 1.25rem;
+  border-bottom: var(--border);
+}
+.screen-dialog-toolbar h2 {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+.screen-dialog-toolbar > div {
+  display: flex;
+  gap: 0.5rem;
+}
+.screen-dialog button {
+  border: var(--border);
+  border-radius: 0.4rem;
+  background: transparent;
+  color: var(--color-text);
+  padding: 0.5rem 0.7rem;
+  min-height: 2.75rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+.screen-dialog-canvas {
+  height: calc(100% - 4.5rem);
+  overflow: auto;
+  padding: 1.5rem;
+  overscroll-behavior: contain;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+}
+.screen-dialog img {
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  height: auto;
+}
+.screen-dialog.is-zoomed .screen-dialog-canvas {
+  display: block;
+}
+.screen-dialog.is-zoomed img {
+  max-width: none;
+  max-height: none;
+  width: var(--preview-width, 90rem);
+}
+@media (max-width: 760px) {
+  .systems {
+    padding-block: 2.75rem;
+  }
+  .systems-head {
+    display: block;
+  }
+  .systems-head > p {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+  .js .systems-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    top: var(--header-height);
+    margin-inline: calc(var(--gutter) * -1);
+    border-radius: 0;
+    border-inline: 0;
+    padding: 0.4rem var(--gutter);
+    scroll-padding-inline: var(--gutter);
+  }
+  .systems-tab {
+    flex-shrink: 0;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.75rem;
+  }
+  .system-info {
+    display: block;
+    padding-bottom: 1rem;
+  }
+  .system-info p {
+    font-size: 0.8rem;
+  }
+  .system-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-top: 1rem;
+  }
+  .system-features li {
+    font-size: 0.65rem;
+  }
+  .slide-picker {
+    gap: 0.35rem;
+  }
+  .slide-picker button {
+    font-size: 0.6rem;
+    padding: 0.4rem 0.6rem;
+  }
+  .slides-stage {
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+  }
+  .sample-zoom {
+    position: static;
+    margin: 0.75rem auto 0;
+    display: flex;
+    width: max-content;
+    box-shadow: none;
+  }
+  .slides-footer {
+    align-items: start;
+  }
+  .system-note {
+    max-width: 12rem;
+    font-size: 0.6rem;
+  }
+  .slides-controls {
+    gap: 0.3rem;
+  }
+  .slides-count {
+    min-width: 2rem;
+  }
+  .screen-dialog {
+    width: 100%;
+    height: 100svh;
+    border-radius: 0;
+  }
+  .screen-dialog-toolbar {
+    height: 4.5rem;
+    padding: 0.7rem;
+  }
+  .screen-dialog-toolbar h2 {
+    font-size: 0.75rem;
+    max-width: 12rem;
+  }
+  .screen-dialog button {
+    font-size: 0.6rem;
+  }
+  .screen-dialog-canvas {
+    padding: 0.5rem;
+  }
+  .slide .screen-mobile {
+    width: min(100%, 14rem);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .system-panel.is-entering .slides-stage {
+    animation: system-enter var(--dur-2) var(--ease-out) both;
+  }
+}
+@keyframes system-enter {
+  from {
+    opacity: 0.3;
+    transform: translateY(0.35rem);
   }
 }
 
@@ -308,7 +617,7 @@
   }
   .js .exploded-pair .photo {
     grid-area: 1 / 1;
-    will-change: opacity, transform, filter;
+    will-change: opacity;
   }
   .js .exploded-b {
     opacity: 0;
@@ -409,50 +718,6 @@
     grid-template-columns: 1fr;
   }
 }
-/* Keep device screens legible and tab changes close to the interaction. */
-@media (max-width: 700px) {
-  .svc-hero {
-    min-height: 0;
-    padding-block: 3.5rem 2.5rem;
-  }
-  .svc-hero h1 {
-    font-size: clamp(1.6rem, 6vw, 2.5rem);
-    overflow-wrap: anywhere;
-  }
-  .svc-intro {
-    font-size: 0.95rem;
-  }
-  .js .systems-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    margin-inline: calc(var(--gutter) * -1);
-    padding-inline: var(--gutter);
-    padding-bottom: 0.5rem;
-    scroll-padding-inline: var(--gutter);
-    scrollbar-width: thin;
-  }
-  .systems-tab {
-    flex-shrink: 0;
-  }
-  .systems-panels {
-    min-width: 0;
-  }
-  .system-panel {
-    min-width: 0;
-    gap: 1.5rem;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .system-panel.is-entering .slides {
-    animation: sys-screen var(--dur-3) var(--ease-out) both;
-  }
-  .js .exploded-pair .photo {
-    will-change: opacity;
-  }
-}
-@keyframes sys-screen {
-  from {
-    opacity: 0.3;
-    transform: translateY(0.5rem);
-  }
+html:has(.screen-dialog[open]) {
+  overflow: hidden;
 }

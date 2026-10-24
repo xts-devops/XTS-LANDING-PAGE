@@ -5,109 +5,62 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Book an appointment — Luntian Workspace</title>
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../featured.css" />
   </head>
-  <body>
-    <main class="mobile" style="--accent: #347e70">
-      <div class="statusbar">
-        <span>9:41</span><span>▮▮▮ &nbsp; ◉ &nbsp; ▰</span>
+  <body class="product-software">
+    <main class="ux-phone">
+      <div class="ux-phone-status">
+        <b>9:41</b><span>▮▮▮ &nbsp; ◉ &nbsp; ▰</span>
       </div>
-      <header class="mobile-head">
-        <p>Luntian Workspace</p>
-        <h1>Book an appointment</h1>
+      <header class="ux-phone-head">
+        <div>
+          <small>BOOK AN APPOINTMENT</small>
+          <h1>Choose your time</h1>
+        </div>
+        <span class="ux-avatar">MS</span>
       </header>
-      <div class="mobile-body">
-        <div class="panel">
-          <div class="pad">
-            <p>SELECT SERVICE</p>
-            <h2 style="margin: 12px 0">Project consultation</h2>
-            <p>30 minutes · Online meeting</p>
-            <div class="dashed"></div>
-            <h3>October 2026</h3>
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                margin: 18px 0;
-              "
-            >
-              <div
-                style="
-                  padding: 12px 9px;
-                  border-radius: 8px;
-                  background: #edf1f6;
-                  color: inherit;
-                "
-              >
-                Wed<br /><b style="font-size: 20px">21</b>
-              </div>
-              <div
-                style="
-                  padding: 12px 9px;
-                  border-radius: 8px;
-                  background: #edf1f6;
-                  color: inherit;
-                "
-              >
-                Thu<br /><b style="font-size: 20px">22</b>
-              </div>
-              <div
-                style="
-                  padding: 12px 9px;
-                  border-radius: 8px;
-                  background: var(--accent);
-                  color: white;
-                "
-              >
-                Fri<br /><b style="font-size: 20px">23</b>
-              </div>
-              <div
-                style="
-                  padding: 12px 9px;
-                  border-radius: 8px;
-                  background: #edf1f6;
-                  color: inherit;
-                "
-              >
-                Sat<br /><b style="font-size: 20px">24</b>
-              </div>
-              <div
-                style="
-                  padding: 12px 9px;
-                  border-radius: 8px;
-                  background: #edf1f6;
-                  color: inherit;
-                "
-              >
-                Sun<br /><b style="font-size: 20px">25</b>
-              </div>
-            </div>
-            <h3>Available times · Asia/Manila</h3>
-            <div class="grid equal" style="gap: 10px; margin: 16px 0">
-              <button class="btn">09:00 AM</button
-              ><button class="btn primary">10:00 AM</button
-              ><button class="btn">11:30 AM</button
-              ><button class="btn">02:00 PM</button>
-            </div>
-            <div class="dashed"></div>
-            <div class="detail">
-              <span>Your specialist</span><b>Paolo Reyes</b>
-            </div>
-            <div class="detail"><span>Location</span><b>Video call</b></div>
-            <div class="detail"><span>Duration</span><b>30 minutes</b></div>
-            <button class="btn primary" style="width: 100%">
-              Confirm appointment
-            </button>
-            <p class="center" style="margin-top: 13px; font-size: 10px">
-              Confirmation will appear in your workspace.
-            </p>
+      <div class="ux-phone-content">
+        <div class="ux-phone-service">
+          <span>◷</span>
+          <div>
+            <b>Project consultation</b>
+            <p>30 min · Online · With Paolo Reyes</p>
           </div>
         </div>
+        <div class="ux-phone-section">
+          <h3>October 2026</h3>
+          <span>‹ &nbsp; ›</span>
+        </div>
+        <div class="ux-phone-dates">
+          <div class=""><small>WED</small><b>21</b><i></i></div>
+          <div class=""><small>THU</small><b>22</b><i></i></div>
+          <div class="selected"><small>FRI</small><b>23</b><i></i></div>
+          <div class=""><small>SAT</small><b>24</b><i></i></div>
+          <div class=""><small>SUN</small><b>25</b><i></i></div>
+        </div>
+        <div class="ux-phone-section">
+          <h3>Available times</h3>
+          <span>GMT+8</span>
+        </div>
+        <div class="ux-phone-times">
+          <button class="">9:00 AM</button
+          ><button class="selected">10:00 AM</button
+          ><button class="">11:30 AM</button><button class="">2:00 PM</button>
+        </div>
+        <div class="ux-phone-summary">
+          <h3>Your appointment</h3>
+          <div><span>When</span><b>Fri, Oct 23 · 10:00 AM</b></div>
+          <div><span>Where</span><b>Online meeting</b></div>
+          <div><span>Duration</span><b>30 minutes</b></div>
+        </div>
+        <button class="ux-phone-primary">Continue to your details →</button>
+        <p class="ux-phone-muted">You can reschedule from your bookings.</p>
       </div>
-      <div class="sample">Fictional sample system · Demonstration data</div>
-      <nav class="bottom-nav">
-        <b>⌂ Home</b><span>▤ Tasks</span><span>▣ Schedule</span
-        ><span>◉ Account</span>
+      <nav class="ux-phone-nav">
+        <span class="">⌂ Home</span><span class="active">▣ Bookings</span
+        ><span class="">◌ Updates</span><span class="">◉ Account</span>
       </nav>
+      <div class="ux-phone-sample">Fictional product · Sample data</div>
     </main>
   </body>
 </html>

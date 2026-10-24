@@ -21,15 +21,12 @@ import '../../styles/home.css';
             alt={service.photoAlt}
             ratio="4 / 3"
             sizes="(min-width: 901px) 24vw, (min-width: 561px) 45vw, 100vw"
-            transition={`svc-${service.slug}`}
           />
           <div class="service-body">
             <span class="service-index" aria-hidden="true">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <h3 style={`view-transition-name:svc-title-${service.slug}`}>
-              {service.title}
-            </h3>
+            <h3>{service.title}</h3>
             <p>{service.tagline}</p>
             <span class="service-cta">
               {site.services.cta} {service.title}

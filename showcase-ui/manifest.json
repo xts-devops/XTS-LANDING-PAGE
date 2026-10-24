@@ -177,56 +177,56 @@
   {
     "key": "software/portal",
     "title": "Welcome back, Maria",
-    "product": "Luntian Workspace",
+    "product": "Kubo ClientSpace",
     "width": 1440,
     "height": 900
   },
   {
     "key": "software/booking",
     "title": "Bookings",
-    "product": "Luntian Workspace",
+    "product": "Sulyap Appointments",
     "width": 1440,
     "height": 900
   },
   {
     "key": "software/mobile-1",
     "title": "Good morning, Maria",
-    "product": "Luntian Workspace",
+    "product": "Sulyap Mobile",
     "width": 390,
     "height": 844
   },
   {
     "key": "software/mobile-2",
     "title": "Book an appointment",
-    "product": "Luntian Workspace",
+    "product": "Sulyap Mobile",
     "width": 390,
     "height": 844
   },
   {
     "key": "software/mobile-3",
     "title": "Request #0142",
-    "product": "Luntian Workspace",
+    "product": "Sulyap Mobile",
     "width": 390,
     "height": 844
   },
   {
     "key": "automation/flow-builder",
     "title": "Order fulfilment sync",
-    "product": "Habi Connect",
+    "product": "Habi Automation",
     "width": 1440,
     "height": 900
   },
   {
     "key": "automation/sync-log",
     "title": "Sync log",
-    "product": "Habi Connect",
+    "product": "Habi Automation",
     "width": 1440,
     "height": 900
   },
   {
     "key": "automation/ops-dashboard",
     "title": "Operations monitor",
-    "product": "Habi Connect",
+    "product": "Habi Automation",
     "width": 1440,
     "height": 900
   }

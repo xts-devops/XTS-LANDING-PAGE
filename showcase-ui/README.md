@@ -11,3 +11,4 @@
 - Payroll amounts are illustrative fixtures and do not implement statutory contribution calculations. Receipt preview is explicitly marked as a demonstration receipt.
 
 The contact sheet uses the captured PNGs and links to each full HTML screen.
+The featured portal, booking/mobile journey and automation screens now use distinct product layouts from `featured-screens.mjs` and `featured.css`. The other business modules retain their own product themes. All 33 exact screen keys and native capture sizes are unchanged. The website's full-screen inspector loads an original DPR-2 PNG only when opened; normal pages use responsive AVIF previews.

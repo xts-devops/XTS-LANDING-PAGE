@@ -1,0 +1,61 @@
+---
+import Container from '../ui/Container.astro';
+import Photo from '../media/Photo.astro';
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+import { site } from '../../content/site';
+import { presentation } from '../../content/presentation';
+import type { Service } from '../../content/types';
+interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+const visual =
+  presentation.services[service.slug as keyof typeof presentation.services];
+---
+
+<section
+  class="svc-hero"
+  aria-labelledby="svc-title"
+  data-service={service.slug}
+>
+  <Container>
+    <a href="/#services" class="svc-back">
+      <Icon name="arrow-right" class="flip" />
+      {site.servicePage.back}
+    </a>
+    <div class="svc-hero-grid">
+      <div class="svc-hero-copy">
+        <p class="eyebrow">
+          {visual.number} / {visual.category}
+        </p>
+        <h1 id="svc-title">{service.title}</h1>
+        <p class="svc-intro">{service.intro}</p>
+        <ul class="svc-highlights" role="list">
+          {service.highlights.map((h) => (
+            <li>
+              <Icon name="shield-check" />
+              {h}
+            </li>
+          ))}
+        </ul>
+        <Button href={service.systems ? '#systems' : '#engineering'}>
+          {presentation.serviceCta}
+        </Button>
+      </div>
+      <div class="svc-visual">
+        <Photo
+          photo={service.photo}
+          alt={service.photoAlt}
+          ratio="5 / 4"
+          sizes="(min-width:900px) 45vw, 100vw"
+          eager
+        />
+        <div class="svc-visual-caption">
+          <span>{visual.visual}</span>
+          <p>{visual.note}</p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

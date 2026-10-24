@@ -25,9 +25,14 @@ const videoUrl = Object.values(videos)[0];
 const copy = site.servicePage;
 ---
 
-<section class="exploded" aria-labelledby="exploded-heading" data-exploded>
+<section
+  id="engineering"
+  class="exploded"
+  aria-labelledby="exploded-heading"
+  data-exploded
+>
   <Container class="exploded-head">
-    <div data-reveal="up">
+    <div data-reveal="up" data-scroll-start>
       <Eyebrow>Robotics &amp; R&amp;D</Eyebrow>
       <h2 id="exploded-heading">{copy.explodedHeading}</h2>
       <p>{copy.explodedSummary}</p>

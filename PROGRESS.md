@@ -2,11 +2,20 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · codex · codex/v2-ui-refinement (service experience review)
+**Did:** Replaced the service hero's fragile absolute/photo cascade with a bounded responsive grid across all four services. Rebuilt home as a product-led composition with a sharp business preview, workflow and robotics; removed the blurred backdrop. Anchors align visible section content below the header. Added sticky product tabs, named view selection and a native full-screen inspector with original DPR-2 images, actual-size zoom, Escape, focus restoration and scroll resumption. Distinct portal, booking/mobile and automation products replace repetitive examples; all business products have their own themes. Recaptured all 33 exact PNG keys and strengthened mobile overlap checks.
+**Motion/performance:** Interaction-only engine loading, no idle timer, no delayed hero-image fade, correctly sized high-priority WebP hero thumbnail, responsive AVIF service previews and lazy original PNG inspection. Registered robotic-arm crossfade preserved.
+**Verify:** npm run capture:ui passes 33/33; npm run verify passes (0 errors/0 warnings). 53 e2e tests + 15 responsive screenshot cases pass at 375/768/1440; final home thumbnails additionally recaptured at all three sizes. Three final mobile Lighthouse runs: Performance 100/100, Accessibility 100/100, LCP 1.58s, CLS <0.001, TBT 0ms. Logs/review captures: docs/review/v2-service-refresh and docs/review/codex-v2-ui-refinement (gitignored).
+**Next:** Updated PR #12 for Claude review under D24. Production preview http://127.0.0.1:4380/ serves the final build; no public deployment or company facts changed.
+
 ## 2026-10-25 · claude · claude/parallel-lanes
 **Did:** D24 (supersedes D23): Codex and Claude work at the same time again. Codex keeps `XTS LadingPage`; Claude's worktree moved out of sight to `D:/DEV WORKS/.worktrees/xts-landing-claude` (outside the project folder so Codex's lint/type-check/format don't scan it). Tasks split by lane and by files; rules in AGENTS/CLAUDE/DEV-FLOW §1.
 **Why:** User: one visible folder, but both agents should work simultaneously on separate tasks.
 **Verify:** `git worktree list` → main folder + hidden worktree. Docs only.
 **Next:** Codex is mid-task on `codex/v2-ui-refinement` — Claude stays off those files.
+## 2026-10-25 · codex · codex/v2-ui-refinement (service experience follow-up claim)
+**Claim:** User feedback expands PR #12: replace the broken service hero structure, make the homepage product-led, align section navigation to visible content, distinguish sample apps, and improve showcase inspection. Files: src/pages/services/[slug].astro; components/service/*, sections/Hero, ui/Section, media/Screen; styles hero/service/media; content/site/services/presentation; scripts/ui/{anchors,slides,index,tabs} and motion/index; showcase-ui sources and captured assets. New targeted tests only; no shared config/type/package edits. Claude continues to stay off these UI files under D24.
+
 ## 2026-10-25 · codex · codex/v2-ui-refinement (review)
 **Did:** Audited home and service pages at 375/768/1440. Replaced the tiny boxed header/footer logo with a transparent raster mark plus a legible responsive wordmark, preserving supplied originals. Regenerated the hero as an engineering studio with deliberate copy space; simplified headline wrapping and proof hierarchy. Balanced all four service cards. Added gallery controls, mobile menu dismissal, scrollable mobile system tabs and accurate slideshow indexing.
 **Motion:** Calmer entrances, desktop-only hero parallax/pinning, breakpoint cleanup, live reduced-motion cleanup and no GSAP/Lenis download for initial reduced motion. Arm frames now crossfade at their registered positions without scale drift or blur. Anchor handling preserves modified clicks and transfers focus on completion.

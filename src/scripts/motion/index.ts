@@ -8,12 +8,10 @@ const events = [
   'wheel',
 ] as const;
 let started = false;
-let fallback: ReturnType<typeof setTimeout> | undefined;
 const start = () => {
   if (started || preference.matches) return;
   started = true;
   events.forEach((ev) => removeEventListener(ev, start));
-  clearTimeout(fallback);
   void boot().catch(() => {});
 };
 function schedule() {
@@ -21,7 +19,6 @@ function schedule() {
   events.forEach((ev) =>
     addEventListener(ev, start, { passive: true, once: true }),
   );
-  fallback = setTimeout(start, 3500);
 }
 preference.addEventListener('change', schedule);
 schedule();
@@ -93,21 +90,6 @@ async function boot() {
     wide.add(
       '(min-width:1024px) and (min-height:650px) and (hover:hover) and (pointer:fine)',
       () => {
-        const backdrop = document.querySelector<HTMLElement>(
-          '.hero-backdrop, .svc-hero-photo',
-        );
-        if (backdrop)
-          gsap.to(backdrop, {
-            yPercent: 4,
-            scale: 1.08,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: backdrop.parentElement!,
-              start: 'top top',
-              end: 'bottom top',
-              scrub: 0.6,
-            },
-          });
         return initWorkGallery(gsap, ScrollTrigger, smooth?.lenis);
       },
     );
@@ -247,63 +229,24 @@ function initSmoothScroll(
   const tick = (t: number) => lenis.raf(t * 1000);
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(tick);
-  const focusTarget = (target: HTMLElement) => {
-    if (!target.hasAttribute('tabindex')) {
-      target.setAttribute('tabindex', '-1');
-      target.addEventListener(
-        'blur',
-        () => target.removeAttribute('tabindex'),
-        { once: true },
-      );
-    }
-    target.focus({ preventScroll: true });
+  const onAnchor = (event: Event) => {
+    event.preventDefault();
+    const { top, finish } = (
+      event as CustomEvent<import('../ui/anchors').AnchorRequest>
+    ).detail;
+    lenis.scrollTo(top, { onComplete: finish });
   };
-  const onClick = (e: MouseEvent) => {
-    if (
-      e.defaultPrevented ||
-      e.button !== 0 ||
-      e.metaKey ||
-      e.ctrlKey ||
-      e.shiftKey ||
-      e.altKey
-    )
-      return;
-    const link = (e.target as Element).closest<HTMLAnchorElement>(
-      'a[href*="#"]',
-    );
-    if (
-      !link ||
-      link.origin !== location.origin ||
-      link.pathname !== location.pathname ||
-      link.search !== location.search ||
-      link.target ||
-      link.hasAttribute('download') ||
-      link.hash.length < 2 ||
-      link.closest('[role="tablist"]')
-    )
-      return;
-    let id: string;
-    try {
-      id = decodeURIComponent(link.hash.slice(1));
-    } catch {
-      return;
-    }
-    const target = document.getElementById(id);
-    if (!target) return;
-    e.preventDefault();
-    const offset =
-      -(
-        document.querySelector('.site-header')?.getBoundingClientRect()
-          .height ?? 0
-      ) - 16;
-    history.pushState(null, '', link.hash);
-    lenis.scrollTo(target, { offset, onComplete: () => focusTarget(target) });
+  const onPreview = (event: Event) => {
+    if ((event as CustomEvent<{ open: boolean }>).detail.open) lenis.stop();
+    else lenis.start();
   };
-  document.addEventListener('click', onClick);
+  document.addEventListener('site:preview', onPreview);
+  document.addEventListener('site:anchor', onAnchor);
   return {
     lenis,
     destroy: () => {
-      document.removeEventListener('click', onClick);
+      document.removeEventListener('site:anchor', onAnchor);
+      document.removeEventListener('site:preview', onPreview);
       gsap.ticker.remove(tick);
       lenis.destroy();
     },

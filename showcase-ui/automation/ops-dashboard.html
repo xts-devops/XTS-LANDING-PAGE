@@ -5,281 +5,215 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Operations monitor — Habi Connect</title>
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../featured.css" />
   </head>
-  <body>
-    <main class="app" style="--accent: #5b69db">
-      <aside class="sidebar">
-        <div class="brand"><span class="mark">H</span>Habi</div>
-        <div class="nav-label">WORKSPACE</div>
-        <a class="nav" href="flow-builder.html"
-          ><span style="margin-right: 12px">▦</span>Order fulfilment sync</a
-        ><a class="nav" href="sync-log.html"
-          ><span style="margin-right: 12px">▤</span>Sync log</a
-        ><a class="nav active" href="ops-dashboard.html"
-          ><span style="margin-right: 12px">◈</span>Operations monitor</a
-        >
-        <div class="nav-label">MANAGE</div>
-        <div class="nav">⚙ &nbsp; Settings</div>
-        <div class="nav">◉ &nbsp; Help centre</div>
-        <div class="sidefoot">
-          Habi Connect<br />Philippines workspace<br />◉ All systems operational
+  <body class="product-automation">
+    <main class="ux-auto">
+      <aside class="ux-auto-side">
+        <div class="ux-auto-brand">
+          <span>⌘</span>habi<span class="ux-auto-dot">●</span>
+        </div>
+        <div class="ux-auto-workspace">Amihan workspace <span>⌄</span></div>
+        <small>BUILD & OPERATE</small>
+        <div class="ux-auto-nav">⌘<span>Workflows</span></div>
+        <div class="ux-auto-nav">≡<span>Execution log</span></div>
+        <div class="ux-auto-nav active">▥<span>Observability</span></div>
+        <small>CONNECTIONS</small>
+        <div class="ux-auto-connection"><i></i>Northwind ERP<span>↗</span></div>
+        <div class="ux-auto-connection"><i></i>Bodega WMS<span>↗</span></div>
+        <div class="ux-auto-connection">
+          <i></i>Storefront API<span>↗</span>
+        </div>
+        <div class="ux-auto-side-bottom">
+          <span class="ux-badge green">Production</span>
+          <p>All connectors operational</p>
+          <div>
+            <span class="ux-avatar">CM</span
+            ><span>Carlo Mendoza<br /><small>Workspace owner</small></span>
+          </div>
         </div>
       </aside>
-      <div class="shell">
-        <header class="topbar">
-          <span>Amihan workspace &nbsp;⌄</span>
-          <div class="topright">
-            <span class="search">⌕ &nbsp; Search anything…</span
-            ><span>◷ &nbsp; Notifications</span>
-            <div class="avatar">MS</div>
+      <div class="ux-auto-shell">
+        <header class="ux-auto-top">
+          <span>Amihan / Operations monitor</span>
+          <div>
+            <span class="ux-live-dot"></span>Live environment <b>⌘ K</b
+            ><span class="ux-avatar">CM</span>
           </div>
         </header>
-        <div class="content">
-          <div class="crumb">
-            Habi Connect &nbsp; / &nbsp; Operations monitor
+        <div class="ux-auto-heading">
+          <div>
+            <p>OBSERVABILITY / PRODUCTION</p>
+            <h1>Operations monitor</h1>
           </div>
-          <div class="heading">
-            <div>
-              <h1>Operations monitor</h1>
-              <p>All integrations healthy · Updated 10:42:18</p>
-            </div>
-            <div class="actions">
-              <button class="btn">Export</button
-              ><button class="btn primary">October 2026 ⌄</button>
-            </div>
+          <div>
+            <button class="ux-button">History</button
+            ><button class="ux-button is-primary">Export report</button>
           </div>
-          <div class="stats">
-            <div class="kpi">
-              <p>Events processed</p>
-              <strong>12,846</strong
-              ><small>↑ 8.4% <span>vs. previous period</span></small>
-            </div>
-            <div class="kpi">
-              <p>Success rate</p>
-              <strong>99.97%</strong
-              ><small>↑ 8.4% <span>vs. previous period</span></small>
-            </div>
-            <div class="kpi">
-              <p>Queue depth</p>
-              <strong>24</strong
-              ><small>↑ 8.4% <span>vs. previous period</span></small>
-            </div>
-            <div class="kpi">
-              <p>Median latency</p>
-              <strong>142 ms</strong
-              ><small>↓ 18 ms <span>vs. previous period</span></small>
-            </div>
+        </div>
+        <div class="ux-ops-status">
+          <span class="ux-live-dot"></span><b>All systems operational</b
+          ><span>Last event received 2 seconds ago</span
+          ><small>Auto-refresh: 10s</small>
+        </div>
+        <div class="ux-auto-kpis">
+          <div>
+            <small>Events processed</small><strong>12,846</strong
+            ><span>↑ 12.4% today</span>
           </div>
-          <div class="grid">
-            <section class="panel">
-              <div class="panel-head">
+          <div>
+            <small>Success rate</small><strong>99.97%</strong
+            ><span>SLO target ≥ 99.9%</span>
+          </div>
+          <div>
+            <small>Queue depth</small><strong>24</strong
+            ><span>Within normal range</span>
+          </div>
+          <div>
+            <small>Median latency</small><strong>142 ms</strong
+            ><span>↓ 18 ms vs. yesterday</span>
+          </div>
+        </div>
+        <div class="ux-ops-grid">
+          <section class="ux-auto-chart">
+            <header>
+              <div>
                 <h2>Event throughput</h2>
-                <small>Last 6 hours</small>
+                <p>Processed events / minute</p>
               </div>
-              <div class="pad">
-                <svg class="chart" viewBox="0 0 700 250">
-                  <defs>
-                    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-                      <stop stop-color="var(--accent)" stop-opacity=".2" />
-                      <stop
-                        offset="1"
-                        stop-color="var(--accent)"
-                        stop-opacity="0"
-                      />
-                    </linearGradient>
-                  </defs>
-                  <line x1="48" y1="30" x2="680" y2="30" stroke="#edf1f6" />
-                  <text x="6" y="34" font-size="10" fill="#99a5b4">400k</text>
-                  <line x1="48" y1="75" x2="680" y2="75" stroke="#edf1f6" />
-                  <text x="6" y="79" font-size="10" fill="#99a5b4">300k</text>
-                  <line x1="48" y1="120" x2="680" y2="120" stroke="#edf1f6" />
-                  <text x="6" y="124" font-size="10" fill="#99a5b4">200k</text>
-                  <line x1="48" y1="165" x2="680" y2="165" stroke="#edf1f6" />
-                  <text x="6" y="169" font-size="10" fill="#99a5b4">100k</text>
-                  <line x1="48" y1="210" x2="680" y2="210" stroke="#edf1f6" />
-                  <text x="6" y="214" font-size="10" fill="#99a5b4">0k</text>
-                  <rect
-                    x="65"
-                    y="130"
-                    width="27"
-                    height="90"
-                    rx="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="96"
-                    y="150"
-                    width="27"
-                    height="70"
-                    rx="4"
-                    fill="#dfe8fa"
-                  />
-                  <rect
-                    x="177"
-                    y="85"
-                    width="27"
-                    height="135"
-                    rx="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="208"
-                    y="105"
-                    width="27"
-                    height="115"
-                    rx="4"
-                    fill="#dfe8fa"
-                  />
-                  <rect
-                    x="289"
-                    y="110"
-                    width="27"
-                    height="110"
-                    rx="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="320"
-                    y="130"
-                    width="27"
-                    height="90"
-                    rx="4"
-                    fill="#dfe8fa"
-                  />
-                  <rect
-                    x="401"
-                    y="65"
-                    width="27"
-                    height="155"
-                    rx="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="432"
-                    y="85"
-                    width="27"
-                    height="135"
-                    rx="4"
-                    fill="#dfe8fa"
-                  />
-                  <rect
-                    x="513"
-                    y="48"
-                    width="27"
-                    height="172"
-                    rx="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="544"
-                    y="68"
-                    width="27"
-                    height="152"
-                    rx="4"
-                    fill="#dfe8fa"
-                  />
-                  <rect
-                    x="625"
-                    y="25"
-                    width="27"
-                    height="195"
-                    rx="4"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="656"
-                    y="45"
-                    width="27"
-                    height="175"
-                    rx="4"
-                    fill="#dfe8fa"
-                  />
-                  <text x="70" y="240" fill="#95a1b1" font-size="10">May</text>
-                  <text x="184" y="240" fill="#95a1b1" font-size="10">Jun</text>
-                  <text x="298" y="240" fill="#95a1b1" font-size="10">Jul</text>
-                  <text x="412" y="240" fill="#95a1b1" font-size="10">Aug</text>
-                  <text x="526" y="240" fill="#95a1b1" font-size="10">Sep</text>
-                  <text x="640" y="240" fill="#95a1b1" font-size="10">Oct</text>
-                </svg>
-                <div class="legend">
-                  ● Current period &nbsp; ○ Previous period
-                </div>
-              </div>
-            </section>
-            <section class="panel">
-              <div class="panel-head">
-                <h2>Connected systems</h2>
-                <small>View report →</small>
-              </div>
-              <div class="pad">
-                <div class="row">
-                  <div>Northwind ERP<small>Quezon City</small></div>
-                  <strong>● Healthy</strong>
-                </div>
-                <div class="row">
-                  <div>Bodega WMS<small>Makati</small></div>
-                  <strong>● Healthy</strong>
-                </div>
-                <div class="row">
-                  <div>Haraya CRM<small>Cebu City</small></div>
-                  <strong>● Healthy</strong>
-                </div>
-                <div class="row">
-                  <div>Luntian Portal<small>Pasig</small></div>
-                  <strong>● Healthy</strong>
-                </div>
-              </div>
-            </section>
-          </div>
-          <section class="panel">
-            <div class="panel-head">
-              <h2>Active flows</h2>
-              <small>View report →</small>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>FLOW</th>
-                  <th>LAST RUN</th>
-                  <th>RUNS TODAY</th>
-                  <th>SUCCESS</th>
-                  <th>STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Order fulfilment sync</td>
-                  <td>12 seconds ago</td>
-                  <td>1,284</td>
-                  <td>99.8%</td>
-                  <td><span class="badge">Active</span></td>
-                </tr>
-                <tr>
-                  <td>Inventory reconciliation</td>
-                  <td>2 minutes ago</td>
-                  <td>288</td>
-                  <td>100%</td>
-                  <td><span class="badge">Active</span></td>
-                </tr>
-                <tr>
-                  <td>Customer record sync</td>
-                  <td>34 seconds ago</td>
-                  <td>842</td>
-                  <td>100%</td>
-                  <td><span class="badge">Active</span></td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="foot">
-              <span>3 active flows</span
-              ><span
-                >‹ &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; … &nbsp; 6 &nbsp; ›</span
+              <span>Last 6 hours ⌄</span>
+            </header>
+            <svg
+              viewBox="0 0 640 190"
+              class="ux-chart"
+              aria-label="Illustrative throughput over the last six hours"
+            >
+              <defs>
+                <linearGradient id="ux-area" x2="0" y2="1">
+                  <stop stop-color="#9ee3ae" stop-opacity=".3" />
+                  <stop offset="1" stop-color="#9ee3ae" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path d="M30 25H625" stroke="currentColor" opacity=".1" />
+              <path d="M30 65H625" stroke="currentColor" opacity=".1" />
+              <path d="M30 105H625" stroke="currentColor" opacity=".1" />
+              <path d="M30 145H625" stroke="currentColor" opacity=".1" />
+              <path
+                d="M30 140L80 115L130 120L180 80L230 100L280 60L330 75L380 38L430 58L480 35L530 50L580 20L625 30V160H30Z"
+                fill="url(#ux-area)"
+              />
+              <path
+                d="M30 140L80 115L130 120L180 80L230 100L280 60L330 75L380 38L430 58L480 35L530 50L580 20L625 30"
+                stroke="#9ee3ae"
+                fill="none"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+              <text
+                x="30"
+                y="185"
+                fill="currentColor"
+                opacity=".45"
+                font-size="10"
               >
+                09:00
+              </text>
+              <text
+                x="140"
+                y="185"
+                fill="currentColor"
+                opacity=".45"
+                font-size="10"
+              >
+                10:00
+              </text>
+              <text
+                x="250"
+                y="185"
+                fill="currentColor"
+                opacity=".45"
+                font-size="10"
+              >
+                11:00
+              </text>
+              <text
+                x="360"
+                y="185"
+                fill="currentColor"
+                opacity=".45"
+                font-size="10"
+              >
+                12:00
+              </text>
+              <text
+                x="470"
+                y="185"
+                fill="currentColor"
+                opacity=".45"
+                font-size="10"
+              >
+                13:00
+              </text>
+              <text
+                x="580"
+                y="185"
+                fill="currentColor"
+                opacity=".45"
+                font-size="10"
+              >
+                14:00
+              </text>
+            </svg>
+            <footer>
+              <span>● Events processed</span><span>Peak: 284 / min</span>
+            </footer>
+          </section>
+          <section class="ux-auto-health">
+            <h2>Connector health</h2>
+            <div>
+              <i>✓</i>
+              <p><b>Northwind ERP</b><small>Finance & inventory</small></p>
+              <span>128 ms<small>Healthy</small></span>
             </div>
+            <div>
+              <i>✓</i>
+              <p><b>Bodega WMS</b><small>Stock & fulfilment</small></p>
+              <span>142 ms<small>Healthy</small></span>
+            </div>
+            <div>
+              <i>✓</i>
+              <p><b>Storefront API</b><small>Orders & customers</small></p>
+              <span>96 ms<small>Healthy</small></span>
+            </div>
+            <p class="ux-auto-health-note">No connection issues detected.</p>
           </section>
         </div>
+        <section class="ux-auto-flow-list">
+          <header>
+            <h2>Production workflows</h2>
+            <span>3 active</span>
+          </header>
+          <div>
+            <span class="ux-flow-list-icon">⌘</span><b>Order fulfilment sync</b
+            ><span>1,284 runs today</span><span>99.8% success</span
+            ><span>12s ago</span><span class="ux-badge green">Active</span>
+          </div>
+          <div>
+            <span class="ux-flow-list-icon">⌘</span
+            ><b>Inventory reconciliation</b><span>288 runs today</span
+            ><span>100% success</span><span>2m ago</span
+            ><span class="ux-badge green">Active</span>
+          </div>
+          <div>
+            <span class="ux-flow-list-icon">⌘</span><b>Customer record sync</b
+            ><span>842 runs today</span><span>100% success</span
+            ><span>34s ago</span><span class="ux-badge green">Active</span>
+          </div>
+        </section>
       </div>
-      <div class="sample">Fictional sample system · Demonstration data</div>
+      <div class="ux-sample">
+        FICTIONAL PRODUCT · PHILIPPINE DEMONSTRATION DATA
+      </div>
     </main>
   </body>
 </html>

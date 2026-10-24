@@ -186,12 +186,12 @@ export const services: Service[] = [
           },
           {
             screen: 'software/mobile-2',
-            caption: 'Mobile app: orders',
+            caption: 'Mobile app: booking',
             device: 'mobile',
           },
           {
             screen: 'software/mobile-3',
-            caption: 'Mobile app: profile',
+            caption: 'Mobile app: confirmation',
             device: 'mobile',
           },
         ],
@@ -207,7 +207,7 @@ export const services: Service[] = [
       },
       {
         photo: 'software/mobile-in-hand',
-        alt: 'A customer in a café holding a phone running a sample ordering app',
+        alt: 'A customer in a café holding a phone running a sample booking app',
         caption: 'In your customers’ hands',
         ratio: '4 / 5',
         onPhoto: {

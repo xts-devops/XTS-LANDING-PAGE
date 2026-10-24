@@ -12,13 +12,24 @@ interface Props {
   alt: string;
   device?: 'desktop' | 'tablet' | 'mobile';
   eager?: boolean;
+  sizes?: string;
+  widths?: number[];
+  format?: 'avif' | 'webp';
 }
 
 const files = import.meta.glob<{ default: ImageMetadata }>(
   '../../assets/showcase/**/*.png',
   { eager: true },
 );
-const { screen, alt, device = 'desktop', eager = false } = Astro.props;
+const {
+  screen,
+  alt,
+  device = 'desktop',
+  eager = false,
+  sizes,
+  widths,
+  format = 'avif',
+} = Astro.props;
 const match = Object.entries(files).find(([path]) =>
   path.endsWith(`/showcase/${screen}.png`),
 );
@@ -29,7 +40,11 @@ const ratio = { desktop: '16 / 10', tablet: '4 / 3', mobile: '390 / 844' }[
 const width = { desktop: 1440, tablet: 1366, mobile: 390 }[device];
 ---
 
-<div class:list={['screen', `screen-${device}`]} style={`--ratio:${ratio}`}>
+<div
+  class:list={['screen', `screen-${device}`]}
+  style={`--ratio:${ratio}`}
+  data-screen-source={src?.src}
+>
   {device === 'desktop' && (
     <div class="screen-bar" aria-hidden="true">
       <i />
@@ -42,13 +57,15 @@ const width = { desktop: 1440, tablet: 1366, mobile: 390 }[device];
       <Image
         src={src}
         alt={alt}
-        widths={[width / 2, width, Math.min(width * 2, src.width)]}
+        widths={widths ?? [width / 2, width, Math.min(width * 2, src.width)]}
         sizes={
-          device === 'mobile' ? '320px' : '(min-width: 1024px) 60vw, 100vw'
+          sizes ??
+          (device === 'mobile' ? '320px' : '(min-width: 1024px) 60vw, 100vw')
         }
-        format="avif"
+        format={format}
         quality={70}
         loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
       />
     ) : (
       <div class="screen-pending" role="img" aria-label={alt}>

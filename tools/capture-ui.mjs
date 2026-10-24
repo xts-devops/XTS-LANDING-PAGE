@@ -95,7 +95,7 @@ if (serving) {
           screen.key + ' viewport overflow: ' + JSON.stringify(bounds),
         );
       const mobileBottom = await page
-        .locator('.mobile-body')
+        .locator('.mobile-body, .ux-phone-content')
         .evaluateAll((es) => es[0]?.getBoundingClientRect().bottom ?? 0);
       if (mobileBottom > 770)
         failures.push(

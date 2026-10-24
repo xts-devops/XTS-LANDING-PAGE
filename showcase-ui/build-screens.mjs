@@ -1,3 +1,4 @@
+import { applyFeatured } from './featured-screens.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 const root = 'showcase-ui',
@@ -1107,6 +1108,7 @@ add(
       ),
     ),
 );
+applyFeatured(screens, { stats, panel, chart, table, rows });
 const groups = {
   erp: ['Northwind ERP', '#3a72e8'],
   pos: ['Tindahan POS', '#168977'],
@@ -1134,7 +1136,13 @@ for (const key of contract) {
     tablet = key === 'pos/checkout' || key === 'pos/receipt';
   const width = mobile ? 390 : tablet ? 1366 : 1440,
     height = mobile ? 844 : tablet ? 1024 : 900;
-  manifest.push({ key, title: s.title, product, width, height });
+  manifest.push({
+    key,
+    title: s.title,
+    product: s.product || product,
+    width,
+    height,
+  });
   const nav = contract
     .filter((k) => k.startsWith(group + '/'))
     .map(
@@ -1144,14 +1152,16 @@ for (const key of contract) {
     .join('');
   const sample =
     '<div class="sample">Fictional sample system · Demonstration data</div>';
-  const body = mobile
-    ? `<main class="mobile" style="--accent:${accent}"><div class="statusbar"><span>9:41</span><span>▮▮▮ &nbsp; ◉ &nbsp; ▰</span></div><header class="mobile-head"><p>${s.sub}</p><h1>${s.title}</h1></header><div class="mobile-body">${s.body}</div>${sample}<nav class="bottom-nav"><b>⌂ Home</b><span>▤ Tasks</span><span>▣ Schedule</span><span>◉ Account</span></nav></main>`
-    : `<main class="app" style="--accent:${accent}"><aside class="sidebar"><div class="brand"><span class="mark">${product[0]}</span>${product.split(' ')[0]}</div><div class="nav-label">WORKSPACE</div>${nav}<div class="nav-label">MANAGE</div><div class="nav">⚙ &nbsp; Settings</div><div class="nav">◉ &nbsp; Help centre</div><div class="sidefoot">${product}<br>Philippines workspace<br>◉ All systems operational</div></aside><div class="shell"><header class="topbar"><span>Amihan workspace &nbsp;⌄</span><div class="topright"><span class="search">⌕ &nbsp; Search anything…</span><span>◷ &nbsp; Notifications</span><div class="avatar">MS</div></div></header><div class="content"><div class="crumb">${product} &nbsp; / &nbsp; ${s.title}</div><div class="heading"><div><h1>${s.title}</h1><p>${s.sub}</p></div><div class="actions">${btn('Export')}${btn(s.action || 'October 2026 ⌄', true)}</div></div>${s.body}</div></div>${sample}</main>`;
+  const body = s.standalone
+    ? s.body
+    : mobile
+      ? `<main class="mobile" style="--accent:${accent}"><div class="statusbar"><span>9:41</span><span>▮▮▮ &nbsp; ◉ &nbsp; ▰</span></div><header class="mobile-head"><p>${s.sub}</p><h1>${s.title}</h1></header><div class="mobile-body">${s.body}</div>${sample}<nav class="bottom-nav"><b>⌂ Home</b><span>▤ Tasks</span><span>▣ Schedule</span><span>◉ Account</span></nav></main>`
+      : `<main class="app" style="--accent:${accent}"><aside class="sidebar"><div class="brand"><span class="mark">${product[0]}</span>${product.split(' ')[0]}</div><div class="nav-label">WORKSPACE</div>${nav}<div class="nav-label">MANAGE</div><div class="nav">⚙ &nbsp; Settings</div><div class="nav">◉ &nbsp; Help centre</div><div class="sidefoot">${product}<br>Philippines workspace<br>◉ All systems operational</div></aside><div class="shell"><header class="topbar"><span>Amihan workspace &nbsp;⌄</span><div class="topright"><span class="search">⌕ &nbsp; Search anything…</span><span>◷ &nbsp; Notifications</span><div class="avatar">MS</div></div></header><div class="content"><div class="crumb">${product} &nbsp; / &nbsp; ${s.title}</div><div class="heading"><div><h1>${s.title}</h1><p>${s.sub}</p></div><div class="actions">${btn('Export')}${btn(s.action || 'October 2026 ⌄', true)}</div></div>${s.body}</div></div>${sample}</main>`;
   const file = path.join(root, key + '.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(
     file,
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${s.title} — ${product}</title><link rel="stylesheet" href="../style.css"></head><body>${body}</body></html>\n`,
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${s.title} — ${product}</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="../featured.css"></head><body class="product-${group}">${body}</body></html>\n`,
   );
 }
 fs.writeFileSync(

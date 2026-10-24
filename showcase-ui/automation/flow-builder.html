@@ -5,124 +5,148 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Order fulfilment sync — Habi Connect</title>
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../featured.css" />
   </head>
-  <body>
-    <main class="app" style="--accent: #5b69db">
-      <aside class="sidebar">
-        <div class="brand"><span class="mark">H</span>Habi</div>
-        <div class="nav-label">WORKSPACE</div>
-        <a class="nav active" href="flow-builder.html"
-          ><span style="margin-right: 12px">▦</span>Order fulfilment sync</a
-        ><a class="nav" href="sync-log.html"
-          ><span style="margin-right: 12px">▤</span>Sync log</a
-        ><a class="nav" href="ops-dashboard.html"
-          ><span style="margin-right: 12px">◈</span>Operations monitor</a
-        >
-        <div class="nav-label">MANAGE</div>
-        <div class="nav">⚙ &nbsp; Settings</div>
-        <div class="nav">◉ &nbsp; Help centre</div>
-        <div class="sidefoot">
-          Habi Connect<br />Philippines workspace<br />◉ All systems operational
+  <body class="product-automation">
+    <main class="ux-auto">
+      <aside class="ux-auto-side">
+        <div class="ux-auto-brand">
+          <span>⌘</span>habi<span class="ux-auto-dot">●</span>
+        </div>
+        <div class="ux-auto-workspace">Amihan workspace <span>⌄</span></div>
+        <small>BUILD & OPERATE</small>
+        <div class="ux-auto-nav active">⌘<span>Workflows</span></div>
+        <div class="ux-auto-nav">≡<span>Execution log</span></div>
+        <div class="ux-auto-nav">▥<span>Observability</span></div>
+        <small>CONNECTIONS</small>
+        <div class="ux-auto-connection"><i></i>Northwind ERP<span>↗</span></div>
+        <div class="ux-auto-connection"><i></i>Bodega WMS<span>↗</span></div>
+        <div class="ux-auto-connection">
+          <i></i>Storefront API<span>↗</span>
+        </div>
+        <div class="ux-auto-side-bottom">
+          <span class="ux-badge green">Production</span>
+          <p>All connectors operational</p>
+          <div>
+            <span class="ux-avatar">CM</span
+            ><span>Carlo Mendoza<br /><small>Workspace owner</small></span>
+          </div>
         </div>
       </aside>
-      <div class="shell">
-        <header class="topbar">
-          <span>Amihan workspace &nbsp;⌄</span>
-          <div class="topright">
-            <span class="search">⌕ &nbsp; Search anything…</span
-            ><span>◷ &nbsp; Notifications</span>
-            <div class="avatar">MS</div>
+      <div class="ux-auto-shell">
+        <header class="ux-auto-top">
+          <span>Amihan / Order fulfilment</span>
+          <div>
+            <span class="ux-live-dot"></span>Live environment <b>⌘ K</b
+            ><span class="ux-avatar">CM</span>
           </div>
         </header>
-        <div class="content">
-          <div class="crumb">
-            Habi Connect &nbsp; / &nbsp; Order fulfilment sync
+        <div class="ux-auto-heading">
+          <div>
+            <p>WORKFLOWS / COMMERCE TO WAREHOUSE</p>
+            <h1>Order fulfilment</h1>
           </div>
-          <div class="heading">
-            <div>
-              <h1>Order fulfilment sync</h1>
-              <p>Flows / Commerce to warehouse / Production</p>
-            </div>
-            <div class="actions">
-              <button class="btn">Export</button
-              ><button class="btn primary">Publish flow</button>
-            </div>
-          </div>
-          <div class="panel">
-            <div class="panel-head">
-              <div>
-                <span class="badge">Active</span>
-                <span style="margin-left: 15px; font-size: 11px"
-                  >Last published by Carlo Mendoza · 2 hours ago</span
-                >
-              </div>
-              <button class="btn">Test flow</button>
-            </div>
-            <div class="flow">
-              <svg viewBox="0 0 1150 460">
-                <path
-                  d="M230 205H290Q310 205 310 205H370M575 205H625Q650 205 650 125H720M650 205V335H720"
-                  fill="none"
-                  stroke="#aebfd8"
-                  stroke-width="2"
-                />
-                <circle cx="650" cy="205" r="5" fill="#5b69db" />
-              </svg>
-              <div class="node" style="left: 35px; top: 140px">
-                <p>Trigger · HTTPS</p>
-                <h3>Webhook received</h3>
-                <p>Order confirmed</p>
-                <small>● 1,284 events today</small>
-              </div>
-              <div class="node" style="left: 360px; top: 140px">
-                <p>Condition · All rules pass</p>
-                <h3>Validate order</h3>
-                <p>Check stock & address</p>
-                <small>● 99.8% passed</small>
-              </div>
-              <div class="node" style="left: 740px; top: 60px">
-                <p>Action · API request</p>
-                <h3>Create pick request</h3>
-                <p>Bodega WMS</p>
-                <small>● Average 142 ms</small>
-              </div>
-              <div class="node" style="left: 740px; top: 280px">
-                <p>Action · Exception route</p>
-                <h3>Notify operations</h3>
-                <p>Team inbox</p>
-                <small>● 3 routed for review</small>
-              </div>
-            </div>
-            <div class="foot">
-              <span>＋ Add step &nbsp; ↶ Undo &nbsp; ↷ Redo</span
-              ><span>100% &nbsp; − &nbsp; ＋</span>
-            </div>
-          </div>
-          <div class="stats">
-            <div class="kpi">
-              <p>Runs today</p>
-              <strong>1,284</strong
-              ><small>↑ 8.4% <span>vs. previous period</span></small>
-            </div>
-            <div class="kpi">
-              <p>Success rate</p>
-              <strong>99.8%</strong
-              ><small>↑ 8.4% <span>vs. previous period</span></small>
-            </div>
-            <div class="kpi">
-              <p>Median duration</p>
-              <strong>420 ms</strong
-              ><small>↑ 8.4% <span>vs. previous period</span></small>
-            </div>
-            <div class="kpi">
-              <p>Needs review</p>
-              <strong>3</strong
-              ><small>Action required <span>vs. previous period</span></small>
-            </div>
+          <div>
+            <button class="ux-button">History</button
+            ><button class="ux-button is-primary">Publish workflow</button>
           </div>
         </div>
+        <div class="ux-flow-toolbar">
+          <div>
+            <span class="ux-badge green">Active</span
+            ><span>v2.4 · Published 2 hours ago</span>
+          </div>
+          <span>Saved just now &nbsp; ↶ &nbsp; ↷ &nbsp; <b>Test run ▶</b></span>
+        </div>
+        <div class="ux-flow-layout">
+          <section class="ux-flow-canvas">
+            <div class="ux-flow-path-label">
+              SUCCESS PATH · 1,281 RUNS TODAY
+            </div>
+            <svg viewBox="0 0 1000 410" preserveAspectRatio="none">
+              <path
+                d="M224 207H340M534 207H620V117H776M620 207V312H776"
+                stroke="#587369"
+                fill="none"
+                stroke-width="2"
+              />
+              <circle cx="620" cy="207" r="5" fill="#9ee3ae" />
+              <path d="M25 430H915" stroke="#20312d" stroke-dasharray="4 7" />
+            </svg>
+            <div class="ux-flow-node trigger">
+              <div><i>↙</i><span>···</span></div>
+              <h3>Order received</h3>
+              <p>Storefront · Webhook</p>
+              <footer><span>●</span>1,284 events</footer>
+            </div>
+            <div class="ux-flow-node validate">
+              <div><i>◇</i><span>···</span></div>
+              <h3>Validate & route</h3>
+              <p>Stock + delivery address</p>
+              <footer><span>●</span>99.8% passed</footer>
+            </div>
+            <div class="ux-flow-node dispatch">
+              <div><i>▦</i><span>···</span></div>
+              <h3>Create pick request</h3>
+              <p>Bodega WMS · API</p>
+              <footer><span>●</span>142 ms average</footer>
+            </div>
+            <div class="ux-flow-node exception">
+              <div><i>!</i><span>···</span></div>
+              <h3>Notify operations</h3>
+              <p>Exception route · Team inbox</p>
+              <footer><span>●</span>3 need review</footer>
+            </div>
+            <div class="ux-canvas-controls">
+              ＋ Add step <span>− &nbsp; 100% &nbsp; ＋ &nbsp; ▧</span>
+            </div>
+          </section>
+          <aside class="ux-node-inspector">
+            <small>STEP CONFIGURATION</small>
+            <h2>Validate & route</h2>
+            <p>Continue when all conditions pass.</p>
+            <label>Input source</label>
+            <div class="ux-code-field">trigger.order ⌄</div>
+            <label>Conditions <span>ALL / AND</span></label>
+            <div class="ux-condition">
+              <b>inventory.available</b><span>is greater than <em>0</em></span>
+            </div>
+            <div class="ux-condition">
+              <b>shipping.postcode</b><span>is not empty</span>
+            </div>
+            <button class="ux-button">＋ Add condition</button>
+            <div class="ux-inspector-note">
+              ✓ Schema validated<br /><small>Last tested · 14:32:08</small>
+            </div>
+          </aside>
+        </div>
+        <section class="ux-auto-terminal">
+          <header>
+            <b>Execution preview</b
+            ><span
+              >EVT-8246 · 14:32:18 &nbsp;
+              <span class="ux-badge green">Completed</span></span
+            >
+          </header>
+          <div>
+            <time>14:32:18.024</time><b>RECEIVED</b
+            ><span>Order SO-2026-1048 · Makati</span><small>✓</small>
+          </div>
+          <div>
+            <time>14:32:18.082</time><b>VALIDATED</b
+            ><span>Stock available · Shipping address valid</span
+            ><small>✓</small>
+          </div>
+          <div>
+            <time>14:32:18.166</time><b>SYNCED</b
+            ><span>Pick request WMS-0248 created · HTTP 201</span
+            ><small>✓</small>
+          </div>
+        </section>
       </div>
-      <div class="sample">Fictional sample system · Demonstration data</div>
+      <div class="ux-sample">
+        FICTIONAL PRODUCT · PHILIPPINE DEMONSTRATION DATA
+      </div>
     </main>
   </body>
 </html>

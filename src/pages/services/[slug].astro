@@ -5,11 +5,11 @@ import Header from '../../components/sections/Header.astro';
 import Footer from '../../components/sections/Footer.astro';
 import Contact from '../../components/sections/Contact.astro';
 import Container from '../../components/ui/Container.astro';
-import Icon from '../../components/ui/Icon.astro';
 import Photo from '../../components/media/Photo.astro';
 import SystemShowcase from '../../components/service/SystemShowcase.astro';
 import ScreenOnPhoto from '../../components/media/ScreenOnPhoto.astro';
 import ExplodedView from '../../components/service/ExplodedView.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
 import { services } from '../../content/services';
 import type { Service } from '../../content/types';
 import { site } from '../../content/site';
@@ -38,41 +38,16 @@ const rowColumns = `--cols:${(service.gallery ?? []).map((g) => `${ratioOf(g.rat
 <Base title={service.title} description={service.intro}>
   <Header />
   <main id="main-content">
-    <section class="svc-hero" aria-labelledby="svc-title">
-      <Photo
-        photo={service.photo}
-        alt={service.photoAlt}
-        ratio="auto"
-        class="svc-hero-photo"
-        sizes="100vw"
-        widths={[960, 1600, 2000]}
-        eager
-        transition={`svc-${service.slug}`}
-      />
-      <Container class="svc-hero-inner">
-        <a href="/#services" class="svc-back">
-          <Icon name="arrow-right" class="flip" />
-          {copy.back}
-        </a>
-        <h1
-          id="svc-title"
-          style={`view-transition-name:svc-title-${service.slug}`}
-        >
-          {service.title}
-        </h1>
-        <p class="svc-intro">{service.intro}</p>
-        <ul class="svc-highlights" role="list">
-          {service.highlights.map((h) => (
-            <li>{h}</li>
-          ))}
-        </ul>
-      </Container>
-    </section>
+    <ServiceHero service={service} />
 
     {service.slug === 'robotics' && <ExplodedView />}
 
     {service.systems && (
-      <SystemShowcase systems={service.systems} serviceTitle={service.title} />
+      <SystemShowcase
+        systems={service.systems}
+        serviceTitle={service.title}
+        slug={service.slug}
+      />
     )}
 
     {service.gallery && (

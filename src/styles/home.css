@@ -8,7 +8,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 0.9fr 1fr;
-  min-height: 19rem;
+  min-height: 17.5rem;
   height: 100%;
   border: var(--border);
   border-radius: var(--radius);
@@ -314,4 +314,8 @@
 }
 .no-js .work-controls {
   display: none;
+}
+/* Background figures must remain out of flow regardless of shared media import order. */
+.reach > .reach-photo {
+  position: absolute;
 }

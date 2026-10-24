@@ -1,3 +1,5 @@
+import { initScreenPreview } from './preview';
+import { initAnchors } from './anchors';
 import { initTabs } from './tabs';
 import { initSlides } from './slides';
 import { initForm } from '../form';
@@ -141,3 +143,7 @@ function initWorkControls() {
   render(0);
 }
 initWorkControls();
+
+initAnchors();
+
+initScreenPreview();

@@ -1,0 +1,2115 @@
+/* Fictional product art direction: a client workspace, booking experience and engineering console. */
+.ux-app,
+.ux-booking,
+.ux-auto,
+.ux-phone {
+  font:
+    14px 'Segoe UI',
+    Arial,
+    sans-serif;
+  line-height: 1.45;
+  color: #263348;
+}
+.ux-app h1,
+.ux-booking h1,
+.ux-auto h1,
+.ux-phone h1 {
+  letter-spacing: -1px;
+}
+.ux-app p,
+.ux-booking p,
+.ux-auto p,
+.ux-phone p {
+  margin: 0;
+  font-size: 12px;
+}
+.ux-app h2,
+.ux-booking h2,
+.ux-auto h2,
+.ux-phone h2 {
+  font-size: 16px;
+  margin: 0;
+}
+.ux-app h3,
+.ux-auto h3,
+.ux-phone h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.ux-avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #d7e5f4;
+  color: #345875;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.ux-avatar.purple {
+  background: #e8dffc;
+  color: #79629d;
+}
+.ux-avatar.pale {
+  background: #f0f3f7;
+  color: #8090a3;
+}
+.ux-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ux-badge {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 10px;
+  background: #edf2f8;
+  color: #5c7294;
+}
+.ux-badge.green {
+  background: #183d30;
+  color: #a2e8b5;
+}
+.ux-badge.amber {
+  background: #f5ecda;
+  color: #b18031;
+}
+.ux-button {
+  padding: 10px 15px;
+  border: 1px solid #dce3ed;
+  border-radius: 7px;
+  background: white;
+  color: #485a71;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ux-button.is-primary {
+  background: #254738;
+  border-color: #254738;
+  color: white;
+}
+.ux-sample {
+  position: fixed;
+  right: 22px;
+  bottom: 10px;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  opacity: 0.5;
+  z-index: 4;
+}
+.ux-chart {
+  display: block;
+  width: 100%;
+  height: 190px;
+}
+.ux-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 14px;
+}
+.ux-section-title h2 {
+  font-size: 16px;
+}
+.ux-section-title h2 small {
+  font-size: 10px;
+  background: #e9edf3;
+  padding: 3px 7px;
+  border-radius: 10px;
+  margin-left: 8px;
+  color: #8796aa;
+  font-weight: 400;
+}
+.ux-section-title > span {
+  font-size: 10px;
+  color: #7a8da3;
+}
+/* Kubo: calm, tactile client-facing workspace. */
+.ux-portal {
+  height: 900px;
+  display: flex;
+  background: #f4f6fa;
+}
+.ux-side {
+  width: 235px;
+  flex-shrink: 0;
+  background: #162337;
+  padding: 28px 20px;
+  color: #9bacc3;
+  display: flex;
+  flex-direction: column;
+}
+.ux-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c4d8fa;
+  font:
+    bold 38px Georgia,
+    serif;
+}
+.ux-logo > span {
+  font:
+    600 22px 'Segoe UI',
+    sans-serif;
+  color: white;
+}
+.ux-logo > span > span {
+  display: block;
+  font: 8px 'Segoe UI';
+  letter-spacing: 3px;
+  color: #8ca0bc;
+  margin-top: 4px;
+}
+.ux-org {
+  padding: 12px;
+  border: 1px solid #354258;
+  border-radius: 7px;
+  margin-top: 35px;
+  font-size: 11px;
+  color: #ced6e3;
+}
+.ux-org > span {
+  float: right;
+}
+.ux-side > small {
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  margin: 32px 12px 12px;
+  color: #697e99;
+}
+.ux-nav {
+  padding: 12px;
+  font-size: 12px;
+  border-radius: 7px;
+  margin: 3px 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.ux-nav.active {
+  color: white;
+  background: #2d3d56;
+}
+.ux-nav > span {
+  font-size: 17px;
+  color: #91a6c3;
+}
+.ux-nav b {
+  margin-left: auto;
+  background: #506a96;
+  padding: 1px 6px;
+  font-size: 9px;
+  border-radius: 4px;
+}
+.ux-side-bottom {
+  margin-top: auto;
+}
+.ux-help {
+  border: 1px solid #354258;
+  padding: 17px 13px;
+  border-radius: 9px;
+  font-size: 12px;
+  background: linear-gradient(135deg, #2e3d59, #1d2c42);
+}
+.ux-help p {
+  font-size: 10px;
+  margin: 8px 0 14px;
+  line-height: 1.7;
+}
+.ux-help button {
+  border: 1px solid #536783;
+  border-radius: 5px;
+  padding: 8px;
+  background: none;
+  color: #cad6e8;
+  font-size: 10px;
+}
+.ux-person {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-top: 1px solid #354258;
+  margin-top: 20px;
+  padding-top: 20px;
+  color: white;
+  font-size: 11px;
+}
+.ux-person small {
+  display: block;
+  color: #859ab5;
+  font-size: 9px;
+  margin-top: 4px;
+}
+.ux-person > span:last-child {
+  margin-left: auto;
+}
+.ux-shell {
+  min-width: 0;
+  flex: 1;
+}
+.ux-top {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e1e6ef;
+  padding: 0 32px;
+  background: #fff;
+  color: #8b9aab;
+  font-size: 11px;
+}
+.ux-top b {
+  color: #52647c;
+  font-weight: 500;
+}
+.ux-top > div {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.ux-notification {
+  font-size: 17px;
+  color: #63788f;
+}
+.ux-content {
+  padding: 30px 32px;
+}
+.ux-page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.ux-page-head h1 {
+  font-size: 29px;
+  margin: 5px 0 8px;
+  font-weight: 600;
+}
+.ux-page-head p {
+  color: #8a98ab;
+  font-size: 11px;
+}
+.ux-wave {
+  color: #a4b8d5;
+  font-size: 25px;
+}
+.ux-portal-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr;
+  border: 1px solid #e1e6ef;
+  border-radius: 10px;
+  background: white;
+  padding: 20px 0;
+}
+.ux-portal-summary > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 22px;
+  border-right: 1px solid #e8ecf2;
+}
+.ux-portal-summary > div:last-child {
+  border: 0;
+}
+.ux-summary-icon {
+  display: grid;
+  place-items: center;
+  background: #e8effb;
+  color: #749ac4;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 21px;
+}
+.ux-summary-icon.purple {
+  background: #f0eafb;
+  color: #ab91cb;
+}
+.ux-summary-icon.amber {
+  background: #fbf1df;
+  color: #c7a364;
+}
+.ux-portal-summary p {
+  font-size: 10px;
+  color: #8c99ac;
+}
+.ux-portal-summary b {
+  display: block;
+  font-size: 25px;
+  color: #263348;
+  margin-top: 4px;
+}
+.ux-portal-summary .ux-next {
+  display: block;
+}
+.ux-next small {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #97a2b2;
+}
+.ux-next b {
+  font-size: 13px;
+  margin: 6px 0;
+}
+.ux-next > span {
+  font-size: 10px;
+  color: #8d9baf;
+}
+.ux-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.ux-project {
+  background: white;
+  border: 1px solid #e1e6ef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ux-project-art {
+  height: 120px;
+  background: #dce6f5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.ux-project-art:before {
+  content: '';
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 1px solid #ffffff90;
+  position: absolute;
+  right: -25px;
+  top: -65px;
+}
+.ux-project-art > div {
+  width: 110px;
+  height: 60px;
+  background: #ffffffa8;
+  border-radius: 7px;
+  border: 1px solid white;
+  transform: rotate(-8deg);
+  box-shadow: 0 8px 15px #7186a32b;
+}
+.ux-project-art > i {
+  width: 28px;
+  height: 50px;
+  border-radius: 5px;
+  background: #a2b8d5;
+  transform: rotate(-8deg);
+}
+.ux-project-art > i + i {
+  height: 35px;
+  background: #bfcde2;
+}
+.ux-project-art > b {
+  position: absolute;
+  font-size: 32px;
+  color: #6785af;
+}
+.ux-project-art.art-1 {
+  background: #e7ddf4;
+}
+.ux-project-art.art-1 > i {
+  background: #b5a2d0;
+}
+.ux-project-art.art-1 > b {
+  color: #9678bb;
+}
+.ux-project-art.art-2 {
+  background: #f3e4cf;
+}
+.ux-project-art.art-2 > i {
+  background: #d8b783;
+}
+.ux-project-art.art-2 > b {
+  color: #b6935f;
+}
+.ux-project-body {
+  padding: 17px;
+}
+.ux-project-body small {
+  font-size: 9px;
+  color: #a0aabb;
+}
+.ux-project-body h3 {
+  margin: 9px 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.ux-project-progress {
+  height: 4px;
+  background: #edf1f6;
+  border-radius: 4px;
+  margin: 19px 0 13px;
+}
+.ux-project-progress i {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+}
+.ux-project-body .ux-row > span {
+  font-size: 9px;
+  color: #96a2b4;
+}
+.ux-avatars {
+  display: flex;
+  padding-right: 3px;
+}
+.ux-avatars .ux-avatar {
+  width: 24px;
+  height: 24px;
+  font-size: 8px;
+  border: 2px solid white;
+  margin-right: -4px;
+}
+.ux-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+  margin-top: 22px;
+}
+.ux-card {
+  background: white;
+  border: 1px solid #e1e6ef;
+  border-radius: 10px;
+  padding: 0 20px;
+}
+.ux-card .ux-section-title {
+  margin-top: 18px;
+}
+.ux-approval {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-top: 1px solid #edf1f5;
+  padding: 17px 0;
+}
+.ux-file-icon {
+  width: 33px;
+  height: 38px;
+  background: #eee9f6;
+  color: #a28cbf;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  font-size: 18px;
+}
+.ux-file-icon.amber {
+  background: #f9f0df;
+  color: #c5a367;
+}
+.ux-approval > div {
+  flex: 1;
+}
+.ux-approval b,
+.ux-team-row b {
+  font-size: 11px;
+  font-weight: 600;
+}
+.ux-approval p,
+.ux-team-row p {
+  font-size: 9px;
+  color: #9ca7b8;
+  margin-top: 5px;
+}
+.ux-team-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #edf1f5;
+  padding: 15px 0;
+}
+.ux-online {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #74b998;
+  margin-left: auto;
+}
+/* Sulyap: a bright end-user booking application. */
+.ux-booking {
+  height: 900px;
+  background: #f6f6ef;
+  color: #284334;
+}
+.ux-booking-nav {
+  height: 86px;
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dedfd5;
+  background: #fffefa;
+}
+.ux-booking-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: italic 46px Georgia;
+  color: #496e50;
+}
+.ux-booking-brand > span {
+  font: 600 24px 'Segoe UI';
+  letter-spacing: -1px;
+}
+.ux-booking-brand b {
+  display: block;
+  font: 7px 'Segoe UI';
+  letter-spacing: 2.5px;
+  margin-top: 3px;
+}
+.ux-booking-nav nav {
+  display: flex;
+  gap: 35px;
+  font-size: 12px;
+  color: #748171;
+}
+.ux-booking-nav nav span {
+  color: #304b35;
+}
+.ux-booking-nav > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.ux-booking-nav .ux-avatar {
+  background: #dfe8d7;
+  color: #5f7759;
+}
+.ux-booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 95px;
+  max-width: 1180px;
+  margin: 38px auto;
+}
+.ux-booking-info {
+  padding-top: 15px;
+}
+.ux-kicker {
+  font-size: 8px !important;
+  letter-spacing: 2.5px;
+  color: #8b9a79 !important;
+}
+.ux-booking-info h1 {
+  font:
+    54px/1.08 Georgia,
+    serif;
+  letter-spacing: -2px;
+  margin: 17px 0;
+}
+.ux-booking-info h1 em {
+  color: #789164;
+}
+.ux-booking-info > p {
+  font-size: 12px;
+  color: #89917f;
+  max-width: 290px;
+  line-height: 1.8;
+}
+.ux-specialist {
+  margin-top: 28px;
+  border-top: 1px solid #dce0d2;
+  padding-top: 22px;
+  position: relative;
+  padding-left: 82px;
+  min-height: 155px;
+}
+.ux-portrait {
+  position: absolute;
+  left: 0;
+  top: 22px;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #e4d3b8, #a8b9a0);
+  display: grid;
+  place-items: center;
+  font: 24px Georgia;
+  color: #fbfaf4;
+}
+.ux-portrait span {
+  position: absolute;
+  right: -2px;
+  bottom: 0;
+  background: #3c6046;
+  border: 3px solid #f6f6ef;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 1px 4px;
+}
+.ux-specialist h2 {
+  font-size: 15px;
+}
+.ux-specialist > p {
+  font-size: 10px;
+  color: #8b9683;
+  margin: 7px 0 10px;
+}
+.ux-specialist .ux-badge {
+  background: #e4ebdb;
+  color: #6d855f;
+  font-size: 9px;
+}
+.ux-specialist-meta {
+  display: flex;
+  gap: 18px;
+  font-size: 10px;
+  margin-top: 18px;
+  color: #819079;
+}
+.ux-booking-panel {
+  background: #fffefa;
+  border: 1px solid #e0e4d8;
+  border-radius: 15px;
+  padding: 28px 32px;
+  box-shadow: 0 12px 45px #7281600b;
+}
+.ux-booking-steps {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 9px;
+  color: #acb39f;
+}
+.ux-booking-steps b {
+  color: #466344;
+  font-weight: 600;
+}
+.ux-booking-steps i {
+  flex: 1;
+  height: 1px;
+  background: #e2e6d9;
+}
+.ux-booking-heading {
+  margin: 28px 0 25px;
+}
+.ux-booking-heading h2 {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+.ux-booking-heading p {
+  font-size: 10px;
+  color: #a0a894;
+  margin-top: 7px;
+}
+.ux-calendar-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.ux-calendar-heading > span {
+  color: #9eaa8f;
+}
+.ux-booking-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+.ux-booking-calendar small {
+  font-size: 8px;
+  color: #a6b29a;
+  margin-bottom: 9px;
+}
+.ux-booking-calendar > span {
+  height: 41px;
+  border-radius: 7px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+.ux-booking-calendar .past {
+  color: #c9cebf;
+}
+.ux-booking-calendar .selected {
+  background: #35583e;
+  color: white;
+}
+.ux-booking-calendar i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  bottom: 5px;
+  background: #8ca779;
+  border-radius: 50%;
+  left: 50%;
+}
+.ux-booking-calendar .selected i {
+  background: #dcdfc0;
+}
+.ux-time-heading {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 13px;
+  font-size: 11px;
+}
+.ux-time-heading small {
+  font-size: 9px;
+  color: #a1ad96;
+}
+.ux-time-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+.ux-time-slots button {
+  padding: 12px 6px;
+  border: 1px solid #dce4d4;
+  border-radius: 7px;
+  background: none;
+  font-size: 10px;
+  color: #89967e;
+}
+.ux-time-slots .selected {
+  background: #e7eddf;
+  border-color: #809a70;
+  color: #4e6e47;
+}
+.ux-booking-footer {
+  margin-top: 27px;
+  padding-top: 22px;
+  border-top: 1px solid #e2e6d9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: #8c9981;
+}
+/* Coordinated mobile booking journey, not a scaled-down admin dashboard. */
+.ux-phone {
+  width: 390px;
+  height: 844px;
+  background: #f7f8f2;
+  position: relative;
+  overflow: hidden;
+  color: #254737;
+}
+.ux-phone-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 24px 8px;
+  font-size: 12px;
+}
+.ux-phone-head {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ux-phone-head small {
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  color: #91a48a;
+}
+.ux-phone-head h1 {
+  font-size: 25px;
+  margin: 5px 0 0;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+}
+.ux-phone .ux-avatar {
+  background: #e2e9d9;
+  color: #6e8464;
+}
+.ux-phone-content {
+  padding: 3px 24px;
+}
+.ux-phone-welcome {
+  position: relative;
+  padding: 22px 20px;
+  border-radius: 16px;
+  background: #254d39;
+  overflow: hidden;
+  color: #f2f5e9;
+}
+.ux-phone-welcome:after {
+  content: '';
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 1px solid #6e90724d;
+  border-radius: 50%;
+  right: -70px;
+  top: -80px;
+}
+.ux-phone-welcome small {
+  font-size: 7px;
+  letter-spacing: 1.8px;
+  color: #a7bc9c;
+}
+.ux-phone-welcome h2 {
+  font:
+    27px/1.15 Georgia,
+    serif;
+  margin-top: 14px;
+  letter-spacing: -0.5px;
+}
+.ux-phone-orbit {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  color: #c6d7ac;
+  font-size: 39px;
+}
+.ux-phone-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0 12px;
+}
+.ux-phone-section h3 {
+  font-size: 13px;
+  font-weight: 600;
+}
+.ux-phone-section > span {
+  font-size: 9px;
+  color: #879b7e;
+}
+.ux-visit-card {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: white;
+  border: 1px solid #e3e8d9;
+  border-radius: 12px;
+  padding: 17px;
+}
+.ux-visit-date {
+  background: #edf1e7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: center;
+}
+.ux-visit-date b {
+  display: block;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.ux-visit-date > span {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.ux-visit-card h3 {
+  font-size: 12px;
+}
+.ux-visit-card p {
+  font-size: 9px;
+  color: #95a18b;
+  margin: 5px 0 8px;
+}
+.ux-phone .ux-badge {
+  font-size: 8px;
+  color: #729064;
+  background: #eaf1e2;
+  padding: 3px 6px;
+}
+.ux-phone-person {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 3px;
+}
+.ux-phone-person b {
+  font-size: 11px;
+}
+.ux-phone-person p {
+  font-size: 9px;
+  color: #8e9c84;
+  margin-top: 3px;
+}
+.ux-phone-person > span:last-child {
+  margin-left: auto;
+  font-size: 23px;
+}
+.ux-phone-primary {
+  width: 100%;
+  padding: 14px;
+  background: #315b40;
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+.ux-phone-task {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid #e2e8d9;
+}
+.ux-phone-task > span {
+  font-size: 15px;
+  color: #8fa97e;
+}
+.ux-phone-task b {
+  font-size: 10px;
+  font-weight: 600;
+}
+.ux-phone-task p {
+  font-size: 8px;
+  color: #97a68d;
+  margin-top: 5px;
+}
+.ux-phone-tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #eaf0e2;
+  padding: 13px;
+  border-radius: 9px;
+  margin-top: 17px;
+}
+.ux-phone-tip > span {
+  font-size: 24px;
+  color: #8ca47d;
+}
+.ux-phone-tip p {
+  font-size: 8px;
+  color: #849378;
+  line-height: 1.8;
+}
+.ux-phone-tip b {
+  font-weight: 500;
+  color: #506d45;
+}
+.ux-phone-nav {
+  position: absolute;
+  bottom: 0;
+  height: 64px;
+  left: 0;
+  right: 0;
+  background: #fffefa;
+  border-top: 1px solid #e4e8db;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 9px;
+  color: #9ea992;
+}
+.ux-phone-nav .active {
+  color: #315c3f;
+  font-weight: 600;
+}
+.ux-phone-sample {
+  position: absolute;
+  bottom: 71px;
+  right: 24px;
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  color: #aab59f;
+}
+.ux-phone-service {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  background: #edf1e6;
+  border-radius: 10px;
+  padding: 17px;
+  margin-top: 6px;
+}
+.ux-phone-service > span {
+  font-size: 22px;
+  color: #6f8b61;
+}
+.ux-phone-service b {
+  font-size: 11px;
+}
+.ux-phone-service p {
+  font-size: 8px;
+  color: #96a58a;
+  margin-top: 5px;
+}
+.ux-phone-dates {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ux-phone-dates > div {
+  text-align: center;
+  flex: 1;
+  padding: 13px 7px 10px;
+  border: 1px solid #dfe7d5;
+  border-radius: 10px;
+  background: white;
+  position: relative;
+}
+.ux-phone-dates small {
+  font-size: 7px;
+  color: #9aab8d;
+}
+.ux-phone-dates b {
+  display: block;
+  font-size: 22px;
+  font-weight: 500;
+  margin-top: 7px;
+}
+.ux-phone-dates i {
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #9bb68b;
+  margin: 7px auto 0;
+}
+.ux-phone-dates .selected {
+  background: #345c40;
+  color: white;
+  border-color: #345c40;
+}
+.ux-phone-dates .selected small {
+  color: #bdd0b2;
+}
+.ux-phone-times {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+.ux-phone-times button {
+  padding: 15px 10px;
+  background: white;
+  border: 1px solid #dfe7d5;
+  border-radius: 8px;
+  color: #8c9c80;
+  font-size: 11px;
+}
+.ux-phone-times .selected {
+  background: #e6eddc;
+  border-color: #8ba479;
+  color: #4b7141;
+}
+.ux-phone-times .unavailable {
+  color: #c9d0c2;
+  text-decoration: line-through;
+  background: none;
+}
+.ux-phone-summary {
+  border: 1px solid #e2e8d8;
+  background: white;
+  border-radius: 11px;
+  padding: 14px;
+  margin: 14px 0;
+}
+.ux-phone-summary h3 {
+  font-size: 12px;
+  margin-bottom: 17px;
+}
+.ux-phone-summary > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  padding: 6px 0;
+}
+.ux-phone-summary span {
+  color: #98a58d;
+}
+.ux-phone-summary b {
+  font-weight: 500;
+}
+.ux-phone-muted {
+  font-size: 8px !important;
+  color: #a0ad95;
+  text-align: center;
+  margin-top: 14px !important;
+}
+.ux-confirmed {
+  text-align: center;
+  padding: 12px 0 5px;
+}
+.ux-confirmed > span {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #e5eddb;
+  color: #688d55;
+  font-size: 25px;
+  margin: auto auto 15px;
+}
+.ux-confirmed h2 {
+  font: 28px Georgia;
+}
+.ux-confirmed p {
+  font-size: 10px;
+  color: #9aa88d;
+  margin-top: 8px;
+}
+.ux-journey {
+  padding: 0 8px 14px;
+}
+.ux-journey h3 {
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+.ux-journey > div {
+  display: flex;
+  gap: 14px;
+  align-items: start;
+  position: relative;
+  min-height: 54px;
+}
+.ux-journey i {
+  font-size: 12px;
+  font-style: normal;
+  color: #88a877;
+  background: #f7f8f2;
+  z-index: 1;
+}
+.ux-journey > div:after {
+  content: '';
+  position: absolute;
+  height: 40px;
+  left: 5px;
+  top: 12px;
+  width: 1px;
+  background: #e0e8d6;
+}
+.ux-journey > div:last-child:after {
+  display: none;
+}
+.ux-journey p b {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+}
+.ux-journey small {
+  font-size: 8px;
+  color: #9fad93;
+  margin-top: 5px;
+  display: block;
+}
+/* Habi: high-density engineering UI with a true workflow canvas and terminal. */
+.ux-auto {
+  display: flex;
+  height: 900px;
+  background: #0d1518;
+  color: #c6d3d1;
+  --ux-green: #a2e8b5;
+}
+.ux-auto-side {
+  width: 195px;
+  flex-shrink: 0;
+  background: #101d20;
+  border-right: 1px solid #243236;
+  padding: 30px 17px;
+  display: flex;
+  flex-direction: column;
+}
+.ux-auto-brand {
+  font-size: 29px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: #e8efea;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ux-auto-brand > span:first-child {
+  font-size: 24px;
+  color: #9ee3ae;
+}
+.ux-auto-dot {
+  font-size: 6px;
+  color: #9ee3ae;
+  margin-left: 2px;
+}
+.ux-auto-workspace {
+  border: 1px solid #304044;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 29px;
+  font-size: 10px;
+  color: #8da3a1;
+}
+.ux-auto-workspace > span {
+  float: right;
+}
+.ux-auto-side > small {
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  color: #506b6c;
+  margin: 27px 10px 13px;
+}
+.ux-auto-nav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border-radius: 6px;
+  margin: 2px 0;
+  color: #617f7e;
+  font-size: 16px;
+}
+.ux-auto-nav > span {
+  font-size: 11px;
+  color: #8da5a2;
+}
+.ux-auto-nav.active {
+  background: #233c35;
+  color: #b3e4bd;
+}
+.ux-auto-nav.active > span {
+  color: #b3e4bd;
+}
+.ux-auto-connection {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 9px;
+  margin: 11px;
+  color: #7e9693;
+}
+.ux-auto-connection > i {
+  width: 4px;
+  height: 4px;
+  background: #83c495;
+  border-radius: 50%;
+}
+.ux-auto-connection > span {
+  margin-left: auto;
+  color: #54706e;
+}
+.ux-auto-side-bottom {
+  margin-top: auto;
+  padding: 10px;
+}
+.ux-auto-side-bottom > p {
+  font-size: 8px;
+  color: #627e78;
+  margin: 10px 0 23px;
+}
+.ux-auto-side-bottom > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 19px;
+  border-top: 1px solid #283c3b;
+  font-size: 10px;
+}
+.ux-auto .ux-avatar {
+  background: #29423d;
+  color: #94baa8;
+  width: 29px;
+  height: 29px;
+  font-size: 9px;
+}
+.ux-auto-side-bottom small {
+  font-size: 8px;
+  color: #617b75;
+}
+.ux-auto-shell {
+  min-width: 0;
+  flex: 1;
+}
+.ux-auto-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 30px;
+  border-bottom: 1px solid #223235;
+  font-size: 10px;
+  color: #617b7b;
+}
+.ux-auto-top > div {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+}
+.ux-auto-top b {
+  font-size: 9px;
+  font-weight: 400;
+  border: 1px solid #2c4142;
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin-left: 12px;
+}
+.ux-live-dot {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #a2e8b5;
+  box-shadow: 0 0 10px #a2e8b530;
+}
+.ux-auto-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 30px 22px;
+}
+.ux-auto-heading p {
+  font-size: 7px;
+  letter-spacing: 1.3px;
+  color: #587775;
+}
+.ux-auto h1 {
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 550;
+  margin: 7px 0 0;
+  color: #dbe7e1;
+}
+.ux-auto-heading > div:last-child {
+  display: flex;
+  gap: 8px;
+}
+.ux-auto .ux-button {
+  background: none;
+  color: #809e94;
+  border-color: #30463f;
+  font-size: 10px;
+}
+.ux-auto .ux-button.is-primary {
+  background: #a2ddb0;
+  border-color: #a2ddb0;
+  color: #20392a;
+}
+.ux-auto .ux-sample {
+  color: #5c7470;
+}
+.ux-flow-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 30px;
+  padding: 13px 0;
+  border-top: 1px solid #253735;
+  font-size: 9px;
+  color: #6e8981;
+}
+.ux-flow-toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.ux-flow-toolbar b {
+  font-weight: 500;
+  color: #a8c6b5;
+  margin-left: 15px;
+}
+.ux-flow-layout {
+  display: grid;
+  grid-template-columns: 1fr 255px;
+  border-block: 1px solid #293a38;
+  margin: 0 30px;
+}
+.ux-flow-canvas {
+  position: relative;
+  height: 410px;
+  background-color: #101b1d;
+  background-image: radial-gradient(#2d4240 1px, transparent 1px);
+  background-size: 20px 20px;
+  overflow: hidden;
+}
+.ux-flow-canvas > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ux-flow-path-label {
+  position: absolute;
+  top: 23px;
+  left: 24px;
+  font-size: 7px;
+  letter-spacing: 1.3px;
+  color: #58746b;
+}
+.ux-flow-node {
+  position: absolute;
+  width: 180px;
+  border: 1px solid #3a534a;
+  border-radius: 8px;
+  background: #152421;
+  box-shadow: 0 8px 25px #0002;
+  padding: 15px;
+}
+.ux-flow-node > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #53776a;
+}
+.ux-flow-node i {
+  font-size: 18px;
+  font-style: normal;
+  color: #a0cbb4;
+}
+.ux-flow-node h3 {
+  font-size: 11px;
+  margin: 9px 0 4px;
+  color: #c0d5c7;
+}
+.ux-flow-node p {
+  font-size: 8px;
+  color: #708f7f;
+}
+.ux-flow-node footer {
+  font-size: 7px;
+  border-top: 1px solid #2c4137;
+  color: #779d85;
+  padding-top: 10px;
+  margin-top: 13px;
+}
+.ux-flow-node footer > span {
+  font-size: 5px;
+  margin-right: 6px;
+  color: #a2e8b5;
+}
+.ux-flow-node.trigger {
+  left: 3%;
+  top: 140px;
+}
+.ux-flow-node.validate {
+  left: 34%;
+  top: 140px;
+  border-color: #a2ddb0;
+  box-shadow: 0 0 0 3px #a2ddb00c;
+}
+.ux-flow-node.dispatch {
+  right: 3%;
+  top: 50px;
+}
+.ux-flow-node.exception {
+  right: 3%;
+  top: 245px;
+  border-color: #695b38;
+}
+.ux-flow-node.exception i,
+.ux-flow-node.exception footer > span {
+  color: #c5aa6e;
+}
+.ux-canvas-controls {
+  position: absolute;
+  bottom: 18px;
+  left: 22px;
+  right: 22px;
+  font-size: 9px;
+  color: #65837a;
+  display: flex;
+  justify-content: space-between;
+}
+.ux-node-inspector {
+  border-left: 1px solid #2d413a;
+  padding: 22px 18px;
+  background: #101b1c;
+}
+.ux-node-inspector > small {
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: #55716a;
+}
+.ux-node-inspector h2 {
+  font-size: 15px;
+  margin: 10px 0;
+  color: #c0d3c5;
+}
+.ux-node-inspector > p {
+  font-size: 9px;
+  color: #708b7e;
+}
+.ux-node-inspector label {
+  display: block;
+  font-size: 9px;
+  color: #7f9c8b;
+  margin: 23px 0 9px;
+}
+.ux-node-inspector label > span {
+  float: right;
+  color: #a3bd9d;
+  font-size: 7px;
+}
+.ux-code-field {
+  padding: 10px;
+  background: #182824;
+  border: 1px solid #30453a;
+  border-radius: 5px;
+  font:
+    9px Consolas,
+    monospace;
+  color: #a1bca4;
+}
+.ux-condition {
+  padding: 12px 10px;
+  background: #16231f;
+  border: 1px solid #30453a;
+  border-radius: 5px;
+  margin-bottom: 9px;
+  font-size: 8px;
+}
+.ux-condition b {
+  display: block;
+  color: #9cb8a2;
+  font:
+    9px Consolas,
+    monospace;
+}
+.ux-condition > span {
+  display: block;
+  margin-top: 7px;
+  color: #698773;
+}
+.ux-condition em {
+  font-style: normal;
+  background: #263c2e;
+  color: #aac5aa;
+  padding: 1px 7px;
+  margin-left: 5px;
+}
+.ux-node-inspector .ux-button {
+  padding: 8px;
+  font-size: 8px;
+  width: 100%;
+}
+.ux-inspector-note {
+  font-size: 9px;
+  color: #85ac8a;
+  margin-top: 20px;
+}
+.ux-inspector-note small {
+  font-size: 7px;
+  color: #58775d;
+}
+.ux-auto-terminal {
+  margin: 20px 30px 0;
+  border: 1px solid #283b36;
+  border-radius: 7px;
+  background: #101c1b;
+  overflow: hidden;
+}
+.ux-auto-terminal header {
+  padding: 12px 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #243c31;
+  font-size: 9px;
+  color: #789989;
+}
+.ux-auto-terminal header > b {
+  font-weight: 500;
+  color: #b2c6b7;
+}
+.ux-auto-terminal > div {
+  display: flex;
+  gap: 20px;
+  padding: 10px 17px;
+  font:
+    9px Consolas,
+    monospace;
+}
+.ux-auto-terminal time {
+  color: #526e63;
+}
+.ux-auto-terminal b {
+  width: 65px;
+  font-size: 8px;
+  color: #89b693;
+  font-weight: 500;
+}
+.ux-auto-terminal > div > span {
+  color: #87a795;
+}
+.ux-auto-terminal small {
+  margin-left: auto;
+  color: #83bb8f;
+}
+.ux-auto-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin: 0 30px 22px;
+}
+.ux-auto-kpis > div {
+  padding: 19px 20px;
+  border: 1px solid #293e38;
+  background: linear-gradient(125deg, #152622, #111d1d);
+  border-radius: 8px;
+}
+.ux-auto-kpis small {
+  font-size: 9px;
+  color: #7b9589;
+}
+.ux-auto-kpis strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.8px;
+  color: #d4e4d7;
+  margin: 10px 0 8px;
+}
+.ux-auto-kpis span {
+  font-size: 8px;
+  color: #719e78;
+}
+.ux-auto-kpis .amber {
+  color: #b59c65;
+}
+.ux-auto-log {
+  margin: 0 30px;
+  border: 1px solid #293e38;
+  border-radius: 8px;
+  background: #101d1c;
+  overflow: hidden;
+}
+.ux-log-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #2a4036;
+}
+.ux-log-filters > span {
+  flex: 1;
+  font-size: 9px;
+  border: 1px solid #2a4036;
+  padding: 9px 12px;
+  color: #557468;
+  border-radius: 5px;
+}
+.ux-log-filters b {
+  font-size: 8px;
+  font-weight: 400;
+  color: #789881;
+  border: 1px solid #2a4036;
+  padding: 9px;
+  border-radius: 5px;
+}
+.ux-auto-log table {
+  font-size: 10px;
+}
+.ux-auto-log th {
+  background: #14231f;
+  color: #567661;
+  font-size: 8px;
+  font-weight: 500;
+  padding: 12px 17px;
+  border-bottom: 1px solid #2a4036;
+}
+.ux-auto-log td {
+  border-bottom: 1px solid #22382c;
+  padding: 12px 17px;
+  font-size: 9px;
+  color: #7d9a84;
+}
+.ux-auto-log td small {
+  font-size: 8px;
+  color: #4c6c54;
+  margin-top: 5px;
+}
+.ux-auto-log td b {
+  font-size: 10px;
+  font-weight: 500;
+  color: #a5bfaa;
+}
+.ux-auto-log .selected td {
+  background: #182d23;
+}
+.ux-auto-log code {
+  font: 8px Consolas;
+  color: #80a688;
+  background: #203b28;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+.ux-auto-log .ux-badge {
+  font-size: 8px;
+}
+.ux-auto-log .ux-badge.amber {
+  background: #3c3420;
+  color: #baac7a;
+}
+.ux-connector-icon {
+  margin-right: 8px;
+  color: #7ca18a;
+}
+.ux-auto-log footer {
+  padding: 15px 17px;
+  font-size: 8px;
+  color: #55765d;
+  display: flex;
+  justify-content: space-between;
+}
+.ux-auto-audit-note {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 24px 30px;
+  color: #58775e;
+}
+.ux-auto-audit-note > i {
+  font-style: normal;
+  font-size: 28px;
+}
+.ux-auto-audit-note b {
+  font-size: 10px;
+  font-weight: 500;
+  color: #7c9a7f;
+}
+.ux-auto-audit-note p {
+  font-size: 9px;
+  margin-top: 5px;
+  color: #4f6c52;
+}
+.ux-auto-audit-note > span {
+  margin-left: auto;
+  font-size: 9px;
+}
+.ux-ops-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  margin: 0 30px 23px;
+  background: #162b22;
+  border: 1px solid #2b4834;
+  border-radius: 7px;
+  padding: 14px 18px;
+  color: #83b48e;
+}
+.ux-ops-status b {
+  font-weight: 500;
+  color: #b2d6b5;
+}
+.ux-ops-status > span:last-of-type {
+  font-size: 9px;
+  color: #5d8968;
+  margin-left: 15px;
+}
+.ux-ops-status small {
+  margin-left: auto;
+  font-size: 8px;
+  color: #65896b;
+}
+.ux-ops-grid {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 18px;
+  margin: 0 30px 20px;
+}
+.ux-auto-chart,
+.ux-auto-health {
+  border: 1px solid #293f33;
+  border-radius: 8px;
+  background: #111f1b;
+  padding: 19px;
+}
+.ux-auto-chart header {
+  display: flex;
+  justify-content: space-between;
+}
+.ux-auto-chart h2,
+.ux-auto-health h2,
+.ux-auto-flow-list h2 {
+  font-size: 12px;
+  font-weight: 500;
+  color: #b4cdb7;
+}
+.ux-auto-chart p {
+  font-size: 8px;
+  color: #56785d;
+  margin-top: 5px;
+}
+.ux-auto-chart header > span {
+  font-size: 8px;
+  color: #6a9171;
+}
+.ux-auto-chart .ux-chart {
+  margin-top: 15px;
+}
+.ux-auto-chart footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #5c8a67;
+  margin-top: 10px;
+}
+.ux-auto-health > div {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 19px 0;
+  border-bottom: 1px solid #223d2c;
+}
+.ux-auto-health i {
+  display: grid;
+  place-items: center;
+  background: #203b2a;
+  color: #8cbf97;
+  width: 29px;
+  height: 29px;
+  border-radius: 7px;
+  font-size: 10px;
+  font-style: normal;
+}
+.ux-auto-health b {
+  font-size: 10px;
+  font-weight: 500;
+  color: #9dbda5;
+}
+.ux-auto-health small {
+  display: block;
+  font-size: 8px;
+  color: #4d7658;
+  margin-top: 4px;
+}
+.ux-auto-health > div > span {
+  font-size: 9px;
+  margin-left: auto;
+  color: #789f81;
+  text-align: right;
+}
+.ux-auto-health-note {
+  font-size: 8px !important;
+  color: #4d7658 !important;
+  margin-top: 19px !important;
+}
+.ux-auto-flow-list {
+  margin: 0 30px;
+  border: 1px solid #293f33;
+  border-radius: 8px;
+  background: #111f1b;
+  overflow: hidden;
+}
+.ux-auto-flow-list header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 19px;
+  border-bottom: 1px solid #263f2f;
+}
+.ux-auto-flow-list header > span {
+  font-size: 8px;
+  color: #5a8564;
+}
+.ux-auto-flow-list > div {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 14px 19px;
+  border-bottom: 1px solid #223c2b;
+  font-size: 9px;
+  color: #688e71;
+}
+.ux-auto-flow-list b {
+  font-size: 10px;
+  font-weight: 500;
+  flex: 1;
+  color: #93b59b;
+}
+.ux-auto-flow-list .ux-badge {
+  font-size: 8px;
+}
+.ux-flow-list-icon {
+  color: #7da788;
+  font-size: 18px;
+}
+/* Business tools keep their own visual cues and information density. */
+.product-pos .app .sidebar {
+  background: #f5f2e9;
+  color: #87917e;
+  border-right: 1px solid #e0e3d7;
+}
+.product-pos .brand {
+  color: #355342;
+}
+.product-pos .nav.active {
+  background: #dfe8da;
+  color: #305b42;
+}
+.product-pos .nav-label {
+  color: #a6b19a;
+}
+.product-pos .sidefoot {
+  border-color: #d4ddca;
+}
+.product-pos .art {
+  background: linear-gradient(135deg, #f1e6d0, #e7dbc1);
+  color: #8e7152;
+}
+.product-pos .product {
+  box-shadow: 0 3px 10px #53644806;
+}
+.product-crm .sidebar {
+  background: #281f3f;
+}
+.product-crm .nav.active {
+  background: #493564;
+}
+.product-crm .lane {
+  background: #ece6f4;
+}
+.product-crm .deal {
+  border-color: #e1d5ef;
+  box-shadow: 0 5px 12px #6d4e9908;
+}
+.product-inventory .sidebar {
+  background: #fff;
+  color: #8c9baf;
+  border-right: 1px solid #e1e7f0;
+}
+.product-inventory .brand {
+  color: #2d5687;
+}
+.product-inventory .nav.active {
+  background: #eaf1fb;
+  color: #3e6595;
+}
+.product-inventory .sidefoot {
+  border-color: #e4eaf3;
+}
+.product-wms .sidebar {
+  background: #132f34;
+}
+.product-wms .nav.active {
+  background: #24494f;
+}
+.product-hr .app {
+  background: #f7f4ef;
+}
+.product-hr .sidebar {
+  background: #392f2b;
+}
+.product-hr .nav.active {
+  background: #5b483a;
+}
+.product-hr .person {
+  border-color: #e9dfd1;
+}
+.product-hr .person:nth-child(2n) .avatar {
+  background: #e2e9dc;
+  color: #75856b;
+}
+.product-hr .person:nth-child(3n) .avatar {
+  background: #f3e3d7;
+  color: #b19780;
+}
+.erp-fulfil {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 17px;
+}
+.erp-ring {
+  height: 112px;
+  width: 112px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(#4080e6 0 87%, #edf1f8 87% 100%);
+  position: relative;
+}
+.erp-ring:before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  background: white;
+  border-radius: 50%;
+}
+.erp-ring strong {
+  z-index: 1;
+  font-size: 26px;
+  font-weight: 600;
+}
+.erp-ring strong span {
+  font-size: 13px;
+  color: #8d9bad;
+  margin-left: 2px;
+}
+.erp-fulfil h3 {
+  font-size: 11px;
+}
+.erp-fulfil p {
+  font-size: 9px;
+  margin-top: 7px;
+}
+.erp-fulfil-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 0 0 100%;
+  font-size: 9px;
+  color: #8d9eb5;
+  border-top: 1px solid #edf1f8;
+  padding-top: 13px;
+}
+.erp-fulfil-legend span {
+  display: flex;
+  justify-content: space-between;
+}
+.erp-fulfil-legend b {
+  color: #5c7291;
+  font-weight: 500;
+}
+/* Native capture density: keep complete tools in their designed viewport. */
+.ux-content {
+  padding: 24px 30px;
+}
+.ux-page-head {
+  margin-bottom: 20px;
+}
+.ux-project-art {
+  height: 110px;
+}
+.ux-bottom-grid {
+  margin-top: 18px;
+}
+.ux-approval {
+  padding: 14px 0;
+}
+.ux-auto-heading {
+  padding: 20px 30px 16px;
+}
+.ux-auto-kpis {
+  margin-bottom: 16px;
+}
+.ux-auto-kpis > div {
+  padding: 14px 19px;
+}
+.ux-auto-log td {
+  padding: 8px 17px;
+}
+.ux-log-filters {
+  padding: 12px 16px;
+}
+.ux-auto-log footer {
+  padding: 11px 17px;
+}
+.ux-auto-audit-note {
+  margin: 16px 30px;
+}
+.ux-auto-chart,
+.ux-auto-health {
+  padding: 16px;
+}
+.ux-auto-chart .ux-chart {
+  height: 175px;
+}
+.ux-auto-health > div {
+  padding: 16px 0;
+}
+.ux-auto-terminal header > b {
+  width: auto;
+  white-space: nowrap;
+}
+.ux-auto-log td {
+  padding-block: 7px;
+}

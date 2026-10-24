@@ -1,0 +1,68 @@
+---
+import Screen from '../media/Screen.astro';
+import Photo from '../media/Photo.astro';
+import { presentation } from '../../content/presentation';
+const c = presentation.home;
+---
+
+<div class="product-stage" role="group" aria-label={c.label}>
+  <div class="stage-grid" aria-hidden="true"></div>
+  <div class="stage-caption">
+    <span class="stage-dot" aria-hidden="true"></span>
+    {c.eyebrow}
+    <a href="/services/custom-software" class="stage-custom">
+      {c.custom}
+      <span aria-hidden="true"> ↗</span>
+    </a>
+  </div>
+  <a href="/services/business-systems" class="stage-main">
+    <span class="stage-label">
+      {c.platform}
+      <span aria-hidden="true">↗</span>
+    </span>
+    <Screen
+      screen="erp/dashboard"
+      format="webp"
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 1024px) 42vw, 100vw"
+      alt="Sample business platform overview"
+      eager
+    />
+  </a>
+  <a href="/services/automation" class="stage-flow">
+    <span class="stage-label">
+      {c.flow}
+      <span aria-hidden="true">↗</span>
+    </span>
+    <div class="mini-flow" aria-hidden="true">
+      <span>Order</span>
+      <i></i>
+      <span>Validate</span>
+      <i></i>
+      <span>Sync</span>
+    </div>
+  </a>
+  <a href="/services/robotics" class="stage-robot">
+    <Photo
+      photo="robotics/hero-arm"
+      alt="Robotic arm capability preview"
+      ratio="5 / 3"
+      sizes="240px"
+      widths={[480]}
+      eager
+    />
+    <span>
+      {c.hardware}
+      <span aria-hidden="true">↗</span>
+    </span>
+  </a>
+  <p class="stage-note">{c.sample}</p>
+  <div class="stage-process" role="group" aria-label={c.status}>
+    {c.steps.map((step, i) => (
+      <span>
+        <b>{String(i + 1).padStart(2, '0')}</b>
+        {step}
+      </span>
+    ))}
+  </div>
+</div>

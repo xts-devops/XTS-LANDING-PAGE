@@ -19,6 +19,11 @@ export function initSlides(root: ParentNode = document) {
           Math.max(1, slides[1].offsetLeft - slides[0].offsetLeft),
       );
       current = Math.min(slides.length - 1, Math.max(0, index));
+      wrap
+        .querySelectorAll<HTMLButtonElement>('[data-slide-index]')
+        .forEach((button, i) =>
+          button.setAttribute('aria-pressed', String(i === current)),
+        );
       if (label) label.textContent = `${current + 1} / ${slides.length}`;
       if (prev) prev.disabled = current === 0;
       if (next) next.disabled = current === slides.length - 1;
@@ -33,6 +38,13 @@ export function initSlides(root: ParentNode = document) {
       });
     };
 
+    wrap
+      .querySelectorAll<HTMLButtonElement>('[data-slide-index]')
+      .forEach((button) =>
+        button.addEventListener('click', () =>
+          go(Number(button.dataset.slideIndex)),
+        ),
+      );
     prev?.addEventListener('click', () => go(current - 1));
     next?.addEventListener('click', () => go(current + 1));
     track.addEventListener('keydown', (e) => {
