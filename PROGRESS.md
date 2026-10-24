@@ -2,6 +2,12 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · claude · claude/v2-redesign (PR #7, includes #8 + #9)
+**Did:** Reviewed Codex's v2 media. All 50 photo/screen keys in `src/content` match delivered files; the arm pair aligns (same base, camera, light) and the exploded view now blends the real pair. Merged `codex/v2-media-ui` (which contains `codex/v2-media`) into PR #7. Wired the 4 unused photos: Custom Software and Automation pages get a short photo row (`galleryHeading`, per-photo `ratio`, equal heights). New `ScreenOnPhoto` + `src/lib/homography.ts` warp the captured `software/mobile-1` screen onto the phone in `software/mobile-in-hand` (build-time matrix3d, ~15 lines of JS to scale). New e2e test for it.
+**Why:** User: verify Codex's work, implement and finalize.
+**Verify:** `npm run verify` ✅ · e2e 34/34 ✅ · Lighthouse home ×3: Perf 0.99–1.00, A11y/BP 1, LCP 1.6s, CLS 0 (SEO 1 with `PUBLIC_ALLOW_INDEXING=true` as in CI). Build now ~2 min (AVIF encoding of ~60 images).
+**Next:** Waiting on XTS: real project names/countries (PLAN-v2 §6), Web3Forms key, vector logo, legal review; then deployment (Vercel). Optional: Higgsfield clip from the arm pair → `src/assets/video/arm-exploded.mp4` (auto-used).
+
 ## YYYY-MM-DD · <agent> · <branch>
 **Did:** ...
 **Why:** ...

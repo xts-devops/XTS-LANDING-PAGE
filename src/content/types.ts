@@ -51,8 +51,29 @@ export type Service = {
   highlights: string[];
   /** Business systems / software / automation: switchable product showcases. */
   systems?: System[];
-  /** Robotics: real-life photo gallery. */
-  gallery?: { photo: PhotoKey; alt: string; caption: string }[];
+  /** Real-life photo gallery (robotics: bento; others: a short row). */
+  gallery?: GalleryItem[];
+  /** Gallery heading; defaults to site.servicePage.galleryHeading. */
+  galleryHeading?: string;
+};
+
+export type GalleryItem = {
+  photo: PhotoKey;
+  alt: string;
+  caption: string;
+  /** Native photo ratio, e.g. '4 / 5'; used for short-row galleries. Default '4 / 3'. */
+  ratio?: string;
+  /** A product screen warped onto a device in the photo (ScreenOnPhoto). */
+  onPhoto?: {
+    screen: ScreenKey;
+    quad: readonly [
+      readonly [number, number],
+      readonly [number, number],
+      readonly [number, number],
+      readonly [number, number],
+    ];
+    photoSize: readonly [number, number];
+  };
 };
 
 export type WorkItem = {

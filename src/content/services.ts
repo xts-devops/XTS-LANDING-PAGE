@@ -197,6 +197,31 @@ export const services: Service[] = [
         ],
       },
     ],
+    galleryHeading: 'Built with your team, used by your customers',
+    gallery: [
+      {
+        photo: 'software/team-planning',
+        alt: 'Product team planning features on a glass wall of sticky notes',
+        caption: 'Planned with you, sprint by sprint',
+        ratio: '8 / 5',
+      },
+      {
+        photo: 'software/mobile-in-hand',
+        alt: 'A customer in a café holding a phone running a sample ordering app',
+        caption: 'In your customers’ hands',
+        ratio: '4 / 5',
+        onPhoto: {
+          screen: 'software/mobile-1',
+          quad: [
+            [565, 492],
+            [797, 518],
+            [730, 1060],
+            [464, 1034],
+          ],
+          photoSize: [1200, 1500],
+        },
+      },
+    ],
   },
   {
     slug: 'automation',
@@ -242,6 +267,21 @@ export const services: Service[] = [
             caption: 'Operations dashboard',
           },
         ],
+      },
+    ],
+    galleryHeading: 'Where the automation runs',
+    gallery: [
+      {
+        photo: 'automation/control-room',
+        alt: 'Operator at a desk watching live system dashboards on wall displays',
+        caption: 'Live operations, one screen',
+        ratio: '8 / 5',
+      },
+      {
+        photo: 'automation/scanner-dock',
+        alt: 'Worker scanning parcels on a conveyor at a loading dock',
+        caption: 'Every scan synced to stock',
+        ratio: '8 / 5',
       },
     ],
   },

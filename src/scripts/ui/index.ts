@@ -48,7 +48,23 @@ function initActiveNav() {
   });
 }
 
+/** Scale screen-on-photo stages (native photo px) to their rendered figure. */
+function initFitStages() {
+  const stages = document.querySelectorAll<HTMLElement>('[data-fit-stage]');
+  if (!stages.length) return;
+  const ro = new ResizeObserver((entries) => {
+    for (const e of entries) {
+      const stage = e.target.querySelector<HTMLElement>('[data-fit-stage]');
+      if (!stage) continue;
+      const native = Number(stage.dataset.fitStage) || 1;
+      stage.style.setProperty('--s', String(e.contentRect.width / native));
+    }
+  });
+  stages.forEach((s) => s.parentElement && ro.observe(s.parentElement));
+}
+
 initHeader();
+initFitStages();
 initActiveNav();
 initMobileMenu();
 initTabs();

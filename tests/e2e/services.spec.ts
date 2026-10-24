@@ -98,6 +98,23 @@ test.describe('system showcase', () => {
   });
 });
 
+test.describe('screen on photo', () => {
+  test('phone screen is scaled onto the photo and stays inside it', async ({
+    page,
+  }) => {
+    await page.goto('/services/custom-software');
+    const fig = page.locator('.photo:has([data-fit-stage])');
+    await fig.scrollIntoViewIfNeeded();
+    const screen = fig.locator('.on-photo-screen');
+    await expect(screen).toBeVisible();
+    const [f, s] = await Promise.all([fig.boundingBox(), screen.boundingBox()]);
+    expect(s!.width).toBeGreaterThan(f!.width * 0.15);
+    expect(s!.x).toBeGreaterThan(f!.x);
+    expect(s!.x + s!.width).toBeLessThan(f!.x + f!.width);
+    expect(s!.y + s!.height).toBeLessThan(f!.y + f!.height);
+  });
+});
+
 test.describe('work gallery', () => {
   test('is keyboard-reachable and lists every item', async ({ page }) => {
     await page.goto('/');

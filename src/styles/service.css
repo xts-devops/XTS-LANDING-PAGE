@@ -397,3 +397,15 @@
     aspect-ratio: auto;
   }
 }
+
+/* Short gallery row (2–3 photos): widths follow each photo's ratio, so heights line up. */
+.gallery-row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  gap: 1rem;
+}
+@media (max-width: 720px) {
+  .gallery-row {
+    grid-template-columns: 1fr;
+  }
+}
