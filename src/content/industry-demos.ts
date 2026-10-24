@@ -1,16 +1,17 @@
 import records from './industry-demos.json';
 export const industryDemos = records;
 export const industryCopy = {
-  eyebrow: 'The demo collection',
-  heading: 'Different industries. Thoughtfully built.',
+  eyebrow: 'Software, in context',
+  heading: 'See how the system works.',
   summary:
-    'Explore a few ways we could shape software around your business. Each is a fictional concept with sample data, built to try.',
-  open: 'Try the demo',
-  fallback: 'Open a demo',
-  label: 'Interactive concept',
-  close: 'Close demo',
-  loading: 'Opening the demo…',
-  note: 'Fictional brands · Sample data · No live transactions',
-  dialogNote: 'Try the controls. Everything here is a demonstration.',
+    'Short workflow previews, shaped around everyday business tasks. Hover to watch, or use the preview control.',
+  play: 'Preview workflow',
+  pause: 'Stop preview',
+  replay: 'Replay overview',
+  complete: 'Overview complete',
+  still: 'View overview',
+  fallback: 'View system screens',
+  note: 'Illustrative systems · Sample data · No live transactions',
   modules: 'Explore system modules',
-};
+  previewLabel: 'Workflow overview',
+} as const;

@@ -2,280 +2,280 @@
   {
     "key": "erp/dashboard",
     "title": "Company overview",
-    "product": "Northwind ERP",
+    "product": "Business ERP",
     "width": 1440,
     "height": 900
   },
   {
     "key": "erp/sales-orders",
     "title": "Sales orders",
-    "product": "Northwind ERP",
+    "product": "Business ERP",
     "width": 1440,
     "height": 900
   },
   {
     "key": "erp/purchase-order",
     "title": "Purchase order PO-2026-0086",
-    "product": "Northwind ERP",
+    "product": "Business ERP",
     "width": 1440,
     "height": 900
   },
   {
     "key": "erp/inventory-valuation",
     "title": "Inventory valuation",
-    "product": "Northwind ERP",
+    "product": "Business ERP",
     "width": 1440,
     "height": 900
   },
   {
     "key": "erp/general-ledger",
     "title": "General ledger",
-    "product": "Northwind ERP",
+    "product": "Business ERP",
     "width": 1440,
     "height": 900
   },
   {
     "key": "erp/approvals",
     "title": "Approvals inbox",
-    "product": "Northwind ERP",
+    "product": "Business ERP",
     "width": 1440,
     "height": 900
   },
   {
     "key": "pos/checkout",
     "title": "Register 01",
-    "product": "Tindahan POS",
+    "product": "Coffee shop POS",
     "width": 1366,
     "height": 1024
   },
   {
     "key": "pos/receipt",
     "title": "Receipt preview",
-    "product": "Tindahan POS",
+    "product": "Coffee shop POS",
     "width": 1366,
     "height": 1024
   },
   {
     "key": "pos/shift-summary",
     "title": "Shift summary",
-    "product": "Tindahan POS",
+    "product": "Coffee shop POS",
     "width": 1440,
     "height": 900
   },
   {
     "key": "pos/branch-sales",
     "title": "Branch sales",
-    "product": "Tindahan POS",
+    "product": "Coffee shop POS",
     "width": 1440,
     "height": 900
   },
   {
     "key": "crm/pipeline",
     "title": "Sales pipeline",
-    "product": "Haraya CRM",
+    "product": "Sales CRM",
     "width": 1440,
     "height": 900
   },
   {
     "key": "crm/contact",
     "title": "Maria Santos",
-    "product": "Haraya CRM",
+    "product": "Sales CRM",
     "width": 1440,
     "height": 900
   },
   {
     "key": "crm/quotes",
     "title": "Quotes",
-    "product": "Haraya CRM",
+    "product": "Sales CRM",
     "width": 1440,
     "height": 900
   },
   {
     "key": "crm/dashboard",
     "title": "Sales overview",
-    "product": "Haraya CRM",
+    "product": "Sales CRM",
     "width": 1440,
     "height": 900
   },
   {
     "key": "wms/dashboard",
     "title": "Warehouse overview",
-    "product": "Bodega WMS",
+    "product": "Warehouse management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "wms/receiving",
     "title": "Receive shipment",
-    "product": "Bodega WMS",
+    "product": "Warehouse management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "wms/pick-list",
     "title": "Pick list #0248",
-    "product": "Bodega WMS",
+    "product": "Warehouse management",
     "width": 390,
     "height": 844
   },
   {
     "key": "wms/bin-map",
     "title": "Location map",
-    "product": "Bodega WMS",
+    "product": "Warehouse management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "wms/stock-transfer",
     "title": "Stock transfer TR-0036",
-    "product": "Bodega WMS",
+    "product": "Warehouse management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "inventory/stock-list",
     "title": "Stock overview",
-    "product": "Stockwise",
+    "product": "Inventory management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "inventory/item-detail",
     "title": "Arabica coffee beans · 1kg",
-    "product": "Stockwise",
+    "product": "Inventory management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "inventory/stock-count",
     "title": "Stock count SC-0024",
-    "product": "Stockwise",
+    "product": "Inventory management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "hr/directory",
     "title": "People directory",
-    "product": "Kawayan People",
+    "product": "HR & payroll",
     "width": 1440,
     "height": 900
   },
   {
     "key": "hr/payroll-run",
     "title": "Payroll run · October",
-    "product": "Kawayan People",
+    "product": "HR & payroll",
     "width": 1440,
     "height": 900
   },
   {
     "key": "hr/leave-calendar",
     "title": "Leave calendar",
-    "product": "Kawayan People",
+    "product": "HR & payroll",
     "width": 1440,
     "height": 900
   },
   {
     "key": "software/portal",
     "title": "Welcome back, Maria",
-    "product": "Kubo ClientSpace",
+    "product": "Customer portal",
     "width": 1440,
     "height": 900
   },
   {
     "key": "software/booking",
     "title": "Bookings",
-    "product": "Sulyap Appointments",
+    "product": "Appointment booking",
     "width": 1440,
     "height": 900
   },
   {
     "key": "software/mobile-1",
     "title": "Good morning, Maria",
-    "product": "Sulyap Mobile",
+    "product": "Mobile booking",
     "width": 390,
     "height": 844
   },
   {
     "key": "software/mobile-2",
     "title": "Book an appointment",
-    "product": "Sulyap Mobile",
+    "product": "Mobile booking",
     "width": 390,
     "height": 844
   },
   {
     "key": "software/mobile-3",
     "title": "Request #0142",
-    "product": "Sulyap Mobile",
+    "product": "Mobile booking",
     "width": 390,
     "height": 844
   },
   {
     "key": "automation/flow-builder",
     "title": "Order fulfilment sync",
-    "product": "Habi Automation",
+    "product": "Workflow automation",
     "width": 1440,
     "height": 900
   },
   {
     "key": "automation/sync-log",
     "title": "Sync log",
-    "product": "Habi Automation",
+    "product": "Workflow automation",
     "width": 1440,
     "height": 900
   },
   {
     "key": "automation/ops-dashboard",
     "title": "Operations monitor",
-    "product": "Habi Automation",
+    "product": "Workflow automation",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/morrow",
-    "title": "Coffee, grocery & local produce",
-    "product": "Morrow & Moss",
+    "title": "Retail operations",
+    "product": "Coffee shop & grocery POS",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/formafield",
-    "title": "Construction & project delivery",
-    "product": "FormaField",
+    "title": "Project delivery",
+    "product": "Construction project management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/brightlane",
-    "title": "School & staff operations",
-    "product": "Brightlane Campus",
+    "title": "Education operations",
+    "product": "School & staff management",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/kindred",
-    "title": "Dental & clinic booking",
-    "product": "Kindred Smile",
+    "title": "Healthcare appointments",
+    "product": "Dental appointment booking",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/daybreak",
-    "title": "Hotel stays & court reservations",
-    "product": "Daybreak Club",
+    "title": "Hospitality & leisure",
+    "product": "Hotel & court booking",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/vista",
-    "title": "Real estate & property discovery",
-    "product": "Vista Grove",
+    "title": "Property sales",
+    "product": "Real estate & property discovery",
     "width": 1440,
     "height": 900
   },
   {
     "key": "industry/relaydock",
-    "title": "Infrastructure & implementation",
-    "product": "RelayDock",
+    "title": "Infrastructure operations",
+    "product": "Server & deployment management",
     "width": 1440,
     "height": 900
   }

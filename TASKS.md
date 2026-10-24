@@ -80,8 +80,10 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 ## v2 UI refinement
 - [ ] **V2-UX Site refinement** — brand lockup, desktop/mobile composition, purposeful motion and photo art direction ... owner: codex · status: review (codex/v2-ui-refinement)
 
-- [ ] **V2-DEMO Industry demo collection** — seven focused brands, live previews and robotic-arm media preparation ... owner: codex · status: review (codex/v2-ui-refinement)
+- [ ] **V2-DEMO Industry demo collection** — seven system-purpose previews, workflow overviews and robotic-arm media preparation ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-BOOT Global hero and brand entrance** — international/global copy, new studio composition and accessible session intro ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-SLIDES Preview controls and product media** — side navigation, accessible 3s rotation and photographic product thumbnails ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-OVERVIEW System-purpose previews** — descriptive naming, compact hover/tap workflows and photographic catalogue media ... owner: codex · status: review (codex/v2-ui-refinement)

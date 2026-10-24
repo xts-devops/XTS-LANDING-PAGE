@@ -8,11 +8,11 @@ The user explicitly requested automatic previews on 2026-10-25. Multi-screen ser
 
 Reduced motion starts paused, disables smooth paging and stops playback when enabled live. Autoplay does not move keyboard focus; the count uses a quiet live region during rotation and polite announcements during manual navigation. Inactive slides are inert so hidden full-screen buttons are not keyboard stops. No-JS visitors can scroll the screens natively; nonfunctional enhancement controls are hidden.
 
-This is limited to the user-requested service preview galleries. The interactive industry demos and homepage gallery retain their existing manual controls.
+This is limited to the user-requested service preview galleries. The homepage gallery retains manual controls. The industry overview cards now follow the explicit finite hover/tap preview behavior documented in INDUSTRY-DEMOS.md.
 
 ## Product media
 
-The fictional Tindahan POS uses nine generated photographic product thumbnails. Morrow & Moss uses six matching coffee/market photographs, including rice, fruit and greens. Small local 480×480 WebP exports replace symbols. Products fit within their image area rather than being clipped. Sources, exact generation prompts and export paths are in [product-sources.json](media-v2/product-sources.json), with per-file records in [IMAGE-BRIEF-v2.md](IMAGE-BRIEF-v2.md). They are illustrative catalogue photographs, not XTS client products.
+The fictional coffee shop POS uses nine generated photographic product thumbnails. coffee/grocery system uses six matching coffee/market photographs, including rice, fruit and greens. Small local 480×480 WebP exports replace symbols. Products fit within their image area rather than being clipped. Sources, exact generation prompts and export paths are in [product-sources.json](media-v2/product-sources.json), with per-file records in [IMAGE-BRIEF-v2.md](IMAGE-BRIEF-v2.md). They are illustrative catalogue photographs, not XTS client products.
 
 ## Guidance and validation
 

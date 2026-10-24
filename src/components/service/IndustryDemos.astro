@@ -36,18 +36,48 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
         role="list"
       >
         {demos.map((d) => (
-          <li class="industry-card">
-            <div class="industry-thumb">
+          <li class="industry-card" data-overview={d.id}>
+            <div class="industry-thumb" data-overview-stage>
               <Screen
                 screen={`industry/${d.id}`}
-                alt={`${d.brand}: ${d.industry} concept interface`}
+                alt={`${d.title}: sample system interface`}
                 sizes="(min-width: 1024px) 32vw, 100vw"
                 widths={[480, 800]}
               />
+              <div
+                class="overview-live"
+                data-overview-live
+                aria-hidden="true"
+                inert
+              ></div>
+              <p
+                class="overview-status"
+                data-overview-status
+                aria-hidden="true"
+              ></p>
+              <button
+                type="button"
+                class="overview-control"
+                data-overview-play
+                data-overview-url={`/demos/${d.id}.html?preview=1`}
+                data-title={d.title}
+                data-play-label={copy.play}
+                data-stop-label={copy.pause}
+                data-replay-label={copy.replay}
+                data-still-label={copy.still}
+                data-complete-label={copy.complete}
+                aria-label={`${copy.play}: ${d.title}`}
+                aria-pressed="false"
+              >
+                <span class="overview-symbol" aria-hidden="true">
+                  ▶
+                </span>
+                <span data-overview-label>{copy.play}</span>
+              </button>
             </div>
             <div class="industry-card-body">
               <p class="industry-category">{d.industry}</p>
-              <h3>{d.brand}</h3>
+              <h3>{d.title}</h3>
               <p>{d.summary}</p>
               <ul class="industry-capabilities" role="list">
                 {d.capabilities.map((c) => (
@@ -57,22 +87,9 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
                   </li>
                 ))}
               </ul>
-              <button
-                type="button"
-                class="industry-open"
-                data-demo-open
-                aria-label={`${copy.open}: ${d.brand}`}
-                data-demo-url={`/demos/${d.id}.html`}
-                data-demo-title={d.brand}
-                data-demo-hint={d.try}
-              >
-                {copy.open}
-                <Icon name="arrow-up-right" />
-              </button>
               <noscript>
-                <a class="industry-open" href={`/demos/${d.id}.html`}>
+                <a class="overview-fallback" href={`/demos/${d.id}.html`}>
                   {copy.fallback}
-                  <Icon name="arrow-up-right" />
                 </a>
               </noscript>
             </div>
@@ -87,36 +104,5 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
         </a>
       </div>
     </Container>
-    <dialog
-      class="industry-dialog"
-      data-demo-dialog
-      data-lenis-prevent
-      aria-labelledby="demo-dialog-heading"
-    >
-      <div class="industry-dialog-head">
-        <div>
-          <span>{copy.label}</span>
-          <h2 id="demo-dialog-heading">{copy.fallback}</h2>
-        </div>
-        <button type="button" data-demo-close autofocus>
-          {copy.close}
-          <span aria-hidden="true"> ×</span>
-        </button>
-      </div>
-      <p class="industry-dialog-hint" data-demo-instruction>
-        {copy.dialogNote}
-      </p>
-      <div class="industry-live">
-        <p role="status" data-demo-loading>
-          {copy.loading}
-        </p>
-        <iframe
-          data-demo-frame
-          title={copy.label}
-          sandbox="allow-scripts"
-          referrerpolicy="no-referrer"
-        ></iframe>
-      </div>
-    </dialog>
   </section>
 )}

@@ -15,14 +15,14 @@ const names = [
   'Luis Ramos',
 ];
 const firms = [
-  'Amihan Home Supply',
-  'Sinag Market Co.',
-  'Dalisay Trading',
-  'Hiraya Works',
-  'Alon Retail Group',
-  'Luntian Goods',
-  'Bituin Distribution',
-  'Siklab Services',
+  'Retail supplier',
+  'Grocery retailer',
+  'Wholesale supplier',
+  'Construction supplier',
+  'Multi-branch retailer',
+  'General goods supplier',
+  'Regional distributor',
+  'Service provider',
 ];
 const cities = [
   'Quezon City',
@@ -148,7 +148,7 @@ add(
   'Purchasing / Purchase orders / PO-2026-0086',
   `<div class="grid">${panel(
     'Order details',
-    `<div class="pad grid equal"><div><p>SUPPLIER</p><h3>Amihan Home Supply</h3><p>Quezon City, Metro Manila</p></div><div><p>DELIVERY</p><h3>Pasig warehouse</h3><p>Expected October 24, 2026</p></div></div>${table(
+    `<div class="pad grid equal"><div><p>SUPPLIER</p><h3>Retail supplier</h3><p>Quezon City, Metro Manila</p></div><div><p>DELIVERY</p><h3>Pasig warehouse</h3><p>Expected October 24, 2026</p></div></div>${table(
       ['ITEM', 'QUANTITY', 'UNIT PRICE', 'AMOUNT'],
       [
         ['Arabica coffee beans', '100 kg', '₱420.00', '₱42,000.00'],
@@ -311,7 +311,7 @@ add(
   'pos/receipt',
   'Receipt preview',
   'Sale #00482 · Completed October 20, 2026 at 10:42',
-  `<div class="grid equal"><div class="receipt"><h2>TINDAHAN SAMPLE STORE</h2><p class="center">Makati, Metro Manila<br>DEMONSTRATION RECEIPT<br>Not valid for tax purposes</p><div class="dashed"></div>${details(
+  `<div class="grid equal"><div class="receipt"><h2>COFFEE SHOP RECEIPT</h2><p class="center">Makati, Metro Manila<br>DEMONSTRATION RECEIPT<br>Not valid for tax purposes</p><div class="dashed"></div>${details(
     [
       ['Receipt', 'DEMO-00482'],
       ['Cashier', 'Maria Santos'],
@@ -411,7 +411,7 @@ add(
 add(
   'crm/contact',
   'Maria Santos',
-  'Contacts / Amihan Home Supply / Maria Santos',
+  'Contacts / Retail supplier / Maria Santos',
   `<div class="grid">${panel(
     'Activity timeline',
     tabs(['Timeline', 'Notes', 'Emails', 'Files']) +
@@ -442,9 +442,9 @@ add(
     'Contact details',
     `<div class="pad"><div class="profile"><div class="avatar">MS</div><div><h3>Maria Santos</h3><p>Operations Manager</p></div></div>${details(
       [
-        ['Company', 'Amihan Home Supply'],
+        ['Company', 'Retail supplier'],
         ['City', 'Quezon City'],
-        ['Email', 'maria@amihan.example'],
+        ['Email', 'maria@customer.example'],
         ['Owner', 'Paolo Reyes'],
         ['Lifecycle', 'Active opportunity'],
       ],
@@ -527,21 +527,21 @@ add(
           [
             'Dock 01',
             'ASN-0084',
-            'Amihan Freight',
+            'Freight carrier',
             '09:30',
             badge('Unloading', 'blue'),
           ],
           [
             'Dock 02',
             'ASN-0085',
-            'Bituin Logistics',
+            'Logistics carrier',
             '10:00',
             badge('Checked in'),
           ],
           [
             'Dock 03',
             'OUT-0246',
-            'Alon Transport',
+            'Transport provider',
             '10:15',
             badge('Loading', 'amber'),
           ],
@@ -553,7 +553,7 @@ add(
 add(
   'wms/receiving',
   'Receive shipment',
-  'ASN-2026-0084 · Amihan Home Supply · Dock 01',
+  'ASN-2026-0084 · Retail supplier · Dock 01',
   stats([
     ['Expected units', '640'],
     ['Received units', '480'],
@@ -875,7 +875,7 @@ add(
         .join('')}</div>`,
     )}${panel(
       'Your account',
-      `<div class="pad"><h2>Amihan Home Supply</h2><p style="margin:12px 0 24px">Workspace administrator</p>${details(
+      `<div class="pad"><h2>Retail supplier</h2><p style="margin:12px 0 24px">Workspace administrator</p>${details(
         [
           ['Account manager', 'Paolo Reyes'],
           ['Next check-in', 'Oct 24 · 10:00'],
@@ -922,7 +922,7 @@ add(
 add(
   'software/mobile-1',
   'Good morning, Maria',
-  'Luntian Workspace',
+  'Customer workspace',
   `<div class="stats"><div class="kpi"><p>Open tasks</p><strong>12</strong><small>4 due today</small></div><div class="kpi"><p>Completed</p><strong>28</strong><small>This month</small></div></div>${panel('Today’s schedule', `<div class="pad"><p>10:00–10:30 · Online meeting</p><h2 style="margin:10px 0">Branch rollout review</h2><p>With Paolo Reyes and Angela Cruz</p><button class="btn primary" style="margin-top:15px;width:100%">View meeting details</button></div>`, 'Oct 20')}${panel(
     'Your tasks',
     `<div class="pad">${[
@@ -942,7 +942,7 @@ add(
 add(
   'software/mobile-2',
   'Book an appointment',
-  'Luntian Workspace',
+  'Customer workspace',
   `<div class="panel"><div class="pad"><p>SELECT SERVICE</p><h2 style="margin:12px 0">Project consultation</h2><p>30 minutes · Online meeting</p><div class="dashed"></div><h3>October 2026</h3><div style="display:flex;justify-content:space-between;margin:18px 0">${[21, 22, 23, 24, 25].map((d, i) => `<div style="padding:12px 9px;border-radius:8px;background:${i === 2 ? 'var(--accent)' : '#edf1f6'};color:${i === 2 ? 'white' : 'inherit'}">${['Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}<br><b style="font-size:20px">${d}</b></div>`).join('')}</div><h3>Available times · Asia/Manila</h3><div class="grid equal" style="gap:10px;margin:16px 0">${['09:00 AM', '10:00 AM', '11:30 AM', '02:00 PM'].map((t, i) => btn(t, i === 1)).join('')}</div><div class="dashed"></div>${details(
     [
       ['Your specialist', 'Paolo Reyes'],
@@ -955,7 +955,7 @@ add(
 add(
   'software/mobile-3',
   'Request #0142',
-  'Luntian Workspace',
+  'Customer workspace',
   `${panel(
     'Add Cebu branch users',
     `<div class="pad">${badge('In progress', 'blue')}<p style="margin:15px 0">Please create access for our new Cebu branch team before Friday’s training.</p>${details(
@@ -992,7 +992,7 @@ add(
     ],
     [
       'Create pick request',
-      'Bodega WMS',
+      'Warehouse management',
       'Action · API request',
       'Average 142 ms',
       740,
@@ -1072,10 +1072,10 @@ add(
     `<div class="grid">${panel('Event throughput', chart(true), 'Last 6 hours')}${panel(
       'Connected systems',
       list([
-        ['Northwind ERP', '● Healthy'],
-        ['Bodega WMS', '● Healthy'],
-        ['Haraya CRM', '● Healthy'],
-        ['Luntian Portal', '● Healthy'],
+        ['Business ERP', '● Healthy'],
+        ['Warehouse management', '● Healthy'],
+        ['Sales CRM', '● Healthy'],
+        ['Customer portal', '● Healthy'],
       ]),
     )}</div>` +
     panel(
@@ -1111,14 +1111,14 @@ add(
 );
 applyFeatured(screens, { stats, panel, chart, table, rows });
 const groups = {
-  erp: ['Northwind ERP', '#3a72e8'],
-  pos: ['Tindahan POS', '#168977'],
-  crm: ['Haraya CRM', '#7d5ce2'],
-  wms: ['Bodega WMS', '#277b9a'],
-  inventory: ['Stockwise', '#326baf'],
-  hr: ['Kawayan People', '#97704a'],
-  software: ['Luntian Workspace', '#347e70'],
-  automation: ['Habi Connect', '#5b69db'],
+  erp: ['Business ERP', '#3a72e8'],
+  pos: ['Coffee shop POS', '#168977'],
+  crm: ['Sales CRM', '#7d5ce2'],
+  wms: ['Warehouse management', '#277b9a'],
+  inventory: ['Inventory management', '#326baf'],
+  hr: ['HR & payroll', '#97704a'],
+  software: ['Customer workspace', '#347e70'],
+  automation: ['Workflow automation', '#5b69db'],
 };
 const contract = JSON.parse(
   fs.readFileSync(path.join(root, 'screen-contract.json'), 'utf8'),
@@ -1157,7 +1157,7 @@ for (const key of contract) {
     ? s.body
     : mobile
       ? `<main class="mobile" style="--accent:${accent}"><div class="statusbar"><span>9:41</span><span>▮▮▮ &nbsp; ◉ &nbsp; ▰</span></div><header class="mobile-head"><p>${s.sub}</p><h1>${s.title}</h1></header><div class="mobile-body">${s.body}</div>${sample}<nav class="bottom-nav"><b>⌂ Home</b><span>▤ Tasks</span><span>▣ Schedule</span><span>◉ Account</span></nav></main>`
-      : `<main class="app" style="--accent:${accent}"><aside class="sidebar"><div class="brand"><span class="mark">${product[0]}</span>${product.split(' ')[0]}</div><div class="nav-label">WORKSPACE</div>${nav}<div class="nav-label">MANAGE</div><div class="nav">⚙ &nbsp; Settings</div><div class="nav">◉ &nbsp; Help centre</div><div class="sidefoot">${product}<br>Philippines workspace<br>◉ All systems operational</div></aside><div class="shell"><header class="topbar"><span>Amihan workspace &nbsp;⌄</span><div class="topright"><span class="search">⌕ &nbsp; Search anything…</span><span>◷ &nbsp; Notifications</span><div class="avatar">MS</div></div></header><div class="content"><div class="crumb">${product} &nbsp; / &nbsp; ${s.title}</div><div class="heading"><div><h1>${s.title}</h1><p>${s.sub}</p></div><div class="actions">${btn('Export')}${btn(s.action || 'October 2026 ⌄', true)}</div></div>${s.body}</div></div>${sample}</main>`;
+      : `<main class="app" style="--accent:${accent}"><aside class="sidebar"><div class="brand"><span class="mark">${product[0]}</span>${product}</div><div class="nav-label">WORKSPACE</div>${nav}<div class="nav-label">MANAGE</div><div class="nav">⚙ &nbsp; Settings</div><div class="nav">◉ &nbsp; Help centre</div><div class="sidefoot">${product}<br>Philippines workspace<br>◉ All systems operational</div></aside><div class="shell"><header class="topbar"><span>Sample workspace &nbsp;⌄</span><div class="topright"><span class="search">⌕ &nbsp; Search anything…</span><span>◷ &nbsp; Notifications</span><div class="avatar">MS</div></div></header><div class="content"><div class="crumb">${product} &nbsp; / &nbsp; ${s.title}</div><div class="heading"><div><h1>${s.title}</h1><p>${s.sub}</p></div><div class="actions">${btn('Export')}${btn(s.action || 'October 2026 ⌄', true)}</div></div>${s.body}</div></div>${sample}</main>`;
   const file = path.join(root, key + '.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(

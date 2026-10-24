@@ -127,3 +127,12 @@ These are illustrative design directions, not a continuous filmed walkthrough, a
 | `showcase-ui/assets/products/greens.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `market-products-source.png` logged in `docs/media-v2/product-sources.json`. |
 
 The six live-demo thumbnails are also exported under `public/demos/media/products/`. Source PNG sheets are retained in `docs/media-v2/`; crops are resized to 480×480 WebP at quality 82. These generated photographs replace symbols in the fictional Tindahan POS and Morrow & Moss demos. They are illustrative catalogue products, not XTS client evidence.
+
+## Hospitality system photographs — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `public/demos/media/studio.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |
+| `public/demos/media/garden-suite.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |
+| `public/demos/media/family-loft.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |
+| `public/demos/media/pickleball-court.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |

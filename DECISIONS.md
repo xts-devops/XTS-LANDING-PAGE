@@ -84,3 +84,7 @@ User explicitly requests a first-entry XTS website boot and a different hero dir
 
 ### D26 · 2026-10-25 · user + codex · Controlled service-preview rotation
 User explicitly requests automatic sample-screen previews and image-side arrows. Multi-screen service galleries rotate at a 3s cadence only while visible, with a Play/Pause control, hover pause, persistent stop on focus/manual/touch interaction, reduced-motion suppression and hidden-panel/document/modal suspension. Native swipe/keyboard controls and full-screen inspection remain. This applies to service screenshots only; homepage and live industry demos retain their manual behavior. Layout, source media and acceptance: docs/CAROUSEL-UX.md.
+
+
+### D27 · 2026-10-25 · user + codex · Descriptive systems and finite workflow overviews
+User replaces fictional company/product branding with system-purpose names, including core sample UIs. Industry cards replace Try-the-demo CTAs and full-screen sandboxes with compact hover/tap overviews: one lazy iframe, finite cursor actions on real local controls, explicit stop/replay, static reduced-motion output and cleanup on exit/offscreen/hidden. Existing internal screen keys remain stable; no fake client or company claims. Current direction: docs/INDUSTRY-DEMOS.md.

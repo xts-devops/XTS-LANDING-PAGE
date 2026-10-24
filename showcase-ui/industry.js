@@ -298,7 +298,8 @@
   $('[data-viewing]')?.addEventListener('click', () => {
     const panel = $('[data-viewing-panel]');
     panel.hidden = !panel.hidden;
-    if (!panel.hidden) $('[data-viewing-date]').focus();
+    if (!panel.hidden && !new URLSearchParams(location.search).has('preview'))
+      $('[data-viewing-date]').focus();
   });
   $('[data-viewing-confirm]')?.addEventListener('click', () => {
     const date = $('[data-viewing-date]');
@@ -375,7 +376,7 @@
       r.querySelector('small').textContent = 'Ready';
     });
     $('[data-deploy-log]').textContent =
-      '$ relaydock deploy --preview\nStarting local demonstration…';
+      '$ system deploy --preview\nStarting local demonstration…';
     deployStep(0);
   });
   document.addEventListener('visibilitychange', () => {
@@ -395,4 +396,134 @@
     stopDeploy();
     clearTimeout(toastTimer);
   });
+})();
+/* Local, finite marketing choreography: real controls, no external requests. */
+(() => {
+  const query = new URLSearchParams(location.search);
+  if (!query.has('preview')) return;
+  document.documentElement.classList.add('is-overview');
+  const reduced =
+    query.has('still') || matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const workflows = {
+    morrow: [
+      ['[data-product="Flat white"]', 'Add a coffee'],
+      ['[data-product="Local rice · 1 kg"]', 'Add a pantry item'],
+      [
+        '[data-segment="products"][data-value="Market"]',
+        'Filter the catalogue',
+      ],
+      ['[data-checkout]', 'Complete the sample sale'],
+    ],
+    formafield: [
+      ['[data-phase-button="0"]', 'Foundation'],
+      ['[data-phase-button="1"]', 'Structural frame'],
+      ['[data-phase-button="2"]', 'Envelope'],
+      ['[data-phase-button="3"]', 'Fit-out & handover'],
+    ],
+    brightlane: [
+      ['[data-segment="roster"][data-value="Staff"]', 'See the staff roster'],
+      ['[data-attendance]', 'Filter attendance', 'Present'],
+      [
+        '[data-segment="roster"][data-value="Students"]',
+        'Switch to student records',
+      ],
+      ['[data-attendance]', 'Find pending arrivals', 'Pending'],
+    ],
+    kindred: [
+      ['[data-clinician]', 'Choose a clinician', 'Dr Maya Reyes'],
+      ['[data-book-date="Mon, 26 October"]', 'Choose a day'],
+      ['[data-book-time="2:00 PM"]', 'Select a time'],
+      ['[data-confirm-booking]', 'Review the confirmation'],
+    ],
+    daybreak: [
+      ['[data-reserve="Garden suite"]', 'Preview a stay reservation'],
+      [
+        '[data-segment="reservation"][data-value="Courts"]',
+        'Switch to sports bookings',
+      ],
+      [
+        '[data-reserve="Court 02 · 4:00–5:00 PM"]',
+        'Preview a court reservation',
+      ],
+    ],
+    vista: [
+      ['[data-tour-view="interior"]', 'Explore the living space'],
+      ['[data-tour-view="exterior"]', 'Return to the courtyard'],
+      ['[data-viewing]', 'Arrange a viewing'],
+      ['[data-viewing-confirm]', 'Review the viewing request'],
+    ],
+    relaydock: [
+      ['[data-stack="data"]', 'Inspect data services'],
+      ['[data-stack="jobs"]', 'Inspect the worker queue'],
+      ['[data-deploy]', 'Run deployment checks'],
+    ],
+  };
+  const steps = workflows[document.body.dataset.demo] ?? [];
+  const cursor = document.createElement('div');
+  cursor.className = 'overview-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  const caption = document.createElement('div');
+  caption.className = 'overview-caption';
+  caption.setAttribute('aria-hidden', 'true');
+  if (!reduced) document.body.append(cursor);
+  document.body.append(caption);
+  let timer,
+    cancelled = false;
+  const wait = (ms) =>
+    new Promise((resolve) => {
+      timer = setTimeout(resolve, ms);
+    });
+  const stop = () => {
+    cancelled = true;
+    clearTimeout(timer);
+  };
+  const run = async () => {
+    for (const [selector, text, value] of steps) {
+      if (cancelled) return;
+      const target = document.querySelector(selector);
+      if (!target) continue;
+      caption.textContent = text;
+      parent.postMessage({ type: 'xts:overview-step', label: text }, '*');
+      const rect = target.getBoundingClientRect();
+      cursor.style.transform = `translate(${rect.x + rect.width / 2}px,${rect.y + rect.height / 2}px)`;
+      if (!reduced) await wait(420);
+      if (cancelled) return;
+      target.classList.add('overview-target');
+      cursor.classList.add('is-clicking');
+      if (value !== undefined) {
+        target.value = value;
+        target.dispatchEvent(new Event('change', { bubbles: true }));
+      } else target.click();
+      if (!reduced) await wait(900);
+      if (cancelled) return;
+      target.classList.remove('overview-target');
+      cursor.classList.remove('is-clicking');
+    }
+    if (!reduced)
+      await wait(document.body.dataset.demo === 'relaydock' ? 2800 : 500);
+    if (cancelled) return;
+    caption.textContent = 'Workflow overview complete';
+    cursor.hidden = true;
+    parent.postMessage({ type: 'xts:overview-ended' }, '*');
+  };
+  let started = false;
+  addEventListener('message', (event) => {
+    if (
+      event.source !== parent ||
+      event.data?.type !== 'xts:overview-start' ||
+      started
+    )
+      return;
+    started = true;
+    void run();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+  });
+  matchMedia('(prefers-reduced-motion:reduce)').addEventListener(
+    'change',
+    stop,
+  );
+  addEventListener('pagehide', stop);
+  parent.postMessage({ type: 'xts:overview-ready' }, '*');
 })();

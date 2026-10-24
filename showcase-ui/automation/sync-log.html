@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sync log — Habi Connect</title>
+    <title>Sync log — Workflow automation</title>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../featured.css" />
   </head>
@@ -11,16 +11,18 @@
     <main class="ux-auto">
       <aside class="ux-auto-side">
         <div class="ux-auto-brand">
-          <span>⌘</span>habi<span class="ux-auto-dot">●</span>
+          <span>⌘</span>Automation<span class="ux-auto-dot">●</span>
         </div>
-        <div class="ux-auto-workspace">Amihan workspace <span>⌄</span></div>
+        <div class="ux-auto-workspace">Sample workspace <span>⌄</span></div>
         <small>BUILD & OPERATE</small>
         <div class="ux-auto-nav">⌘<span>Workflows</span></div>
         <div class="ux-auto-nav active">≡<span>Execution log</span></div>
         <div class="ux-auto-nav">▥<span>Observability</span></div>
         <small>CONNECTIONS</small>
-        <div class="ux-auto-connection"><i></i>Northwind ERP<span>↗</span></div>
-        <div class="ux-auto-connection"><i></i>Bodega WMS<span>↗</span></div>
+        <div class="ux-auto-connection"><i></i>Business ERP<span>↗</span></div>
+        <div class="ux-auto-connection">
+          <i></i>Warehouse management<span>↗</span>
+        </div>
         <div class="ux-auto-connection">
           <i></i>Storefront API<span>↗</span>
         </div>
@@ -35,7 +37,7 @@
       </aside>
       <div class="ux-auto-shell">
         <header class="ux-auto-top">
-          <span>Amihan / Execution log</span>
+          <span>Workspace / Execution log</span>
           <div>
             <span class="ux-live-dot"></span>Live environment <b>⌘ K</b
             ><span class="ux-avatar">CM</span>
@@ -101,7 +103,7 @@
                 <td>
                   <b>Stock reconciled</b><small>EVT-8245 / SO-1047</small>
                 </td>
-                <td><span class="ux-connector-icon">▦</span>WMS → Northwind</td>
+                <td><span class="ux-connector-icon">▦</span>WMS → ERP</td>
                 <td>165 ms</td>
                 <td><code>200</code></td>
                 <td><span class="ux-badge green">Success</span></td>
@@ -129,7 +131,7 @@
                 <td>
                   <b>Stock reconciled</b><small>EVT-8242 / SO-1044</small>
                 </td>
-                <td><span class="ux-connector-icon">▦</span>WMS → Northwind</td>
+                <td><span class="ux-connector-icon">▦</span>WMS → ERP</td>
                 <td>234 ms</td>
                 <td><code>429</code></td>
                 <td><span class="ux-badge amber">Retrying</span></td>
@@ -157,7 +159,7 @@
                 <td>
                   <b>Stock reconciled</b><small>EVT-8239 / SO-1041</small>
                 </td>
-                <td><span class="ux-connector-icon">▦</span>WMS → Northwind</td>
+                <td><span class="ux-connector-icon">▦</span>WMS → ERP</td>
                 <td>303 ms</td>
                 <td><code>422</code></td>
                 <td><span class="ux-badge amber">Validation error</span></td>
@@ -190,7 +192,7 @@
         </div>
       </div>
       <div class="ux-sample">
-        FICTIONAL PRODUCT · PHILIPPINE DEMONSTRATION DATA
+        ILLUSTRATIVE SYSTEM · PHILIPPINE DEMONSTRATION DATA
       </div>
     </main>
   </body>

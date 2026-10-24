@@ -1,0 +1,12 @@
+{
+  "source": "Generated with built-in imagegen",
+  "file": "docs/media-v2/hospitality-source.png",
+  "prompt": "Square contact sheet, exactly 2 columns and 2 rows of equal square photographs with no gutters and no text. Photorealistic hospitality listing photography for a generic hotel booking UI. Top left: modest refined studio hotel room with one queen bed, warm oak furniture, ivory linens and a window overlooking a leafy courtyard. Top right: larger garden suite with queen bed, a small pale sofa and sliding glass door onto a planted terrace. Bottom left: family hotel loft with two comfortable beds and a compact sitting area, neutral linen and natural wood, believable modest upscale accommodation. Bottom right: clean indoor pickleball court, green playing surface, crisp white court markings, central net, warm daylight through high windows, no players. Each scene photographed at eye level with a wide-angle lens, natural warm daylight, authentic material texture and realistic details. All four images useful as clear booking thumbnails. No logos, no hotel names, no text, no signage, no people, no watermarks, no illustrations.",
+  "exports": [
+    "public/demos/media/studio.webp",
+    "public/demos/media/garden-suite.webp",
+    "public/demos/media/family-loft.webp",
+    "public/demos/media/pickleball-court.webp"
+  ],
+  "export": "Four equal cells extracted from the source sheet; 720×540 WebP quality 82. Illustrative room/court photographs, not actual hotel inventory or client projects."
+}

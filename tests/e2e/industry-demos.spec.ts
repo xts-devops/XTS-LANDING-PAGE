@@ -31,7 +31,7 @@ for (const id of ids)
         animations: 'disabled',
       });
     });
-test('concept sandboxes are requested on demand, Escape returns focus, and unloading stops them', async ({
+test('workflow previews load on request, stay inline and stop with Escape', async ({
   page,
 }) => {
   const requests: string[] = [];
@@ -39,21 +39,23 @@ test('concept sandboxes are requested on demand, Escape returns focus, and unloa
     if (/\/demos\/.*\.html/.test(r.url())) requests.push(r.url());
   });
   await page.goto('/services/custom-software');
-  await expect(page.locator('[data-demo-open]')).toHaveCount(3);
+  await expect(page.locator('[data-overview-play]')).toHaveCount(3);
   expect(requests).toHaveLength(0);
-  const opener = page.locator('[data-demo-open]').first();
-  await opener.click();
-  const dialog = page.locator('[data-demo-dialog]');
-  await expect(dialog).toBeVisible();
-  const frame = page.frameLocator('[data-demo-frame]');
-  await expect(frame.locator('h1')).toContainText('smile');
+  const button = page.locator('[data-overview-play]').first();
+  await button.click();
+  const card = page.locator('[data-overview]').first();
+  await expect(card).toHaveAttribute('data-preview', 'complete');
+  await expect(card.locator('iframe')).toHaveAttribute(
+    'sandbox',
+    'allow-scripts',
+  );
+  await expect(card.locator('iframe')).toHaveAttribute('tabindex', '-1');
   expect(requests).toHaveLength(1);
-  await frame.locator('[data-confirm-booking]').focus();
   await page.keyboard.press('Escape');
-  await expect(dialog).not.toBeVisible();
-  await expect(opener).toBeFocused();
-  await expect(page.locator('[data-demo-frame]')).not.toHaveAttribute('src');
+  await expect(card.locator('iframe')).toHaveCount(0);
+  await expect(button).toBeFocused();
 });
+
 test('retail checkout and filtering use local sample state', async ({
   page,
 }) => {
@@ -174,7 +176,7 @@ test('no-JS visitors have a direct concept preview link', async ({
   });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4380/services/custom-software');
-  await expect(page.locator('[data-demo-open]').first()).not.toBeVisible();
+  await expect(page.locator('[data-overview-play]').first()).not.toBeVisible();
   const link = page.locator('.industry-card noscript a').first();
   await expect(link).toBeVisible();
   await link.click();
