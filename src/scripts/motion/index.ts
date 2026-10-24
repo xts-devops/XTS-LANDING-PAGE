@@ -1,16 +1,15 @@
 /**
- * Motion engine (MOTION §7, D19). Markup declares motion with data-* attributes; this applies it.
+ * Motion engine v2 (MOTION §7, D19, D22). Markup declares motion with data-*; this applies it.
  *
  * - Reduced motion → returns before downloading anything (0 KB of GSAP/Lenis).
- * - GSAP + plugins load lazily after first paint; the hero entrance is pure CSS and never waits.
- * - Nothing is hidden by CSS up front: from-states are set only on elements still below the
- *   viewport when the engine starts, so a slow or failed load never leaves content invisible.
+ * - GSAP + ScrollTrigger + Lenis load on first interaction (3.5s fallback); the hero entrance is
+ *   pure CSS and never waits for JS.
+ * - Nothing is hidden by CSS up front: from-states are set only on elements still below the fold.
+ * - Layout-changing modes (exploded view) are decided in CSS before first paint, never here (CLS).
  */
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (!reduce) {
-  // Boot on first interaction (or after 3.5s): no JS cost for the first paint/LCP, and below-fold
-  // elements are still below the fold when the first scroll arrives.
   const events = [
     'scroll',
     'pointermove',
@@ -31,29 +30,31 @@ if (!reduce) {
   setTimeout(start, 3500);
 }
 
+type Gsap = typeof import('gsap').gsap;
+type ST = typeof import('gsap/ScrollTrigger').ScrollTrigger;
+type Lenis = InstanceType<typeof import('lenis').default>;
+
 async function boot() {
-  const [{ gsap }, { ScrollTrigger }, { DrawSVGPlugin }] = await Promise.all([
+  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
     import('gsap'),
     import('gsap/ScrollTrigger'),
-    import('gsap/DrawSVGPlugin'),
   ]);
-  gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+  gsap.registerPlugin(ScrollTrigger);
   const { DUR, EASE } = await import('./tokens');
   gsap.defaults({ ease: EASE.out, duration: DUR[3] });
 
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const lenis = await initSmoothScroll(gsap, ScrollTrigger);
   const belowFold = (el: Element) =>
     el.getBoundingClientRect().top > innerHeight * 0.92;
 
-  await initSmoothScroll(gsap, ScrollTrigger);
-
-  // ---- data-reveal: up | fade | clip (batched, once) ----------------------------------------
-
+  // ---- data-reveal: section heads + media only (restraint), batched, once --------------------
   // opacity (not autoAlpha): visibility:hidden would drop headings from the accessibility tree.
   const reveals = gsap.utils
     .toArray<HTMLElement>('[data-reveal]')
     .filter(belowFold);
   const from: Record<string, gsap.TweenVars> = {
-    up: { opacity: 0, y: 24 },
+    up: { opacity: 0, y: 28 },
     fade: { opacity: 0 },
     clip: { clipPath: 'inset(0 0 100% 0)' },
   };
@@ -77,86 +78,33 @@ async function boot() {
       ),
   });
 
-  // ---- data-draw inside schematics: lines draw in as the art reveals ----------------------
-  gsap.utils.toArray<SVGPathElement>('.visual [data-draw]').forEach((path) => {
-    if (!belowFold(path)) return;
-    gsap.fromTo(
-      path,
-      { drawSVG: '0%' },
-      {
-        drawSVG: '100%',
-        duration: 1.4,
-        ease: EASE.inout,
-        delay: 0.3,
-        scrollTrigger: { trigger: path, start: 'top 85%', once: true },
-      },
-    );
-  });
-
-  // ---- data-count: count up to the value already in the markup ("300+") -----------------
+  // ---- data-count: count up to the value already in the markup ("300+") ------------------------
   gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
     const match = el.textContent?.trim().match(/^(\d+)(.*)$/);
     if (!match) return;
     const target = Number(match[1]);
     const suffix = match[2];
     const state = { n: 0 };
-    el.style.fontVariantNumeric = 'tabular-nums';
     gsap.to(state, {
       n: target,
       duration: 1.6,
       ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+      scrollTrigger: { trigger: el, start: 'top 95%', once: true },
       onStart: () => void (el.textContent = `0${suffix}`),
       onUpdate: () => void (el.textContent = `${Math.round(state.n)}${suffix}`),
     });
   });
 
-  // ---- Process: connectors fill with scroll, nodes light up as the line reaches them -------
-  const timeline = document.querySelector<HTMLElement>('.process-timeline');
-  if (timeline) {
-    const steps = [...timeline.querySelectorAll<HTMLElement>(':scope > li')];
-    const segments = steps.length - 1;
-    ScrollTrigger.create({
-      trigger: timeline,
-      start: 'top 75%',
-      end: 'bottom 55%',
-      scrub: 0.6,
-      onUpdate: ({ progress }) => {
-        steps.forEach((li, i) => {
-          const fill = Math.min(1, Math.max(0, progress * segments - i));
-          li.style.setProperty('--fill', fill.toFixed(3));
-          const reached = i === 0 ? progress > 0.02 : progress * segments >= i;
-          li.classList.toggle('is-reached', reached);
-        });
-      },
-    });
-  }
-
-  // ---- Hero console: gentle pointer + scroll parallax (desktop only) -----------------------
-  const consoleEl = document.querySelector<HTMLElement>('.hero-parallax');
-  if (
-    consoleEl &&
-    matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1051px)')
-      .matches
-  ) {
-    const xTo = gsap.quickTo(consoleEl, 'x', {
-      duration: 0.9,
-      ease: 'power3.out',
-    });
-    const yTo = gsap.quickTo(consoleEl, 'y', {
-      duration: 0.9,
-      ease: 'power3.out',
-    });
-    const hero = document.querySelector<HTMLElement>('[data-hero]');
-    hero?.addEventListener('pointermove', (e) => {
-      xTo((e.clientX / innerWidth - 0.5) * 12);
-      yTo((e.clientY / innerHeight - 0.5) * 10);
-    });
-    gsap.to('.console', {
-      yPercent: -6,
+  // ---- Hero: photo drifts slower than the page ------------------------------------------------
+  const backdrop = document.querySelector<HTMLElement>(
+    '.hero-backdrop, .svc-hero-photo',
+  );
+  if (backdrop) {
+    gsap.to(backdrop, {
+      yPercent: 12,
       ease: 'none',
       scrollTrigger: {
-        trigger: '[data-hero]',
+        trigger: backdrop.parentElement!,
         start: 'top top',
         end: 'bottom top',
         scrub: true,
@@ -164,17 +112,100 @@ async function boot() {
     });
   }
 
-  // Layout settles once fonts/images are in.
+  initWorkGallery(gsap, ScrollTrigger, lenis, fine);
+  initExploded(ScrollTrigger);
+
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
   addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
 }
 
+/** Work: pinned section whose vertical scroll moves the track sideways (wide screens, fine pointer). */
+function initWorkGallery(
+  gsap: Gsap,
+  ScrollTrigger: ST,
+  lenis: Lenis | undefined,
+  fine: boolean,
+) {
+  const section = document.querySelector<HTMLElement>('#work');
+  const track = section?.querySelector<HTMLElement>('[data-work-track]');
+  const list = track?.querySelector<HTMLElement>('.work-list');
+  if (!section || !track || !list || !fine || innerWidth < 1024) return;
+
+  track.classList.add('is-pinned');
+  const distance = () => Math.max(0, list.scrollWidth - track.clientWidth);
+  const tween = gsap.to(list, {
+    x: () => -distance(),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top+=72',
+      end: () => `+=${distance()}`,
+      pin: true,
+      scrub: 0.8,
+      invalidateOnRefresh: true,
+    },
+  });
+  // Keyboard users: focusing something in an off-screen card scrolls the page to reveal it.
+  list.addEventListener('focusin', (e) => {
+    const card = (e.target as Element).closest<HTMLElement>('.work-card');
+    const st = tween.scrollTrigger;
+    if (!card || !st) return;
+    const ratio = Math.min(
+      1,
+      card.offsetLeft / Math.max(1, list.scrollWidth - card.offsetWidth),
+    );
+    const y = st.start + ratio * (st.end - st.start);
+    if (lenis) lenis.scrollTo(y, { immediate: true });
+    else scrollTo({ top: y });
+  });
+  ScrollTrigger.refresh();
+}
+
+/** Robotics exploded view: scroll position drives the video, or the separation between photos. */
+function initExploded(ScrollTrigger: ST) {
+  const root = document.querySelector<HTMLElement>('[data-exploded]');
+  if (!root) return;
+  const scroller = root.querySelector<HTMLElement>('.exploded-scroll');
+  const bar = root.querySelector<HTMLElement>('.exploded-progress');
+  const video = root.querySelector<HTMLVideoElement>('[data-exploded-video]');
+  const a = root.querySelector<HTMLElement>('.exploded-a');
+  const b = root.querySelector<HTMLElement>('.exploded-b');
+  if (!scroller) return;
+
+  if (video) {
+    video.preload = 'auto';
+    video.load();
+  }
+  const ease = (t: number) => t * t * (3 - 2 * t); // smoothstep
+  ScrollTrigger.create({
+    trigger: scroller,
+    start: 'top top+=104',
+    end: 'bottom bottom',
+    scrub: true,
+    onUpdate: ({ progress }) => {
+      bar?.style.setProperty('--p', progress.toFixed(3));
+      if (video && video.duration) {
+        video.currentTime = progress * (video.duration - 0.05);
+        return;
+      }
+      if (!a || !b) return;
+      const t = ease(Math.min(1, Math.max(0, (progress - 0.12) / 0.7)));
+      a.style.opacity = String(1 - t);
+      a.style.transform = `scale(${1 + t * 0.05})`;
+      a.style.filter = `blur(${(t * 6).toFixed(2)}px)`;
+      b.style.opacity = String(t);
+      b.style.transform = `scale(${0.94 + t * 0.06})`;
+      b.style.filter = `blur(${((1 - t) * 6).toFixed(2)}px)`;
+    },
+  });
+}
+
 /** Lenis smooth scrolling for fine pointers, synced to ScrollTrigger; anchors honour the header. */
 async function initSmoothScroll(
-  gsap: typeof import('gsap').gsap,
-  ScrollTrigger: typeof import('gsap/ScrollTrigger').ScrollTrigger,
-) {
-  if (!matchMedia('(pointer: fine)').matches) return;
+  gsap: Gsap,
+  ScrollTrigger: ST,
+): Promise<Lenis | undefined> {
+  if (!matchMedia('(pointer: fine)').matches) return undefined;
   const { default: Lenis } = await import('lenis');
   const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
   lenis.on('scroll', ScrollTrigger.update);
@@ -188,19 +219,20 @@ async function initSmoothScroll(
     ) - 16;
   document.addEventListener('click', (e) => {
     const link = (e.target as Element).closest<HTMLAnchorElement>(
-      'a[href^="#"]',
+      'a[href*="#"]',
     );
-    if (!link || link.hash.length < 2 || link.closest('[role="tablist"]'))
+    if (!link || link.pathname !== location.pathname || link.hash.length < 2)
       return;
-    const target = document.querySelector(link.hash);
+    if (link.closest('[role="tablist"]')) return;
+    const target = document.querySelector<HTMLElement>(link.hash);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target as HTMLElement, { offset: headerOffset() });
+    lenis.scrollTo(target, { offset: headerOffset() });
     history.pushState(null, '', link.hash);
-    // Move focus for keyboard and screen-reader users once the scroll lands.
     setTimeout(() => {
-      (target as HTMLElement).setAttribute('tabindex', '-1');
-      (target as HTMLElement).focus({ preventScroll: true });
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
     }, 700);
   });
+  return lenis;
 }

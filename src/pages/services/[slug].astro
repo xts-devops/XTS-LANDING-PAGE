@@ -1,0 +1,123 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/sections/Header.astro';
+import Footer from '../../components/sections/Footer.astro';
+import Contact from '../../components/sections/Contact.astro';
+import Container from '../../components/ui/Container.astro';
+import Icon from '../../components/ui/Icon.astro';
+import Photo from '../../components/media/Photo.astro';
+import SystemShowcase from '../../components/service/SystemShowcase.astro';
+import ScreenOnPhoto from '../../components/media/ScreenOnPhoto.astro';
+import ExplodedView from '../../components/service/ExplodedView.astro';
+import { services } from '../../content/services';
+import type { Service } from '../../content/types';
+import { site } from '../../content/site';
+import '../../styles/service.css';
+
+export const getStaticPaths = (() =>
+  services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+const copy = site.servicePage;
+// Short galleries sit in one row; column widths follow each photo's ratio so heights match.
+const row = (service.gallery?.length ?? 0) < 4;
+const ratioOf = (r = '4 / 3') => {
+  const [a, b] = r.split('/').map(Number);
+  return a / b;
+};
+const rowColumns = `--cols:${(service.gallery ?? []).map((g) => `${ratioOf(g.ratio).toFixed(3)}fr`).join(' ')}`;
+---
+
+<Base title={service.title} description={service.intro}>
+  <Header />
+  <main id="main-content">
+    <section class="svc-hero" aria-labelledby="svc-title">
+      <Photo
+        photo={service.photo}
+        alt={service.photoAlt}
+        ratio="auto"
+        class="svc-hero-photo"
+        sizes="100vw"
+        widths={[960, 1600, 2000]}
+        eager
+        transition={`svc-${service.slug}`}
+      />
+      <Container class="svc-hero-inner">
+        <a href="/#services" class="svc-back">
+          <Icon name="arrow-right" class="flip" />
+          {copy.back}
+        </a>
+        <h1
+          id="svc-title"
+          style={`view-transition-name:svc-title-${service.slug}`}
+        >
+          {service.title}
+        </h1>
+        <p class="svc-intro">{service.intro}</p>
+        <ul class="svc-highlights" role="list">
+          {service.highlights.map((h) => (
+            <li>{h}</li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+
+    {service.slug === 'robotics' && <ExplodedView />}
+
+    {service.systems && (
+      <SystemShowcase systems={service.systems} serviceTitle={service.title} />
+    )}
+
+    {service.gallery && (
+      <section class="section gallery" aria-labelledby="gallery-heading">
+        <Container>
+          <h2 id="gallery-heading" data-reveal="up">
+            {service.galleryHeading ?? copy.galleryHeading}
+          </h2>
+          {row ? (
+            <ul class="gallery-row" role="list" style={rowColumns}>
+              {service.gallery.map((g) => (
+                <li class="gallery-item">
+                  <Photo
+                    photo={g.photo}
+                    alt={g.alt}
+                    ratio={g.ratio ?? '4 / 3'}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  >
+                    {g.onPhoto && <ScreenOnPhoto {...g.onPhoto} />}
+                    <figcaption>{g.caption}</figcaption>
+                  </Photo>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul class="gallery-grid" role="list">
+              {service.gallery.map((g, i) => (
+                <li class={`gallery-item gallery-item-${i}`}>
+                  <Photo
+                    photo={g.photo}
+                    alt={g.alt}
+                    ratio={i === 0 ? '4 / 5' : '4 / 3'}
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  >
+                    <figcaption>{g.caption}</figcaption>
+                  </Photo>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Container>
+      </section>
+    )}
+
+    <Contact need={service.slug} />
+  </main>
+  <Footer />
+</Base>

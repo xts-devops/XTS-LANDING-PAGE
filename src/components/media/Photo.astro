@@ -1,0 +1,74 @@
+---
+/**
+ * Real-life photo by key (D22): src/assets/photos/<key>.(jpg|jpeg|png|webp).
+ * Optimised to AVIF/WebP with responsive srcset. If the file isn't there yet, renders a quiet
+ * placeholder (and, in dev, the expected path) so pages ship before media does.
+ */
+import type { ImageMetadata } from 'astro';
+import '../../styles/media.css';
+import { Picture } from 'astro:assets';
+
+interface Props {
+  photo: string;
+  alt: string;
+  /** CSS aspect-ratio of the frame, e.g. '4 / 3'. */
+  ratio?: string;
+  sizes?: string;
+  widths?: number[];
+  eager?: boolean;
+  class?: string;
+  /** Native view-transition name for page-to-page morphs. */
+  transition?: string;
+}
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/photos/**/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+const {
+  photo,
+  alt,
+  ratio = '4 / 3',
+  sizes = '(min-width: 1024px) 50vw, 100vw',
+  widths = [480, 800, 1200, 1600],
+  eager = false,
+  class: className,
+  transition,
+} = Astro.props;
+
+const match = Object.entries(files).find(([path]) =>
+  path.replace(/\.(jpe?g|png|webp)$/, '').endsWith(`/photos/${photo}`),
+);
+const src = match?.[1].default;
+const style = [
+  `--ratio:${ratio}`,
+  transition ? `view-transition-name:${transition}` : '',
+]
+  .filter(Boolean)
+  .join(';');
+---
+
+<figure class:list={['photo', className]} style={style}>
+  {src ? (
+    <Picture
+      src={src}
+      alt={alt}
+      formats={['avif', 'webp']}
+      widths={widths.filter((w) => w <= src.width)}
+      sizes={sizes}
+      quality={72}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+    />
+  ) : (
+    <div
+      class="photo-pending"
+      {...(alt
+        ? { role: 'img', 'aria-label': alt }
+        : { 'aria-hidden': 'true' })}
+    >
+      {import.meta.env.DEV && <span>photos/{photo}.jpg</span>}
+    </div>
+  )}
+  <slot />
+</figure>

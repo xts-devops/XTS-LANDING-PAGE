@@ -1,58 +1,89 @@
-import type { ImageMetadata } from 'astro';
+/**
+ * Content contract v2 (D22). Images are referenced by key, not imported:
+ *   photo  → src/assets/photos/<key>.(jpg|png|webp)
+ *   screen → src/assets/showcase/<key>.png   (captured from showcase-ui/)
+ * Missing files render a tidy placeholder, so content can ship before media does.
+ */
 
-export type Img = { src: ImageMetadata; alt: string };
-/** Coded schematic shown when no photo is supplied (components/art/Schematic.astro). */
-export type ArtName =
-  | 'platforms'
-  | 'software'
-  | 'automation'
-  | 'robotics'
-  | 'retail-ops'
-  | 'warehouse'
-  | 'production-cell'
-  | 'industry-retail'
-  | 'industry-manufacturing'
-  | 'industry-logistics'
-  | 'industry-healthcare'
-  | 'industry-government';
-export type Pillar = {
-  id: string;
-  title: string;
-  summary: string;
-  chips: string[];
-  icon: string;
-  art: ArtName;
-  /** Optional photo; replaces the schematic when supplied (IMAGE-BRIEF). */
-  image?: Img;
-};
-export type Showcase = {
-  id: string;
-  title: string;
-  tags: string[];
-  bullets: string[];
-  art: ArtName;
-  /** Optional photo; replaces the schematic when supplied (IMAGE-BRIEF). */
-  image?: Img;
-  need: Pillar['id'];
-};
-export type Industry = {
-  id: string;
-  name: string;
-  icon: string;
-  summary: string;
-  examples: string[];
-  art: ArtName;
-  /** Optional photo; replaces the schematic when supplied (IMAGE-BRIEF). */
-  image?: Img;
-};
-export type Step = { n: number; title: string; summary: string; icon: string };
-export type Principle = { title: string; summary: string; icon: string };
+/** e.g. 'home/service-business' → src/assets/photos/home/service-business.jpg */
+export type PhotoKey = string;
+/** e.g. 'erp/dashboard' → src/assets/showcase/erp/dashboard.png */
+export type ScreenKey = string;
+
 export type Proof =
   | { kind: 'count'; value: number; suffix: string; label: string }
   | { kind: 'text'; value: string; label: string };
+
 export type Contact = {
   email: string;
   phoneDisplay: string;
   phoneHref: string;
   location: string;
+};
+
+/** One slide in a system showcase. */
+export type Slide = {
+  screen: ScreenKey;
+  caption: string;
+  /** 'desktop' (1440×900), 'tablet' (1366×1024) or 'mobile' (390×844) frame. */
+  device?: 'desktop' | 'tablet' | 'mobile';
+};
+
+/** A product family inside a service, e.g. ERP inside Business Systems. */
+export type System = {
+  id: string;
+  name: string;
+  summary: string;
+  features: string[];
+  slides: Slide[];
+};
+
+export type Service = {
+  slug: string;
+  title: string;
+  /** One line for the home tile. */
+  tagline: string;
+  /** Two or three sentences for the service page intro. */
+  intro: string;
+  /** Home tile and service-page hero (shared-element transition). */
+  photo: PhotoKey;
+  photoAlt: string;
+  highlights: string[];
+  /** Business systems / software / automation: switchable product showcases. */
+  systems?: System[];
+  /** Real-life photo gallery (robotics: bento; others: a short row). */
+  gallery?: GalleryItem[];
+  /** Gallery heading; defaults to site.servicePage.galleryHeading. */
+  galleryHeading?: string;
+};
+
+export type GalleryItem = {
+  photo: PhotoKey;
+  alt: string;
+  caption: string;
+  /** Native photo ratio, e.g. '4 / 5'; used for short-row galleries. Default '4 / 3'. */
+  ratio?: string;
+  /** A product screen warped onto a device in the photo (ScreenOnPhoto). */
+  onPhoto?: {
+    screen: ScreenKey;
+    quad: readonly [
+      readonly [number, number],
+      readonly [number, number],
+      readonly [number, number],
+      readonly [number, number],
+    ];
+    photoSize: readonly [number, number];
+  };
+};
+
+export type WorkItem = {
+  id: string;
+  title: string;
+  sector: string;
+  /** Leave empty until XTS confirms where it was delivered. */
+  location?: string;
+  summary: string;
+  service: Service['slug'];
+  photo: PhotoKey;
+  photoAlt: string;
 };

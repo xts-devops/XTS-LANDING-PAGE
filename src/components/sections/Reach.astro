@@ -1,0 +1,49 @@
+---
+/**
+ * Global reach. Shows regions and quotes only once XTS confirms them (content/work.ts → reach);
+ * until then it's the statement alone, so nothing unconfirmed is displayed.
+ */
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Photo from '../media/Photo.astro';
+import { reach } from '../../content/work';
+import '../../styles/home.css';
+---
+
+<section id="reach" class="section reach" aria-labelledby="reach-heading">
+  <Photo
+    photo="home/cta-team"
+    alt=""
+    ratio="auto"
+    class="reach-photo"
+    sizes="100vw"
+    widths={[960, 1600, 2000]}
+  />
+  <Container class="reach-inner">
+    <div data-reveal="up">
+      <Eyebrow>{reach.eyebrow}</Eyebrow>
+      <h2 id="reach-heading">{reach.heading}</h2>
+      <p class="reach-summary">{reach.summary}</p>
+    </div>
+    {reach.regions.length > 0 && (
+      <ul class="reach-regions" role="list">
+        {reach.regions.map((r) => (
+          <li>
+            <strong>{r.name}</strong>
+            {r.note && <span>{r.note}</span>}
+          </li>
+        ))}
+      </ul>
+    )}
+    {reach.quotes.length > 0 && (
+      <div class="reach-quotes">
+        {reach.quotes.map((q) => (
+          <blockquote>
+            <p>{q.text}</p>
+            <footer>{q.who}</footer>
+          </blockquote>
+        ))}
+      </div>
+    )}
+  </Container>
+</section>

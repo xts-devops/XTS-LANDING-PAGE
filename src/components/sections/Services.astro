@@ -1,0 +1,40 @@
+---
+import Section from '../ui/Section.astro';
+import Photo from '../media/Photo.astro';
+import Icon from '../ui/Icon.astro';
+import { services } from '../../content/services';
+import { site } from '../../content/site';
+import '../../styles/home.css';
+---
+
+<Section id="services" {...site.services}>
+  <ul class="service-grid" role="list">
+    {services.map((service, i) => (
+      <li class={`service-tile service-tile-${i}`}>
+        <a
+          href={`/services/${service.slug}`}
+          class="service-link"
+          data-reveal="up"
+        >
+          <Photo
+            photo={service.photo}
+            alt={service.photoAlt}
+            ratio={i === 0 ? '4 / 5' : '16 / 10'}
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            transition={`svc-${service.slug}`}
+          />
+          <div class="service-body">
+            <h3 style={`view-transition-name:svc-title-${service.slug}`}>
+              {service.title}
+            </h3>
+            <p>{service.tagline}</p>
+            <span class="service-cta">
+              {site.services.cta} {service.title}
+              <Icon name="arrow-up-right" />
+            </span>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Section>

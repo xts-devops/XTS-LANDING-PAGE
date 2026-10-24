@@ -1,0 +1,56 @@
+---
+/**
+ * Puts a captured product screen onto a device in a photo (e.g. a phone held at an angle).
+ * The warp is a CSS matrix3d computed at build time from the screen's four corners in the
+ * photo's native pixels; ui/index.ts scales the stage to the rendered figure. Place inside
+ * <Photo> (as slot content) whose ratio equals the photo's native ratio. Decorative.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { quadMatrix3d, type Quad } from '../../lib/homography';
+
+interface Props {
+  screen: string;
+  /** Screen corners in photo px: top-left, top-right, bottom-right, bottom-left. */
+  quad: Quad;
+  /** Native photo size in px. */
+  photoSize: readonly [number, number];
+}
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/showcase/**/*.png',
+  { eager: true },
+);
+const { screen, quad, photoSize } = Astro.props;
+const src = Object.entries(files).find(([path]) =>
+  path.endsWith(`/showcase/${screen}.png`),
+)?.[1].default;
+// Captures are DPR 2; lay the screen out at CSS size.
+const w = src ? src.width / 2 : 390;
+const h = src ? src.height / 2 : 844;
+const transform = quadMatrix3d(w, h, quad);
+---
+
+{src && (
+  <div
+    class="on-photo"
+    data-fit-stage={photoSize[0]}
+    style={`width:${photoSize[0]}px;height:${photoSize[1]}px`}
+    aria-hidden="true"
+  >
+    <div
+      class="on-photo-screen"
+      style={`width:${w}px;height:${h}px;transform:${transform}`}
+    >
+      <Image
+        src={src}
+        alt=""
+        widths={[w, src.width]}
+        sizes="(min-width: 1024px) 360px, 60vw"
+        format="avif"
+        quality={70}
+        loading="lazy"
+      />
+    </div>
+  </div>
+)}

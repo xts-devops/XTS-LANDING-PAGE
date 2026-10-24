@@ -1,0 +1,73 @@
+---
+/**
+ * Robotics centrepiece (PLAN-v2 §4): a robotic arm that comes apart as you scroll.
+ * Media, best available first:
+ *   1. video  src/assets/video/arm-exploded.(mp4|webm) → scroll-scrubbed (all-keyframe encode)
+ *   2. photos robotics/hero-arm + robotics/arm-exploded → scroll-driven separation between the two
+ *   3. neither yet → placeholders (still laid out, so the page is complete)
+ * No JS / reduced motion: both states side by side, static. Lazy: nothing heavy loads before
+ * the visitor scrolls near it.
+ */
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Photo from '../media/Photo.astro';
+import { site } from '../../content/site';
+
+const videos = import.meta.glob<string>(
+  '../../assets/video/arm-exploded.{mp4,webm}',
+  {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  },
+);
+const videoUrl = Object.values(videos)[0];
+const copy = site.servicePage;
+---
+
+<section class="exploded" aria-labelledby="exploded-heading" data-exploded>
+  <Container class="exploded-head">
+    <div data-reveal="up">
+      <Eyebrow>Robotics &amp; R&amp;D</Eyebrow>
+      <h2 id="exploded-heading">{copy.explodedHeading}</h2>
+      <p>{copy.explodedSummary}</p>
+    </div>
+  </Container>
+  <div class="exploded-scroll">
+    <div class="exploded-stage">
+      {videoUrl ? (
+        <video
+          class="exploded-video"
+          data-exploded-video
+          src={videoUrl}
+          muted
+          playsinline
+          preload="none"
+          aria-label="Robotic arm separating into its components"
+        />
+      ) : (
+        <div class="exploded-pair">
+          <Photo
+            photo="robotics/hero-arm"
+            alt="Assembled six-axis robotic arm"
+            ratio="5 / 3"
+            class="exploded-a"
+            sizes="(min-width: 1024px) 80vw, 100vw"
+            widths={[800, 1200, 2000]}
+          />
+          <Photo
+            photo="robotics/arm-exploded"
+            alt="The same robotic arm in an exploded view, parts separated along their axes"
+            ratio="5 / 3"
+            class="exploded-b"
+            sizes="(min-width: 1024px) 80vw, 100vw"
+            widths={[800, 1200, 2000]}
+          />
+        </div>
+      )}
+      <div class="exploded-progress" aria-hidden="true">
+        <i data-exploded-bar />
+      </div>
+    </div>
+  </div>
+</section>

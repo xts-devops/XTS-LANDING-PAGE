@@ -4,8 +4,14 @@ import Eyebrow from '../ui/Eyebrow.astro';
 import Icon from '../ui/Icon.astro';
 import Button from '../ui/Button.astro';
 import { contact, site } from '../../content/site';
-import { pillars } from '../../content/pillars';
+import { services } from '../../content/services';
 import '../../styles/contact.css';
+
+interface Props {
+  /** Preselect a service in "What do you need?" (service pages pass their slug). */
+  need?: string;
+}
+const { need } = Astro.props;
 const copy = site.contactSection;
 // The form goes live only when a Web3Forms access key is configured (D18). Until then it stays
 // disabled and the note points people to email/phone.
@@ -126,8 +132,10 @@ const describedBy = (field: string) => `${field}-error`;
               aria-describedby={describedBy('need')}
             >
               <option value="">{copy.choose}</option>
-              {pillars.map((pillar) => (
-                <option value={pillar.id}>{pillar.title}</option>
+              {services.map((service) => (
+                <option value={service.slug} selected={service.slug === need}>
+                  {service.title}
+                </option>
               ))}
               <option value="other">{copy.other}</option>
             </select>

@@ -72,3 +72,7 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [x] Dev flow, motion system, lane swap (claude + user)
 - [x] Stack decided: Astro, no CMS, GitHub, English only (claude + user)
 - [x] Plan v1–v1.1, coordination scaffold, git init (claude)
+
+## v2 media assignment
+- [x] **V2-A Photoreal media** — 25 JPEGs, matched robotic-arm pair and complete source log ... owner: codex · status: done (merged via PR #7)
+- [x] **V2-B Sample system UIs** — 33 HTML screens, DPR-2 PNGs, capture command and contact sheet ... owner: codex · status: done (merged via PR #7)

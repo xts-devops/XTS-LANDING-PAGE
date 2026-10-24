@@ -18,7 +18,9 @@
     "shots": "astro build && playwright test --project=shots",
     "test:e2e": "astro build && playwright test --project=e2e",
     "test:lighthouse": "npx -y @lhci/cli@0.15.1 autorun",
-    "serve": "astro build && astro preview --host --port 4380"
+    "serve": "astro build && astro preview --host --port 4380",
+    "capture:ui": "node tools/capture-ui.mjs",
+    "preview:ui": "node tools/capture-ui.mjs --serve"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

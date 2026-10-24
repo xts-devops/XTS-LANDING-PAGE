@@ -1,0 +1,66 @@
+---
+/**
+ * Product screen in a device frame (D22): src/assets/showcase/<key>.png, captured from
+ * showcase-ui/ by `npm run capture:ui`. Until a capture exists, shows a skeleton app window.
+ */
+import type { ImageMetadata } from 'astro';
+import '../../styles/media.css';
+import { Image } from 'astro:assets';
+
+interface Props {
+  screen: string;
+  alt: string;
+  device?: 'desktop' | 'tablet' | 'mobile';
+  eager?: boolean;
+}
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/showcase/**/*.png',
+  { eager: true },
+);
+const { screen, alt, device = 'desktop', eager = false } = Astro.props;
+const match = Object.entries(files).find(([path]) =>
+  path.endsWith(`/showcase/${screen}.png`),
+);
+const src = match?.[1].default;
+const ratio = { desktop: '16 / 10', tablet: '4 / 3', mobile: '390 / 844' }[
+  device
+];
+const width = { desktop: 1440, tablet: 1366, mobile: 390 }[device];
+---
+
+<div class:list={['screen', `screen-${device}`]} style={`--ratio:${ratio}`}>
+  {device === 'desktop' && (
+    <div class="screen-bar" aria-hidden="true">
+      <i />
+      <i />
+      <i />
+    </div>
+  )}
+  <div class="screen-view">
+    {src ? (
+      <Image
+        src={src}
+        alt={alt}
+        widths={[width / 2, width, Math.min(width * 2, src.width)]}
+        sizes={
+          device === 'mobile' ? '320px' : '(min-width: 1024px) 60vw, 100vw'
+        }
+        format="avif"
+        quality={70}
+        loading={eager ? 'eager' : 'lazy'}
+      />
+    ) : (
+      <div class="screen-pending" role="img" aria-label={alt}>
+        <span class="sk-side" />
+        <span class="sk-main">
+          <i />
+          <i />
+          <i />
+          <b />
+        </span>
+        {import.meta.env.DEV && <em>showcase/{screen}.png</em>}
+      </div>
+    )}
+  </div>
+</div>
