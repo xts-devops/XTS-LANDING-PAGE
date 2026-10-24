@@ -145,8 +145,8 @@
 /* Product screen warped onto a device in a photo (ScreenOnPhoto). Hidden until JS sets --s. */
 .photo .on-photo {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: var(--photo-y, 0px);
+  left: var(--photo-x, 0px);
   transform-origin: 0 0;
   scale: var(--s, 0);
   pointer-events: none;

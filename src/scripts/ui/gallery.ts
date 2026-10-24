@@ -1,3 +1,4 @@
+import { observePhotoStages } from './photo-fit';
 /** Photographs keep native links as the no-JS fallback. Only the selected large image loads. */
 export function initPhotoGallery() {
   const root = document.querySelector<HTMLElement>('[data-photo-gallery]');
@@ -15,6 +16,8 @@ export function initPhotoGallery() {
     ...(root?.querySelectorAll<HTMLAnchorElement>('[data-gallery-open]') ?? []),
   ];
   if (!dialog || !image || !links.length) return;
+  const media = dialog.querySelector<HTMLElement>('.gallery-dialog-media');
+  let stopFit: (() => void) | undefined;
   let current = 0;
   let opener: HTMLAnchorElement | null = null;
   const show = (index: number) => {
@@ -22,6 +25,18 @@ export function initPhotoGallery() {
     const link = links[current];
     image.src = link.dataset.galleryOpen ?? link.href;
     image.alt = link.dataset.galleryAlt ?? '';
+    stopFit?.();
+    media?.querySelector('.on-photo')?.remove();
+    const sourceStage = link.querySelector<HTMLElement>('.on-photo');
+    if (sourceStage && media) {
+      const stage = sourceStage.cloneNode(true) as HTMLElement;
+      stage.dataset.fitMode = 'contain';
+      stage.style.removeProperty('--s');
+      stage.style.removeProperty('--photo-x');
+      stage.style.removeProperty('--photo-y');
+      media.append(stage);
+      stopFit = observePhotoStages(media);
+    }
     if (title) title.textContent = link.dataset.galleryCaption ?? '';
     if (count)
       count.textContent =
@@ -72,6 +87,8 @@ export function initPhotoGallery() {
       new CustomEvent('site:preview', { detail: { open: false } }),
     );
     opener?.focus({ preventScroll: true });
+    stopFit?.();
+    media?.querySelector('.on-photo')?.remove();
     image.removeAttribute('src');
   });
 }

@@ -91,3 +91,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-AUTOMATION Automation examples** — replies/BPO, email/document processing and factory hardware integrations with stronger visual direction ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-GALLERY Photo gallery motion** — scroll reveals, restrained image depth, hover/focus and full-photo inspection ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-PHONE Phone screen alignment** — perspective corners, responsive crop fitting and inspection overlay ... owner: codex · status: review (codex/v2-ui-refinement)

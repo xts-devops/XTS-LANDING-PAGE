@@ -2,6 +2,15 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · codex · codex/v2-ui-refinement (phone alignment review)
+**Did:** Recalibrated the mobile UI's four perspective corners, including the lower edge that ended too high on the phone glass. Extracted a small reusable stage fitter that matches native photo dimensions and actual centered cover/contain placement, including crop and letterbox offsets. The existing homography solver and original assets remain unchanged.
+**Preview:** Large-photo inspection now carries the decorative UI overlay with the selected photo, uses contain fitting on both layers and disconnects/removes that stage on navigation/close. A specific contain-fit rule overrides the general photo-cover rule. Previously inspection showed an empty black phone. Phone composites continue to skip independent hover/parallax transforms.
+**Verify:** npm run verify passes (0 errors/0 warnings); 23 focused checks pass, including four new alignment cases for 375/768/1440 inspection/resizing/cleanup and a deliberately cropped photo frame, existing gallery dialog/keyboard/no-JS checks, service axe and screen-on-photo behavior, plus three refreshed software-page captures. Reviewed before/after and inspection screenshots in docs/review/phone-alignment (gitignored).
+**Next:** Update existing PR #12; local preview http://127.0.0.1:4380/services/custom-software#photo-gallery. No regenerated photo or new dependency required.
+
+## 2026-10-25 · codex · codex/v2-ui-refinement (phone alignment claim)
+**Claim:** Correct the custom-software phone screen's perspective registration, responsive scale/crop offsets and layered image-preview consistency. Scope: service photo corner coordinates, ScreenOnPhoto/media CSS, reusable stage fitting and gallery inspection UI, focused alignment tests and review artifacts. No photo regeneration, shared types/config/dependencies or homography-library edits. Preserve the real screen content rather than changing the underlying photo.
+
 ## 2026-10-25 · codex · codex/v2-ui-refinement (photo gallery motion review)
 **Did:** Shared robotics/software/automation photo galleries now have staggered entrance reveals, restrained desktop scroll depth, gold hover/focus edges, subtle zoom/expand cues, numbered tiles and always-visible captions. A decorative indicator follows actual section progress, with reserved space to avoid shifting the layout. Touch and reduced-motion visitors retain still photos and tap inspection. The existing phone-on-photo composite skips independent transforms to preserve registration.
 **Inspection:** Native links enhance to a full-photo dialog with centred side controls, arrow-key navigation, count, visible close/Escape/backdrop handling and focus/scroll restoration. Large WebPs load only when selected; modified clicks and no-JS retain image navigation. No new dependency, generated media, autoplay, artificial loading delay or pinned gallery.

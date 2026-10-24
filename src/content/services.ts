@@ -213,10 +213,10 @@ export const services: Service[] = [
         onPhoto: {
           screen: 'software/mobile-1',
           quad: [
-            [565, 492],
-            [797, 518],
-            [730, 1060],
-            [464, 1034],
+            [561, 486],
+            [806, 518],
+            [724, 1080],
+            [454, 1035],
           ],
           photoSize: [1200, 1500],
         },

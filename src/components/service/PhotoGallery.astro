@@ -131,7 +131,9 @@ const photos = await Promise.all(
       <button type="button" data-gallery-prev aria-label={copy.previous}>
         <Icon name="arrow-right" class="flip" />
       </button>
-      <img data-gallery-image alt="" width="1600" height="1200" />
+      <div class="gallery-dialog-media photo">
+        <img data-gallery-image alt="" width="1600" height="1200" />
+      </div>
       <button type="button" data-gallery-next aria-label={copy.next}>
         <Icon name="arrow-right" />
       </button>

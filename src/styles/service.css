@@ -1075,3 +1075,20 @@ html:has(.gallery-dialog[open]) {
     visibility: hidden !important;
   }
 }
+
+/* The large photo and its registered UI share one contain-fit viewport. */
+.gallery-dialog-media.photo {
+  width: 100%;
+  height: min(70dvh, 60rem);
+  aspect-ratio: auto;
+  background: transparent;
+}
+.gallery-dialog-media.photo > [data-gallery-image] {
+  height: 100%;
+  object-fit: contain;
+}
+@media (max-width: 720px) {
+  .gallery-dialog-media.photo {
+    height: 60dvh;
+  }
+}
