@@ -15,7 +15,8 @@ export function initSlides(root: ParentNode = document) {
     let current = 0;
     const update = () => {
       const index = Math.round(
-        track.scrollLeft / Math.max(1, track.clientWidth),
+        track.scrollLeft /
+          Math.max(1, slides[1].offsetLeft - slides[0].offsetLeft),
       );
       current = Math.min(slides.length - 1, Math.max(0, index));
       if (label) label.textContent = `${current + 1} / ${slides.length}`;
@@ -26,7 +27,9 @@ export function initSlides(root: ParentNode = document) {
       const target = slides[Math.min(slides.length - 1, Math.max(0, index))];
       track.scrollTo({
         left: target.offsetLeft - track.offsetLeft,
-        behavior: 'smooth',
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'auto'
+          : 'smooth',
       });
     };
 

@@ -388,3 +388,27 @@ ol {
     navigation: none;
   }
 }
+/* Coherent interaction feedback, with a complete reduced-motion fallback. */
+html {
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+}
+.footer-contact a:hover,
+.footer-top nav a:hover {
+  color: var(--color-gold-hi);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

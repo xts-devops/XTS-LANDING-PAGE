@@ -76,3 +76,6 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 ## v2 media assignment
 - [x] **V2-A Photoreal media** — 25 JPEGs, matched robotic-arm pair and complete source log ... owner: codex · status: done (merged via PR #7)
 - [x] **V2-B Sample system UIs** — 33 HTML screens, DPR-2 PNGs, capture command and contact sheet ... owner: codex · status: done (merged via PR #7)
+
+## v2 UI refinement
+- [ ] **V2-UX Site refinement** — brand lockup, desktop/mobile composition, purposeful motion and photo art direction ... owner: codex · status: review (codex/v2-ui-refinement)

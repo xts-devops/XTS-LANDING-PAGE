@@ -18,9 +18,30 @@ function initHeader() {
 /** Mobile menu closes after choosing a link. */
 function initMobileMenu() {
   const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  const summary = menu?.querySelector('summary');
+  if (!menu || !summary) return;
+  const close = (focus = false) => {
+    menu.open = false;
+    if (focus) summary.focus();
+  };
   menu
-    ?.querySelectorAll('a')
-    .forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+    .querySelectorAll('a')
+    .forEach((a) => a.addEventListener('click', () => close()));
+  menu.addEventListener('toggle', () =>
+    summary.setAttribute('aria-expanded', String(menu.open)),
+  );
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.open) close(true);
+  });
+  document.addEventListener('pointerdown', (e) => {
+    if (menu.open && !menu.contains(e.target as Node)) close();
+  });
+  document.addEventListener('focusin', (e) => {
+    if (menu.open && !menu.contains(e.target as Node)) close();
+  });
+  matchMedia('(min-width:701px)').addEventListener('change', (e) => {
+    if (e.matches) close();
+  });
 }
 
 /** Highlight the nav link for the section in view (aria-current). Home page only. */
@@ -70,3 +91,53 @@ initMobileMenu();
 initTabs();
 initSlides();
 initForm();
+
+/** Buttons work with native swipe and with the desktop scroll-driven gallery. */
+function initWorkControls() {
+  const track = document.querySelector<HTMLElement>('[data-work-track]');
+  const cards = [...(track?.querySelectorAll<HTMLElement>('.work-card') ?? [])];
+  const prev = document.querySelector<HTMLButtonElement>('[data-work-prev]');
+  const next = document.querySelector<HTMLButtonElement>('[data-work-next]');
+  const count = document.querySelector<HTMLElement>('[data-work-count]');
+  if (!track || !cards.length) return;
+  let current = 0;
+  const render = (index: number) => {
+    current = Math.max(0, Math.min(cards.length - 1, index));
+    if (count)
+      count.textContent =
+        String(current + 1).padStart(2, '0') +
+        ' / ' +
+        String(cards.length).padStart(2, '0');
+    if (prev) prev.disabled = current === 0;
+    if (next) next.disabled = current === cards.length - 1;
+  };
+  const update = () => {
+    if (track.classList.contains('is-pinned')) return;
+    const max = Math.max(1, track.scrollWidth - track.clientWidth);
+    render(Math.round((track.scrollLeft / max) * (cards.length - 1)));
+  };
+  const go = (delta: number) => {
+    const index = Math.max(0, Math.min(cards.length - 1, current + delta));
+    const event = new CustomEvent('work:navigate', {
+      detail: { index },
+      cancelable: true,
+    });
+    if (!track.dispatchEvent(event)) return;
+    const max = track.scrollWidth - track.clientWidth;
+    track.scrollTo({
+      left: (max * index) / Math.max(1, cards.length - 1),
+      behavior: matchMedia('(prefers-reduced-motion:reduce)').matches
+        ? 'auto'
+        : 'smooth',
+    });
+  };
+  prev?.addEventListener('click', () => go(-1));
+  next?.addEventListener('click', () => go(1));
+  track.addEventListener('scroll', update, { passive: true });
+  track.addEventListener('work:progress', (e) =>
+    render((e as CustomEvent<{ index: number }>).detail.index),
+  );
+  new ResizeObserver(update).observe(track);
+  render(0);
+}
+initWorkControls();

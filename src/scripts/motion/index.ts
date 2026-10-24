@@ -1,238 +1,311 @@
-/**
- * Motion engine v2 (MOTION §7, D19, D22). Markup declares motion with data-*; this applies it.
- *
- * - Reduced motion → returns before downloading anything (0 KB of GSAP/Lenis).
- * - GSAP + ScrollTrigger + Lenis load on first interaction (3.5s fallback); the hero entrance is
- *   pure CSS and never waits for JS.
- * - Nothing is hidden by CSS up front: from-states are set only on elements still below the fold.
- * - Layout-changing modes (exploded view) are decided in CSS before first paint, never here (CLS).
- */
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if (!reduce) {
-  const events = [
-    'scroll',
-    'pointermove',
-    'keydown',
-    'touchstart',
-    'wheel',
-  ] as const;
-  let started = false;
-  const start = () => {
-    if (started) return;
-    started = true;
-    events.forEach((ev) => removeEventListener(ev, start));
-    void boot().catch(() => {});
-  };
+/** Motion is progressive: native navigation, readable content and swipe work before it loads. */
+const preference = matchMedia('(prefers-reduced-motion: reduce)');
+const events = [
+  'scroll',
+  'pointermove',
+  'keydown',
+  'touchstart',
+  'wheel',
+] as const;
+let started = false;
+let fallback: ReturnType<typeof setTimeout> | undefined;
+const start = () => {
+  if (started || preference.matches) return;
+  started = true;
+  events.forEach((ev) => removeEventListener(ev, start));
+  clearTimeout(fallback);
+  void boot().catch(() => {});
+};
+function schedule() {
+  if (preference.matches || started) return;
   events.forEach((ev) =>
     addEventListener(ev, start, { passive: true, once: true }),
   );
-  setTimeout(start, 3500);
+  fallback = setTimeout(start, 3500);
 }
-
+preference.addEventListener('change', schedule);
+schedule();
 type Gsap = typeof import('gsap').gsap;
 type ST = typeof import('gsap/ScrollTrigger').ScrollTrigger;
 type Lenis = InstanceType<typeof import('lenis').default>;
 
 async function boot() {
-  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+  const [{ gsap }, { ScrollTrigger }, { DUR, EASE }] = await Promise.all([
     import('gsap'),
     import('gsap/ScrollTrigger'),
+    import('./tokens'),
   ]);
   gsap.registerPlugin(ScrollTrigger);
-  const { DUR, EASE } = await import('./tokens');
-  gsap.defaults({ ease: EASE.out, duration: DUR[3] });
-
-  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const lenis = await initSmoothScroll(gsap, ScrollTrigger);
-  const belowFold = (el: Element) =>
-    el.getBoundingClientRect().top > innerHeight * 0.92;
-
-  // ---- data-reveal: section heads + media only (restraint), batched, once --------------------
-  // opacity (not autoAlpha): visibility:hidden would drop headings from the accessibility tree.
-  const reveals = gsap.utils
-    .toArray<HTMLElement>('[data-reveal]')
-    .filter(belowFold);
-  const from: Record<string, gsap.TweenVars> = {
-    up: { opacity: 0, y: 28 },
-    fade: { opacity: 0 },
-    clip: { clipPath: 'inset(0 0 100% 0)' },
-  };
-  const to: Record<string, gsap.TweenVars> = {
-    up: { opacity: 1, y: 0 },
-    fade: { opacity: 1 },
-    clip: { clipPath: 'inset(0 0 0% 0)', duration: DUR[4], ease: EASE.inout },
-  };
-  for (const el of reveals)
-    gsap.set(el, from[el.dataset.reveal ?? 'up'] ?? from.up);
-  ScrollTrigger.batch(reveals, {
-    start: 'top 88%',
-    once: true,
-    onEnter: (batch) =>
-      batch.forEach((el, i) =>
-        gsap.to(el, {
-          ...(to[(el as HTMLElement).dataset.reveal ?? 'up'] ?? to.up),
-          delay: i * 0.08,
-          clearProps: 'clipPath,transform',
-        }),
-      ),
-  });
-
-  // ---- data-count: count up to the value already in the markup ("300+") ------------------------
-  gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
-    const match = el.textContent?.trim().match(/^(\d+)(.*)$/);
-    if (!match) return;
-    const target = Number(match[1]);
-    const suffix = match[2];
-    const state = { n: 0 };
-    gsap.to(state, {
-      n: target,
-      duration: 1.6,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 95%', once: true },
-      onStart: () => void (el.textContent = `0${suffix}`),
-      onUpdate: () => void (el.textContent = `${Math.round(state.n)}${suffix}`),
+  // The desktop-only dependency is never fetched for coarse pointers.
+  const LenisClass = matchMedia('(pointer:fine)').matches
+    ? (await import('lenis')).default
+    : undefined;
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    gsap.defaults({ ease: EASE.out, duration: DUR[3] });
+    const smooth = LenisClass
+      ? initSmoothScroll(gsap, ScrollTrigger, LenisClass)
+      : undefined;
+    const belowFold = (el: Element) =>
+      el.getBoundingClientRect().top > innerHeight * 0.95;
+    const reveals = gsap.utils
+      .toArray<HTMLElement>('[data-reveal]')
+      .filter(belowFold);
+    const states: Record<string, gsap.TweenVars> = {
+      up: { opacity: 0, y: 20 },
+      fade: { opacity: 0 },
+      clip: { opacity: 0, clipPath: 'inset(8% 0 0 0)' },
+    };
+    reveals.forEach((el) =>
+      gsap.set(el, states[el.dataset.reveal ?? 'up'] ?? states.up),
+    );
+    ScrollTrigger.batch(reveals, {
+      start: 'top 92%',
+      once: true,
+      onEnter: (batch) =>
+        batch.forEach((el, i) =>
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            clipPath: 'inset(0% 0 0 0)',
+            delay: Math.min(i, 3) * 0.06,
+            clearProps: 'opacity,transform,clipPath',
+          }),
+        ),
     });
-  });
-
-  // ---- Hero: photo drifts slower than the page ------------------------------------------------
-  const backdrop = document.querySelector<HTMLElement>(
-    '.hero-backdrop, .svc-hero-photo',
-  );
-  if (backdrop) {
-    gsap.to(backdrop, {
-      yPercent: 12,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: backdrop.parentElement!,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
+    // Already-visible proof remains stable when the first pointer movement boots the engine.
+    const counters = gsap.utils.toArray<HTMLElement>('[data-count]');
+    const finals = counters.map((el) => el.textContent ?? '');
+    counters.filter(belowFold).forEach((el) => {
+      const match = el.textContent?.trim().match(/^(\d+)(.*)$/);
+      if (!match) return;
+      const state = { n: 0 };
+      gsap.to(state, {
+        n: Number(match[1]),
+        duration: 1.1,
+        scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+        onUpdate: () => {
+          el.textContent = Math.round(state.n) + match[2];
+        },
+      });
+    });
+    const wide = gsap.matchMedia();
+    wide.add(
+      '(min-width:1024px) and (min-height:650px) and (hover:hover) and (pointer:fine)',
+      () => {
+        const backdrop = document.querySelector<HTMLElement>(
+          '.hero-backdrop, .svc-hero-photo',
+        );
+        if (backdrop)
+          gsap.to(backdrop, {
+            yPercent: 4,
+            scale: 1.08,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: backdrop.parentElement!,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.6,
+            },
+          });
+        return initWorkGallery(gsap, ScrollTrigger, smooth?.lenis);
       },
+    );
+    initExploded(ScrollTrigger);
+    const refresh = () => ScrollTrigger.refresh();
+    document.fonts?.ready.then(() => {
+      if (!preference.matches) refresh();
     });
-  }
-
-  initWorkGallery(gsap, ScrollTrigger, lenis, fine);
-  initExploded(ScrollTrigger);
-
-  document.fonts?.ready.then(() => ScrollTrigger.refresh());
-  addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+    addEventListener('load', refresh, { once: true });
+    return () => {
+      wide.revert();
+      smooth?.destroy();
+      removeEventListener('load', refresh);
+      const revealElements =
+        document.querySelectorAll<HTMLElement>('[data-reveal]');
+      gsap.killTweensOf(revealElements);
+      revealElements.forEach((el) => {
+        for (const prop of ['opacity', 'transform', 'clip-path'])
+          el.style.removeProperty(prop);
+      });
+      counters.forEach((el, i) => {
+        el.textContent = finals[i];
+      });
+      document
+        .querySelectorAll<HTMLElement>('.exploded-a,.exploded-b')
+        .forEach((el) => {
+          el.style.removeProperty('opacity');
+        });
+    };
+  });
 }
 
-/** Work: pinned section whose vertical scroll moves the track sideways (wide screens, fine pointer). */
-function initWorkGallery(
-  gsap: Gsap,
-  ScrollTrigger: ST,
-  lenis: Lenis | undefined,
-  fine: boolean,
-) {
+/** Pin only where a whole card fits; matchMedia tears it down cleanly after a resize. */
+function initWorkGallery(gsap: Gsap, ScrollTrigger: ST, lenis?: Lenis) {
   const section = document.querySelector<HTMLElement>('#work');
   const track = section?.querySelector<HTMLElement>('[data-work-track]');
   const list = track?.querySelector<HTMLElement>('.work-list');
-  if (!section || !track || !list || !fine || innerWidth < 1024) return;
-
+  if (!section || !track || !list) return;
+  const cards = [...list.querySelectorAll<HTMLElement>('.work-card')];
+  track.scrollLeft = 0;
   track.classList.add('is-pinned');
   const distance = () => Math.max(0, list.scrollWidth - track.clientWidth);
+  let last = -1;
   const tween = gsap.to(list, {
     x: () => -distance(),
     ease: 'none',
     scrollTrigger: {
       trigger: section,
-      start: 'top top+=72',
+      start: () =>
+        `top top+=${(document.querySelector('.site-header')?.getBoundingClientRect().height ?? 76) + 12}`,
       end: () => `+=${distance()}`,
       pin: true,
-      scrub: 0.8,
+      scrub: 0.55,
       invalidateOnRefresh: true,
+      onUpdate: ({ progress }) => {
+        const index = Math.round(progress * (cards.length - 1));
+        if (index !== last) {
+          last = index;
+          track.dispatchEvent(
+            new CustomEvent('work:progress', { detail: { index } }),
+          );
+        }
+      },
     },
   });
-  // Keyboard users: focusing something in an off-screen card scrolls the page to reveal it.
-  list.addEventListener('focusin', (e) => {
-    const card = (e.target as Element).closest<HTMLElement>('.work-card');
+  const navigate = (index: number, immediate = false) => {
     const st = tween.scrollTrigger;
-    if (!card || !st) return;
-    const ratio = Math.min(
-      1,
-      card.offsetLeft / Math.max(1, list.scrollWidth - card.offsetWidth),
+    if (!st) return;
+    const ratio = Math.max(
+      0,
+      Math.min(1, index / Math.max(1, cards.length - 1)),
     );
     const y = st.start + ratio * (st.end - st.start);
-    if (lenis) lenis.scrollTo(y, { immediate: true });
-    else scrollTo({ top: y });
-  });
+    if (lenis) lenis.scrollTo(y, { immediate });
+    else scrollTo({ top: y, behavior: immediate ? 'instant' : 'smooth' });
+  };
+  const onNavigate = (event: Event) => {
+    event.preventDefault();
+    navigate((event as CustomEvent<{ index: number }>).detail.index);
+  };
+  const onFocus = (event: FocusEvent) => {
+    const card = (event.target as Element).closest<HTMLElement>('.work-card');
+    if (card) navigate(cards.indexOf(card), true);
+  };
+  track.addEventListener('work:navigate', onNavigate);
+  list.addEventListener('focusin', onFocus);
   ScrollTrigger.refresh();
+  return () => {
+    track.classList.remove('is-pinned');
+    track.removeEventListener('work:navigate', onNavigate);
+    list.removeEventListener('focusin', onFocus);
+    track.dispatchEvent(new Event('scroll'));
+  };
 }
 
-/** Robotics exploded view: scroll position drives the video, or the separation between photos. */
+/** A registered pair crossfades without camera movement or per-frame blur rasterization. */
 function initExploded(ScrollTrigger: ST) {
   const root = document.querySelector<HTMLElement>('[data-exploded]');
-  if (!root) return;
-  const scroller = root.querySelector<HTMLElement>('.exploded-scroll');
+  const scroller = root?.querySelector<HTMLElement>('.exploded-scroll');
+  if (!root || !scroller) return;
   const bar = root.querySelector<HTMLElement>('.exploded-progress');
   const video = root.querySelector<HTMLVideoElement>('[data-exploded-video]');
-  const a = root.querySelector<HTMLElement>('.exploded-a');
   const b = root.querySelector<HTMLElement>('.exploded-b');
-  if (!scroller) return;
-
-  if (video) {
-    video.preload = 'auto';
-    video.load();
-  }
-  const ease = (t: number) => t * t * (3 - 2 * t); // smoothstep
+  if (video)
+    ScrollTrigger.create({
+      trigger: scroller,
+      start: 'top bottom+=400',
+      once: true,
+      onEnter: () => {
+        video.preload = 'auto';
+        video.load();
+      },
+    });
   ScrollTrigger.create({
     trigger: scroller,
     start: 'top top+=104',
     end: 'bottom bottom',
-    scrub: true,
     onUpdate: ({ progress }) => {
       bar?.style.setProperty('--p', progress.toFixed(3));
-      if (video && video.duration) {
-        video.currentTime = progress * (video.duration - 0.05);
+      if (video && Number.isFinite(video.duration)) {
+        video.currentTime = progress * Math.max(0, video.duration - 0.05);
         return;
       }
-      if (!a || !b) return;
-      const t = ease(Math.min(1, Math.max(0, (progress - 0.12) / 0.7)));
-      a.style.opacity = String(1 - t);
-      a.style.transform = `scale(${1 + t * 0.05})`;
-      a.style.filter = `blur(${(t * 6).toFixed(2)}px)`;
-      b.style.opacity = String(t);
-      b.style.transform = `scale(${0.94 + t * 0.06})`;
-      b.style.filter = `blur(${((1 - t) * 6).toFixed(2)}px)`;
+      const t = Math.min(1, Math.max(0, (progress - 0.12) / 0.7));
+      if (b) b.style.opacity = String(t * t * (3 - 2 * t));
     },
   });
 }
 
-/** Lenis smooth scrolling for fine pointers, synced to ScrollTrigger; anchors honour the header. */
-async function initSmoothScroll(
+/** One ticker, cleaned up when motion is disabled. Modified clicks retain browser behavior. */
+function initSmoothScroll(
   gsap: Gsap,
   ScrollTrigger: ST,
-): Promise<Lenis | undefined> {
-  if (!matchMedia('(pointer: fine)').matches) return undefined;
-  const { default: Lenis } = await import('lenis');
-  const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+  LenisClass: typeof import('lenis').default,
+) {
+  const lenis = new LenisClass({ duration: 0.85, smoothWheel: true });
+  const tick = (t: number) => lenis.raf(t * 1000);
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((t) => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-
-  const headerOffset = () =>
-    -(
-      document.querySelector('.site-header')?.getBoundingClientRect().height ??
-      0
-    ) - 16;
-  document.addEventListener('click', (e) => {
+  gsap.ticker.add(tick);
+  const focusTarget = (target: HTMLElement) => {
+    if (!target.hasAttribute('tabindex')) {
+      target.setAttribute('tabindex', '-1');
+      target.addEventListener(
+        'blur',
+        () => target.removeAttribute('tabindex'),
+        { once: true },
+      );
+    }
+    target.focus({ preventScroll: true });
+  };
+  const onClick = (e: MouseEvent) => {
+    if (
+      e.defaultPrevented ||
+      e.button !== 0 ||
+      e.metaKey ||
+      e.ctrlKey ||
+      e.shiftKey ||
+      e.altKey
+    )
+      return;
     const link = (e.target as Element).closest<HTMLAnchorElement>(
       'a[href*="#"]',
     );
-    if (!link || link.pathname !== location.pathname || link.hash.length < 2)
+    if (
+      !link ||
+      link.origin !== location.origin ||
+      link.pathname !== location.pathname ||
+      link.search !== location.search ||
+      link.target ||
+      link.hasAttribute('download') ||
+      link.hash.length < 2 ||
+      link.closest('[role="tablist"]')
+    )
       return;
-    if (link.closest('[role="tablist"]')) return;
-    const target = document.querySelector<HTMLElement>(link.hash);
+    let id: string;
+    try {
+      id = decodeURIComponent(link.hash.slice(1));
+    } catch {
+      return;
+    }
+    const target = document.getElementById(id);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: headerOffset() });
+    const offset =
+      -(
+        document.querySelector('.site-header')?.getBoundingClientRect()
+          .height ?? 0
+      ) - 16;
     history.pushState(null, '', link.hash);
-    setTimeout(() => {
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
-    }, 700);
-  });
-  return lenis;
+    lenis.scrollTo(target, { offset, onComplete: () => focusTarget(target) });
+  };
+  document.addEventListener('click', onClick);
+  return {
+    lenis,
+    destroy: () => {
+      document.removeEventListener('click', onClick);
+      gsap.ticker.remove(tick);
+      lenis.destroy();
+    },
+  };
 }

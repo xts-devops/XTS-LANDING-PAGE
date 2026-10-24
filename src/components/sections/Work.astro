@@ -6,12 +6,37 @@
  */
 import Section from '../ui/Section.astro';
 import Photo from '../media/Photo.astro';
+import Icon from '../ui/Icon.astro';
 import { work, workIntro } from '../../content/work';
 import { serviceBySlug } from '../../content/services';
 import '../../styles/home.css';
 ---
 
 <Section id="work" {...workIntro} class="work-section">
+  <div class="work-tools">
+    <p>{workIntro.browseHint}</p>
+    <div class="work-controls" role="group" aria-label={workIntro.browseLabel}>
+      <span class="work-count" data-work-count aria-live="polite">
+        01 / {String(work.length).padStart(2, '0')}
+      </span>
+      <button
+        class="work-button"
+        type="button"
+        data-work-prev
+        aria-label={workIntro.previous}
+      >
+        <Icon name="arrow-right" class="work-arrow-prev" />
+      </button>
+      <button
+        class="work-button"
+        type="button"
+        data-work-next
+        aria-label={workIntro.next}
+      >
+        <Icon name="arrow-right" />
+      </button>
+    </div>
+  </div>
   <div
     class="work-track"
     data-work-track

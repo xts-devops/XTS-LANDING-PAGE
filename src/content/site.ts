@@ -44,7 +44,8 @@ export const site = {
   buildCta: 'Let’s Build',
   hero: {
     eyebrow: 'Technology · People · Real impact',
-    heading: 'Technology solutions built for',
+    heading: 'Technology built for',
+    lines: ['Technology', 'built for'],
     emphasis: 'real growth',
     summary:
       'We engineer, build, and implement intelligent systems — from business platforms and custom software to automation and robotics.',

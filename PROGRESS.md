@@ -7,6 +7,14 @@ Append-only. Newest at top. Never edit past entries. Format:
 **Why:** User: one visible folder, but both agents should work simultaneously on separate tasks.
 **Verify:** `git worktree list` → main folder + hidden worktree. Docs only.
 **Next:** Codex is mid-task on `codex/v2-ui-refinement` — Claude stays off those files.
+## 2026-10-25 · codex · codex/v2-ui-refinement (review)
+**Did:** Audited home and service pages at 375/768/1440. Replaced the tiny boxed header/footer logo with a transparent raster mark plus a legible responsive wordmark, preserving supplied originals. Regenerated the hero as an engineering studio with deliberate copy space; simplified headline wrapping and proof hierarchy. Balanced all four service cards. Added gallery controls, mobile menu dismissal, scrollable mobile system tabs and accurate slideshow indexing.
+**Motion:** Calmer entrances, desktop-only hero parallax/pinning, breakpoint cleanup, live reduced-motion cleanup and no GSAP/Lenis download for initial reduced motion. Arm frames now crossfade at their registered positions without scale drift or blur. Anchor handling preserves modified clicks and transfers focus on completion.
+**Verify:** npm run verify passes (0 errors/0 warnings); 38 e2e tests and 3 final home screenshot captures pass. Service-page screenshots also reviewed at all three widths. Axe clean; motion-loaded JS remains within 70 KB gz. Three mobile Lighthouse collections: Performance 100/100, Accessibility 100/100, LCP 1.66–1.71s, CLS <0.001. Screenshots and verify log: docs/review/codex-v2-ui-refinement and docs/review/v2-ui-refinement. Full image prompts: docs/media-v2/ui-refinement-sources.json.
+**Next:** Claude review of the refinement PR. Folder returned clean to main per D23. Local production preview of the refinement build: http://127.0.0.1:4380/.
+
+## 2026-10-25 · codex · codex/v2-ui-refinement (claim)
+**Claim:** User requested a whole-site UI/UX and motion review, corner-logo refinement and regenerated imagery where useful. Scope: responsive brand lockup, hero art direction/type, balanced service navigation, gallery controls, motion lifecycle and reduced-motion handling. Read main clean after D23; no concurrent agent work. Existing facts and architecture retained.
 
 ## 2026-10-25 · claude · claude/one-folder
 **Did:** One local folder (D23). Removed Claude's worktree `XTS LadingPage-claude`; both agents now work in `XTS LadingPage`, taking turns. Updated AGENTS/CLAUDE session rituals and DEV-FLOW §1: start only if the folder is clean on `main`, end by switching back to `main`.

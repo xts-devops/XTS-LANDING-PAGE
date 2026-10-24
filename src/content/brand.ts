@@ -1,7 +1,8 @@
-/** User-supplied originals; retain the baked-in dark background and aspect ratio. */
+/** Supplied originals are retained; the responsive lockup uses a transparent raster derivative. */
 export const brand = {
   name: 'XZEN TECH SOLUTIONS',
   shortName: 'XTS',
+  wordmark: { primary: 'XZEN', secondary: 'TECH SOLUTIONS' },
   goldLogo: {
     src: '/brand/logo-gold-original.png',
     width: 426,

@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import heroBackdrop from '../../assets/images/hero-office.png';
+import heroBackdrop from '../../assets/photos/home/hero-studio-v3.jpg';
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
@@ -26,7 +26,10 @@ import '../../styles/hero.css';
         <Eyebrow>{site.hero.eyebrow}</Eyebrow>
       </div>
       <h1 id="hero-heading" data-hero-part="title">
-        {site.hero.heading} <span>{site.hero.emphasis}</span>
+        {site.hero.lines.map((line) => (
+          <span class="hero-line">{line} </span>
+        ))}{' '}
+        <span class="hero-emphasis">{site.hero.emphasis}</span>
       </h1>
       <p class="hero-summary" data-hero-part="copy">
         {site.hero.summary}
@@ -40,7 +43,9 @@ import '../../styles/hero.css';
     </div>
     <dl class="hero-proof">
       {proof.map((item) => (
-        <div>
+        <div
+          class:list={['proof-item', { 'proof-count': item.kind === 'count' }]}
+        >
           <dt>{item.label}</dt>
           <dd {...(item.kind === 'count' ? { 'data-count': '' } : {})}>
             {item.value}

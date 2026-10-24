@@ -6,6 +6,10 @@ import type { WorkItem } from './types';
  * `location` once confirmed. Delete any entry XTS doesn't want shown.
  */
 export const workIntro = {
+  browseLabel: 'Browse capabilities',
+  previous: 'Previous example',
+  next: 'Next example',
+  browseHint: 'Explore what we can build for your team',
   eyebrow: 'Selected work',
   heading: 'Systems running in real businesses',
   summary:

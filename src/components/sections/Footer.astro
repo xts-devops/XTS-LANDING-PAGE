@@ -1,9 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import Icon from '../ui/Icon.astro';
-import { Image } from 'astro:assets';
-import logoWhite from '../../assets/brand/logo-white.png';
-import { brand } from '../../content/brand';
+import BrandLogo from '../ui/BrandLogo.astro';
 import { navigation, site, contact } from '../../content/site';
 const onHome = Astro.url.pathname === '/';
 const base = onHome ? '' : '/';
@@ -18,14 +16,7 @@ const base = onHome ? '' : '/';
           class="brand-link"
           aria-label={site.homeLabel}
         >
-          <Image
-            src={logoWhite}
-            alt={brand.whiteLogo.alt}
-            width={184}
-            densities={[1, 2]}
-            format="webp"
-            quality={82}
-          />
+          <BrandLogo />
         </a>
         <p class="footer-tagline">{site.footer.summary}</p>
       </div>

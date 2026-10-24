@@ -1,38 +1,62 @@
-/* Site header: sticky, translucent; firms up once the page scrolls (scripts/ui). */
+/* Compact, legible brand lockup. Originals remain in assets/brand. */
+:root {
+  --header-height: 4.75rem;
+}
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
   border-bottom: 1px solid transparent;
-  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);
+  background: color-mix(in srgb, var(--color-bg) 75%, transparent);
+  backdrop-filter: blur(14px);
   transition:
     border-color var(--dur-2) var(--ease-out),
     background-color var(--dur-2) var(--ease-out);
   view-transition-name: site-header;
 }
-.site-header.is-scrolled {
+.site-header.is-scrolled,
+.site-header:has(.mobile-menu[open]) {
   border-bottom-color: var(--color-line);
-  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 94%, transparent);
 }
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  min-height: 5.5rem;
+  min-height: var(--header-height);
 }
 .brand-link {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
-  width: 10.5rem;
+  min-height: 2.75rem;
+  border-radius: 0.25rem;
 }
-.brand-link img {
-  width: 100%;
-  /* Supplied logo has a textured near-black background: push it to black, then lighten-blend it
-     away. Remove once XTS supplies a transparent/vector logo (T05). */
-  filter: brightness(0.92) contrast(1.5);
-  mix-blend-mode: lighten;
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.brand-mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+}
+.brand-wordmark {
+  display: grid;
+  gap: 0.25rem;
+  line-height: 1;
+}
+.brand-wordmark strong {
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: 0.2em;
+}
+.brand-wordmark > span {
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--color-muted);
 }
 .desktop-nav {
   display: flex;
@@ -54,16 +78,32 @@
   display: none;
 }
 @media (max-width: 860px) {
+  .header-inner {
+    gap: 1.25rem;
+  }
+  .desktop-nav {
+    gap: 1.25rem;
+  }
   .header-cta {
     display: none;
   }
 }
 @media (max-width: 700px) {
-  .header-inner {
-    min-height: 4.75rem;
+  :root {
+    --header-height: 4.5rem;
   }
-  .brand-link {
-    width: 8.5rem;
+  .brand-mark {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .brand-lockup {
+    gap: 0.6rem;
+  }
+  .brand-wordmark strong {
+    font-size: 1.1rem;
+  }
+  .brand-wordmark > span {
+    font-size: 0.5rem;
   }
   .desktop-nav {
     display: none;
@@ -73,10 +113,11 @@
   }
   .mobile-menu summary {
     display: flex;
-    gap: 1.25rem;
+    gap: 1rem;
     align-items: center;
     min-height: 2.75rem;
-    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
     cursor: pointer;
     list-style: none;
   }
@@ -97,12 +138,31 @@
     right: 0;
     top: 100%;
     display: grid;
-    padding: 1rem var(--gutter);
+    gap: 0.25rem;
+    padding: 1rem var(--gutter) 1.25rem;
     background: var(--color-surface);
     border-block: var(--border);
+    box-shadow: 0 1.5rem 3rem
+      color-mix(in srgb, var(--color-bg) 60%, transparent);
   }
   .mobile-menu nav a {
     padding: 0.85rem 0.5rem;
+    border-bottom: var(--border);
     font-size: 1rem;
+  }
+  .mobile-menu nav a:last-child {
+    border: 0;
+    color: var(--color-gold-hi);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-menu[open] nav {
+    animation: menu-enter var(--dur-2) var(--ease-out) both;
+  }
+}
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
   }
 }

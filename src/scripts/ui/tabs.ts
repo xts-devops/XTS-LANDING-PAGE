@@ -38,7 +38,13 @@ export function initTabs(root: ParentNode = document) {
           active && opts.animate !== false,
         );
       });
-      if (opts.focus) tabs[index].focus();
+      if (opts.focus) tabs[index].focus({ preventScroll: true });
+      if (opts.focus)
+        tabs[index].scrollIntoView({
+          block: 'nearest',
+          inline: 'nearest',
+          behavior: 'instant',
+        });
       list.dispatchEvent(new CustomEvent('tabs:change', { detail: { index } }));
     };
 

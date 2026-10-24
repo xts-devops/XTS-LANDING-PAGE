@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import mark from '../../assets/brand/mark-gold-transparent.png';
+import { brand } from '../../content/brand';
+interface Props {
+  eager?: boolean;
+}
+const { eager = false } = Astro.props;
+---
+
+<span class="brand-lockup">
+  <Image
+    src={mark}
+    alt=""
+    width={48}
+    densities={[1, 2]}
+    format="webp"
+    quality={90}
+    loading={eager ? 'eager' : 'lazy'}
+    class="brand-mark"
+  />
+  <span class="brand-wordmark">
+    <strong>{brand.wordmark.primary} </strong>
+    <span>{brand.wordmark.secondary}</span>
+  </span>
+</span>
