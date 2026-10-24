@@ -93,13 +93,14 @@ async function boot() {
         return initWorkGallery(gsap, ScrollTrigger, smooth?.lenis);
       },
     );
-    initExploded(ScrollTrigger);
+    const cleanExploded = initExploded(ScrollTrigger);
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(() => {
       if (!preference.matches) refresh();
     });
     addEventListener('load', refresh, { once: true });
     return () => {
+      cleanExploded?.();
       wide.revert();
       smooth?.destroy();
       removeEventListener('load', refresh);
@@ -193,13 +194,56 @@ function initExploded(ScrollTrigger: ST) {
   const bar = root.querySelector<HTMLElement>('.exploded-progress');
   const video = root.querySelector<HTMLVideoElement>('[data-exploded-video]');
   const b = root.querySelector<HTMLElement>('.exploded-b');
-  if (video)
+  let progress = 0,
+    frame = 0,
+    disposed = false;
+  const seek = () => {
+    frame = 0;
+    if (
+      disposed ||
+      document.hidden ||
+      !video ||
+      !root.classList.contains('has-arm-video') ||
+      video.seeking ||
+      !Number.isFinite(video.duration)
+    )
+      return;
+    const time = progress * Math.max(0, video.duration - 0.05);
+    if (Math.abs(video.currentTime - time) > 0.035) video.currentTime = time;
+  };
+  const schedule = () => {
+    if (!frame && !disposed) frame = requestAnimationFrame(seek);
+  };
+  const ready = () => {
+    if (!disposed) {
+      root.classList.add('has-arm-video');
+      schedule();
+    }
+  };
+  const failed = () => root.classList.remove('has-arm-video');
+  const visibility = () => {
+    if (document.hidden) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      video?.pause();
+    } else schedule();
+  };
+  video?.addEventListener('loadeddata', ready);
+  video?.addEventListener('seeked', schedule);
+  video?.addEventListener('error', failed);
+  document.addEventListener('visibilitychange', visibility);
+  const saveData = (
+    navigator as Navigator & { connection?: { saveData?: boolean } }
+  ).connection?.saveData;
+  if (video && !saveData)
     ScrollTrigger.create({
       trigger: scroller,
       start: 'top bottom+=400',
       once: true,
       onEnter: () => {
+        if (disposed || !video.dataset.src) return;
         video.preload = 'auto';
+        video.src = video.dataset.src;
         video.load();
       },
     });
@@ -207,16 +251,28 @@ function initExploded(ScrollTrigger: ST) {
     trigger: scroller,
     start: 'top top+=104',
     end: 'bottom bottom',
-    onUpdate: ({ progress }) => {
+    onUpdate: (state) => {
+      progress = state.progress;
       bar?.style.setProperty('--p', progress.toFixed(3));
-      if (video && Number.isFinite(video.duration)) {
-        video.currentTime = progress * Math.max(0, video.duration - 0.05);
-        return;
-      }
       const t = Math.min(1, Math.max(0, (progress - 0.12) / 0.7));
       if (b) b.style.opacity = String(t * t * (3 - 2 * t));
+      schedule();
     },
   });
+  return () => {
+    disposed = true;
+    cancelAnimationFrame(frame);
+    root.classList.remove('has-arm-video');
+    document.removeEventListener('visibilitychange', visibility);
+    video?.removeEventListener('loadeddata', ready);
+    video?.removeEventListener('seeked', schedule);
+    video?.removeEventListener('error', failed);
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+  };
 }
 
 /** One ticker, cleaned up when motion is disabled. Modified clicks retain browser behavior. */

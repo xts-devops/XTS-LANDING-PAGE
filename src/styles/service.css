@@ -595,9 +595,19 @@
   border-radius: var(--radius);
 }
 .exploded-video {
-  display: block;
+  display: none;
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: calc(100% - 1rem);
+  object-fit: contain;
   border-radius: var(--radius);
+  background: var(--color-bg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .has-arm-video .exploded-video {
+    display: block;
+  }
 }
 .exploded-progress {
   display: none;

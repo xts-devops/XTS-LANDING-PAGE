@@ -1,0 +1,50 @@
+{
+  "id": "xts-arm-exploded-01",
+  "status": "awaiting-higgsfield-connection",
+  "inputs": [
+    {
+      "role": "start",
+      "file": "src/assets/photos/robotics/hero-arm.jpg",
+      "width": 2000,
+      "height": 1200,
+      "sha256": "e4974d1a3d4011729725d7bc499c1154d91cc1143eb0701c46d688a3ba5e073f"
+    },
+    {
+      "role": "end",
+      "file": "src/assets/photos/robotics/arm-exploded.jpg",
+      "width": 2000,
+      "height": 1200,
+      "sha256": "fcaab0d9aae5e13e651d1aa2bdb6871366d9be09d6489bd1946acdc6e687e890"
+    }
+  ],
+  "aspectRatio": "5:3",
+  "durationSeconds": 6,
+  "fps": 24,
+  "beats": [
+    {
+      "start": 0,
+      "end": 0.6,
+      "action": "hold assembled"
+    },
+    {
+      "start": 0.6,
+      "end": 4.8,
+      "action": "separate components along local axes, fixed base"
+    },
+    {
+      "start": 4.8,
+      "end": 6,
+      "action": "hold exploded end pose"
+    }
+  ],
+  "prompt": "Locked-off tripod view of the supplied six-axis industrial robotic arm in the same dark laboratory with the same single warm key light. Start exactly at the assembled reference. Hold the fixed base, floor, background, camera framing, lighting and arm identity unchanged. Separate each rigid mechanical component smoothly along its own axis into the evenly spaced clean exploded pose supplied by the end reference. No pan, tilt, zoom, rotation, cuts, extra components, geometry morphing, text, logos, audio, sparks or particles. Hold the exploded final reference. One forward six-second shot only.",
+  "delivery": {
+    "preferred": "src/assets/video/arm-exploded.mp4",
+    "optional": "src/assets/video/arm-exploded.webm",
+    "webSize": [1280, 768],
+    "allKeyframes": true,
+    "audio": false,
+    "preferredMaxBytes": 8388608
+  },
+  "fallback": "registered-photo-pair"
+}

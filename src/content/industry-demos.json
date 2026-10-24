@@ -1,0 +1,83 @@
+[
+  {
+    "id": "morrow",
+    "brand": "Morrow & Moss",
+    "industry": "Coffee, grocery & local produce",
+    "service": "business-systems",
+    "summary": "One counter for the morning coffee rush and everyday market essentials.",
+    "capabilities": ["Touch-friendly checkout", "Stock-aware selling"],
+    "try": "Add a coffee and produce to the ticket, then complete a sample sale."
+  },
+  {
+    "id": "formafield",
+    "brand": "FormaField",
+    "industry": "Construction & project delivery",
+    "service": "business-systems",
+    "summary": "A clear view of site progress, dependencies and the next handover.",
+    "capabilities": [
+      "Phase-by-phase building view",
+      "Tasks and site milestones"
+    ],
+    "try": "Step through the build phases or play the short construction sequence."
+  },
+  {
+    "id": "brightlane",
+    "brand": "Brightlane Campus",
+    "industry": "School & staff operations",
+    "service": "business-systems",
+    "summary": "Bring attendance, schedules and team coordination into one calm workspace.",
+    "capabilities": [
+      "Student and staff views",
+      "Attendance and schedule filters"
+    ],
+    "try": "Switch between students and staff, then filter today's attendance."
+  },
+  {
+    "id": "kindred",
+    "brand": "Kindred Smile",
+    "industry": "Dental & clinic booking",
+    "service": "custom-software",
+    "summary": "A reassuring appointment journey from choosing a clinician to confirmation.",
+    "capabilities": [
+      "Accessible appointment selection",
+      "Clear booking confirmation"
+    ],
+    "try": "Choose a clinician and a time, then confirm a demonstration booking."
+  },
+  {
+    "id": "daybreak",
+    "brand": "Daybreak Club",
+    "industry": "Hotel stays & court reservations",
+    "service": "custom-software",
+    "summary": "Plan a short stay or book a pickleball session without a complicated form.",
+    "capabilities": [
+      "Rooms and sports-court availability",
+      "Transparent sample pricing"
+    ],
+    "try": "Switch between stays and courts, choose an option and reserve it."
+  },
+  {
+    "id": "vista",
+    "brand": "Vista Grove",
+    "industry": "Real estate & property discovery",
+    "service": "custom-software",
+    "summary": "Explore an architectural concept, move between spaces and arrange a viewing.",
+    "capabilities": [
+      "Exterior and interior concept views",
+      "Simple viewing requests"
+    ],
+    "try": "Explore the courtyard and living space, then request a sample viewing."
+  },
+  {
+    "id": "relaydock",
+    "brand": "RelayDock",
+    "industry": "Infrastructure & implementation",
+    "service": "automation",
+    "summary": "Follow an industry system from environment checks to rollout and team handover.",
+    "capabilities": [
+      "Server-stack visibility",
+      "Deployment and enablement checklist"
+    ],
+    "try": "Inspect a stack component and run a simulated deployment checklist."
+  }
+]

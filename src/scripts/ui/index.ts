@@ -1,3 +1,4 @@
+import { initIndustryDemos } from './industry';
 import { initScreenPreview } from './preview';
 import { initAnchors } from './anchors';
 import { initTabs } from './tabs';
@@ -147,3 +148,5 @@ initWorkControls();
 initAnchors();
 
 initScreenPreview();
+
+initIndustryDemos();

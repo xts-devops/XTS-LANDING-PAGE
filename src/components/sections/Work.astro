@@ -60,7 +60,10 @@ import '../../styles/home.css';
             </p>
             <h3>{item.title}</h3>
             <p>{item.summary}</p>
-            <a class="work-service" href={`/services/${item.service}`}>
+            <a
+              class="work-service"
+              href={`/services/${item.service}#${item.service === 'robotics' ? 'engineering' : 'industry-demos'}`}
+            >
               {serviceBySlug(item.service)?.title}
             </a>
           </div>

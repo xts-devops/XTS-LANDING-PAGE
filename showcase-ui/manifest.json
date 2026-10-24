@@ -229,5 +229,54 @@
     "product": "Habi Automation",
     "width": 1440,
     "height": 900
+  },
+  {
+    "key": "industry/morrow",
+    "title": "Coffee, grocery & local produce",
+    "product": "Morrow & Moss",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/formafield",
+    "title": "Construction & project delivery",
+    "product": "FormaField",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/brightlane",
+    "title": "School & staff operations",
+    "product": "Brightlane Campus",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/kindred",
+    "title": "Dental & clinic booking",
+    "product": "Kindred Smile",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/daybreak",
+    "title": "Hotel stays & court reservations",
+    "product": "Daybreak Club",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/vista",
+    "title": "Real estate & property discovery",
+    "product": "Vista Grove",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/relaydock",
+    "title": "Infrastructure & implementation",
+    "product": "RelayDock",
+    "width": 1440,
+    "height": 900
   }
 ]

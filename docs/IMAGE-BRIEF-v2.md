@@ -99,3 +99,12 @@ along their axes, same angle and lighting). Claude builds the scroll transition 
 |---|---|---|
 | `src/assets/photos/home/hero-studio-v3.jpg` | Generated · built-in ImageGen, then edited to remove labels | Project-generated illustrative engineering studio. Full generation and refinement prompts: `docs/media-v2/ui-refinement-sources.json`. Exported 2400×1400; replaces only the homepage visual. |
 | `src/assets/brand/mark-gold-transparent.png` | Built-in ImageGen edit of the supplied gold logo | XTS-supplied mark isolated on transparent alpha for the header/footer lockup. Original assets retained. Full extraction prompt and export record: `docs/media-v2/ui-refinement-sources.json`. Raster derivative; no vector source claimed. |
+
+## Industry concept visuals — 2026-10-25
+
+| Filename | Origin | Prompt record |
+|---|---|---|
+| `public/demos/media/vista-exterior.webp` | Generated with built-in imagegen; no third-party stock. Fictional architectural concept. | Full exterior prompt and export details in `docs/media-v2/industry-sources.json` |
+| `public/demos/media/vista-interior.webp` | Generated with built-in imagegen; no third-party stock. Fictional architectural concept. | Full interior prompt and export details in `docs/media-v2/industry-sources.json` |
+
+These are illustrative design directions, not a continuous filmed walkthrough, an existing property listing or XTS client work. The seven new `src/assets/showcase/industry/*.png` screens are captured from the repository's own HTML/CSS/JS concept demos; their source and screen contract are documented in `docs/INDUSTRY-DEMOS.md`.

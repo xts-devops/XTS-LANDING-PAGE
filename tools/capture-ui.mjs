@@ -7,15 +7,19 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifest = JSON.parse(
   await readFile(path.join(root, 'showcase-ui/manifest.json'), 'utf8'),
 );
-const contract = JSON.parse(
+const coreContract = JSON.parse(
   await readFile(path.join(root, 'showcase-ui/screen-contract.json'), 'utf8'),
 );
+const industryContract = JSON.parse(
+  await readFile(path.join(root, 'showcase-ui/industry-contract.json'), 'utf8'),
+);
+const contract = [...coreContract, ...industryContract];
 if (
-  manifest.length !== 33 ||
-  new Set(manifest.map((s) => s.key)).size !== 33 ||
+  manifest.length !== contract.length ||
+  new Set(manifest.map((s) => s.key)).size !== contract.length ||
   contract.some((k) => !manifest.some((s) => s.key === k))
 )
-  throw Error('The 33-screen filename contract is incomplete');
+  throw Error('The screen filename contract is incomplete');
 const server = createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(
@@ -25,12 +29,16 @@ const server = createServer(async (req, res) => {
       pathname === '/' ? 'showcase-ui/index.html' : pathname.slice(1);
     if (
       !relative.startsWith('showcase-ui/') &&
-      !relative.startsWith('src/assets/showcase/')
+      !relative.startsWith('src/assets/showcase/') &&
+      !relative.startsWith('demos/')
     ) {
       res.writeHead(404).end();
       return;
     }
-    const filename = path.resolve(root, relative);
+    const filename = path.resolve(
+      root,
+      relative.startsWith('demos/') ? 'public/' + relative : relative,
+    );
     if (!filename.startsWith(root + path.sep)) {
       res.writeHead(403).end();
       return;
@@ -42,6 +50,8 @@ const server = createServer(async (req, res) => {
         '.html': 'text/html; charset=utf-8',
         '.css': 'text/css; charset=utf-8',
         '.png': 'image/png',
+        '.webp': 'image/webp',
+        '.js': 'text/javascript',
         '.json': 'application/json',
       }[path.extname(filename)] || 'application/octet-stream',
     );
@@ -115,7 +125,7 @@ if (serving) {
       );
     }
     if (failures.length) throw Error(failures.join('\n'));
-    console.log('All 33 screens captured at DPR 2.');
+    console.log(`All ${manifest.length} screens captured at DPR 2.`);
   } finally {
     await browser?.close();
     await new Promise((resolve) => server.close(resolve));

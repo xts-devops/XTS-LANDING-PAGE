@@ -1,3 +1,4 @@
+import { buildIndustry } from './industry-screens.mjs';
 import { applyFeatured } from './featured-screens.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -1164,12 +1165,13 @@ for (const key of contract) {
     `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${s.title} — ${product}</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="../featured.css"></head><body class="product-${group}">${body}</body></html>\n`,
   );
 }
+manifest.push(...buildIndustry());
 fs.writeFileSync(
   path.join(root, 'manifest.json'),
   JSON.stringify(manifest, null, 2) + '\n',
 );
 fs.writeFileSync(
   path.join(root, 'index.html'),
-  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sample systems — Contact sheet</title><style>body{margin:0;padding:40px;background:#eef2f7;color:#24374b;font:15px system-ui}h1{font-size:32px;margin:0}p{color:#61758c}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:30px}a{display:block;background:white;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid #dce4ed}img{width:100%;height:220px;object-fit:contain;background:#e7edf5}article{padding:18px}h2{font-size:17px;margin:0 0 8px}small{color:#718299}</style></head><body><h1>Software that feels ready for work.</h1><p>33 fictional sample screens · Philippine demonstration data · Captured at native size, DPR 2</p><main>${manifest.map((s) => `<a href="${s.key}.html"><img src="../src/assets/showcase/${s.key}.png" alt="${s.title}" loading="lazy"><article><h2>${s.product} · ${s.title}</h2><small>${s.key} · ${s.width} × ${s.height}</small></article></a>`).join('')}</main></body></html>\n`,
+  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sample systems — Contact sheet</title><style>body{margin:0;padding:40px;background:#eef2f7;color:#24374b;font:15px system-ui}h1{font-size:32px;margin:0}p{color:#61758c}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:30px}a{display:block;background:white;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid #dce4ed}img{width:100%;height:220px;object-fit:contain;background:#e7edf5}article{padding:18px}h2{font-size:17px;margin:0 0 8px}small{color:#718299}</style></head><body><h1>Software that feels ready for work.</h1><p>${manifest.length} fictional sample screens · Philippine demonstration data · Captured at native size, DPR 2</p><main>${manifest.map((s) => `<a href="${s.key}.html"><img src="../src/assets/showcase/${s.key}.png" alt="${s.title}" loading="lazy"><article><h2>${s.product} · ${s.title}</h2><small>${s.key} · ${s.width} × ${s.height}</small></article></a>`).join('')}</main></body></html>\n`,
 );
 console.log(`Built ${manifest.length} standalone screens and contact sheet.`);

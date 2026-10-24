@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>FormaField — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-formafield" data-demo="formafield">
+    <div class="demo-banner" role="banner">
+      <span>FICTIONAL CONCEPT / SAMPLE DATA</span
+      ><a href="/services/business-systems#industry-demos" target="_top"
+        >XZEN demo collection ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside class="demo-sidebar" aria-label="FormaField workspace">
+        <div class="demo-brand"><span>F</span><b>FormaField</b></div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Overview</span
+          ><span class=""><i>◈</i>Operations</span
+          ><span class=""><i>▤</i>Reports</span
+          ><span class=""><i>⚙</i>Settings</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            A fictional product direction.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Construction & project delivery</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">PROJECT / FF-024</p>
+              <h1>Courtyard House</h1>
+              <p>Site coordination · Planning through handover</p>
+            </div>
+            <span class="pill green">On schedule</span>
+          </div>
+          <div class="metrics">
+            <article class="metric">
+              <span>Overall progress</span><strong>68%</strong
+              ><small>Sample project status</small>
+            </article>
+            <article class="metric">
+              <span>Open tasks</span><strong>12</strong
+              ><small>4 due this week</small>
+            </article>
+            <article class="metric">
+              <span>Next milestone</span><strong>Envelope</strong
+              ><small>30 October · Sample date</small>
+            </article>
+            <article class="metric">
+              <span>Site team</span><strong>8 people</strong
+              ><small>Design · Engineering · Delivery</small>
+            </article>
+          </div>
+          <div class="build-layout">
+            <section class="panel build-panel">
+              <div class="panel-head">
+                <div>
+                  <h2>From the ground up</h2>
+                  <small
+                    >Concept build sequence · Diagram, not engineering
+                    documentation</small
+                  >
+                </div>
+                <button type="button" data-build-play class="soft">
+                  Play sequence
+                </button>
+              </div>
+              <div class="build-scene" data-build-scene data-phase="2">
+                <svg
+                  viewBox="0 0 800 400"
+                  role="img"
+                  aria-label="Building phase diagram"
+                >
+                  <defs>
+                    <pattern
+                      id="ground"
+                      width="40"
+                      height="20"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M0 20L40 0M0 0l40 20"
+                        stroke="#dbe2dd"
+                        stroke-width=".8"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="800" height="400" fill="url(#ground)" />
+                  <g class="build-ground">
+                    <path
+                      d="M155 265l260-125 245 125-260 125z"
+                      fill="#b8c8bd"
+                    />
+                    <path
+                      d="M205 265l210-100 195 100-210 105z"
+                      fill="#839d90"
+                    />
+                  </g>
+                  <g class="build-frame">
+                    <path
+                      d="M215 255V135l200-97 185 97v120M315 305V183M415 354V233M515 307V184M215 135l200 98 185-98M315 183l200-98M415 38v195"
+                      fill="none"
+                      stroke="#476b61"
+                      stroke-width="12"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <g class="build-envelope">
+                    <path d="M215 135l200 98v121L215 255z" fill="#c9bda9" />
+                    <path d="M415 233l185-98v120L415 354z" fill="#e0d8c9" />
+                    <path d="M215 135l200-97 185 97-185 98z" fill="#f3eee2" />
+                    <path
+                      d="M440 246l50-26v85l-50 25M515 207l58-30v45l-58 30"
+                      fill="#547d82"
+                    />
+                    <path
+                      d="M245 175l52 25v55l-52-25M327 215l53 25v55l-53-25"
+                      fill="#6d9695"
+                    />
+                  </g>
+                  <g class="build-fitout">
+                    <path
+                      d="M155 285l47-23 32 17-47 23zM600 278l44-20 24 14-44 20z"
+                      fill="#9bb98d"
+                    />
+                    <circle cx="165" cy="255" r="30" fill="#6d8f77" />
+                    <circle cx="645" cy="238" r="25" fill="#91ad80" />
+                  </g></svg
+                ><span class="scene-tag" data-phase-label>03 / Envelope</span>
+              </div>
+              <div class="phase-buttons" role="group" aria-label="Build phase">
+                <button
+                  type="button"
+                  data-phase-button="0"
+                  aria-pressed="false"
+                >
+                  <span>01</span>Foundation</button
+                ><button
+                  type="button"
+                  data-phase-button="1"
+                  aria-pressed="false"
+                >
+                  <span>02</span>Frame</button
+                ><button
+                  type="button"
+                  data-phase-button="2"
+                  aria-pressed="true"
+                >
+                  <span>03</span>Envelope</button
+                ><button
+                  type="button"
+                  data-phase-button="3"
+                  aria-pressed="false"
+                >
+                  <span>04</span>Fit-out
+                </button>
+              </div>
+            </section>
+            <aside>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Next on site</h2>
+                  <small>This week</small>
+                </div>
+                <div class="task-list">
+                  <label
+                    ><input type="checkbox" data-site-task /><span
+                      ><b>Envelope inspection</b
+                      ><small>Alex Lim · Site lead</small></span
+                    ></label
+                  ><label
+                    ><input type="checkbox" data-site-task /><span
+                      ><b>Review window schedule</b
+                      ><small>Sam Reyes · Design</small></span
+                    ></label
+                  ><label
+                    ><input type="checkbox" data-site-task /><span
+                      ><b>Confirm supplier delivery</b
+                      ><small>Noor Tan · Procurement</small></span
+                    ></label
+                  ><label
+                    ><input type="checkbox" data-site-task /><span
+                      ><b>Prepare client handover</b
+                      ><small>Isabel Cruz · Delivery</small></span
+                    ></label
+                  >
+                </div>
+                <p class="muted" data-site-status>
+                  0 of 4 coordination tasks complete
+                </p>
+              </section>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Milestone timeline</h2>
+                  <small></small>
+                </div>
+                <ol class="timeline">
+                  <li><b>Site preparation</b><span>Complete</span></li>
+                  <li><b>Structure</b><span>Complete</span></li>
+                  <li class="current">
+                    <b>Envelope</b><span>In progress</span>
+                  </li>
+                  <li><b>Fit-out & handover</b><span>Up next</span></li>
+                </ol>
+              </section>
+            </aside>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Fictional brand and people · Demonstration data · No live transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

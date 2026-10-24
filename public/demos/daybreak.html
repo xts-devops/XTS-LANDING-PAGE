@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Daybreak Club — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-daybreak" data-demo="daybreak">
+    <div class="demo-banner" role="banner">
+      <span>FICTIONAL CONCEPT / SAMPLE DATA</span
+      ><a href="/services/custom-software#industry-demos" target="_top"
+        >XZEN demo collection ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside class="demo-sidebar" aria-label="Daybreak Club workspace">
+        <div class="demo-brand"><span>D</span><b>Daybreak Club</b></div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Reservations</span
+          ><span class=""><i>◈</i>Club overview</span
+          ><span class=""><i>▤</i>Guest services</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            A fictional product direction.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Hotel stays & court reservations</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">DAYBREAK CLUB / RESERVATIONS</p>
+              <h1>More time for the good things.</h1>
+              <p>A quiet stay. A great game. A plan that feels effortless.</p>
+            </div>
+            <span class="pill">Concept reservation desk</span>
+          </div>
+          <div class="club-intro">
+            <div>
+              <p class="eyebrow">STAY A LITTLE. PLAY A LITTLE.</p>
+              <h2>Your next break,<br />beautifully simple.</h2>
+              <p>
+                Sample rooms and pickleball courts in one reservation
+                experience.
+              </p>
+            </div>
+            <div
+              class="court-art"
+              aria-label="Pickleball court diagram"
+              role="img"
+            >
+              <div class="court-lines"><i></i><b></b><span></span></div>
+              <span>COURT / 02</span>
+            </div>
+          </div>
+          <div class="reservation-controls">
+            <div class="segments" role="group" aria-label="reservation">
+              <button
+                type="button"
+                data-segment="reservation"
+                data-value="Stays"
+                aria-pressed="true"
+              >
+                Stays</button
+              ><button
+                type="button"
+                data-segment="reservation"
+                data-value="Courts"
+                aria-pressed="false"
+              >
+                Courts
+              </button>
+            </div>
+            <label class="field"
+              >Arrival / play date<input
+                type="date"
+                value="2026-10-23"
+                min="2026-10-01"
+                max="2026-12-31"
+                data-reserve-date
+            /></label>
+            <p class="muted">Sample availability · GMT+8</p>
+          </div>
+          <div class="option-grid" data-reservation="Stays">
+            <article class="stay-card">
+              <div class="room-art warm" aria-hidden="true">
+                <div class="window"></div>
+                <div class="bed"></div>
+                <span>01</span>
+              </div>
+              <div>
+                <h3>Courtyard studio</h3>
+                <p>2 guests · Breakfast included</p>
+                <strong>₱4,200<small> / night</small></strong
+                ><button
+                  class="soft"
+                  type="button"
+                  data-reserve="Courtyard studio"
+                >
+                  Reserve sample stay ↗
+                </button>
+              </div>
+            </article>
+            <article class="stay-card">
+              <div class="room-art sage" aria-hidden="true">
+                <div class="window"></div>
+                <div class="bed"></div>
+                <span>02</span>
+              </div>
+              <div>
+                <h3>Garden suite</h3>
+                <p>2–3 guests · Private terrace</p>
+                <strong>₱5,800<small> / night</small></strong
+                ><button class="soft" type="button" data-reserve="Garden suite">
+                  Reserve sample stay ↗
+                </button>
+              </div>
+            </article>
+            <article class="stay-card">
+              <div class="room-art blue" aria-hidden="true">
+                <div class="window"></div>
+                <div class="bed"></div>
+                <span>03</span>
+              </div>
+              <div>
+                <h3>Family loft</h3>
+                <p>4 guests · Two sleeping areas</p>
+                <strong>₱7,600<small> / night</small></strong
+                ><button class="soft" type="button" data-reserve="Family loft">
+                  Reserve sample stay ↗
+                </button>
+              </div>
+            </article>
+          </div>
+          <div class="option-grid" data-reservation="Courts" hidden>
+            <article class="stay-card court-card">
+              <div class="small-court" aria-hidden="true"><i></i></div>
+              <div>
+                <h3>Court 01</h3>
+                <p>Indoor · 2–4 players</p>
+                <strong>₱600<small> / hour · 9:00–10:00 AM</small></strong
+                ><button
+                  class="soft"
+                  type="button"
+                  data-reserve="Court 01 · 9:00–10:00 AM"
+                >
+                  Reserve sample court ↗
+                </button>
+              </div>
+            </article>
+            <article class="stay-card court-card">
+              <div class="small-court" aria-hidden="true"><i></i></div>
+              <div>
+                <h3>Court 02</h3>
+                <p>Covered · 2–4 players</p>
+                <strong>₱600<small> / hour · 4:00–5:00 PM</small></strong
+                ><button
+                  class="soft"
+                  type="button"
+                  data-reserve="Court 02 · 4:00–5:00 PM"
+                >
+                  Reserve sample court ↗
+                </button>
+              </div>
+            </article>
+            <article class="stay-card court-card">
+              <div class="small-court" aria-hidden="true"><i></i></div>
+              <div>
+                <h3>Court 03</h3>
+                <p>Outdoor · 2–4 players</p>
+                <strong>₱600<small> / hour · 5:00–6:00 PM</small></strong
+                ><button
+                  class="soft"
+                  type="button"
+                  data-reserve="Court 03 · 5:00–6:00 PM"
+                >
+                  Reserve sample court ↗
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Fictional brand and people · Demonstration data · No live transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

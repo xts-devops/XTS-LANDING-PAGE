@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Brightlane Campus — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-brightlane" data-demo="brightlane">
+    <div class="demo-banner" role="banner">
+      <span>FICTIONAL CONCEPT / SAMPLE DATA</span
+      ><a href="/services/business-systems#industry-demos" target="_top"
+        >XZEN demo collection ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside class="demo-sidebar" aria-label="Brightlane Campus workspace">
+        <div class="demo-brand"><span>B</span><b>Brightlane Campus</b></div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Overview</span
+          ><span class=""><i>◈</i>Operations</span
+          ><span class=""><i>▤</i>Reports</span
+          ><span class=""><i>⚙</i>Settings</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            A fictional product direction.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>School & staff operations</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">CAMPUS OPERATIONS</p>
+              <h1>A clearer school day.</h1>
+              <p>Attendance, schedules and people in one place.</p>
+            </div>
+            <span class="pill">Friday, 23 October</span>
+          </div>
+          <div class="metrics">
+            <article class="metric">
+              <span>Present today</span><strong>248 / 260</strong
+              ><small>Demonstration attendance</small>
+            </article>
+            <article class="metric">
+              <span>Scheduled classes</span><strong>18</strong
+              ><small>Across 6 learning groups</small>
+            </article>
+            <article class="metric">
+              <span>Staff on site</span><strong>24</strong
+              ><small>Teaching and support</small>
+            </article>
+            <article class="metric">
+              <span>Action items</span><strong>6</strong
+              ><small>2 need a follow-up</small>
+            </article>
+          </div>
+          <div class="campus-layout">
+            <section class="panel">
+              <div class="panel-head">
+                <h2>People & attendance</h2>
+                <div class="segments" role="group" aria-label="roster">
+                  <button
+                    type="button"
+                    data-segment="roster"
+                    data-value="Students"
+                    aria-pressed="true"
+                  >
+                    Students</button
+                  ><button
+                    type="button"
+                    data-segment="roster"
+                    data-value="Staff"
+                    aria-pressed="false"
+                  >
+                    Staff
+                  </button>
+                </div>
+              </div>
+              <div class="filter-row">
+                <label class="search"
+                  >Search roster<input
+                    type="search"
+                    data-roster-search
+                    placeholder="Name or group…" /></label
+                ><label class="field"
+                  >Attendance<select data-attendance>
+                    <option>All</option>
+                    <option>Present</option>
+                    <option>Pending</option>
+                  </select></label
+                >
+              </div>
+              <div data-roster="Students">
+                <div
+                  class="table-wrap"
+                  tabindex="0"
+                  role="region"
+                  aria-label="Scrollable roster table"
+                >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Student</th>
+                        <th scope="col">Learning group</th>
+                        <th scope="col">Arrival</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>L. Santos</td>
+                        <td>Grade 8 · Mahogany</td>
+                        <td>07:42</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                      <tr>
+                        <td>A. Tan</td>
+                        <td>Grade 9 · Acacia</td>
+                        <td>07:48</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                      <tr>
+                        <td>M. Cruz</td>
+                        <td>Grade 8 · Mahogany</td>
+                        <td>—</td>
+                        <td><span class="pill amber">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td>J. Lim</td>
+                        <td>Grade 10 · Narra</td>
+                        <td>07:39</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                      <tr>
+                        <td>S. Lee</td>
+                        <td>Grade 9 · Acacia</td>
+                        <td>07:55</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div data-roster="Staff" hidden>
+                <div
+                  class="table-wrap"
+                  tabindex="0"
+                  role="region"
+                  aria-label="Scrollable roster table"
+                >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Team member</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Schedule</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Alex Tan</td>
+                        <td>Learning coordinator</td>
+                        <td>07:30–16:30</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                      <tr>
+                        <td>Maya Reyes</td>
+                        <td>Science educator</td>
+                        <td>08:00–17:00</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                      <tr>
+                        <td>Sam Lee</td>
+                        <td>Student support</td>
+                        <td>08:00–17:00</td>
+                        <td><span class="pill amber">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td>Isabel Cruz</td>
+                        <td>Operations lead</td>
+                        <td>07:30–16:30</td>
+                        <td><span class="pill green">Present</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <p class="muted" data-roster-status>
+                Showing today's sample roster
+              </p>
+            </section>
+            <aside>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Today, at a glance</h2>
+                  <small></small>
+                </div>
+                <ol class="schedule">
+                  <li>
+                    <time>08:00</time>
+                    <div>
+                      <b>Learning block 01</b><span>Classrooms · 6 groups</span>
+                    </div>
+                  </li>
+                  <li>
+                    <time>10:30</time>
+                    <div>
+                      <b>Science studio</b><span>Lab 02 · Maya Reyes</span>
+                    </div>
+                  </li>
+                  <li>
+                    <time>13:00</time>
+                    <div>
+                      <b>Student support hour</b><span>Learning centre</span>
+                    </div>
+                  </li>
+                  <li>
+                    <time>15:30</time>
+                    <div>
+                      <b>Staff coordination</b><span>Meeting room 01</span>
+                    </div>
+                  </li>
+                </ol>
+              </section>
+              <div class="feature-note">
+                <span>ONE CAMPUS. ONE VIEW.</span>
+                <h2>Less admin.<br />More time for learning.</h2>
+                <p>
+                  Illustrative workflows, with fictional people and records.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Fictional brand and people · Demonstration data · No live transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

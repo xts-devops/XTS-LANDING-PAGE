@@ -10,6 +10,7 @@ import SystemShowcase from '../../components/service/SystemShowcase.astro';
 import ScreenOnPhoto from '../../components/media/ScreenOnPhoto.astro';
 import ExplodedView from '../../components/service/ExplodedView.astro';
 import ServiceHero from '../../components/service/ServiceHero.astro';
+import IndustryDemos from '../../components/service/IndustryDemos.astro';
 import { services } from '../../content/services';
 import type { Service } from '../../content/types';
 import { site } from '../../content/site';
@@ -41,6 +42,8 @@ const rowColumns = `--cols:${(service.gallery ?? []).map((g) => `${ratioOf(g.rat
     <ServiceHero service={service} />
 
     {service.slug === 'robotics' && <ExplodedView />}
+
+    <IndustryDemos service={service.slug} />
 
     {service.systems && (
       <SystemShowcase

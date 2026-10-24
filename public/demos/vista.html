@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Vista Grove — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-vista" data-demo="vista">
+    <div class="demo-banner" role="banner">
+      <span>FICTIONAL CONCEPT / SAMPLE DATA</span
+      ><a href="/services/custom-software#industry-demos" target="_top"
+        >XZEN demo collection ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside class="demo-sidebar" aria-label="Vista Grove workspace">
+        <div class="demo-brand"><span>V</span><b>Vista Grove</b></div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Discover</span
+          ><span class=""><i>◈</i>Concept spaces</span
+          ><span class=""><i>▤</i>Viewing</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            A fictional product direction.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Real estate & property discovery</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="estate-head">
+            <div>
+              <p class="eyebrow">VISTA GROVE / ARCHITECTURAL CONCEPTS</p>
+              <h1>Space to live a little differently.</h1>
+            </div>
+            <span class="pill">Fictional property concept</span>
+          </div>
+          <div class="estate-layout">
+            <section class="estate-tour">
+              <div class="tour-image">
+                <img
+                  src="/demos/media/vista-exterior.webp"
+                  data-tour-image
+                  width="1536"
+                  height="1024"
+                  alt="Generated exterior concept of a contemporary courtyard house"
+                /><span class="tour-tag" data-tour-label
+                  >01 / Courtyard arrival</span
+                ><button
+                  type="button"
+                  class="tour-hotspot"
+                  data-tour-next
+                  aria-label="Explore the next space"
+                >
+                  ↗
+                </button>
+              </div>
+              <div
+                class="tour-controls"
+                role="group"
+                aria-label="Explore concept spaces"
+              >
+                <button
+                  type="button"
+                  data-tour-view="exterior"
+                  aria-pressed="true"
+                >
+                  <span>01</span>Courtyard arrival</button
+                ><button
+                  type="button"
+                  data-tour-view="interior"
+                  aria-pressed="false"
+                >
+                  <span>02</span>Living & gathering
+                </button>
+              </div>
+              <p class="muted">
+                Generated architectural concepts. Views illustrate a design
+                direction; they are not a surveyed property or a continuous
+                filmed walkthrough.
+              </p>
+            </section>
+            <aside class="estate-details">
+              <p class="eyebrow">THE COURTYARD COLLECTION</p>
+              <h2>A calmer kind<br />of coming home.</h2>
+              <p>
+                Light-filled spaces, warm natural materials and a little room
+                for the everyday.
+              </p>
+              <div class="property-facts">
+                <span><b>3</b>Bedrooms</span><span><b>2</b>Levels</span
+                ><span><b>186 m²</b>Concept area</span>
+              </div>
+              <div class="floorplan">
+                <svg
+                  viewBox="0 0 300 160"
+                  role="img"
+                  aria-label="Illustrative ground-floor concept plan"
+                >
+                  <path
+                    d="M15 15h270v130H15z"
+                    fill="#faf7f0"
+                    stroke="#8c978c"
+                    stroke-width="4"
+                  />
+                  <path
+                    d="M165 15v130M15 85h150M220 15v65h65"
+                    fill="none"
+                    stroke="#8c978c"
+                    stroke-width="3"
+                  />
+                  <rect x="175" y="91" width="100" height="42" fill="#cbd4bb" />
+                  <text x="40" y="56">Living</text>
+                  <text x="38" y="118">Dining</text>
+                  <text x="183" y="55">Entry</text>
+                  <text x="191" y="118">Courtyard</text></svg
+                ><small>Illustrative layout · Not to scale</small>
+              </div>
+              <button type="button" class="primary" data-viewing>
+                Arrange a sample viewing
+              </button>
+              <p class="muted">
+                No listing, price or availability is being offered.
+              </p>
+              <div class="viewing-panel" data-viewing-panel hidden>
+                <label class="field"
+                  >Preferred day<input
+                    type="date"
+                    value="2026-10-26"
+                    data-viewing-date /></label
+                ><button type="button" class="soft" data-viewing-confirm>
+                  Request sample viewing
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Fictional brand and people · Demonstration data · No live transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

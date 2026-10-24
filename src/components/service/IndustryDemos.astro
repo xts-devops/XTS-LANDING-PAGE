@@ -1,0 +1,122 @@
+---
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+import Screen from '../media/Screen.astro';
+import {
+  industryDemos,
+  industryCopy as copy,
+} from '../../content/industry-demos';
+import '../../styles/industry.css';
+interface Props {
+  service: string;
+}
+const demos = industryDemos.filter((d) => d.service === Astro.props.service);
+---
+
+{demos.length > 0 && (
+  <section
+    class="section industry-demos"
+    id="industry-demos"
+    aria-labelledby="industry-heading"
+  >
+    <Container>
+      <div class="industry-head" data-scroll-start>
+        <div>
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <h2 id="industry-heading">{copy.heading}</h2>
+        </div>
+        <p>{copy.summary}</p>
+      </div>
+      <ul
+        class:list={[
+          'industry-grid',
+          { 'industry-grid-single': demos.length === 1 },
+        ]}
+        role="list"
+      >
+        {demos.map((d) => (
+          <li class="industry-card">
+            <div class="industry-thumb">
+              <Screen
+                screen={`industry/${d.id}`}
+                alt={`${d.brand}: ${d.industry} concept interface`}
+                sizes="(min-width: 1024px) 32vw, 100vw"
+                widths={[480, 800]}
+              />
+            </div>
+            <div class="industry-card-body">
+              <p class="industry-category">{d.industry}</p>
+              <h3>{d.brand}</h3>
+              <p>{d.summary}</p>
+              <ul class="industry-capabilities" role="list">
+                {d.capabilities.map((c) => (
+                  <li>
+                    <Icon name="shield-check" />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                class="industry-open"
+                data-demo-open
+                aria-label={`${copy.open}: ${d.brand}`}
+                data-demo-url={`/demos/${d.id}.html`}
+                data-demo-title={d.brand}
+                data-demo-hint={d.try}
+              >
+                {copy.open}
+                <Icon name="arrow-up-right" />
+              </button>
+              <noscript>
+                <a class="industry-open" href={`/demos/${d.id}.html`}>
+                  {copy.fallback}
+                  <Icon name="arrow-up-right" />
+                </a>
+              </noscript>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="industry-footer">
+        <p>{copy.note}</p>
+        <a href="#systems">
+          {copy.modules}
+          <Icon name="arrow-right" />
+        </a>
+      </div>
+    </Container>
+    <dialog
+      class="industry-dialog"
+      data-demo-dialog
+      data-lenis-prevent
+      aria-labelledby="demo-dialog-heading"
+    >
+      <div class="industry-dialog-head">
+        <div>
+          <span>{copy.label}</span>
+          <h2 id="demo-dialog-heading">{copy.fallback}</h2>
+        </div>
+        <button type="button" data-demo-close autofocus>
+          {copy.close}
+          <span aria-hidden="true"> ×</span>
+        </button>
+      </div>
+      <p class="industry-dialog-hint" data-demo-instruction>
+        {copy.dialogNote}
+      </p>
+      <div class="industry-live">
+        <p role="status" data-demo-loading>
+          {copy.loading}
+        </p>
+        <iframe
+          data-demo-frame
+          title={copy.label}
+          sandbox="allow-scripts"
+          referrerpolicy="no-referrer"
+        ></iframe>
+      </div>
+    </dialog>
+  </section>
+)}

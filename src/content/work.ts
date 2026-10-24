@@ -10,10 +10,10 @@ export const workIntro = {
   previous: 'Previous example',
   next: 'Next example',
   browseHint: 'Explore what we can build for your team',
-  eyebrow: 'Selected work',
-  heading: 'Systems running in real businesses',
+  eyebrow: 'Applications, in context',
+  heading: 'Built around the way you work',
   summary:
-    'Client details stay confidential. Here’s the kind of work we deliver, and the people it serves.',
+    'Client details stay confidential. These illustrative concepts explore the systems we can build, with generated imagery and no client results claimed.',
 };
 
 export const work: WorkItem[] = [

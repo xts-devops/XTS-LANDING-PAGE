@@ -21,7 +21,9 @@ const videos = import.meta.glob<string>(
     import: 'default',
   },
 );
-const videoUrl = Object.values(videos)[0];
+const videoUrl = Object.entries(videos).sort(
+  ([a], [b]) => Number(b.endsWith('.mp4')) - Number(a.endsWith('.mp4')),
+)[0]?.[1];
 const copy = site.servicePage;
 ---
 
@@ -40,35 +42,34 @@ const copy = site.servicePage;
   </Container>
   <div class="exploded-scroll">
     <div class="exploded-stage">
-      {videoUrl ? (
+      <div class="exploded-pair">
+        <Photo
+          photo="robotics/hero-arm"
+          alt="Assembled six-axis robotic arm"
+          ratio="5 / 3"
+          class="exploded-a"
+          sizes="(min-width: 1024px) 80vw, 100vw"
+          widths={[800, 1200, 2000]}
+        />
+        <Photo
+          photo="robotics/arm-exploded"
+          alt="The same robotic arm in an exploded view, parts separated along their axes"
+          ratio="5 / 3"
+          class="exploded-b"
+          sizes="(min-width: 1024px) 80vw, 100vw"
+          widths={[800, 1200, 2000]}
+        />
+      </div>
+      {videoUrl && (
         <video
           class="exploded-video"
           data-exploded-video
-          src={videoUrl}
+          data-src={videoUrl}
           muted
           playsinline
           preload="none"
-          aria-label="Robotic arm separating into its components"
+          aria-hidden="true"
         />
-      ) : (
-        <div class="exploded-pair">
-          <Photo
-            photo="robotics/hero-arm"
-            alt="Assembled six-axis robotic arm"
-            ratio="5 / 3"
-            class="exploded-a"
-            sizes="(min-width: 1024px) 80vw, 100vw"
-            widths={[800, 1200, 2000]}
-          />
-          <Photo
-            photo="robotics/arm-exploded"
-            alt="The same robotic arm in an exploded view, parts separated along their axes"
-            ratio="5 / 3"
-            class="exploded-b"
-            sizes="(min-width: 1024px) 80vw, 100vw"
-            widths={[800, 1200, 2000]}
-          />
-        </div>
       )}
       <div class="exploded-progress" aria-hidden="true">
         <i data-exploded-bar />

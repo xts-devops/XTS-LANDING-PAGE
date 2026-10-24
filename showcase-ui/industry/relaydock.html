@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>RelayDock — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-relaydock" data-demo="relaydock">
+    <div class="demo-banner" role="banner">
+      <span>FICTIONAL CONCEPT / SAMPLE DATA</span
+      ><a href="/services/automation#industry-demos" target="_top"
+        >XZEN demo collection ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside class="demo-sidebar" aria-label="RelayDock workspace">
+        <div class="demo-brand"><span>R</span><b>RelayDock</b></div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Overview</span
+          ><span class=""><i>◈</i>Operations</span
+          ><span class=""><i>▤</i>Reports</span
+          ><span class=""><i>⚙</i>Settings</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            A fictional product direction.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Infrastructure & implementation</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">ENVIRONMENTS / DEMO-STACK</p>
+              <h1>From setup to a smooth handover.</h1>
+              <p>Infrastructure, application delivery and team readiness.</p>
+            </div>
+            <span class="pill blue">Sandbox · No live infrastructure</span>
+          </div>
+          <div class="metrics">
+            <article class="metric">
+              <span>Services healthy</span><strong>5 / 5</strong
+              ><small>Sample stack telemetry</small>
+            </article>
+            <article class="metric">
+              <span>Release candidate</span><strong>v1.8.0</strong
+              ><small>Ready for a dry run</small>
+            </article>
+            <article class="metric">
+              <span>Latest backup</span><strong>09:00</strong
+              ><small>Demo timestamp</small>
+            </article>
+            <article class="metric">
+              <span>Enablement</span><strong>3 sessions</strong
+              ><small>Planned, not delivered</small>
+            </article>
+          </div>
+          <div class="ops-layout">
+            <section class="panel stack-panel">
+              <div class="panel-head">
+                <h2>Industry application stack</h2>
+                <span class="mono">DEMO / AP-SOUTHEAST</span>
+              </div>
+              <div class="stack-map">
+                <button type="button" data-stack="edge" aria-pressed="true">
+                  <span class="node-icon">↗</span><b>Edge & routing</b
+                  ><small>HTTPS / traffic policy</small><i></i></button
+                ><button type="button" data-stack="app" aria-pressed="false">
+                  <span class="node-icon">▦</span><b>Application</b
+                  ><small>Web / booking / operations</small><i></i></button
+                ><button type="button" data-stack="data" aria-pressed="false">
+                  <span class="node-icon">▤</span><b>Data services</b
+                  ><small>PostgreSQL / object storage</small><i></i></button
+                ><button type="button" data-stack="jobs" aria-pressed="false">
+                  <span class="node-icon">⇄</span><b>Worker queue</b
+                  ><small>Scheduled sync / notifications</small><i></i>
+                </button>
+              </div>
+              <div class="stack-detail">
+                <span class="eyebrow">SELECTED COMPONENT</span>
+                <h3 data-stack-title>Edge & routing</h3>
+                <p data-stack-description>
+                  Routes incoming requests to the application. Demo policies
+                  show HTTPS and basic health checks.
+                </p>
+              </div>
+              <div class="terminal">
+                <div><span>Deployment preview</span><small>DRY RUN</small></div>
+                <pre data-deploy-log>
+Ready. This simulation does not contact a server.
+$ relaydock deploy --preview
+Waiting for your command…</pre>
+              </div>
+            </section>
+            <aside>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Release checklist</h2>
+                  <small></small>
+                </div>
+                <ol class="release-list">
+                  <li data-release-step="0">
+                    <span>01</span><b>Validate configuration</b
+                    ><small>Ready</small>
+                  </li>
+                  <li data-release-step="1">
+                    <span>02</span><b>Check data backup</b><small>Ready</small>
+                  </li>
+                  <li data-release-step="2">
+                    <span>03</span><b>Verify application health</b
+                    ><small>Ready</small>
+                  </li>
+                  <li data-release-step="3">
+                    <span>04</span><b>Prepare team handover</b
+                    ><small>Ready</small>
+                  </li>
+                </ol>
+                <button type="button" class="primary" data-deploy>
+                  Run dry deployment
+                </button>
+              </section>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Implementation & enablement</h2>
+                  <small>Sample delivery plan</small>
+                </div>
+                <div class="enablement">
+                  <div>
+                    <span>01</span>
+                    <p>
+                      <b>Discovery & environment plan</b
+                      ><small>Map roles, integrations and rollout needs</small>
+                    </p>
+                  </div>
+                  <div>
+                    <span>02</span>
+                    <p>
+                      <b>Operator workshop</b
+                      ><small>Hands-on workflows with sample records</small>
+                    </p>
+                  </div>
+                  <div>
+                    <span>03</span>
+                    <p>
+                      <b>Handover & support guide</b
+                      ><small>Runbook, ownership and recovery paths</small>
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Fictional brand and people · Demonstration data · No live transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Kindred Smile — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-kindred" data-demo="kindred">
+    <div class="demo-banner" role="banner">
+      <span>FICTIONAL CONCEPT / SAMPLE DATA</span
+      ><a href="/services/custom-software#industry-demos" target="_top"
+        >XZEN demo collection ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside class="demo-sidebar" aria-label="Kindred Smile workspace">
+        <div class="demo-brand"><span>K</span><b>Kindred Smile</b></div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Appointments</span
+          ><span class=""><i>◈</i>Our approach</span
+          ><span class=""><i>▤</i>Your visit</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            A fictional product direction.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Dental & clinic booking</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">CARE, AT YOUR PACE</p>
+              <h1>Make room for your smile.</h1>
+              <p>
+                A simple booking experience, from your first visit to your next.
+              </p>
+            </div>
+            <span class="pill">Fictional clinic concept</span>
+          </div>
+          <div class="booking-layout">
+            <section class="care-story">
+              <div class="care-emblem" aria-hidden="true">✳</div>
+              <p class="eyebrow">KINDRED SMILE / APPOINTMENTS</p>
+              <h2>A little care.<br />A lot of clarity.</h2>
+              <p>
+                Choose your clinician and a time that works for you. Review
+                every detail before confirming.
+              </p>
+              <div class="care-details">
+                <span>01 / Select your clinician</span
+                ><span>02 / Find a time</span><span>03 / You're all set</span>
+              </div>
+              <div class="staff-mini">
+                <span class="avatar">AT</span><span class="avatar">MR</span>
+                <p>
+                  Alex Tan & Maya Reyes<br /><small>Fictional care team</small>
+                </p>
+              </div>
+            </section>
+            <section class="panel appointment">
+              <div class="panel-head">
+                <h2>Book a consultation</h2>
+                <span class="pill">30 minutes</span>
+              </div>
+              <label class="field"
+                >Choose a clinician<select data-clinician>
+                  <option>Dr Alex Tan</option>
+                  <option>Dr Maya Reyes</option>
+                </select></label
+              >
+              <div class="calendar-head">
+                <b>October 2026</b><span>Appointment times · GMT+8</span>
+              </div>
+              <div
+                class="date-options"
+                role="group"
+                aria-label="Appointment date"
+              >
+                <button
+                  type="button"
+                  data-book-date="Fri, 23 October"
+                  aria-pressed="true"
+                >
+                  <small>Fri</small><b>23</b><i></i></button
+                ><button
+                  type="button"
+                  data-book-date="Sat, 24 October"
+                  aria-pressed="false"
+                >
+                  <small>Sat</small><b>24</b><i></i></button
+                ><button
+                  type="button"
+                  data-book-date="Mon, 26 October"
+                  aria-pressed="false"
+                >
+                  <small>Mon</small><b>26</b><i></i></button
+                ><button
+                  type="button"
+                  data-book-date="Tue, 27 October"
+                  aria-pressed="false"
+                >
+                  <small>Tue</small><b>27</b><i></i></button
+                ><button
+                  type="button"
+                  data-book-date="Wed, 28 October"
+                  aria-pressed="false"
+                >
+                  <small>Wed</small><b>28</b><i></i>
+                </button>
+              </div>
+              <h3>Available times</h3>
+              <div
+                class="time-options"
+                role="group"
+                aria-label="Appointment time"
+              >
+                <button
+                  type="button"
+                  data-book-time="9:00 AM"
+                  aria-pressed="false"
+                >
+                  9:00 AM</button
+                ><button
+                  type="button"
+                  data-book-time="10:00 AM"
+                  aria-pressed="true"
+                >
+                  10:00 AM</button
+                ><button
+                  type="button"
+                  data-book-time="11:30 AM"
+                  aria-pressed="false"
+                >
+                  11:30 AM</button
+                ><button
+                  type="button"
+                  data-book-time="2:00 PM"
+                  aria-pressed="false"
+                >
+                  2:00 PM
+                </button>
+              </div>
+              <div class="booking-review">
+                <span>Your consultation</span
+                ><strong data-book-review
+                  >Dr Alex Tan · Fri, 23 October · 10:00 AM</strong
+                ><small>Online or at the clinic · Demonstration only</small>
+              </div>
+              <button type="button" class="primary" data-confirm-booking>
+                Confirm sample appointment
+              </button>
+              <p class="muted">
+                No personal details or payments are collected in this demo.
+              </p>
+            </section>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Fictional brand and people · Demonstration data · No live transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

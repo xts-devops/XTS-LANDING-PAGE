@@ -1,0 +1,14 @@
+[
+  {
+    "file": "public/demos/media/vista-exterior.webp",
+    "source": "Generated with the built-in imagegen tool",
+    "prompt": "Use case: photorealistic-natural. Asset type: architectural photograph for a fictional real-estate website demo, landscape 3:2. Primary request: a contemporary two-storey courtyard home in a tropical Southeast Asian suburban setting, refined but attainable architecture, shaded veranda, warm white plaster, pale natural stone, vertical timber screens, realistic planting, a small courtyard tree and a clean pedestrian approach. Camera at human eye level, three-quarter exterior view with the entry clearly visible and generous landscaping. Editorial architectural photography, 35mm lens, warm late-afternoon daylight, clean natural colours, subtle texture, physically plausible details. No people, no vehicles, no words, no signage, no logos, no watermarks. The architecture is a fictional design concept, not an existing property or client project.",
+    "export": "WebP at original 1536×1024, quality 82; original generated PNG retained outside repo. Fictional architectural concept."
+  },
+  {
+    "file": "public/demos/media/vista-interior.webp",
+    "source": "Generated with the built-in imagegen tool",
+    "prompt": "Use case: photorealistic-natural. Asset type: interior architecture photograph for a fictional real-estate concept, landscape 3:2. Primary request: the sunlit ground-floor living space of a contemporary Southeast Asian courtyard house, warm white plaster, pale natural limestone floor, slatted light oak screens, simple linen seating, a slim low table, large sliding glazed doors open to a small tropical courtyard with a single tree. Refined, comfortable and human-scale; elegant but attainable, no conspicuous luxury. Editorial architectural photography, camera at human eye level from the entry toward the living space and courtyard, 28mm lens, natural warm afternoon light, realistic shadows and textures. No people, no text, no logos, no signage, no watermark. Fictional architectural concept visualization, not a photographed listed property.",
+    "export": "WebP at original 1536×1024, quality 82; original generated PNG retained outside repo. Fictional architectural concept, not a registered interior view of a listed property."
+  }
+]
