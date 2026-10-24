@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Factory & hardware integration — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-factory" data-demo="factory">
+    <div class="demo-banner" role="banner">
+      <span>ILLUSTRATIVE SYSTEM / SAMPLE DATA</span
+      ><a href="/services/automation#industry-demos" target="_top"
+        >XZEN system previews ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside
+        class="demo-sidebar"
+        aria-label="Factory & hardware integration workspace"
+      >
+        <div class="demo-brand">
+          <span>▦</span><b>Factory & hardware integration</b>
+        </div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Overview</span
+          ><span class=""><i>◈</i>Operations</span
+          ><span class=""><i>▤</i>Reports</span
+          ><span class=""><i>⚙</i>Settings</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            An illustrative system workflow.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Manufacturing & industrial IoT</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">FACTORY / CONNECTED OPERATIONS</p>
+              <h1>See the signal. Follow the work.</h1>
+              <p>
+                Physical equipment and business software in one traceable
+                workflow.
+              </p>
+            </div>
+            <span class="pill blue">Simulated telemetry</span>
+          </div>
+          <div class="auto-journey">
+            <div>
+              <span class="journey-icon tone-0">◉</span><b>Sense</b
+              ><small>Photoelectric sensor</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span class="journey-icon tone-1">▦</span><b>Control</b
+              ><small>PLC / edge gateway</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span class="journey-icon tone-2">⇄</span><b>Integrate</b
+              ><small>MES / ERP connector</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span class="journey-icon tone-3">↗</span><b>Respond</b
+              ><small>Team & exceptions</small>
+            </div>
+          </div>
+          <div class="auto-columns factory-columns">
+            <section class="panel factory-scene">
+              <div class="factory-photo">
+                <img
+                  src="/demos/media/connected-factory.webp"
+                  width="960"
+                  height="720"
+                  alt="Generated factory cell with an amber robot, conveyor sensors and edge controller"
+                /><span>ILLUSTRATIVE CONNECTED CELL</span>
+              </div>
+              <div class="telemetry-row">
+                <div><span>Sensor</span><b data-factory-sensor>Standby</b></div>
+                <div>
+                  <span>Controller</span><b data-factory-controller>Ready</b>
+                </div>
+                <div>
+                  <span>Connector</span
+                  ><b data-factory-connector>Awaiting batch</b>
+                </div>
+              </div>
+              <div class="auto-pad">
+                <h2>Integration path</h2>
+                <div class="hardware-path">
+                  <span>Photoelectric sensor</span><i>→</i
+                  ><span>PLC / edge gateway</span><i>→</i
+                  ><span>Production software</span>
+                </div>
+                <p class="muted">
+                  Example architecture. Protocols and equipment are selected for
+                  each site.
+                </p>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Production event workspace</h2>
+                <span class="pill blue" data-factory-status>Ready</span>
+              </div>
+              <div class="auto-pad">
+                <div class="batch-card">
+                  <small>DEMONSTRATION BATCH</small>
+                  <h3>BATCH-SAMPLE-024</h3>
+                  <p>Packaging cell · Conveyor station 02</p>
+                  <div class="batch-progress">
+                    <span data-factory-progress></span>
+                  </div>
+                  <b data-factory-count>0 / 24 sample units</b>
+                </div>
+                <ol
+                  class="event-feed"
+                  data-factory-events
+                  tabindex="0"
+                  aria-label="Sample integration events"
+                >
+                  <li>
+                    <span>09:41:00</span
+                    ><b>Waiting for a sample sensor event</b>
+                  </li>
+                </ol>
+                <div class="auto-actions">
+                  <button type="button" data-factory-read class="soft">
+                    Read sample sensor</button
+                  ><button type="button" data-factory-sync class="primary">
+                    Sync batch to ERP</button
+                  ><button type="button" data-factory-alert class="soft">
+                    Simulate exception
+                  </button>
+                </div>
+                <p class="muted" data-factory-result>
+                  This preview does not connect to equipment or operate
+                  machinery.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Illustrative system and sample people · Demonstration data · No live
+          transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

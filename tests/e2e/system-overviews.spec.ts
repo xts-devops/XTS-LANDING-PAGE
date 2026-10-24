@@ -36,6 +36,18 @@ for (const d of industryDemos) {
       await expect(frame.locator('[data-reservation="Courts"]')).toBeVisible();
     if (d.id === 'vista')
       await expect(frame.locator('[data-viewing-panel]')).toBeVisible();
+    if (d.id === 'support')
+      await expect(frame.locator('[data-support-status]')).toHaveText(
+        'Assigned to an agent',
+      );
+    if (d.id === 'documents')
+      await expect(frame.locator('[data-doc-status]')).toHaveText(
+        'Sample sync complete',
+      );
+    if (d.id === 'factory')
+      await expect(frame.locator('[data-factory-status]')).toHaveText(
+        'Sample exception flagged',
+      );
     if (d.id === 'relaydock')
       await expect(frame.locator('[data-release-step].complete')).toHaveCount(
         4,

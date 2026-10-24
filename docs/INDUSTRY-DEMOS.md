@@ -10,6 +10,9 @@ The collection names systems by their purpose, without invented company or produ
 | Dental appointment booking | Clinician, date, time and confirmation |
 | Hotel & court booking | Photographic rooms and sports reservation flows |
 | Real estate & property discovery | Architectural concept views and viewing requests |
+| Auto replies & BPO workflows | Message routing, reply drafting, approval and agent handoff |
+| Email indexing & invoice workflows | Attachment indexing, extracted fields, review and sample ledger sync |
+| Factory & hardware integration | Sensor event, edge controller, ERP record and exception review |
 | Server & deployment management | Data/worker inspection and a dry deployment |
 
 ## Preview behavior
@@ -20,9 +23,9 @@ Leaving, Escape, focus departure, scrolling the preview offscreen, hiding the do
 
 ## Authoring and media
 
-Edit `showcase-ui/industry-screens.mjs`, `industry.css`, `industry.js` and `src/content/industry-demos.json`, then run `node showcase-ui/build-screens.mjs`. This regenerates the standalone sample pages, public CSS/JS and the 40-screen manifest/contact sheet. Format generated files, then run `npm run capture:ui` for all 40 native DPR-2 PNGs. The original 33 screen keys plus seven industry keys remain intact.
+Edit `showcase-ui/industry-screens.mjs`, `industry.css`, `industry.js`, `automation-overviews.mjs`, `automation-actions.js` and `src/content/industry-demos.json`, then run `node showcase-ui/build-screens.mjs`. This regenerates the standalone sample pages, public CSS/JS and the 43-screen manifest/contact sheet. Format generated files, then run `npm run capture:ui` for all 43 native DPR-2 PNGs. The original 33 screen keys plus ten industry keys remain intact.
 
-Café/market products use the generated photographs logged in `docs/media-v2/product-sources.json`. Room and court photographs are logged in `docs/media-v2/hospitality-sources.json`; architectural concept photographs remain in `docs/media-v2/industry-sources.json`. Exact prompts, saved source sheets and export paths are retained. These are illustrative products and spaces, not client evidence, real hotel availability or property listings. Construction remains a clearly labelled phase diagram; future arm/timelapse/walkthrough footage follows the existing Higgsfield handoff.
+Café/market products use the generated photographs logged in `docs/media-v2/product-sources.json`. Room and court photographs are logged in `docs/media-v2/hospitality-sources.json`; architectural concept photographs remain in `docs/media-v2/industry-sources.json`. The connected factory photograph and its JPEG/WebP exports are logged in `docs/media-v2/automation-sources.json`. Exact prompts, saved source sheets and export paths are retained. These are illustrative products and spaces, not client evidence, real hotel availability or property listings. Construction remains a clearly labelled phase diagram; future arm/timelapse/walkthrough footage follows the existing Higgsfield handoff.
 
 ## People and context
 

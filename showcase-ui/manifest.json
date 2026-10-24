@@ -273,6 +273,27 @@
     "height": 900
   },
   {
+    "key": "industry/support",
+    "title": "Customer operations",
+    "product": "Auto replies & BPO workflows",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/documents",
+    "title": "Email & back-office operations",
+    "product": "Email indexing & invoice workflows",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/factory",
+    "title": "Manufacturing & industrial IoT",
+    "product": "Factory & hardware integration",
+    "width": 1440,
+    "height": 900
+  },
+  {
     "key": "industry/relaydock",
     "title": "Infrastructure operations",
     "product": "Server & deployment management",

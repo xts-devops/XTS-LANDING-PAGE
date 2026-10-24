@@ -31,7 +31,10 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
       <ul
         class:list={[
           'industry-grid',
-          { 'industry-grid-single': demos.length === 1 },
+          {
+            'industry-grid-single': demos.length === 1,
+            'industry-grid-pairs': demos.length === 4,
+          },
         ]}
         role="list"
       >

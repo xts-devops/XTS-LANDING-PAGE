@@ -405,6 +405,23 @@
   const reduced =
     query.has('still') || matchMedia('(prefers-reduced-motion:reduce)').matches;
   const workflows = {
+    support: [
+      ['[data-support-classify]', 'Route the conversation'],
+      ['[data-support-draft]', 'Prepare a reply'],
+      ['[data-support-approve]', 'Review the sample response'],
+      ['[data-support-handoff]', 'Hand off to an agent'],
+    ],
+    documents: [
+      ['[data-doc-index]', 'Index the incoming email'],
+      ['[data-doc-extract]', 'Extract invoice fields'],
+      ['[data-doc-review]', 'Review extracted values'],
+      ['[data-doc-sync]', 'Sync the approved sample record'],
+    ],
+    factory: [
+      ['[data-factory-read]', 'Follow a sensor event'],
+      ['[data-factory-sync]', 'Connect the batch to ERP'],
+      ['[data-factory-alert]', 'Route an exception for review'],
+    ],
     morrow: [
       ['[data-product="Flat white"]', 'Add a coffee'],
       ['[data-product="Local rice · 1 kg"]', 'Add a pantry item'],

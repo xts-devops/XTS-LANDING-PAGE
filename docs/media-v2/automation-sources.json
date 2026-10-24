@@ -1,0 +1,10 @@
+{
+  "source": "Generated with built-in imagegen",
+  "file": "src/assets/photos/automation/connected-factory.jpg",
+  "prompt": "Photorealistic editorial industrial technology photograph, landscape 4:3 composition, for an automation and systems integration company website. A clean modern manufacturing cell in a sunlit factory: a warm amber-orange six-axis industrial robot beside a turquoise conveyor carrying a few plain unlabeled white packages, compact photoelectric sensors with restrained blue status lights, and a visible brushed-metal edge-controller enclosure with neatly organized Ethernet cables in the foreground. Show a coherent believable physical connection from sensor to controller to workstation, with no readable display text. Balanced composition keeping the robot and controller near the center so both remain visible when cropped to 5:4 or 4:3. Rich but natural turquoise, amber and blue accents, bright neutral factory daylight, realistic metal and rubber textures, grounded engineering detail, moderate depth of field. Professional, approachable and precise; no neon science fiction, no holograms, no floating graphic overlays. No people, no words, no logos, no company branding, no watermarks. Illustrative generated factory concept, not an actual client project.",
+  "exports": [
+    "src/assets/photos/automation/connected-factory.jpg",
+    "public/demos/media/connected-factory.webp"
+  ],
+  "export": "JPEG 1600×1200 quality 88 for responsive Astro delivery; WebP 960×720 quality 82 for the factory sample. Source generated PNG retained outside repo. Illustrative connected cell; not actual equipment inventory or client evidence."
+}

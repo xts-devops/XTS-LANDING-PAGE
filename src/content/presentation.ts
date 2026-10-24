@@ -30,8 +30,8 @@ export const presentation = {
     automation: {
       number: '03',
       category: 'Connected operations',
-      visual: 'Connect · automate · monitor',
-      note: 'Your tools, working as one system',
+      visual: 'Software · Hardware · People',
+      note: 'From the inbox to the production line',
     },
     robotics: {
       number: '04',

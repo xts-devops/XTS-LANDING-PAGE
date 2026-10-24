@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Email indexing & invoice workflows — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-documents" data-demo="documents">
+    <div class="demo-banner" role="banner">
+      <span>ILLUSTRATIVE SYSTEM / SAMPLE DATA</span
+      ><a href="/services/automation#industry-demos" target="_top"
+        >XZEN system previews ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside
+        class="demo-sidebar"
+        aria-label="Email indexing & invoice workflows workspace"
+      >
+        <div class="demo-brand">
+          <span>▦</span><b>Email indexing & invoice workflows</b>
+        </div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Overview</span
+          ><span class=""><i>◈</i>Operations</span
+          ><span class=""><i>▤</i>Reports</span
+          ><span class=""><i>⚙</i>Settings</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            An illustrative system workflow.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Email & back-office operations</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">BACK OFFICE / EMAIL & DOCUMENTS</p>
+              <h1>From incoming mail to usable records.</h1>
+              <p>
+                Index attachments, review extracted fields and sync approved
+                data.
+              </p>
+            </div>
+            <span class="pill">Sample inbox · No real mail</span>
+          </div>
+          <div class="auto-journey">
+            <div>
+              <span class="journey-icon tone-0">✉</span><b>Email</b
+              ><small>Receive attachments</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span class="journey-icon tone-1">▤</span><b>Index</b
+              ><small>Classify & search</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span class="journey-icon tone-2">⌗</span><b>Extract</b
+              ><small>Review key fields</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span class="journey-icon tone-3">⇄</span><b>Connect</b
+              ><small>Approved system sync</small>
+            </div>
+          </div>
+          <div class="auto-columns document-columns">
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Incoming email</h2>
+                <span class="pill blue">Review queue</span>
+              </div>
+              <div class="auto-pad">
+                <div class="mail-envelope">
+                  <span>FROM / SAMPLE SUPPLIER</span>
+                  <h3>Invoice for the latest delivery</h3>
+                  <p>
+                    Please find the invoice and delivery note attached for your
+                    review.
+                  </p>
+                  <div class="attachment">
+                    <b>▤</b
+                    ><span
+                      >invoice-SAMPLE-0086.pdf<small
+                        >PDF attachment · Illustrative data</small
+                      ></span
+                    >
+                  </div>
+                </div>
+                <div class="document-sheet">
+                  <div class="document-sheet-head">
+                    <b>SUPPLIER INVOICE</b><span>SAMPLE-0086</span>
+                  </div>
+                  <p>Office materials · Quezon City</p>
+                  <div class="document-rule"></div>
+                  <div><span>Materials and supplies</span><b>₱8,400.00</b></div>
+                  <div><span>Delivery</span><b>₱600.00</b></div>
+                  <div class="document-total">
+                    <span>Total</span><b>₱9,000.00</b>
+                  </div>
+                  <small>Generated sample record · Not a tax document</small>
+                </div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Processing workspace</h2>
+                <span class="pill" data-doc-status>Ready to index</span>
+              </div>
+              <div class="auto-pad">
+                <div class="index-summary">
+                  <span>INDEX / CLASSIFICATION</span
+                  ><b data-doc-index-value>Unsorted attachment</b>
+                  <p>
+                    Search by supplier, reference, document type or workflow
+                    status.
+                  </p>
+                </div>
+                <div class="extraction-fields">
+                  <div>
+                    <span>Supplier</span
+                    ><b data-doc-supplier>Awaiting extraction</b>
+                  </div>
+                  <div>
+                    <span>Invoice reference</span><b data-doc-reference>—</b>
+                  </div>
+                  <div><span>Total amount</span><b data-doc-total>—</b></div>
+                  <div>
+                    <span>Review</span><b data-doc-review-value>Not reviewed</b>
+                  </div>
+                </div>
+                <div class="review-banner">
+                  <b>Review before posting</b
+                  ><span
+                    >Keep duplicates, missing fields and exceptions in the
+                    review queue.</span
+                  >
+                </div>
+                <div class="auto-actions">
+                  <button type="button" data-doc-index class="soft">
+                    Index email</button
+                  ><button type="button" data-doc-extract class="soft">
+                    Extract fields</button
+                  ><button type="button" data-doc-review class="soft">
+                    Approve fields</button
+                  ><button type="button" data-doc-sync class="primary">
+                    Sync sample record
+                  </button>
+                </div>
+                <p class="muted" data-doc-result>
+                  No accounting connection is active in this sample.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Illustrative system and sample people · Demonstration data · No live
+          transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

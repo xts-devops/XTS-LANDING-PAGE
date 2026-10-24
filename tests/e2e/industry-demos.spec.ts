@@ -8,6 +8,9 @@ const ids = [
   'daybreak',
   'vista',
   'relaydock',
+  'support',
+  'documents',
+  'factory',
 ];
 for (const id of ids)
   for (const width of [375, 768, 1440])

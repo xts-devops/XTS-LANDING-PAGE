@@ -63,6 +63,39 @@
     "title": "Real estate & property discovery"
   },
   {
+    "id": "support",
+    "industry": "Customer operations",
+    "service": "automation",
+    "title": "Auto replies & BPO workflows",
+    "summary": "Route customer messages, prepare contextual replies and bring an agent in when a case needs a person.",
+    "capabilities": [
+      "Intent routing and response drafts",
+      "Agent review and clear handoffs"
+    ]
+  },
+  {
+    "id": "documents",
+    "industry": "Email & back-office operations",
+    "service": "automation",
+    "title": "Email indexing & invoice workflows",
+    "summary": "Turn incoming email and attachments into searchable records, reviewed invoice fields and connected tasks.",
+    "capabilities": [
+      "Email classification and document indexing",
+      "Field extraction, review and system sync"
+    ]
+  },
+  {
+    "id": "factory",
+    "industry": "Manufacturing & industrial IoT",
+    "service": "automation",
+    "title": "Factory & hardware integration",
+    "summary": "Connect sensors, controllers and production software so teams can follow batches, exceptions and equipment signals.",
+    "capabilities": [
+      "Sensor → controller → software visibility",
+      "Batch sync and exception alerts"
+    ]
+  },
+  {
     "id": "relaydock",
     "industry": "Infrastructure operations",
     "service": "automation",

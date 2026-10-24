@@ -136,3 +136,10 @@ The six live-demo thumbnails are also exported under `public/demos/media/product
 | `public/demos/media/garden-suite.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |
 | `public/demos/media/family-loft.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |
 | `public/demos/media/pickleball-court.webp` | Generated · built-in imagegen | Illustrative room/court photograph, no client or actual availability claimed. Full prompt and 720×540 WebP export in `docs/media-v2/hospitality-sources.json`; source sheet retained in `docs/media-v2/hospitality-source.png`. |
+
+## Connected automation photograph — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `src/assets/photos/automation/connected-factory.jpg` | Generated · built-in imagegen | Illustrative robot/conveyor/sensor/edge-controller cell; not client evidence. Full prompt and 1600×1200 JPEG export: `docs/media-v2/automation-sources.json`. |
+| `public/demos/media/connected-factory.webp` | Generated derivative | 960×720 WebP for the factory system sample; same source/prompt record. |

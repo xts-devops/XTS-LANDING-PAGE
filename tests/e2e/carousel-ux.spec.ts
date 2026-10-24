@@ -11,6 +11,10 @@ for (const width of [375, 768, 1440]) {
         await page
           .getByRole('tab', { name: 'Mobile apps', exact: true })
           .click();
+      if (slug === 'automation')
+        await page
+          .getByRole('tab', { name: 'Integrations', exact: true })
+          .click();
       const panel = page.getByRole('tabpanel');
       const stage = panel.locator('.slides-stage');
       await stage.scrollIntoViewIfNeeded();

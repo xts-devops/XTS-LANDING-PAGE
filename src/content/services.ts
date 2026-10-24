@@ -226,17 +226,63 @@ export const services: Service[] = [
   {
     slug: 'automation',
     title: 'Automation & Integration',
-    tagline: 'Connect your systems and take the manual work out of your day.',
+    tagline:
+      'Connect software, people and machines — from customer replies to the factory floor.',
     intro:
-      'We connect the tools you already use, so data moves on its own: orders to the warehouse, invoices to accounting, alerts to the right person. Less re-typing, fewer errors.',
-    photo: 'home/service-automation',
-    photoAlt: 'Operations manager watching warehouse wall screens',
+      'Connect customer conversations, email, business platforms and factory devices. We design workflows that move information between your tools, with clear reviews, traceable handoffs and hardware integrations where the work happens.',
+    photo: 'automation/connected-factory',
+    photoAlt:
+      'Illustrative connected factory cell with an amber robot, turquoise conveyor, sensors and an edge controller',
     highlights: [
-      'APIs and data sync',
-      'Workflow automation',
-      'Live operations dashboards',
+      'Customer and back-office workflows',
+      'APIs, sensors and controllers',
+      'Human review and exception handling',
     ],
     systems: [
+      {
+        id: 'customer-automation',
+        name: 'Replies & BPO',
+        summary:
+          'Classify messages, prepare replies and route the right work to your team.',
+        features: ['Message classification', 'Agent approval', 'Human handoff'],
+        slides: [
+          { screen: 'industry/support', caption: 'Customer support workflow' },
+        ],
+      },
+      {
+        id: 'document-automation',
+        name: 'Email & documents',
+        summary:
+          'Index incoming mail, review extracted invoice fields and sync approved records.',
+        features: [
+          'Email and attachment indexing',
+          'Field review',
+          'Accounting integration',
+        ],
+        slides: [
+          {
+            screen: 'industry/documents',
+            caption: 'Email and invoice processing',
+          },
+        ],
+      },
+      {
+        id: 'factory-automation',
+        name: 'Factory & IoT',
+        summary:
+          'Follow a sensor event through the edge controller into production software.',
+        features: [
+          'Sensor and controller signals',
+          'Batch traceability',
+          'Exception alerts',
+        ],
+        slides: [
+          {
+            screen: 'industry/factory',
+            caption: 'Hardware and production systems',
+          },
+        ],
+      },
       {
         id: 'flows',
         name: 'Integrations',
