@@ -10,6 +10,11 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-25 · codex · codex/v2-media-ui (Part B complete)
+**Did:** Built 33 standalone HTML/CSS screens across ERP, POS, CRM, WMS, inventory, HR, custom software and automation. Fictional product brands and Philippine sample data; inline SVG charts, tables, filters, workflows and mobile views. Added npm run capture:ui, npm run preview:ui, manifest contract and linked contact sheet. Captured all 33 exact PNG keys from PR #7 at native viewports and DPR 2.
+**Verify:** npm run capture:ui passes with bundled Chromium, all 33 screenshots; captures check page errors, document overflow and mobile navigation overlap. Contact sheet plus representative desktop/tablet/mobile views visually inspected. npm run verify passes (0 errors/0 warnings). No application source edits; only src/assets/showcase.
+**Next:** Separate Part B PR stacked on codex/v2-media; merge Part A first, then retarget Part B to main. PR #7 consumes assets automatically when integrated. Local contact-sheet preview: npm run preview:ui on 127.0.0.1:4382.
+
 ## 2026-10-25 · codex · codex/v2-media (Part A complete)
 **Did:** Delivered all 25 JPEGs at the v2 filenames, including the supplied office hero and the matched 2000×1200 arm pair. Generated 24 photoreal assets with the built-in ImageGen tool; recorded every full prompt in IMAGE-BRIEF-v2 and docs/media-v2/sources.json. Added a toggle/blend arm review page. Main base, shoulder frame, background and camera remain aligned; joint parts separate along their axes.
 **Verify:** All 25 JPEG formats/dimensions checked with Sharp; photo contact sheet and both arm frames visually reviewed. npm run verify passes (Astro check 0 errors/0 warnings, lint, format, build). No application source edits; only src/assets/photos.
