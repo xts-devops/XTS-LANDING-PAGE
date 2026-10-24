@@ -295,7 +295,7 @@ add(
   'pos/checkout',
   'Register 01',
   'Makati · Shift open since 07:00 · Maria Santos',
-  `<div class="grid">${panel('Product catalogue', tabs(['All products', 'Coffee', 'Pastries', 'Merchandise']) + filters('Search product or scan barcode…') + `<div class="pad products">${['Iced latte', 'Americano', 'Cold brew', 'Butter croissant', 'Cinnamon roll', 'Matcha latte', 'Bottled water', 'Canvas tote', 'Coffee beans'].map((x, i) => `<div class="product"><div class="art">${['☕', '☕', '◒', '◔', '◉', '☕', '♧', '▱', '▣'][i]}</div><h3>${x}</h3><p>${28 + i * 3} available</p><strong>${money([145, 110, 130, 95, 105, 165, 45, 195, 420][i])}</strong></div>`).join('')}</div>`)}${panel(
+  `<div class="grid">${panel('Product catalogue', tabs(['All products', 'Coffee', 'Pastries', 'Merchandise']) + filters('Search product or scan barcode…') + `<div class="pad products">${['Iced latte', 'Americano', 'Cold brew', 'Butter croissant', 'Cinnamon roll', 'Matcha latte', 'Bottled water', 'Canvas tote', 'Coffee beans'].map((x, i) => `<div class="product"><div class="art"><img src="../assets/products/${['iced-latte', 'americano', 'cold-brew', 'croissant', 'cinnamon-roll', 'matcha-latte', 'water', 'tote', 'coffee-beans'][i]}.webp" alt="" width="480" height="480"></div><h3>${x}</h3><p>${28 + i * 3} available</p><strong>${money([145, 110, 130, 95, 105, 165, 45, 195, 420][i])}</strong></div>`).join('')}</div>`)}${panel(
     'Current sale · #00482',
     `<div class="pad">${badge('Dine in', 'blue')}<div class="row">Walk-in customer ${btn('＋ Customer')}</div>${cart.map(([n, q, p]) => `<div class="row"><div><h3>${n}</h3><p>${q}</p></div><b>${p}</b></div>`).join('')}<div class="dashed"></div>${details(
       [

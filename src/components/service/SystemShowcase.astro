@@ -59,7 +59,26 @@ const demo = presentation.demo;
               ))}
             </ul>
           </div>
-          <div class="slides" data-slides>
+          <div class="slides" data-slides data-interval="3000">
+            <div class="slides-toolbar">
+              {system.slides.length > 1 && (
+                <button
+                  type="button"
+                  class="slides-play"
+                  data-slides-play
+                  data-play-label={demo.play}
+                  data-pause-label={demo.pause}
+                  aria-label={demo.pause}
+                >
+                  <span class="slides-play-symbol" aria-hidden="true"></span>
+                  <span data-play-label>{demo.pause}</span>
+                </button>
+              )}
+              <span class="slides-timing">{demo.cadence}</span>
+              <span class="slides-count" aria-live="off" data-count-label>
+                1 / {system.slides.length}
+              </span>
+            </div>
             <div class="slide-picker" aria-label={demo.choose} role="group">
               {system.slides.map((slide, i) => (
                 <button
@@ -74,6 +93,17 @@ const demo = presentation.demo;
               ))}
             </div>
             <div class="slides-stage">
+              {system.slides.length > 1 && (
+                <button
+                  type="button"
+                  class="slides-btn slides-prev"
+                  data-prev
+                  aria-label={copy.prev}
+                  aria-controls={`slides-${system.id}`}
+                >
+                  <Icon name="arrow-right" class="flip" />
+                </button>
+              )}
               <div
                 class="slides-track"
                 id={`slides-${system.id}`}
@@ -90,12 +120,8 @@ const demo = presentation.demo;
                     aria-roledescription="slide"
                     aria-label={`${i + 1} ${copy.slideOf} ${system.slides.length}: ${slide.caption}`}
                   >
-                    <div class="slide-display">
-                      <Screen
-                        screen={slide.screen}
-                        alt={`${system.name}: ${slide.caption} (sample system)`}
-                        device={slide.device}
-                      />
+                    <figcaption class="slide-toolbar">
+                      <span>{slide.caption}</span>{' '}
                       <button
                         type="button"
                         class="sample-zoom"
@@ -105,39 +131,31 @@ const demo = presentation.demo;
                         <Icon name="arrow-up-right" />
                         {demo.view}
                       </button>
+                    </figcaption>
+                    <div class="slide-display">
+                      <Screen
+                        screen={slide.screen}
+                        alt={`${system.name}: ${slide.caption} (sample system)`}
+                        device={slide.device}
+                      />
                     </div>
-                    <figcaption>{slide.caption}</figcaption>
                   </figure>
                 ))}
               </div>
+              {system.slides.length > 1 && (
+                <button
+                  type="button"
+                  class="slides-btn slides-next"
+                  data-next
+                  aria-label={copy.next}
+                  aria-controls={`slides-${system.id}`}
+                >
+                  <Icon name="arrow-right" />
+                </button>
+              )}
             </div>
             <div class="slides-footer">
               <p class="system-note">{copy.sampleNote}</p>
-              <div class="slides-controls">
-                {system.slides.length > 1 && (
-                  <button
-                    type="button"
-                    class="slides-btn"
-                    data-prev
-                    aria-label={copy.prev}
-                  >
-                    <Icon name="arrow-right" class="flip" />
-                  </button>
-                )}
-                <span class="slides-count" aria-live="polite" data-count-label>
-                  1 / {system.slides.length}
-                </span>
-                {system.slides.length > 1 && (
-                  <button
-                    type="button"
-                    class="slides-btn"
-                    data-next
-                    aria-label={copy.next}
-                  >
-                    <Icon name="arrow-right" />
-                  </button>
-                )}
-              </div>
             </div>
           </div>
         </article>

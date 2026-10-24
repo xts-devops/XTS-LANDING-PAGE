@@ -108,3 +108,22 @@ along their axes, same angle and lighting). Claude builds the scroll transition 
 | `public/demos/media/vista-interior.webp` | Generated with built-in imagegen; no third-party stock. Fictional architectural concept. | Full interior prompt and export details in `docs/media-v2/industry-sources.json` |
 
 These are illustrative design directions, not a continuous filmed walkthrough, an existing property listing or XTS client work. The seven new `src/assets/showcase/industry/*.png` screens are captured from the repository's own HTML/CSS/JS concept demos; their source and screen contract are documented in `docs/INDUSTRY-DEMOS.md`.
+## Catalogue product photography — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `showcase-ui/assets/products/iced-latte.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/americano.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/cold-brew.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/croissant.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/cinnamon-roll.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/matcha-latte.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/water.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/tote.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/coffee-beans.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `cafe-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/flat-white.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `market-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/rice.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `market-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/fruit-box.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `market-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+| `showcase-ui/assets/products/greens.webp` | Generated · built-in imagegen | Photographic sample product; no third-party stock or actual client products. Full prompt and source sheet `market-products-source.png` logged in `docs/media-v2/product-sources.json`. |
+
+The six live-demo thumbnails are also exported under `public/demos/media/products/`. Source PNG sheets are retained in `docs/media-v2/`; crops are resized to 480×480 WebP at quality 82. These generated photographs replace symbols in the fictional Tindahan POS and Morrow & Moss demos. They are illustrative catalogue products, not XTS client evidence.

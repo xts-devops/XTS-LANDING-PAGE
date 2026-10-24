@@ -18,8 +18,6 @@ const table = (headers, rows) =>
   `<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable roster table"><table><thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 const segments = (group, values) =>
   `<div class="segments" role="group" aria-label="${group}">${values.map((v, i) => `<button type="button" data-segment="${group}" data-value="${v}" aria-pressed="${!i}">${v}</button>`).join('')}</div>`;
-const cup = `<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M22 25h48v23a24 24 0 0 1-48 0z" fill="currentColor" opacity=".85"/><path d="M70 29h8c17 0 17 24-6 24M16 75h61" fill="none" stroke="currentColor" stroke-width="5"/><path d="M38 17c-8-10 8-8 0-17M54 17c-8-10 8-8 0-17" fill="none" stroke="currentColor" stroke-width="3"/></svg>`;
-const produce = `<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M48 31c-26-19-42 7-29 31 12 23 27 12 31 12s22 11 32-14c12-29-12-39-31-28" fill="currentColor" opacity=".8"/><path d="M50 32c0-20 16-25 24-25-2 15-9 22-24 25" fill="currentColor"/></svg>`;
 const bodies = {};
 bodies.morrow = `${head('COUNTER / 01', 'A good day starts here.', 'Morning service · Main counter', pill('Register open', 'green'))}<div class="pos-layout"><section><div class="filter-row"><label class="search">Search products<input data-product-search placeholder="Coffee, pantry, produce…" type="search"></label>${segments('products', ['All', 'Coffee', 'Market'])}</div><div class="product-grid">${[
   ['Flat white', 'Coffee', 145, 'House blend · 8 oz'],
@@ -31,7 +29,7 @@ bodies.morrow = `${head('COUNTER / 01', 'A good day starts here.', 'Morning serv
 ]
   .map(
     ([n, g, p, s], i) =>
-      `<button class="product" type="button" data-product="${n}" data-price="${p}" data-category="${g}"><span class="product-art art-${i}">${g === 'Coffee' ? cup : produce}</span><span><b>${n}</b><small>${s}</small></span><strong>₱${p}</strong><i aria-hidden="true">+</i></button>`,
+      `<button class="product" type="button" data-product="${n}" data-price="${p}" data-category="${g}"><span class="product-art art-${i}"><img src="/demos/media/products/${['flat-white', 'iced-latte', 'cold-brew', 'rice', 'fruit-box', 'greens'][i]}.webp" alt="" width="480" height="480"></span><span><b>${n}</b><small>${s}</small></span><strong>₱${p}</strong><i aria-hidden="true">+</i></button>`,
   )
   .join(
     '',

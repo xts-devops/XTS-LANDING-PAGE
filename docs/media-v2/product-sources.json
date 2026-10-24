@@ -1,0 +1,41 @@
+[
+  {
+    "source": "Generated with built-in imagegen",
+    "file": "docs/media-v2/cafe-products-source.png",
+    "prompt": "Create one high resolution square product-photography contact sheet: EXACTLY 3 columns by 3 rows of equal square photographs, edge to edge with no gutters, no text or labels. Each photograph is an isolated retail product centered with generous margin on a consistent warm ivory tabletop, softly lit from upper left, realistic materials and natural soft shadows, premium cafe ecommerce catalogue photography. Row 1 left to right: clear glass iced latte showing coffee and milk with ice; white ceramic cup of black Americano coffee on saucer; amber cold brew coffee in a tall clear glass with ice. Row 2: golden flaky butter croissant; cinnamon roll with light white icing; clear glass iced matcha latte with green matcha and pale milk. Row 3: clear unlabeled capped water bottle; plain natural canvas tote bag standing with handles; plain kraft coffee bean pouch with a small scattering of roasted coffee beans. Exact nine subjects, one product per cell, no people, no logos, no writing, no symbols, no drawn icons. Photorealistic studio photographs, not illustrations. All subjects entirely contained inside their own square with 15 percent margin for clean extraction.",
+    "exports": [
+      "showcase-ui/assets/products/iced-latte.webp",
+      "showcase-ui/assets/products/americano.webp",
+      "showcase-ui/assets/products/cold-brew.webp",
+      "showcase-ui/assets/products/croissant.webp",
+      "showcase-ui/assets/products/cinnamon-roll.webp",
+      "showcase-ui/assets/products/matcha-latte.webp",
+      "showcase-ui/assets/products/water.webp",
+      "showcase-ui/assets/products/tote.webp",
+      "showcase-ui/assets/products/coffee-beans.webp"
+    ],
+    "export": "Extracted individual catalogue cells; 480×480 WebP, quality 82. Original generated source sheet retained in repo. Illustrative products, not XTS client evidence.",
+    "publicExports": [
+      "public/demos/media/products/iced-latte.webp",
+      "public/demos/media/products/cold-brew.webp"
+    ]
+  },
+  {
+    "source": "Generated with built-in imagegen",
+    "file": "docs/media-v2/market-products-source.png",
+    "prompt": "Generate a square 2 by 2 contact sheet of exactly four photorealistic ecommerce product photographs. No gutters, exact equal square cells. Consistent warm ivory tabletop background and soft upper-left studio light, natural soft shadows. Top left: flat white coffee in a white ceramic cup and saucer, visible delicate latte art on crema. Top right: a modest open plain kraft paper bag filled with uncooked white rice, small scattering of rice in front. Bottom left: shallow unbranded kraft produce box with fresh mangoes, bananas and oranges, viewed three-quarter. Bottom right: a fresh bundle of garden lettuce and leafy greens tied with a plain string. Each product centered and fully inside its cell with ample margin, no overlapping between cells. Premium grocery and cafe catalogue photography, real texture, no logos, no text, no stickers, no people, no icons, no drawings.",
+    "exports": [
+      "showcase-ui/assets/products/flat-white.webp",
+      "showcase-ui/assets/products/rice.webp",
+      "showcase-ui/assets/products/fruit-box.webp",
+      "showcase-ui/assets/products/greens.webp"
+    ],
+    "export": "Extracted individual catalogue cells; 480×480 WebP, quality 82. Original generated source sheet retained in repo. Illustrative products, not XTS client evidence.",
+    "publicExports": [
+      "public/demos/media/products/flat-white.webp",
+      "public/demos/media/products/rice.webp",
+      "public/demos/media/products/fruit-box.webp",
+      "public/demos/media/products/greens.webp"
+    ]
+  }
+]

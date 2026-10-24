@@ -2321,3 +2321,17 @@ td {
 .table-wrap {
   max-width: 100%;
 }
+
+.product-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.product-art {
+  position: relative;
+  background: #eee4d5;
+}
