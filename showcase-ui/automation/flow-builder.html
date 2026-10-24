@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Order fulfilment sync — Habi Connect</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main class="app" style="--accent: #5b69db">
+      <aside class="sidebar">
+        <div class="brand"><span class="mark">H</span>Habi</div>
+        <div class="nav-label">WORKSPACE</div>
+        <a class="nav active" href="flow-builder.html"
+          ><span style="margin-right: 12px">▦</span>Order fulfilment sync</a
+        ><a class="nav" href="sync-log.html"
+          ><span style="margin-right: 12px">▤</span>Sync log</a
+        ><a class="nav" href="ops-dashboard.html"
+          ><span style="margin-right: 12px">◈</span>Operations monitor</a
+        >
+        <div class="nav-label">MANAGE</div>
+        <div class="nav">⚙ &nbsp; Settings</div>
+        <div class="nav">◉ &nbsp; Help centre</div>
+        <div class="sidefoot">
+          Habi Connect<br />Philippines workspace<br />◉ All systems operational
+        </div>
+      </aside>
+      <div class="shell">
+        <header class="topbar">
+          <span>Amihan workspace &nbsp;⌄</span>
+          <div class="topright">
+            <span class="search">⌕ &nbsp; Search anything…</span
+            ><span>◷ &nbsp; Notifications</span>
+            <div class="avatar">MS</div>
+          </div>
+        </header>
+        <div class="content">
+          <div class="crumb">
+            Habi Connect &nbsp; / &nbsp; Order fulfilment sync
+          </div>
+          <div class="heading">
+            <div>
+              <h1>Order fulfilment sync</h1>
+              <p>Flows / Commerce to warehouse / Production</p>
+            </div>
+            <div class="actions">
+              <button class="btn">Export</button
+              ><button class="btn primary">Publish flow</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="badge">Active</span>
+                <span style="margin-left: 15px; font-size: 11px"
+                  >Last published by Carlo Mendoza · 2 hours ago</span
+                >
+              </div>
+              <button class="btn">Test flow</button>
+            </div>
+            <div class="flow">
+              <svg viewBox="0 0 1150 460">
+                <path
+                  d="M230 205H290Q310 205 310 205H370M575 205H625Q650 205 650 125H720M650 205V335H720"
+                  fill="none"
+                  stroke="#aebfd8"
+                  stroke-width="2"
+                />
+                <circle cx="650" cy="205" r="5" fill="#5b69db" />
+              </svg>
+              <div class="node" style="left: 35px; top: 140px">
+                <p>Trigger · HTTPS</p>
+                <h3>Webhook received</h3>
+                <p>Order confirmed</p>
+                <small>● 1,284 events today</small>
+              </div>
+              <div class="node" style="left: 360px; top: 140px">
+                <p>Condition · All rules pass</p>
+                <h3>Validate order</h3>
+                <p>Check stock & address</p>
+                <small>● 99.8% passed</small>
+              </div>
+              <div class="node" style="left: 740px; top: 60px">
+                <p>Action · API request</p>
+                <h3>Create pick request</h3>
+                <p>Bodega WMS</p>
+                <small>● Average 142 ms</small>
+              </div>
+              <div class="node" style="left: 740px; top: 280px">
+                <p>Action · Exception route</p>
+                <h3>Notify operations</h3>
+                <p>Team inbox</p>
+                <small>● 3 routed for review</small>
+              </div>
+            </div>
+            <div class="foot">
+              <span>＋ Add step &nbsp; ↶ Undo &nbsp; ↷ Redo</span
+              ><span>100% &nbsp; − &nbsp; ＋</span>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="kpi">
+              <p>Runs today</p>
+              <strong>1,284</strong
+              ><small>↑ 8.4% <span>vs. previous period</span></small>
+            </div>
+            <div class="kpi">
+              <p>Success rate</p>
+              <strong>99.8%</strong
+              ><small>↑ 8.4% <span>vs. previous period</span></small>
+            </div>
+            <div class="kpi">
+              <p>Median duration</p>
+              <strong>420 ms</strong
+              ><small>↑ 8.4% <span>vs. previous period</span></small>
+            </div>
+            <div class="kpi">
+              <p>Needs review</p>
+              <strong>3</strong
+              ><small>Action required <span>vs. previous period</span></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sample">Fictional sample system · Demonstration data</div>
+    </main>
+  </body>
+</html>

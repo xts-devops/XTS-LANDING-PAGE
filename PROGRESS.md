@@ -14,6 +14,18 @@ Append-only. Newest at top. Never edit past entries. Format:
 **Did:** Rebuilt the site per PLAN-v2 / D22 on Codex's photo-led look. Home = Hero (real photo, proof row) → Services (4 photo tiles) → Work (pinned horizontal gallery) → Global reach → Contact. New `/services/<slug>` pages: system switcher (ERP·POS·CRM·WMS·Inventory·HR, software, automation) with slideshows of product screens; robotics = scroll-scrubbed exploded view + photo gallery. Native cross-document view transitions (tile photo morphs into page hero) + speculation-rules prerender: zero JS. `<Photo>`/`<Screen>` auto-wire files from `src/assets/photos|showcase/**` with placeholders. Removed v1 schematics, console, industries, process. Motion engine v2 (no DrawSVG). Tests rewritten for v2.
 **Verify:** `npm run verify` 0/0; e2e 33/33 (4 service pages + axe, tabs/keyboard/deep link, slides, work pinned + moving, exploded progress, JS budget, no GSAP when reduced); Lighthouse home ×3: Perf 0.99–1.00, A11y/BP/SEO 1, LCP 1.5s, CLS 0.
 **Next:** Codex: CODEX-BRIEF-v2 (images + `showcase-ui/`); they drop in with no code changes. User: real projects + countries (PLAN-v2 §6); exploded-view source (PLAN-v2 §4).
+## 2026-10-25 · codex · codex/v2-media-ui (Part B complete)
+**Did:** Built 33 standalone HTML/CSS screens across ERP, POS, CRM, WMS, inventory, HR, custom software and automation. Fictional product brands and Philippine sample data; inline SVG charts, tables, filters, workflows and mobile views. Added npm run capture:ui, npm run preview:ui, manifest contract and linked contact sheet. Captured all 33 exact PNG keys from PR #7 at native viewports and DPR 2.
+**Verify:** npm run capture:ui passes with bundled Chromium, all 33 screenshots; captures check page errors, document overflow and mobile navigation overlap. Contact sheet plus representative desktop/tablet/mobile views visually inspected. npm run verify passes (0 errors/0 warnings). No application source edits; only src/assets/showcase.
+**Next:** Separate Part B PR stacked on codex/v2-media; merge Part A first, then retarget Part B to main. PR #7 consumes assets automatically when integrated. Local contact-sheet preview: npm run preview:ui on 127.0.0.1:4382.
+
+## 2026-10-25 · codex · codex/v2-media (Part A complete)
+**Did:** Delivered all 25 JPEGs at the v2 filenames, including the supplied office hero and the matched 2000×1200 arm pair. Generated 24 photoreal assets with the built-in ImageGen tool; recorded every full prompt in IMAGE-BRIEF-v2 and docs/media-v2/sources.json. Added a toggle/blend arm review page. Main base, shoulder frame, background and camera remain aligned; joint parts separate along their axes.
+**Verify:** All 25 JPEG formats/dimensions checked with Sharp; photo contact sheet and both arm frames visually reviewed. npm run verify passes (Astro check 0 errors/0 warnings, lint, format, build). No application source edits; only src/assets/photos.
+**Next:** Part A PR for Claude review. PR #7 remains open; its existing filename slots consume these assets on integration. Part B is separately reviewable.
+
+## 2026-10-20 · codex · codex/v2-media (claim)
+**Claim:** v2 media Parts A/B. Part A writes only src/assets/photos and the image licence log; Part B writes showcase-ui, capture tooling, package script and src/assets/showcase. Exact 33 screen keys read from PR #7, not guessed. Shared package.json change is explicitly requested by the user. Robotics first; assembled arm is the exploded-view reference. No page/component/content source edits.
 
 ## 2026-10-19 · claude · main (v2 kickoff)
 **Did:** Planned v2 with the user (D22): `docs/PLAN-v2.md`, `docs/IMAGE-BRIEF-v2.md`, `docs/CODEX-BRIEF-v2.md`. Claude is rebuilding `src/` on `claude/v2-redesign`.
