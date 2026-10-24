@@ -14,6 +14,7 @@ Visuals are coded schematics (`src/components/art/`); add a photo to any pillar/
 
 ## Company facts (approved for the site)
 - Email `info@xzentechsolutions.com` · Phone `0969 244 2557` (`+63 969 244 2557`) · Philippines-based.
+- Team: **international**, working with clients **globally** (user confirmed 2026-10-25). Use “globally”, not “abroad”; no specific offices, countries or headcount are confirmed.
 - Public figures: **300+** business systems, **200+** robotics & automation projects. Nothing else.
 - Client projects are confidential — no names, logos, or results. No partner logos. No social links.
 - Domain `xzentechsolutions.com` is for later; it's live elsewhere now — don't touch DNS or hardcode it.

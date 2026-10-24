@@ -1,9 +1,11 @@
 ---
-import ProductStage from '../service/ProductStage.astro';
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import Photo from '../media/Photo.astro';
 import { proof, site } from '../../content/site';
+import { heroDirection as direction } from '../../content/hero';
 import '../../styles/hero.css';
 ---
 
@@ -11,27 +13,57 @@ import '../../styles/hero.css';
   <Container class="hero-inner">
     <div class="hero-main">
       <div class="hero-copy">
-        <div data-hero-part="eyebrow">
-          <Eyebrow>{site.hero.eyebrow}</Eyebrow>
-        </div>
-        <h1 id="hero-heading" data-hero-part="title">
+        <Eyebrow>{site.hero.eyebrow}</Eyebrow>
+        <h1 id="hero-heading">
           {site.hero.lines.map((line) => (
             <span class="hero-line">{line} </span>
-          ))}{' '}
+          ))}
           <span class="hero-emphasis">{site.hero.emphasis}</span>
         </h1>
-        <p class="hero-summary" data-hero-part="copy">
-          {site.hero.summary}
-        </p>
-        <div class="hero-actions" data-hero-part="copy">
+        <p class="hero-summary">{site.hero.summary}</p>
+        <div class="hero-actions">
           <Button href="#contact">{site.hero.primaryCta}</Button>
           <Button href="#services" variant="outline">
             {site.hero.secondaryCta}
           </Button>
         </div>
       </div>
-      <ProductStage />
+      <div class="hero-visual" role="group" aria-label={direction.label}>
+        <div class="hero-frame-meta">
+          <span aria-hidden="true">{direction.frameCode}</span>
+          <span>{direction.frameNote}</span>
+        </div>
+        <div class="hero-photo-frame">
+          <Photo
+            photo="home/hero-studio-v3"
+            alt={direction.imageAlt}
+            ratio="auto"
+            class="hero-studio"
+            widths={[640, 960, 1280]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            formats={['webp']}
+            eager
+          />
+          <div class="hero-photo-caption">
+            <span class="hero-frame-line" aria-hidden="true"></span>
+            <p>{direction.frameTitle}</p>
+          </div>
+        </div>
+        <p class="hero-image-note">{direction.imageNote}</p>
+      </div>
     </div>
+    <nav class="hero-capabilities" aria-label={direction.indexLabel}>
+      {direction.capabilities.map((c) => (
+        <a href={`/services/${c.slug}`}>
+          <span class="capability-number">{c.number}</span>
+          <span>
+            <strong>{c.title}</strong>
+            <small>{c.detail}</small>
+          </span>
+          <Icon name="arrow-up-right" />
+        </a>
+      ))}
+    </nav>
     <dl class="hero-proof">
       {proof.map((item) => (
         <div

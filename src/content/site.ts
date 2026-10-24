@@ -4,7 +4,7 @@ export const contact: Contact = {
   email: 'info@xzentechsolutions.com',
   phoneDisplay: '0969 244 2557',
   phoneHref: 'tel:+639692442557',
-  location: 'Philippines-based · working with clients in the PH and abroad',
+  location: 'Philippines-based · international team · working globally',
 };
 export const proof: Proof[] = [
   {
@@ -22,8 +22,8 @@ export const proof: Proof[] = [
   { kind: 'text', value: 'End-to-end', label: 'Strategy → build → support' },
   {
     kind: 'text',
-    value: 'PH-based',
-    label: 'Clients in the Philippines and abroad',
+    value: 'International',
+    label: 'A team working with clients globally',
   },
 ];
 export const navigation = [
@@ -35,7 +35,7 @@ export const navigation = [
 export const site = {
   title: 'XZEN TECH SOLUTIONS — Technology built for real growth',
   description:
-    'Your Philippines-based technology partner for business platforms, custom software, automation and robotics. From strategy to implementation and support.',
+    'An international technology team, based in the Philippines and working globally. Business platforms, custom software, automation and robotics — from strategy to support.',
   skipLink: 'Skip to content',
   homeLabel: 'XZEN TECH SOLUTIONS home',
   navLabel: 'Main navigation',
@@ -43,12 +43,12 @@ export const site = {
   menuLabel: 'Menu',
   buildCta: 'Let’s Build',
   hero: {
-    eyebrow: 'Technology · People · Real impact',
-    heading: 'Technology built for',
-    lines: ['Technology', 'built for'],
-    emphasis: 'real growth',
+    eyebrow: 'International team · Working globally',
+    heading: 'Engineering',
+    lines: ['Engineering'],
+    emphasis: 'what’s next.',
     summary:
-      'We engineer, build, and implement intelligent systems — from business platforms and custom software to automation and robotics.',
+      'From the first idea to the systems your business runs on. We connect software, automation and engineering — built together, wherever you work.',
     primaryCta: 'Book a Consultation',
     secondaryCta: 'Explore services',
   },

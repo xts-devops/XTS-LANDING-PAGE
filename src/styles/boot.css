@@ -1,0 +1,195 @@
+.boot-screen {
+  display: none;
+}
+html[data-boot='on'] .boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+  isolation: isolate;
+}
+.boot-screen:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--color-gold-lo) 10%, transparent),
+    transparent 65%
+  );
+}
+.boot-signature {
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  width: min(28rem, calc(100% - 3rem));
+  position: relative;
+}
+.boot-mark {
+  width: 6rem;
+  height: 6rem;
+  object-fit: contain;
+}
+.boot-code {
+  font: 400 clamp(3.5rem, 8vw, 5rem)/1.1 var(--font-display);
+  letter-spacing: 0.14em;
+  padding-left: 0.14em;
+  margin-top: 1.25rem;
+}
+.boot-name {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--color-gold-hi);
+  margin-top: 0.9rem;
+  line-height: 1.8;
+}
+.boot-track {
+  height: 1px;
+  width: 100%;
+  background: var(--color-line);
+  margin-top: 2rem;
+  overflow: hidden;
+}
+.boot-track i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--color-gold-hi);
+  transform-origin: left;
+}
+.boot-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.85rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.boot-status {
+  font-size: 0.6rem;
+  color: var(--color-muted);
+  margin-top: 1.75rem;
+  letter-spacing: 0.04em;
+}
+.boot-skip {
+  position: absolute;
+  right: max(var(--gutter), 1.5rem);
+  bottom: 2rem;
+  border: var(--border);
+  border-radius: 2rem;
+  padding: 0.7rem 1rem;
+  min-height: 2.75rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+.boot-skip > span {
+  color: var(--color-gold-hi);
+  margin-left: 0.7rem;
+}
+.boot-corner {
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.boot-corner-top {
+  top: 2rem;
+  left: max(var(--gutter), 1.5rem);
+  border-top: 1px solid var(--color-gold-lo);
+  border-left: 1px solid var(--color-gold-lo);
+}
+.boot-corner-bottom {
+  bottom: 2rem;
+  left: max(var(--gutter), 1.5rem);
+  border-bottom: 1px solid var(--color-gold-lo);
+  border-left: 1px solid var(--color-gold-lo);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html[data-boot='on'] .boot-screen {
+    animation: xts-boot-out 0.2s var(--ease-out) 0.65s forwards;
+  }
+  .boot-mark {
+    animation: xts-boot-mark 0.28s var(--ease-out) both;
+  }
+  .boot-code {
+    animation: xts-boot-code 0.32s var(--ease-out) 0.08s both;
+  }
+  .boot-track i {
+    animation: xts-boot-track 0.5s var(--ease-out) 0.08s both;
+  }
+  .boot-name,
+  .boot-steps,
+  .boot-status {
+    animation: xts-boot-mark 0.28s var(--ease-out) 0.15s both;
+  }
+  @keyframes xts-boot-mark {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+  }
+  @keyframes xts-boot-code {
+    from {
+      clip-path: inset(0 100% 0 0);
+      transform: translateY(0.25rem);
+    }
+  }
+  @keyframes xts-boot-track {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes xts-boot-out {
+    to {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-boot='on'] .boot-screen {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .boot-signature {
+    width: calc(100% - 4rem);
+    max-width: 22rem;
+  }
+  .boot-name {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+  }
+  .boot-code {
+    font-size: 3.5rem;
+  }
+  .boot-mark {
+    width: 5rem;
+    height: 5rem;
+  }
+  .boot-corner {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .boot-steps {
+    font-size: 0.55rem;
+  }
+  .boot-skip {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  .boot-status {
+    font-size: 0.55rem;
+  }
+}

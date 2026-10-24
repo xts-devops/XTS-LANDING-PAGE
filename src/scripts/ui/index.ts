@@ -1,3 +1,4 @@
+import { initBootIntro } from './boot';
 import { initIndustryDemos } from './industry';
 import { initScreenPreview } from './preview';
 import { initAnchors } from './anchors';
@@ -150,3 +151,5 @@ initAnchors();
 initScreenPreview();
 
 initIndustryDemos();
+
+initBootIntro();

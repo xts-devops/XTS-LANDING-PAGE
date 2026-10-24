@@ -79,10 +79,10 @@ export const work: WorkItem[] = [
  * the statement while the list is empty, so nothing unconfirmed is ever displayed.
  */
 export const reach = {
-  eyebrow: 'Beyond the Philippines',
-  heading: 'Built in the Philippines. Trusted by clients abroad.',
+  eyebrow: 'Connected globally',
+  heading: 'An international team. A global perspective.',
   summary:
-    'We work remotely with teams in other time zones: same process, same standard, with overlap hours agreed up front.',
+    'Our international team works with clients globally, bringing strategy, design, engineering and support together across time zones.',
   regions: [] as { name: string; note?: string }[],
   quotes: [] as { text: string; who: string }[],
 };

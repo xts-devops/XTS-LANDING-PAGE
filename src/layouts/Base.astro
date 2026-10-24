@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Seo from '../components/seo/Seo.astro';
 import { site } from '../content/site';
+import bodyFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 import displayFont from '@fontsource/michroma/files/michroma-latin-400-normal.woff2?url';
 
 interface Props {
@@ -26,7 +27,23 @@ const speculationRules = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Flip to .js before first paint so reveal states never flash; no-JS keeps everything visible. -->
     <script is:inline>
-      document.documentElement.classList.replace('no-js', 'js');
+      const root = document.documentElement;
+      root.classList.replace('no-js', 'js');
+      if (
+        location.pathname === '/' &&
+        !location.hash &&
+        matchMedia('(prefers-reduced-motion:no-preference)').matches
+      ) {
+        try {
+          if (!sessionStorage.getItem('xts:brand-intro:v1')) {
+            sessionStorage.setItem('xts:brand-intro:v1', 'seen');
+            root.setAttribute('data-boot', 'on');
+            setTimeout(() => root.removeAttribute('data-boot'), 1100);
+          }
+        } catch {
+          /* Storage unavailable: show the page immediately. */
+        }
+      }
     </script>
     <link
       rel="preload"
@@ -35,10 +52,21 @@ const speculationRules = {
       type="font/woff2"
       crossorigin
     />
+    <link
+      rel="preload"
+      href={bodyFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <Seo title={title} description={description} noindex={noindex} />
+    <Seo
+      title={title}
+      description={description ?? site.description}
+      noindex={noindex}
+    />
     <!-- Instant navigation, zero JS: prerender pages the visitor is about to open (hover/pointer-down).
          Browsers without Speculation Rules just navigate normally. -->
     <script

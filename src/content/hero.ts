@@ -1,0 +1,44 @@
+export const heroDirection = {
+  label: 'Engineering, from idea to implementation',
+  imageAlt:
+    'Illustrative engineering studio with electronics prototypes, a workstation and warm evening light',
+  frameCode: 'XTS / 01',
+  frameTitle: 'Where ideas become systems.',
+  frameNote: 'Software · Automation · Engineering',
+  imageNote: 'Illustrative studio concept',
+  indexLabel: 'Explore our capabilities',
+  capabilities: [
+    {
+      slug: 'business-systems',
+      number: '01',
+      title: 'Business systems',
+      detail: 'Connect your operations',
+    },
+    {
+      slug: 'custom-software',
+      number: '02',
+      title: 'Custom software',
+      detail: 'Build around your people',
+    },
+    {
+      slug: 'automation',
+      number: '03',
+      title: 'Automation',
+      detail: 'Make your tools work together',
+    },
+    {
+      slug: 'robotics',
+      number: '04',
+      title: 'Robotics & R&D',
+      detail: 'Bring innovation into the real world',
+    },
+  ],
+  boot: {
+    label: 'XTS brand introduction',
+    code: 'XTS',
+    name: 'XZEN TECH SOLUTIONS',
+    status: 'Ideas connected. Possibilities ahead.',
+    steps: ['Engineer', 'Build', 'Connect'],
+    skip: 'Skip intro',
+  },
+};

@@ -78,3 +78,6 @@ Removed Claude's worktree `XTS LadingPage-claude`. Codex and Claude both work in
 
 ### D24 · 2026-10-25 · user · Agents work at the same time on separate tasks (supersedes D23)
 Codex keeps `XTS LadingPage`; Claude works in a hidden worktree `D:/DEV WORKS/.worktrees/xts-landing-claude` (outside the project folder, so tools in Codex's folder never scan it). Tasks are split by lane and by files; no file is edited by both agents in open work. **Why:** user wants one visible project folder but both agents working simultaneously.
+
+### D25 · 2026-10-25 · user + codex · Brief session-only XTS brand entrance
+User explicitly requests a first-entry XTS website boot and a different hero direction. This overrides MOTION §3's blanket no-full-screen-preloader instruction for a short branded introduction only: approximately 1.1s, skippable, session-only, no fake progress percentages, suppressed under reduced motion/direct hashes/no JS, fail-open by 1.4s, and independent of all downloads. The page remains rendered and navigable. Hero becomes a sharp studio-led composition with capability links; international/global wording follows the user's confirmation. Design and acceptance plan: docs/HERO-ENTRANCE.md.

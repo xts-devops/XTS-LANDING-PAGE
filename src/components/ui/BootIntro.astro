@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import mark from '../../assets/brand/mark-gold-transparent.png';
+import { heroDirection } from '../../content/hero';
+import '../../styles/boot.css';
+const copy = heroDirection.boot;
+---
+
+<div class="boot-screen" data-boot-screen role="region" aria-label={copy.label}>
+  <div class="boot-corner boot-corner-top" aria-hidden="true"></div>
+  <div class="boot-corner boot-corner-bottom" aria-hidden="true"></div>
+  <div class="boot-signature" aria-hidden="true">
+    <Image
+      src={mark}
+      alt=""
+      width={96}
+      height={96}
+      format="webp"
+      quality={90}
+      class="boot-mark"
+    />
+    <p class="boot-code">{copy.code}</p>
+    <p class="boot-name">{copy.name}</p>
+    <div class="boot-track">
+      <i></i>
+    </div>
+    <div class="boot-steps">
+      {copy.steps.map((step) => (
+        <span>{step}</span>
+      ))}
+    </div>
+    <p class="boot-status">{copy.status}</p>
+  </div>
+  <button type="button" class="boot-skip" data-boot-skip>
+    {copy.skip}
+    <span aria-hidden="true"> ↗</span>
+  </button>
+</div>
