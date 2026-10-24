@@ -1,3 +1,4 @@
+import { initPhotoGalleryMotion } from './gallery';
 /** Motion is progressive: native navigation, readable content and swipe work before it loads. */
 const preference = matchMedia('(prefers-reduced-motion: reduce)');
 const events = [
@@ -94,6 +95,7 @@ async function boot() {
       },
     );
     const cleanExploded = initExploded(ScrollTrigger);
+    const cleanGallery = initPhotoGalleryMotion(gsap, ScrollTrigger);
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(() => {
       if (!preference.matches) refresh();
@@ -101,6 +103,7 @@ async function boot() {
     addEventListener('load', refresh, { once: true });
     return () => {
       cleanExploded?.();
+      cleanGallery?.();
       wide.revert();
       smooth?.destroy();
       removeEventListener('load', refresh);

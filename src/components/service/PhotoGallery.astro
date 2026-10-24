@@ -1,0 +1,141 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import Photo from '../media/Photo.astro';
+import ScreenOnPhoto from '../media/ScreenOnPhoto.astro';
+import type { Service } from '../../content/types';
+import { site } from '../../content/site';
+import { presentation } from '../../content/presentation';
+interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+const copy = presentation.gallery;
+const gallery = service.gallery ?? [];
+const row = gallery.length < 4;
+const columns = gallery
+  .map((g) => {
+    const [a, b] = (g.ratio ?? '4 / 3').split('/').map(Number);
+    return (a / b).toFixed(3) + 'fr';
+  })
+  .join(' ');
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/photos/**/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+const photos = await Promise.all(
+  gallery.map(async (g) => {
+    const image = Object.entries(files).find(([path]) =>
+      path.replace(/\.(jpe?g|png|webp)$/, '').endsWith('/photos/' + g.photo),
+    )?.[1].default;
+    const large = image
+      ? await getImage({
+          src: image,
+          width: Math.min(1600, image.width),
+          format: 'webp',
+          quality: 78,
+        })
+      : undefined;
+    return { ...g, large: large?.src };
+  }),
+);
+---
+
+<section
+  class="section gallery"
+  id="photo-gallery"
+  aria-labelledby="gallery-heading"
+  data-photo-gallery
+>
+  <Container>
+    <div class="gallery-heading">
+      <div>
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h2 id="gallery-heading" data-reveal="up">
+          {service.galleryHeading ?? site.servicePage.galleryHeading}
+        </h2>
+      </div>
+      <div class="gallery-intro">
+        <p>{copy.hint}</p>
+        <div class="gallery-scroll" aria-hidden="true">
+          <span>{copy.scroll}</span>
+          <span class="gallery-meter">
+            <i data-gallery-progress />
+          </span>
+        </div>
+      </div>
+    </div>
+    <ul
+      class:list={[row ? 'gallery-row' : 'gallery-grid']}
+      role="list"
+      style={row ? '--cols:' + columns : undefined}
+    >
+      {photos.map((g, i) => (
+        <li
+          class:list={['gallery-item', !row && 'gallery-item-' + i]}
+          data-reveal="up"
+        >
+          <a
+            class="gallery-link"
+            href={g.large}
+            data-gallery-open={g.large}
+            data-gallery-caption={g.caption}
+            data-gallery-alt={g.alt}
+            aria-label={copy.open + ': ' + g.caption}
+          >
+            <Photo
+              photo={g.photo}
+              alt={g.alt}
+              ratio={row ? (g.ratio ?? '4 / 3') : i === 0 ? '4 / 5' : '4 / 3'}
+              sizes={
+                row
+                  ? '(min-width: 1024px) 50vw, 100vw'
+                  : '(min-width: 1024px) 33vw, 100vw'
+              }
+            >
+              {g.onPhoto && <ScreenOnPhoto {...g.onPhoto} />}
+              <span class="gallery-number" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <figcaption>
+                <span>{g.caption}</span>
+                <span class="gallery-expand" aria-hidden="true">
+                  <Icon name="arrow-up-right" />
+                </span>
+              </figcaption>
+            </Photo>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="gallery-note">{copy.note}</p>
+  </Container>
+  <dialog
+    class="gallery-dialog"
+    data-gallery-dialog
+    data-lenis-prevent
+    aria-labelledby="gallery-dialog-title"
+  >
+    <div class="gallery-dialog-toolbar">
+      <h2 id="gallery-dialog-title">
+        {service.galleryHeading ?? site.servicePage.galleryHeading}
+      </h2>
+      <button type="button" data-gallery-close autofocus>
+        {copy.close}
+        <span aria-hidden="true"> ×</span>
+      </button>
+    </div>
+    <div class="gallery-dialog-stage">
+      <button type="button" data-gallery-prev aria-label={copy.previous}>
+        <Icon name="arrow-right" class="flip" />
+      </button>
+      <img data-gallery-image alt="" width="1600" height="1200" />
+      <button type="button" data-gallery-next aria-label={copy.next}>
+        <Icon name="arrow-right" />
+      </button>
+    </div>
+    <p class="gallery-dialog-count" data-gallery-count aria-live="polite" />
+  </dialog>
+</section>

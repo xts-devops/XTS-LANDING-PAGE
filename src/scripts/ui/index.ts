@@ -1,3 +1,4 @@
+import { initPhotoGallery } from './gallery';
 import { initBootIntro } from './boot';
 import { initIndustryDemos } from './industry';
 import { initScreenPreview } from './preview';
@@ -153,3 +154,5 @@ initScreenPreview();
 initIndustryDemos();
 
 initBootIntro();
+
+initPhotoGallery();

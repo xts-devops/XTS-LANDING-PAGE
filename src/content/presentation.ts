@@ -14,6 +14,16 @@ export const presentation = {
     status: 'From idea to implementation',
     steps: ['Discover', 'Design', 'Build', 'Support'],
   },
+  gallery: {
+    eyebrow: 'Engineering in context',
+    hint: 'Explore the details. Select a photo for a closer look.',
+    open: 'View photo',
+    close: 'Close photo preview',
+    previous: 'Previous photo',
+    next: 'Next photo',
+    note: 'Illustrative photography · not client project documentation',
+    scroll: 'Scroll to explore',
+  },
   services: {
     'business-systems': {
       number: '01',
