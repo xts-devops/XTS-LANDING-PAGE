@@ -75,3 +75,6 @@ Home = Hero → Services → Work → Global reach → Start a project (Industri
 
 ### D23 · 2026-10-25 · user · One project folder; agents take turns (supersedes the folder part of D16)
 Removed Claude's worktree `XTS LadingPage-claude`. Codex and Claude both work in `XTS LadingPage`, one at a time, each on its own branch, and leave the folder clean on `main`. **Why:** user wants a single local copy; the agents don't run at the same moment.
+
+### D24 · 2026-10-25 · user · Agents work at the same time on separate tasks (supersedes D23)
+Codex keeps `XTS LadingPage`; Claude works in a hidden worktree `D:/DEV WORKS/.worktrees/xts-landing-claude` (outside the project folder, so tools in Codex's folder never scan it). Tasks are split by lane and by files; no file is edited by both agents in open work. **Why:** user wants one visible project folder but both agents working simultaneously.

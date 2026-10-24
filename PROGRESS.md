@@ -2,6 +2,12 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · claude · claude/parallel-lanes
+**Did:** D24 (supersedes D23): Codex and Claude work at the same time again. Codex keeps `XTS LadingPage`; Claude's worktree moved out of sight to `D:/DEV WORKS/.worktrees/xts-landing-claude` (outside the project folder so Codex's lint/type-check/format don't scan it). Tasks split by lane and by files; rules in AGENTS/CLAUDE/DEV-FLOW §1.
+**Why:** User: one visible folder, but both agents should work simultaneously on separate tasks.
+**Verify:** `git worktree list` → main folder + hidden worktree. Docs only.
+**Next:** Codex is mid-task on `codex/v2-ui-refinement` — Claude stays off those files.
+
 ## 2026-10-25 · claude · claude/one-folder
 **Did:** One local folder (D23). Removed Claude's worktree `XTS LadingPage-claude`; both agents now work in `XTS LadingPage`, taking turns. Updated AGENTS/CLAUDE session rituals and DEV-FLOW §1: start only if the folder is clean on `main`, end by switching back to `main`.
 **Why:** User asked for a single project folder.

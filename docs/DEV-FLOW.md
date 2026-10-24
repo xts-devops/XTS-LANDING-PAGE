@@ -109,11 +109,14 @@ That's ~20 task-sized PRs down to **5** (P1 + 4), with gates only where the user
 
 ## Working mechanics
 
-### 1 · One shared folder, taking turns (D23)
-Both agents work in `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage`; GitHub `main` is the meeting point.
-- Only one agent works at a time — two at once would switch branches under each other.
-- Start: `git status` clean on `main`, else the other agent is mid-task → stop and tell the user.
-- End: commit, push, then `git switch main` so the folder is clean on `main` for the next agent.
+### 1 · Two checkouts, separate tasks, working at the same time (D24)
+- **Codex** works in `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage` (the only folder under `XTS PROJECT DEVS`).
+- **Claude** works in a hidden git worktree: `D:\DEV WORKS\.worktrees\xts-landing-claude`. It sits outside the project folder so Codex's lint/type-check/format never scan it.
+- Same repo, separate checkouts; GitHub `main` is the meeting point.
+- Tasks are split by lane (D15) **and by files**: list the files a task touches when claiming it; never edit a file the other agent has in an open task or PR. Shared files (`src/content/types.ts`, `package.json`, `astro.config.mjs`, `tsconfig.json`) need a task flagged in PROGRESS first.
+- Before opening a PR: `git pull --rebase origin main`. `PROGRESS.md` conflicts: keep both entries.
+
+> **Moved the folders?** Worktrees store absolute paths: run `git -C "<main folder>" worktree repair "<claude worktree>"` once.
 
 ### 2 · Branch → PR → review → merge
 1. `git pull` on main → `git switch -c codex/<task>` (or `claude/<task>`).
