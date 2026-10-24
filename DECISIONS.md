@@ -72,3 +72,6 @@ User asked Claude to continue UI/UX until a best-possible MVP. Claude integrates
 
 ### D22 · 2026-10-19 · user + claude · v2: photo-led, simpler story, service pages, real imagery
 Home = Hero → Services → Work → Global reach → Start a project (Industries/Process sections cut). Each service opens `/services/<slug>`: business systems get a system switcher with slides of realistic MVP screens; robotics gets real photos + an exploded robotic-arm centrepiece. Real-life photos replace coded schematics and the hero console. Native cross-document view transitions (zero JS) + speculation-rules prerender for instant, morphing navigation. Photos/screens auto-wire from `src/assets/photos|showcase/**` with graceful placeholders. Codex produces images + `showcase-ui/` sample apps (`docs/CODEX-BRIEF-v2.md`); Claude builds the site. Plan: `docs/PLAN-v2.md`. **Why:** user wants a straightforward, enticing site whose own polish demonstrates the build standard.
+
+### D23 · 2026-10-25 · user · One project folder; agents take turns (supersedes the folder part of D16)
+Removed Claude's worktree `XTS LadingPage-claude`. Codex and Claude both work in `XTS LadingPage`, one at a time, each on its own branch, and leave the folder clean on `main`. **Why:** user wants a single local copy; the agents don't run at the same moment.

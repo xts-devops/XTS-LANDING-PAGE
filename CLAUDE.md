@@ -18,11 +18,11 @@ Codex owns all UI: pages, layouts, components, styles, motion/ui scripts, conten
 Found a UI bug? Request changes on the PR or add a task — don't edit Codex's files.
 
 ## Session ritual
-Work in the worktree **`D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage-claude`** — never in Codex's folder.
-Start: `git fetch && git switch --detach origin/main` (never check out `main` here — Codex's folder needs it) → read docs → claim a task → `git switch -c claude/<task>`.
+One shared folder for both agents (D23): **`D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage`**. Take turns with Codex.
+Start: `git status` must be clean on `main` (if not, Codex is mid-task: stop and tell the user) → `git switch main && git pull` → read docs → claim a task → `git switch -c claude/<task>`.
 Ship: `npm run verify` green → `gh pr create` → squash-merge (Codex may review).
-Review Codex PRs: `gh pr checkout <n>` (in the worktree) → screenshots via Playwright MCP at 375/768/1440 → DEV-FLOW §4 checklist + `frontend-design` lens → `gh pr review --comment` starting with `✅ approved` or `❌ changes requested` (same GitHub account — self-approval is blocked; DEV-FLOW §2), with specific, actionable notes.
-End: append `PROGRESS.md` → task status → push.
+Review Codex PRs: `gh pr checkout <n>` → screenshots via Playwright MCP at 375/768/1440 → DEV-FLOW §4 checklist + `frontend-design` lens → `gh pr review --comment` starting with `✅ approved` or `❌ changes requested` (same GitHub account — self-approval is blocked; DEV-FLOW §2), with specific, actionable notes.
+End: append `PROGRESS.md` → task status → push → `git switch main` (leave the folder clean on `main`).
 
 ## Ground rules
 - Verify before "done": `npm run verify`; tests + Lighthouse once they exist.

@@ -2,6 +2,12 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · claude · claude/one-folder
+**Did:** One local folder (D23). Removed Claude's worktree `XTS LadingPage-claude`; both agents now work in `XTS LadingPage`, taking turns. Updated AGENTS/CLAUDE session rituals and DEV-FLOW §1: start only if the folder is clean on `main`, end by switching back to `main`.
+**Why:** User asked for a single project folder.
+**Verify:** `git worktree list` shows one entry; docs only otherwise.
+**Next:** Unchanged — waiting on XTS facts/keys, then deployment.
+
 ## 2026-10-25 · claude · claude/v2-redesign (PR #7, includes #8 + #9)
 **Did:** Reviewed Codex's v2 media. All 50 photo/screen keys in `src/content` match delivered files; the arm pair aligns (same base, camera, light) and the exploded view now blends the real pair. Merged `codex/v2-media-ui` (which contains `codex/v2-media`) into PR #7. Wired the 4 unused photos: Custom Software and Automation pages get a short photo row (`galleryHeading`, per-photo `ratio`, equal heights). New `ScreenOnPhoto` + `src/lib/homography.ts` warp the captured `software/mobile-1` screen onto the phone in `software/mobile-in-hand` (build-time matrix3d, ~15 lines of JS to scale). New e2e test for it.
 **Why:** User: verify Codex's work, implement and finalize.

@@ -26,10 +26,11 @@ Claude owns: `.github/**`, ESLint/Prettier config, Lighthouse/Vercel config, `te
 (you may add deps listed in MOTION.md §1 without asking), `astro.config.mjs`, `tsconfig.json`.
 
 ## Session ritual
-Work in **this folder** (`D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage`); Claude uses its own worktree — never switch Claude's branches.
-Start: `git switch main && git pull` → read docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<task>`.
+One shared folder for both agents (D23): **`D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage`**. Take turns — never work while the other agent is mid-task.
+Start: `git status` must be clean on `main` (if not, the other agent is mid-task: stop and tell the user) → `git switch main && git pull` → read docs → claim a task (`owner: codex · status: in-progress`) → `git switch -c codex/<task>`.
 Work: one section or concern per branch. Desktop + mobile together.
 Ship: `npm run verify` green → screenshots 375/768/1440 into `docs/review/<branch>/` → `gh pr create` (screenshots in body) → Claude reviews → squash-merge.
+End: everything committed and pushed, then `git switch main` — always leave the folder clean on `main`.
 End: append `PROGRESS.md` (append-only, newest on top) → task `done`/`blocked`/`review`.
 Coordination-only edits (TASKS/PROGRESS/DECISIONS) may go straight to `main`.
 

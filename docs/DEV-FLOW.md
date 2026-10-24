@@ -109,11 +109,11 @@ That's ~20 task-sized PRs down to **5** (P1 + 4), with gates only where the user
 
 ## Working mechanics
 
-### 1 · One folder per agent (no shared working tree)
-Both agents in one folder = one switches branch under the other. So:
-- **Codex** works in `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage` (the main folder).
-- **Claude** works in a git worktree: `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage-claude`.
-Same repo, separate checkouts; GitHub `main` is the meeting point.
+### 1 · One shared folder, taking turns (D23)
+Both agents work in `D:\DEV WORKS\XTS PROJECT DEVS\XTS LadingPage`; GitHub `main` is the meeting point.
+- Only one agent works at a time — two at once would switch branches under each other.
+- Start: `git status` clean on `main`, else the other agent is mid-task → stop and tell the user.
+- End: commit, push, then `git switch main` so the folder is clean on `main` for the next agent.
 
 ### 2 · Branch → PR → review → merge
 1. `git pull` on main → `git switch -c codex/<task>` (or `claude/<task>`).
@@ -169,5 +169,3 @@ command = "npx"
 args = ["-y", "@upstash/context7-mcp"]
 ```
 
-> **Moved the folders?** Git worktrees store absolute paths. After moving both folders, run
-> `git -C "<main folder>" worktree repair "<claude worktree>"` once (done 2026-10-17 for the move into `XTS PROJECT DEVS`).
