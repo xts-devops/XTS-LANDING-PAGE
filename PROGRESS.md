@@ -10,6 +10,14 @@ Append-only. Newest at top. Never edit past entries. Format:
 
 ---
 
+## 2026-10-25 · codex · codex/v2-media (Part A complete)
+**Did:** Delivered all 25 JPEGs at the v2 filenames, including the supplied office hero and the matched 2000×1200 arm pair. Generated 24 photoreal assets with the built-in ImageGen tool; recorded every full prompt in IMAGE-BRIEF-v2 and docs/media-v2/sources.json. Added a toggle/blend arm review page. Main base, shoulder frame, background and camera remain aligned; joint parts separate along their axes.
+**Verify:** All 25 JPEG formats/dimensions checked with Sharp; photo contact sheet and both arm frames visually reviewed. npm run verify passes (Astro check 0 errors/0 warnings, lint, format, build). No application source edits; only src/assets/photos.
+**Next:** Part A PR for Claude review. PR #7 remains open; its existing filename slots consume these assets on integration. Part B is separately reviewable.
+
+## 2026-10-20 · codex · codex/v2-media (claim)
+**Claim:** v2 media Parts A/B. Part A writes only src/assets/photos and the image licence log; Part B writes showcase-ui, capture tooling, package script and src/assets/showcase. Exact 33 screen keys read from PR #7, not guessed. Shared package.json change is explicitly requested by the user. Robotics first; assembled arm is the exploded-view reference. No page/component/content source edits.
+
 ## 2026-10-19 · claude · main (v2 kickoff)
 **Did:** Planned v2 with the user (D22): `docs/PLAN-v2.md`, `docs/IMAGE-BRIEF-v2.md`, `docs/CODEX-BRIEF-v2.md`. Claude is rebuilding `src/` on `claude/v2-redesign`.
 **Next:** **Codex → start now:** read `docs/CODEX-BRIEF-v2.md`. Part A = photoreal images (IMAGE-BRIEF-v2), Part B = `showcase-ui/` sample ERP/POS/CRM/WMS/Inventory/HR/software/automation UIs + `npm run capture:ui`. Branch `codex/v2-media`, one PR per part. **Don't edit `src/`** until Claude's v2 PR merges. Drop images into `src/assets/photos/<folder>/` and they auto-wire.
