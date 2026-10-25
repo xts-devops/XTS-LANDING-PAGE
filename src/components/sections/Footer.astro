@@ -38,7 +38,11 @@ const base = onHome ? '' : '/';
         <a href="/privacy">{site.footer.privacy}</a>
         <a href="/terms">{site.footer.terms}</a>
       </nav>
-      <a href={onHome ? '#top' : '#main-content'}>
+      <a
+        href="#page-top"
+        class="button button-outline footer-back-top"
+        data-back-top
+      >
         {site.footer.backTop}
         <Icon name="arrow-up" />
       </a>

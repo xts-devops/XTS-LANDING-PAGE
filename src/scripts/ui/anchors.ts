@@ -1,10 +1,13 @@
 export interface AnchorRequest {
   top: number;
+  fast?: boolean;
+  cancel?: () => void;
   finish: () => void;
 }
 /** Align section content, rather than an empty padded section boundary, below the header. */
 export function initAnchors() {
   const position = (target: HTMLElement) => {
+    if (target.id === 'page-top') return 0;
     const content =
       target.querySelector<HTMLElement>('[data-scroll-start]') ?? target;
     const transform = getComputedStyle(content).transform;

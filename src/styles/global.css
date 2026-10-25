@@ -412,3 +412,21 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
+/* A footer-only return action, with no floating overlay or reserved viewport area. */
+.footer-bottom .footer-back-top {
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  gap: 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.footer-back-top .icon {
+  transition: transform var(--dur-1) var(--ease-out);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .footer-back-top:hover .icon {
+    transform: translateY(-2px);
+  }
+}

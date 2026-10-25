@@ -236,6 +236,14 @@ function initExploded(gsap: Gsap, ScrollTrigger: ST) {
   const move = (target: number, complete?: () => void) => {
     if (disposed) return;
     desired = target;
+    if (document.documentElement.hasAttribute('data-returning-top')) {
+      tween?.kill();
+      state.progress = target;
+      render();
+      if (replay) replay.disabled = false;
+      complete?.();
+      return;
+    }
     if (!mediaReady) return;
     tween?.kill();
     if (replay) replay.disabled = true;
@@ -366,10 +374,17 @@ function initSmoothScroll(
   gsap.ticker.add(tick);
   const onAnchor = (event: Event) => {
     event.preventDefault();
-    const { top, finish } = (
-      event as CustomEvent<import('../ui/anchors').AnchorRequest>
-    ).detail;
-    lenis.scrollTo(top, { onComplete: finish });
+    const detail = (event as CustomEvent<import('../ui/anchors').AnchorRequest>)
+      .detail;
+    if (detail.fast)
+      detail.cancel = () =>
+        lenis.scrollTo(lenis.actualScroll, { immediate: true, force: true });
+    lenis.scrollTo(detail.top, {
+      onComplete: detail.finish,
+      ...(detail.fast
+        ? { duration: 0.55, easing: (t: number) => 1 - Math.pow(1 - t, 3) }
+        : {}),
+    });
   };
   const onPreview = (event: Event) => {
     if ((event as CustomEvent<{ open: boolean }>).detail.open) lenis.stop();

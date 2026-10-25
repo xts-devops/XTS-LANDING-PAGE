@@ -1,3 +1,4 @@
+import { initBackToTop } from './back-top';
 import { initHeroWorkspace } from './hero-workspace';
 import { observePhotoStages } from './photo-fit';
 import { initPhotoGallery } from './gallery';
@@ -145,3 +146,5 @@ initBootIntro();
 initPhotoGallery();
 
 initHeroWorkspace();
+
+initBackToTop();
