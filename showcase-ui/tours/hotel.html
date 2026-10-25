@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>HOSPITALITY EXPERIENCE — Journey design preview</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <link rel="stylesheet" href="/demos/tours/player.css" />
+    <script defer src="/demos/tours/player.js"></script>
+  </head>
+  <body class="journey-page theme-sage">
+    <div class="journey-shell" data-journey>
+      <header class="journey-header">
+        <a class="journey-brand" href="/demos/daybreak.html"
+          ><span class="journey-mark" aria-hidden="true">↗</span
+          ><span
+            >HOSPITALITY EXPERIENCE<small
+              >Spatial storytelling / design preview</small
+            ></span
+          ></a
+        ><a class="journey-back" href="/demos/daybreak.html"
+          >Hotel booking system ↗</a
+        >
+      </header>
+      <div class="journey-heading">
+        <div>
+          <p class="journey-eyebrow">EXPERIENCE THE SPACE</p>
+          <h1>Arrive. Unwind. Feel at home.</h1>
+          <p>A brief guest journey from the lobby to a quiet suite.</p>
+        </div>
+        <span class="journey-badge">Design preview · footage pending</span>
+      </div>
+      <main class="journey-layout">
+        <div class="journey-main">
+          <section
+            class="tour-stage"
+            data-tour-stage
+            tabindex="0"
+            aria-label="Hotel journey viewer"
+          >
+            <img
+              class="tour-cover"
+              src="/demos/media/tours/hotel-cover.webp"
+              alt="Generated boutique hotel lobby with limestone reception, seafoam seating and a bronze lift bank to the right"
+              width="1600"
+              height="900"
+            /><video
+              data-journey-video
+              muted
+              playsinline
+              preload="none"
+              aria-label="Hotel journey film"
+            ></video>
+            <div class="tour-topline">
+              <span>CONCEPT COVER / ROUTE REVIEW</span
+              ><span data-tour-quality>Generated concept</span>
+            </div>
+            <div class="tour-overlay">
+              <p class="tour-location" data-tour-location>
+                Entrance → reception → lift
+              </p>
+              <h2 data-tour-title>Lobby & arrival</h2>
+              <div class="tour-controls">
+                <button type="button" class="tour-play" data-tour-play disabled>
+                  Footage pending
+                </button>
+                <div>
+                  <button
+                    type="button"
+                    data-tour-prev
+                    aria-label="Previous chapter"
+                  >
+                    ←</button
+                  ><button
+                    type="button"
+                    data-tour-next
+                    aria-label="Next chapter"
+                  >
+                    →</button
+                  ><button
+                    type="button"
+                    data-tour-expand
+                    aria-label="Expand journey viewer"
+                  >
+                    ⛶
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <nav
+            class="journey-chapters"
+            aria-label="Journey chapters"
+            style="--chapters: 2"
+          >
+            <button type="button" data-tour-chapter="0" aria-pressed="true">
+              <span class="chapter-number">01</span
+              ><span
+                ><b>Lobby & arrival</b
+                ><small>Entrance → reception → lift</small></span
+              ><span class="chapter-fill" aria-hidden="true"></span></button
+            ><button type="button" data-tour-chapter="1" aria-pressed="false">
+              <span class="chapter-number">02</span
+              ><span
+                ><b>Suite & terrace</b
+                ><small>Guest corridor → suite → terrace</small></span
+              ><span class="chapter-fill" aria-hidden="true"></span>
+            </button>
+          </nav>
+          <p
+            class="tour-status"
+            data-tour-status
+            role="status"
+            aria-live="polite"
+          >
+            Review the route and controls. Actual video is awaiting a footage
+            source; this cover is not a walkthrough.
+          </p>
+        </div>
+        <aside class="journey-details">
+          <p class="journey-eyebrow">THE ROUTE</p>
+          <h2>One connected experience.</h2>
+          <p class="route-meta">
+            2 chapters · approximately 12 seconds planned
+          </p>
+          <ol class="journey-route">
+            <li data-route-step="0" aria-current="step">
+              <span>01</span>
+              <div>
+                <b>Lobby & arrival</b><small>Entrance → reception → lift</small>
+              </div>
+            </li>
+            <li data-route-step="1" aria-current="false">
+              <span>02</span>
+              <div>
+                <b>Suite & terrace</b
+                ><small>Guest corridor → suite → terrace</small>
+              </div>
+            </li>
+          </ol>
+          <div class="route-description">
+            <span>SELECTED CHAPTER</span>
+            <h3 data-tour-detail-title>Lobby & arrival</h3>
+            <p data-tour-summary>
+              Enter the lobby, pass reception and turn right toward the bronze
+              lift bank.
+            </p>
+          </div>
+          <p class="journey-notice">
+            Concept cover and planned route only. No continuous filmed
+            walkthrough is represented. Source footage must match the route
+            before publishing.
+          </p>
+        </aside>
+      </main>
+      <footer class="journey-footer">
+        <span>Illustrative architecture · no real property listing</span
+        ><span>Quiet playback · chapter navigation · motion-aware</span>
+      </footer>
+    </div>
+    <script type="application/json" data-journey-config>
+      {
+        "id": "hotel",
+        "eyebrow": "HOSPITALITY EXPERIENCE",
+        "title": "Arrive. Unwind. Feel at home.",
+        "subtitle": "A brief guest journey from the lobby to a quiet suite.",
+        "theme": "sage",
+        "back": "/demos/daybreak.html",
+        "backLabel": "Hotel booking system",
+        "cover": "/demos/media/tours/hotel-cover.webp",
+        "alt": "Generated boutique hotel lobby with limestone reception, seafoam seating and a bronze lift bank to the right",
+        "chapters": [
+          {
+            "id": "arrival",
+            "title": "Lobby & arrival",
+            "location": "Entrance → reception → lift",
+            "seconds": 6,
+            "summary": "Enter the lobby, pass reception and turn right toward the bronze lift bank.",
+            "continuity": "Pale limestone, oak ceiling fins, seafoam seating and the courtyard tree stay in their reference positions. Keep the guest walking line clear.",
+            "desktop": "/demos/media/tours/hotel-arrival-1080.mp4",
+            "mobile": "/demos/media/tours/hotel-arrival-720.mp4",
+            "src": null,
+            "mobileSrc": null
+          },
+          {
+            "id": "suite",
+            "title": "Suite & terrace",
+            "location": "Guest corridor → suite → terrace",
+            "seconds": 6,
+            "summary": "A matched-door cut leads into the suite, then a short reveal opens toward its terrace.",
+            "continuity": "Continue the same limestone, oak and bronze palette. The corridor leads naturally through one room door; keep the bed, window and terrace fixed throughout the shot.",
+            "desktop": "/demos/media/tours/hotel-suite-1080.mp4",
+            "mobile": "/demos/media/tours/hotel-suite-720.mp4",
+            "src": null,
+            "mobileSrc": null
+          }
+        ]
+      }
+    </script>
+  </body>
+</html>

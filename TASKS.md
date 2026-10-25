@@ -123,3 +123,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-SLIDE-LINE Thin playback progress control** — CSS fill, accessible pause and remaining-time rotation ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-CONSTRUCTION-PHASES Realistic construction phase showcase** — coherent phase imagery and synchronized project states ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-SPATIAL-JOURNEYS Property and hotel cinematic previews** — route/player prototypes ready; footage source pending ... owner: codex · status: in-progress (codex/v2-ui-refinement)

@@ -165,3 +165,12 @@ These are generated capability concepts, not client photos or real deployed syst
 | `public/demos/media/construction/handover.webp` | Generated · built-in imagegen | Completed residential building used as the reference for all preceding stages. Full prompt/source/export: `docs/media-v2/construction-sources.json`. |
 
 1600×900 WebP photographs are illustrative phase snapshots, not actual client/site evidence, verified engineering geometry or a filmed construction timelapse. Earlier phases use the same finished reference/camera/landmarks. Native system poster remains `src/assets/showcase/industry/formafield.png` at 2880×1800, captured from the local sample. No Higgsfield calls.
+
+## Property/hotel journey concept covers — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `public/demos/media/tours/property-cover.webp` | Generated · built-in imagegen | Fictional waterfront tower/arrival concept for the route review prototype. Full prompt, source path and export: `docs/media-v2/journey-covers.json`. |
+| `public/demos/media/tours/hotel-cover.webp` | Generated · built-in imagegen | Fictional boutique lobby concept with a legible lift/corridor path. Full prompt, source path and export: `docs/media-v2/journey-covers.json`. |
+
+These are static concept covers, not generated video, an actual filmed walkthrough, a famous landmark or client evidence. Tour footage is pending a source choice; current marketing cards are unchanged. See SPATIAL-JOURNEYS.md. No Higgsfield calls.

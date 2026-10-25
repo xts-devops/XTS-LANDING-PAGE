@@ -1,0 +1,20 @@
+{
+  "source": "Generated with built-in imagegen",
+  "usage": "Concept covers for review prototypes only. No actual walkthrough video or exact measured architecture is represented.",
+  "images": [
+    {
+      "id": "property",
+      "source": "exec-f14d6a0a-441c-41f2-a2c5-27bcfa73511a.png",
+      "prompt": "Premium photorealistic architectural concept photograph, landscape16:9, a FICTIONAL slender luxury residential high-rise beside a landscaped waterfront promenade, not any real named landmark. Distinctive stepped silhouette with warm bronze vertical fins and lightly reflective pale blue glass, a human-scale pale limestone double-height entrance canopy clearly visible at the base. Foreground a clear walkable stone approach bordered by low grasses, two fan palms and a shallow oval reflecting pool leading directly to that entrance; carefully controlled landscaping, no street clutter. Late afternoon neutral warm sunlight, bright natural materials, crisp details, realistic urban context and building scale, restrained elegant international architecture. Camera at slightly elevated approach viewpoint looking toward the entrance and tower, entire base and enough skyline to establish height. No people, cars, words, signs, logos, watermarks or overlaid graphics. A generated illustrative concept cover for a property-tour UI prototype, not a photograph of a client building, not an actual walkthrough or a CGI screenshot.",
+      "file": "public/demos/media/tours/property-cover.webp",
+      "bytes": 246044
+    },
+    {
+      "id": "hotel",
+      "source": "exec-dc9de206-4678-4dcb-93f3-0ed139f74050.png",
+      "prompt": "Photorealistic premium boutique-hotel LOBBY architectural concept photograph, landscape16:9. Human eye-level viewpoint from the landscaped entry toward an elegant pale limestone reception desk on the left, tall natural oak ceiling fins, soft seafoam lounge chairs, warm bronze fittings and a large indoor frangipani tree beside a shallow planted courtyard visible through windows at left. On the RIGHT rear wall a clear unobstructed path reaches a pair of bronze lift doors, with a warm timber corridor extending to the right. Keep the layout legible as a future guest journey: entrance -> reception/lobby -> right lift bank -> guest-floor corridor -> suite. No impossible endless mirrors, no extravagant marble spectacle, refined tactile luxury and believable scale. Bright welcoming warm daylight, softly balanced shadows, crisp material detail, no artificial blur, no people, lettering, signage, logos or watermarks. Fictional hotel concept cover for a tour interface prototype; no real property or actual continuous footage claimed. Single edge-to-edge photograph, not a collage or UI mockup.",
+      "file": "public/demos/media/tours/hotel-cover.webp",
+      "bytes": 269416
+    }
+  ]
+}
