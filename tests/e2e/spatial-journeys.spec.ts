@@ -246,6 +246,9 @@ for (const width of [375, 1440])
       page.locator('[data-overview-expanded-live]'),
     ).toHaveJSProperty('inert', false);
     expect(requests).toEqual([]);
+    await expect(dialog.locator('[data-overview-dialog-status]')).toHaveText(
+      'Ready to explore',
+    );
     await frame.locator('[data-tour-chapter="2"]').click();
     await frame.locator('[data-tour-play]').click();
     await expect(frame.locator('[data-journey]')).toHaveAttribute(
@@ -290,4 +293,264 @@ test('data saver suppresses automatic tour requests while keeping explicit playb
     'data-state',
     'playing',
   );
+});
+
+test('one upcoming clip buffers only after intent and remains outside the active DOM', async ({
+  page,
+}) => {
+  await mediaFixture(page);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const requests: string[] = [];
+  page.on('request', (r) => {
+    if (/fixture-\d.mp4$/.test(r.url())) requests.push(r.url());
+  });
+  await page.goto('/demos/tours/property.html');
+  expect(requests).toEqual([]);
+  await page.locator('[data-tour-play]').click();
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await expect.poll(() => requests.length).toBe(2);
+  expect(requests[1]).toContain('fixture-1.mp4');
+  expect(requests.some((r) => r.includes('fixture-2'))).toBe(false);
+  await expect(page.locator('video')).toHaveCount(1);
+  await page.locator('[data-tour-play]').click();
+  await page.waitForTimeout(700);
+  expect(requests.length).toBe(2);
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'paused',
+  );
+});
+
+test('an automatic chapter change holds the outgoing frame while the next request is delayed', async ({
+  page,
+}) => {
+  await mediaFixture(page);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.route('**/demos/media/tours/fixture-1.mp4', async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 1800));
+    await route.fulfill({
+      path: path.resolve('src/assets/video/arm-exploded.mp4'),
+      contentType: 'video/mp4',
+    });
+  });
+  await page.goto('/demos/tours/property.html');
+  await page.locator('[data-tour-play]').click();
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await page.locator('video').evaluate((el: HTMLVideoElement) => {
+    el.playbackRate = 8;
+  });
+  await expect(page.locator('[data-tour-chapter="1"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'loading',
+  );
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-held',
+    'true',
+  );
+  expect(
+    await page
+      .locator('[data-tour-hold]')
+      .evaluate((el: HTMLCanvasElement) => el.width),
+  ).toBeGreaterThan(0);
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await expect(page.locator('video')).toHaveAttribute('src', /fixture-1.mp4$/);
+});
+
+test('a cancelled load and rapid chapter clicks cannot restart an obsolete film', async ({
+  page,
+}) => {
+  await mediaFixture(page);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.route('**/demos/media/tours/fixture-*.mp4', async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await route.fulfill({
+      path: path.resolve('src/assets/video/arm-exploded.mp4'),
+      contentType: 'video/mp4',
+    });
+  });
+  await page.goto('/demos/tours/property.html');
+  const play = page.locator('[data-tour-play]'),
+    root = page.locator('[data-journey]');
+  await play.click();
+  await expect(root).toHaveAttribute('data-state', 'loading');
+  await play.click();
+  await page.waitForTimeout(650);
+  await expect(root).toHaveAttribute('data-state', 'paused');
+  await expect(page.locator('video')).not.toHaveAttribute('src');
+  await page.locator('[data-tour-chapter="1"]').click();
+  await page.locator('[data-tour-chapter="2"]').click();
+  await expect(root).toHaveAttribute('data-state', 'playing');
+  await expect(page.locator('video')).toHaveAttribute('src', /fixture-2.mp4$/);
+  await page.waitForTimeout(650);
+  await expect(page.locator('[data-tour-chapter="2"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(page.locator('video')).toHaveAttribute('src', /fixture-2.mp4$/);
+});
+
+test('expanded playback survives movement from film to chapter controls and preserves the hover position', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/services/custom-software#industry-demos');
+  const card = page.locator('[data-overview="vista"]');
+  await card.locator('[data-overview-stage]').hover();
+  const inline = card.frameLocator('iframe');
+  await expect(inline.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await expect
+    .poll(() =>
+      inline
+        .locator('video')
+        .evaluate((el: HTMLVideoElement) => el.currentTime),
+    )
+    .toBeGreaterThan(0.7);
+  const position = await inline
+    .locator('video')
+    .evaluate((el: HTMLVideoElement) => el.currentTime);
+  const url = page.url(),
+    media = await card.locator('.overview-media').boundingBox();
+  await page.mouse.click(
+    media!.x + media!.width / 2,
+    media!.y + media!.height / 2,
+  );
+  const viewer = page.locator('[data-overview-dialog]');
+  await expect(viewer).toBeVisible();
+  const frame = viewer.frameLocator('iframe');
+  await expect(frame.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  expect(
+    await frame
+      .locator('video')
+      .evaluate((el: HTMLVideoElement) => el.currentTime),
+  ).toBeGreaterThan(position - 0.5);
+  await frame.locator('[data-tour-chapter="2"]').hover();
+  await page.waitForTimeout(400);
+  await expect(frame.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await frame.locator('[data-tour-chapter="2"]').click();
+  await expect(frame.locator('video')).toHaveAttribute(
+    'src',
+    /property-lobby-(720|1080).mp4$/,
+  );
+  await expect(page.locator('iframe')).toHaveCount(1);
+  await expect(frame.locator('[data-tour-prev], [data-tour-next]')).toHaveCount(
+    0,
+  );
+  expect(page.url()).toBe(url);
+});
+
+test('manual chapter pause/resume preserves the single-chapter override', async ({
+  page,
+}) => {
+  await mediaFixture(page);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/demos/tours/property.html');
+  await page.locator('[data-tour-chapter="1"]').click();
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await page.locator('[data-tour-play]').click();
+  await page.locator('[data-tour-play]').click();
+  await page.locator('video').evaluate((el: HTMLVideoElement) => {
+    el.playbackRate = 8;
+  });
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'complete',
+  );
+  await expect(page.locator('[data-tour-chapter="1"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+});
+
+test('expanding a finished hover preview offers Replay instead of replaying its last instant', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/services/custom-software#industry-demos');
+  const card = page.locator('[data-overview="daybreak"]');
+  await card.locator('[data-overview-stage]').hover();
+  const inline = card.frameLocator('iframe');
+  await expect(inline.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await inline.locator('video').evaluate((el: HTMLVideoElement) => {
+    el.playbackRate = 8;
+  });
+  await expect(card).toHaveAttribute('data-preview', 'complete');
+  await card.locator('[data-overview-open]').click();
+  const frame = page.locator('[data-overview-dialog]').frameLocator('iframe');
+  await expect(frame.locator('[data-tour-play]')).toHaveText('Replay journey');
+  await expect(frame.locator('video')).not.toHaveAttribute('src');
+  await frame.locator('[data-tour-play]').click();
+  await expect(frame.locator('[data-tour-chapter="0"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(frame.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+});
+
+test('a hidden expanded viewer releases media and restores the user pause at the same chapter', async ({
+  page,
+}) => {
+  await page.goto('/services/custom-software#industry-demos');
+  await page.locator('[data-overview="vista"] [data-overview-open]').click();
+  const dialog = page.locator('[data-overview-dialog]');
+  const frame = dialog.frameLocator('iframe');
+  await frame.locator('[data-tour-chapter="1"]').click();
+  await frame.locator('[data-tour-play]').click();
+  await expect
+    .poll(() =>
+      frame.locator('video').evaluate((el: HTMLVideoElement) => el.currentTime),
+    )
+    .toBeGreaterThan(0.2);
+  await frame.locator('[data-tour-play]').click();
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', {
+      value: true,
+      configurable: true,
+    });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect(dialog.locator('iframe')).toHaveCount(0);
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', {
+      value: false,
+      configurable: true,
+    });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect(frame.locator('[data-tour-chapter="1"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(frame.locator('[data-tour-play]')).toHaveText('Resume journey');
+  await expect(frame.locator('video')).not.toHaveAttribute('src');
 });

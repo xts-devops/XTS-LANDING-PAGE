@@ -46,7 +46,12 @@
               alt="Generated waterfront tower concept with a landscaped approach and bronze entrance canopy"
               width="1600"
               height="900"
-            /><video
+            /><canvas
+              class="tour-hold"
+              data-tour-hold
+              aria-hidden="true"
+            ></canvas
+            ><video
               data-journey-video
               muted
               playsinline
@@ -66,18 +71,6 @@
                 </button>
                 <div>
                   <button
-                    type="button"
-                    data-tour-prev
-                    aria-label="Previous chapter"
-                  >
-                    ←</button
-                  ><button
-                    type="button"
-                    data-tour-next
-                    aria-label="Next chapter"
-                  >
-                    →</button
-                  ><button
                     type="button"
                     data-tour-expand
                     aria-label="Expand journey viewer"

@@ -25,6 +25,16 @@ export function initIndustryDemos() {
   const saveData = (
     navigator as Navigator & { connection?: { saveData?: boolean } }
   ).connection?.saveData;
+  type TourPosition = {
+    chapter: number;
+    time: number;
+    sequence: boolean;
+    playing: boolean;
+    complete: boolean;
+  };
+  let tourPosition: TourPosition | null = null,
+    resumePosition: TourPosition | null = null,
+    readyHandled = false;
   let active: HTMLElement | null = null,
     expanded: HTMLElement | null = null,
     suppressed: HTMLElement | null = null,
@@ -56,9 +66,16 @@ export function initIndustryDemos() {
     frame?.remove();
     frame = null;
     active = null;
+    tourPosition = null;
+    resumePosition = null;
+    readyHandled = false;
     dialog.dataset.preview = 'idle';
   };
-  const start = (card: HTMLElement, explicit = false) => {
+  const start = (
+    card: HTMLElement,
+    explicit = false,
+    position: TourPosition | null = null,
+  ) => {
     if (
       document.hidden ||
       (dialog.open && expanded !== card) ||
@@ -68,6 +85,8 @@ export function initIndustryDemos() {
     if (active === card && frame) return;
     stop();
     active = card;
+    resumePosition = position;
+    tourPosition = position;
     card.dataset.preview = 'loading';
     const host =
       expanded === card && dialog.open
@@ -87,8 +106,9 @@ export function initIndustryDemos() {
       (card.dataset.overviewUrl ?? '') + (motion.matches ? '&still=1' : '');
     host.append(frame);
     status(card, card.dataset.loadingLabel ?? '');
+    const requestedFrame = frame;
     const failed = () => {
-      if (active !== card) return;
+      if (active !== card || frame !== requestedFrame) return;
       stop();
       status(card, card.dataset.failureLabel ?? '');
     };
@@ -96,6 +116,7 @@ export function initIndustryDemos() {
     failure = setTimeout(failed, 12000);
   };
   const openViewer = (card: HTMLElement, button: HTMLButtonElement) => {
+    const position = active === card ? tourPosition : null;
     stop();
     expanded = card;
     opener = button;
@@ -113,7 +134,7 @@ export function initIndustryDemos() {
     fit();
     close.focus({ preventScroll: true });
     document.dispatchEvent(new Event('site:preview'));
-    start(card, true);
+    start(card, true, position);
   };
   const closeViewer = () => {
     restoringFocus = true;
@@ -217,13 +238,53 @@ export function initIndustryDemos() {
       closeViewer();
       return;
     }
+    if (
+      event.data?.type === 'xts:tour-position' &&
+      active.dataset.journeyPreview === 'true'
+    ) {
+      const data = event.data;
+      if (
+        Number.isInteger(data.chapter) &&
+        data.chapter >= 0 &&
+        data.chapter < 8 &&
+        Number.isFinite(data.time) &&
+        data.time >= 0 &&
+        data.time <= 60 &&
+        typeof data.sequence === 'boolean' &&
+        typeof data.playing === 'boolean' &&
+        typeof data.complete === 'boolean'
+      )
+        tourPosition = {
+          chapter: data.chapter,
+          time: data.time,
+          sequence: data.sequence,
+          playing: data.playing,
+          complete: data.complete,
+        };
+    }
+    if (
+      event.data?.type === 'xts:tour-state' &&
+      active.dataset.journeyPreview === 'true'
+    ) {
+      if (event.data.state === 'playing') {
+        active.dataset.preview = 'playing';
+        dialog.dataset.preview = 'playing';
+      }
+      if (event.data.state === 'error')
+        status(active, active.dataset.failureLabel ?? '');
+      if (event.data.state === 'paused') status(active, 'Journey paused');
+    }
     if (event.data?.type === 'xts:overview-ready') {
+      if (readyHandled) return;
+      readyHandled = true;
       clearTimeout(failure);
       active.dataset.preview = 'playing';
       dialog.dataset.preview = 'playing';
       frame.contentWindow?.postMessage(
         {
           type: 'xts:overview-start',
+          interaction: dialog.open ? 'expanded' : 'hover',
+          position: resumePosition,
           pixelWidth: Math.ceil(
             frame.getBoundingClientRect().width * (devicePixelRatio || 1),
           ),
@@ -237,7 +298,12 @@ export function initIndustryDemos() {
     )
       status(active, event.data.label.slice(0, 100));
     if (event.data?.type === 'xts:overview-ended') {
-      status(active, active.dataset.completeLabel ?? '');
+      status(
+        active,
+        event.data.still === true && active.dataset.journeyPreview === 'true'
+          ? 'Ready to explore'
+          : (active.dataset.completeLabel ?? ''),
+      );
       active.dataset.preview = 'complete';
       dialog.dataset.preview = 'complete';
     }
@@ -249,12 +315,16 @@ export function initIndustryDemos() {
     }
   });
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop();
-    else if (dialog.open && expanded) start(expanded, true);
+    if (document.hidden) {
+      const position = tourPosition;
+      stop();
+      resumePosition = position;
+    } else if (dialog.open && expanded) start(expanded, true, resumePosition);
   });
   motion.addEventListener('change', () => {
+    const position = tourPosition;
     stop();
-    if (dialog.open && expanded) start(expanded, true);
+    if (dialog.open && expanded) start(expanded, true, position);
   });
   fine.addEventListener('change', () => {
     if (!dialog.open) stop();

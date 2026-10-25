@@ -125,3 +125,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-CONSTRUCTION-PHASES Realistic construction phase showcase** — coherent phase imagery and synchronized project states ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-SPATIAL-JOURNEYS Property and hotel cinematic previews** — six HD films integrated; hover/fullscreen responsive viewer, native/mobile delivery and 91 checks ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-JOURNEY-CLEANUP Buffered cinematic preview UX** — bounded buffering, held-frame transitions and hover/fullscreen continuity; 98 checks ... owner: codex · status: review (codex/v2-ui-refinement)

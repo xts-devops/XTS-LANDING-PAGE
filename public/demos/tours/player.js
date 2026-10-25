@@ -1,4 +1,4 @@
-/* Native, finite journey playback. Video bytes are requested only on intent. */
+/* One active film plus one bounded, intent-only next-chapter buffer. */
 (() => {
   const root = document.querySelector('[data-journey]');
   const configNode = document.querySelector('[data-journey-config]');
@@ -6,282 +6,450 @@
   document.documentElement.classList.replace('no-js', 'js');
   const config = JSON.parse(configNode.textContent);
   const stage = root.querySelector('[data-tour-stage]');
-  const video = root.querySelector('[data-journey-video]');
   const play = root.querySelector('[data-tour-play]');
   const status = root.querySelector('[data-tour-status]');
   const expand = root.querySelector('[data-tour-expand]');
+  const cover = root.querySelector('.tour-cover');
+  const hold = root.querySelector('[data-tour-hold]');
+  const chapters = [...root.querySelectorAll('[data-tour-chapter]')];
   const motion = matchMedia('(prefers-reduced-motion:reduce)');
   const fine = matchMedia('(hover:hover) and (pointer:fine)');
-  const chapters = [...root.querySelectorAll('[data-tour-chapter]')];
-  let index = 0,
-    token = 0,
+  const embedded = parent !== window;
+  const connection = navigator.connection;
+  let video = root.querySelector('[data-journey-video]');
+  let prepared = null,
+    index = 0,
+    operation = 0,
     mode = 'idle',
     running = false,
+    wantPlay = false,
     visible = true,
-    displayPixels = 0;
-  let hoverTimer,
+    displayPixels = 0,
+    savedTime = 0,
+    hoverTimer,
+    warmTimer,
     cancelLoad,
-    savedTime = 0;
-  const localVideo = (url) =>
-    typeof url === 'string' &&
-    /^\/demos\/media\/tours\/[a-z0-9-]+\.mp4$/.test(url);
+    checkpointAt = 0;
+  const bindings = new WeakMap();
   const sourceFor = (chapter) => {
-    const mobile =
+    const small =
       (displayPixels > 0
         ? displayPixels <= 1280
         : innerWidth < 768 &&
           stage.clientWidth * (devicePixelRatio || 1) <= 1280) ||
-      navigator.connection?.saveData;
-    const source =
-      mobile && chapter.mobileSrc ? chapter.mobileSrc : chapter.src;
-    return localVideo(source) ? source : null;
+      connection?.saveData;
+    const url = small && chapter.mobileSrc ? chapter.mobileSrc : chapter.src;
+    return typeof url === 'string' &&
+      /^\/demos\/media\/tours\/[a-z0-9-]+\.mp4$/.test(url)
+      ? url
+      : null;
+  };
+  const send = (data) => {
+    if (embedded) parent.postMessage(data, '*');
   };
   const setStatus = (text) => {
-    status.textContent = text;
+    if (status.textContent !== text) status.textContent = text;
   };
   const sync = () => {
     const chapter = config.chapters[index];
     root.querySelector('[data-tour-index]').textContent =
       'JOURNEY / ' + String(index + 1).padStart(2, '0');
-    const cover = root.querySelector('.tour-cover');
     const poster = chapter.poster || config.cover;
     if (cover.getAttribute('src') !== poster) cover.src = poster;
     chapters.forEach((button, i) =>
       button.setAttribute('aria-pressed', String(i === index)),
     );
-    root
-      .querySelectorAll('[data-route-step]')
-      .forEach((step, i) =>
-        step.setAttribute('aria-current', i === index ? 'step' : 'false'),
-      );
     root.querySelector('[data-tour-title]').textContent = chapter.title;
     root.querySelector('[data-tour-location]').textContent = chapter.location;
     root.querySelector('[data-tour-detail-title]').textContent = chapter.title;
     root.querySelector('[data-tour-summary]').textContent = chapter.summary;
+    stage.setAttribute('aria-busy', String(root.dataset.state === 'loading'));
     play.disabled = !sourceFor(chapter);
     play.textContent = play.disabled
       ? 'Footage pending'
-      : running
+      : wantPlay
         ? 'Pause journey'
         : root.dataset.state === 'complete'
           ? 'Replay journey'
           : savedTime > 0
             ? 'Resume journey'
             : 'Play journey';
-    play.setAttribute('aria-pressed', String(running));
+    play.setAttribute('aria-pressed', String(wantPlay));
   };
-  const release = () => {
-    ++token;
-    cancelLoad?.();
-    cancelLoad = undefined;
-    running = false;
-    root.dataset.frame = 'false';
-    video.pause();
-    if (video.hasAttribute('src')) {
-      video.removeAttribute('src');
-      video.load();
+  const clearVideo = (target) => {
+    bindings.get(target)?.abort();
+    target.pause();
+    if (target.hasAttribute('src')) {
+      target.removeAttribute('src');
+      target.load();
     }
   };
-  const pause = (detach = false) => {
+  const clearBuffer = () => {
+    clearTimeout(warmTimer);
+    warmTimer = undefined;
+    if (prepared) clearVideo(prepared);
+    prepared = null;
+  };
+  const cancel = () => {
+    ++operation;
+    cancelLoad?.();
+    cancelLoad = undefined;
     clearTimeout(hoverTimer);
-    if (Number.isFinite(video.currentTime) && video.currentTime > 0)
-      savedTime = video.currentTime;
+    clearTimeout(warmTimer);
+    warmTimer = undefined;
+  };
+  const release = () => {
+    cancel();
+    clearBuffer();
+    clearVideo(video);
     running = false;
+    wantPlay = false;
+    root.dataset.frame = 'false';
+    root.dataset.held = 'false';
+    hold.width = hold.height = 0;
+  };
+  const checkpoint = () =>
+    send({
+      type: 'xts:tour-position',
+      chapter: index,
+      time:
+        video.hasAttribute('src') && Number.isFinite(video.currentTime)
+          ? video.currentTime
+          : savedTime,
+      sequence: mode !== 'selected',
+      playing: wantPlay,
+      complete: root.dataset.state === 'complete',
+    });
+  const pause = (detach = false) => {
+    const complete = root.dataset.state === 'complete';
+    savedTime = Number.isFinite(video.currentTime)
+      ? video.currentTime
+      : savedTime;
+    cancel();
+    clearBuffer();
+    running = false;
+    wantPlay = false;
     video.pause();
     if (detach) release();
-    root.dataset.state = 'paused';
-    setStatus('Journey paused. Press Play or Resume to continue.');
+    else if (video.readyState < 2) clearVideo(video);
+    root.dataset.state = complete ? 'complete' : 'paused';
+    setStatus(
+      complete
+        ? 'Journey complete. Replay or explore a chapter.'
+        : 'Journey paused. Resume whenever you are ready.',
+    );
     sync();
+    checkpoint();
+    send({ type: 'xts:tour-state', state: 'paused' });
   };
-  const ready = () =>
-    new Promise((resolve) => {
+  const snapshot = () => {
+    if (
+      video.readyState < 2 ||
+      !video.videoWidth ||
+      root.dataset.frame !== 'true'
+    )
+      return;
+    try {
+      hold.width = video.videoWidth;
+      hold.height = video.videoHeight;
+      hold.getContext('2d').drawImage(video, 0, 0);
+      root.dataset.held = 'true';
+    } catch {
+      root.dataset.held = 'false';
+    }
+  };
+  const createVideo = () => {
+    const target = document.createElement('video');
+    target.muted = true;
+    target.setAttribute('muted', '');
+    target.setAttribute('playsinline', '');
+    target.preload = 'none';
+    target.setAttribute(
+      'aria-label',
+      config.id === 'hotel' ? 'Hotel journey film' : 'Property journey film',
+    );
+    return target;
+  };
+  const waitReady = (target) => {
+    if (target.readyState >= 2) return Promise.resolve(true);
+    if (target.error) return Promise.resolve(false);
+    return new Promise((resolve) => {
       let timer;
       const done = (success) => {
         clearTimeout(timer);
-        video.removeEventListener('loadeddata', loaded);
-        video.removeEventListener('error', failed);
-        cancelLoad = undefined;
+        target.removeEventListener('loadeddata', loaded);
+        target.removeEventListener('error', failed);
+        if (cancelLoad === stop) cancelLoad = undefined;
         resolve(success);
       };
-      const loaded = () => done(true);
-      const failed = () => done(false);
-      cancelLoad = () => done(false);
-      video.addEventListener('loadeddata', loaded, { once: true });
-      video.addEventListener('error', failed, { once: true });
-      timer = setTimeout(failed, 8000);
+      const loaded = () => done(true),
+        failed = () => done(false),
+        stop = () => done(false);
+      cancelLoad = stop;
+      target.addEventListener('loadeddata', loaded, { once: true });
+      target.addEventListener('error', failed, { once: true });
+      timer = setTimeout(failed, 10000);
     });
+  };
+  const warmNext = () => {
+    if (warmTimer) return;
+    if (
+      !running ||
+      mode === 'selected' ||
+      motion.matches ||
+      connection?.saveData ||
+      /(^|-)2g$/.test(connection?.effectiveType || '') ||
+      document.hidden ||
+      !visible ||
+      index + 1 >= chapters.length
+    )
+      return;
+    const next = sourceFor(config.chapters[index + 1]);
+    if (!next || prepared?.getAttribute('src') === next) return;
+    const request = operation;
+    warmTimer = setTimeout(() => {
+      warmTimer = undefined;
+      if (request !== operation || !running || document.hidden || !visible)
+        return;
+      let safeAhead = false;
+      for (let range = 0; range < video.buffered.length; range++) {
+        if (
+          video.buffered.start(range) <= video.currentTime + 0.1 &&
+          video.buffered.end(range) >=
+            Math.min(video.duration - 0.1, video.currentTime + 2)
+        )
+          safeAhead = true;
+      }
+      if (!safeAhead) return;
+      clearBuffer();
+      prepared = createVideo();
+      prepared.preload = 'auto';
+      prepared.src = next;
+      prepared.load();
+    }, 500);
+  };
+  const fail = () => {
+    release();
+    root.dataset.state = 'error';
+    setStatus(
+      'The film could not load. Choose a chapter to try again; the still preview remains available.',
+    );
+    sync();
+    send({ type: 'xts:tour-state', state: 'error' });
+  };
+  const bind = (target) => {
+    bindings.get(target)?.abort();
+    const controller = new AbortController();
+    bindings.set(target, controller);
+    const on = (name, callback) =>
+      target.addEventListener(name, callback, { signal: controller.signal });
+    on('transitionend', (event) => {
+      if (
+        event.propertyName === 'opacity' &&
+        target === video &&
+        root.dataset.frame === 'true'
+      ) {
+        root.dataset.held = 'false';
+        hold.width = hold.height = 0;
+      }
+    });
+    on('progress', warmNext);
+    on('waiting', () => {
+      if (wantPlay) setStatus('Preparing this chapter…');
+    });
+    on('playing', () => {
+      if (wantPlay)
+        setStatus(
+          'Playing ' + config.chapters[index].title.toLowerCase() + '.',
+        );
+    });
+    on('error', () => {
+      if (wantPlay && root.dataset.state !== 'loading') fail();
+    });
+    on('timeupdate', () => {
+      if (!Number.isFinite(target.duration) || !target.duration) return;
+      chapters[index].style.setProperty(
+        '--played',
+        String(Math.min(1, target.currentTime / target.duration)),
+      );
+      if (performance.now() - checkpointAt > 400) {
+        checkpointAt = performance.now();
+        checkpoint();
+      }
+    });
+    on('ended', () => {
+      running = false;
+      wantPlay = false;
+      savedTime = 0;
+      chapters[index].style.setProperty('--played', '1');
+      if (index + 1 < chapters.length && mode !== 'selected')
+        void select(index + 1, true);
+      else {
+        clearBuffer();
+        root.dataset.state = 'complete';
+        setStatus(
+          mode === 'selected'
+            ? 'Chapter complete. Choose another space or replay the journey.'
+            : 'Journey complete. Replay or explore a chapter.',
+        );
+        sync();
+        checkpoint();
+        send({ type: 'xts:overview-ended' });
+      }
+    });
+  };
   const begin = async () => {
-    clearTimeout(hoverTimer);
+    cancel();
     if (document.hidden || !visible) return;
     const source = sourceFor(config.chapters[index]);
     if (!source) {
       root.dataset.state = 'draft';
       setStatus(
-        'This chapter is planned. Footage is not connected; the image is a concept cover.',
+        'This chapter is planned. Its still preview remains available.',
       );
       sync();
       return;
     }
-    if (!video.hasAttribute('src') || video.getAttribute('src') !== source) {
-      release();
-      const request = token;
-      root.dataset.state = 'loading';
-      setStatus(
-        'Preparing ' + config.chapters[index].title.toLowerCase() + '…',
-      );
-      const loading = ready();
-      video.preload = 'auto';
-      video.muted = true;
-      video.src = source;
-      video.load();
-      const loaded = await loading;
-      if (request !== token) return;
-      if (!loaded) {
-        release();
-        root.dataset.state = 'error';
-        setStatus(
-          'The film could not load. The concept cover and chapter descriptions remain available.',
-        );
-        sync();
-        return;
+    const request = operation;
+    wantPlay = true;
+    running = false;
+    root.dataset.state = 'loading';
+    setStatus('Preparing ' + config.chapters[index].title.toLowerCase() + '…');
+    if (video.getAttribute('src') !== source) {
+      snapshot();
+      root.dataset.frame = 'false';
+      const incoming =
+        prepared?.getAttribute('src') === source ? prepared : createVideo();
+      if (incoming === prepared) prepared = null;
+      clearBuffer();
+      incoming.setAttribute('data-journey-video', '');
+      const previous = video;
+      incoming.playbackRate = previous.playbackRate;
+      previous.replaceWith(incoming);
+      video = incoming;
+      clearVideo(previous);
+      bind(video);
+      if (!video.hasAttribute('src')) {
+        video.preload = 'auto';
+        video.src = source;
+        video.load();
       }
-      root.querySelector('[data-tour-quality]').textContent =
-        video.videoHeight >= 1080
-          ? '1080p'
-          : video.videoHeight >= 720
-            ? '720p'
-            : 'Preview';
-      if (savedTime > 0 && Number.isFinite(video.duration))
-        video.currentTime = Math.min(
-          savedTime,
-          Math.max(0, video.duration - 0.1),
-        );
+    } else bind(video);
+    const target = video;
+    sync();
+    const loaded = await waitReady(target);
+    if (request !== operation || !wantPlay) return;
+    if (!loaded) {
+      fail();
+      return;
     }
-    const request = token;
+    root.querySelector('[data-tour-quality]').textContent =
+      target.videoHeight >= 1080
+        ? '1080p'
+        : target.videoHeight >= 720
+          ? '720p'
+          : 'Preview';
+    if (savedTime > 0 && Number.isFinite(target.duration))
+      target.currentTime = Math.min(
+        savedTime,
+        Math.max(0, target.duration - 0.1),
+      );
     try {
-      await video.play();
-      if (request !== token || document.hidden || !visible) {
-        video.pause();
+      await target.play();
+      if (request !== operation || !wantPlay || document.hidden || !visible) {
+        target.pause();
         return;
       }
       running = true;
       root.dataset.frame = 'true';
+      if (motion.matches) {
+        root.dataset.held = 'false';
+        hold.width = hold.height = 0;
+      }
       root.dataset.state = 'playing';
       setStatus('Playing ' + config.chapters[index].title.toLowerCase() + '.');
       sync();
+      checkpoint();
+      warmNext();
+      send({ type: 'xts:tour-state', state: 'playing' });
     } catch {
+      if (request !== operation) return;
       running = false;
+      wantPlay = false;
       root.dataset.state = 'paused';
       setStatus('Press Play to start this chapter.');
       sync();
     }
   };
-  const select = async (next, autoplay = false) => {
-    release();
+  const select = async (next, autoplay = false, resumeTime = 0) => {
+    cancel();
+    video.pause();
+    running = false;
+    wantPlay = false;
     index = (next + chapters.length) % chapters.length;
-    savedTime = 0;
+    savedTime = resumeTime;
     root.dataset.state = 'idle';
     chapters.forEach((button) => button.style.setProperty('--played', '0'));
     sync();
-    parent.postMessage(
-      { type: 'xts:overview-step', label: config.chapters[index].title },
-      '*',
-    );
+    send({ type: 'xts:overview-step', label: config.chapters[index].title });
     if (autoplay) await begin();
-    else
+    else {
+      release();
+      sync();
       setStatus(
         sourceFor(config.chapters[index])
           ? 'Selected ' +
               config.chapters[index].title +
               '. Press Play to explore.'
-          : 'Planned chapter: ' +
-              config.chapters[index].title +
-              '. Concept cover only; footage is pending.',
+          : 'Planned chapter. Concept cover only; footage is pending.',
       );
+    }
+  };
+  const choose = (next) => {
+    const autoplay = wantPlay || (!motion.matches && !connection?.saveData);
+    mode = 'selected';
+    if (next === index && wantPlay) {
+      clearBuffer();
+      return;
+    }
+    void select(next, autoplay);
   };
   play.addEventListener('click', () => {
-    if (running) {
+    if (wantPlay) {
+      if (mode === 'hover') mode = 'explicit';
       pause();
       return;
     }
-    mode = 'explicit';
-    if (root.dataset.state === 'complete') void select(0, true);
-    else void begin();
-  });
-  chapters.forEach((button, i) =>
-    button.addEventListener('click', () => {
-      const autoplay = running;
-      mode = 'selected';
-      clearTimeout(hoverTimer);
-      void select(i, autoplay);
-    }),
-  );
-  root.querySelector('[data-tour-prev]').addEventListener('click', () => {
-    mode = 'selected';
-    void select(index - 1, running);
-  });
-  root.querySelector('[data-tour-next]').addEventListener('click', () => {
-    mode = 'selected';
-    void select(index + 1, running);
-  });
-  video.addEventListener('waiting', () => {
-    if (running) setStatus('Buffering this chapter…');
-  });
-  video.addEventListener('playing', () =>
-    setStatus('Playing ' + config.chapters[index].title.toLowerCase() + '.'),
-  );
-  video.addEventListener('error', () => {
-    if (root.dataset.state === 'loading') return;
-    release();
-    root.dataset.state = 'error';
-    setStatus(
-      'The film could not load. The concept cover and chapter descriptions remain available.',
-    );
-    sync();
-  });
-  video.addEventListener('timeupdate', () => {
-    if (!Number.isFinite(video.duration) || !video.duration) return;
-    chapters[index].style.setProperty(
-      '--played',
-      String(Math.min(1, video.currentTime / video.duration)),
-    );
-  });
-  video.addEventListener('ended', () => {
-    running = false;
-    savedTime = 0;
-    chapters[index].style.setProperty('--played', '1');
-    if (index + 1 < chapters.length && mode !== 'selected')
-      void select(index + 1, true);
-    else {
-      root.dataset.state = 'complete';
-      setStatus(
-        mode === 'selected'
-          ? 'Chapter complete. Choose another space or replay the journey.'
-          : 'Journey complete. Replay or explore a chapter.',
-      );
-      sync();
-      parent.postMessage({ type: 'xts:overview-ended' }, '*');
+    if (root.dataset.state === 'complete') {
+      mode = 'explicit';
+      void select(0, true);
+    } else {
+      if (mode !== 'selected') mode = 'explicit';
+      void begin();
     }
   });
-  const embedded = parent !== window;
+  chapters.forEach((button, i) =>
+    button.addEventListener('click', () => choose(i)),
+  );
   if (embedded) {
     root.classList.add('journey-embedded');
     root.querySelector('.journey-brand').removeAttribute('href');
     expand.hidden = true;
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape')
-        parent.postMessage({ type: 'xts:overview-close' }, '*');
+      if (event.key === 'Escape') send({ type: 'xts:overview-close' });
     });
   }
   stage.addEventListener('pointerenter', () => {
     if (
+      embedded ||
       !fine.matches ||
       motion.matches ||
-      navigator.connection?.saveData ||
-      mode === 'explicit' ||
+      connection?.saveData ||
+      mode !== 'idle' ||
       !config.chapters.every((c) => sourceFor(c))
     )
       return;
+    clearTimeout(hoverTimer);
     hoverTimer = setTimeout(() => {
       mode = 'hover';
       void select(0, true);
@@ -289,8 +457,8 @@
   });
   stage.addEventListener('pointerleave', () => {
     clearTimeout(hoverTimer);
-    if (mode === 'hover') {
-      pause(true);
+    if (!embedded && mode === 'hover') {
+      release();
       savedTime = 0;
       mode = 'idle';
       void select(0);
@@ -300,14 +468,18 @@
     if (event.target !== stage) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       event.preventDefault();
-      mode = 'selected';
-      void select(index + (event.key === 'ArrowRight' ? 1 : -1), running);
+      choose(
+        (index + (event.key === 'ArrowRight' ? 1 : chapters.length - 1)) %
+          chapters.length,
+      );
     } else if (event.key === ' ') {
       event.preventDefault();
       play.click();
     }
   });
   expand.addEventListener('click', async () => {
+    clearTimeout(hoverTimer);
+    mode = 'explicit';
     try {
       if (document.fullscreenElement) await document.exitFullscreen();
       else await stage.requestFullscreen();
@@ -335,34 +507,67 @@
     pause(true);
     mode = 'idle';
   });
-  addEventListener('pagehide', () => {
-    clearTimeout(hoverTimer);
-    release();
+  connection?.addEventListener?.('change', () => {
+    if (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || ''))
+      clearBuffer();
   });
+  addEventListener('pagehide', release);
   addEventListener('message', (event) => {
-    if (event.source !== parent || event.data?.type !== 'xts:overview-start')
-      return;
     if (
-      typeof event.data.pixelWidth === 'number' &&
-      event.data.pixelWidth > 0 &&
-      event.data.pixelWidth <= 20000
+      !embedded ||
+      event.source !== parent ||
+      event.data?.type !== 'xts:overview-start'
     )
-      displayPixels = event.data.pixelWidth;
-    if (navigator.connection?.saveData) {
-      void select(0);
-      parent.postMessage({ type: 'xts:overview-ended' }, '*');
+      return;
+    const data = event.data;
+    if (
+      typeof data.pixelWidth === 'number' &&
+      data.pixelWidth > 0 &&
+      data.pixelWidth <= 20000
+    )
+      displayPixels = data.pixelWidth;
+    const position = data.position;
+    const valid =
+      position &&
+      Number.isInteger(position.chapter) &&
+      position.chapter >= 0 &&
+      position.chapter < chapters.length &&
+      Number.isFinite(position.time) &&
+      position.time >= 0 &&
+      position.time <= 60;
+    if (valid && position.complete === true) {
+      void select(position.chapter);
+      root.dataset.state = 'complete';
+      setStatus('Journey complete. Replay or explore a chapter.');
+      sync();
+      send({ type: 'xts:overview-ended' });
     } else if (
+      connection?.saveData ||
       motion.matches ||
       new URLSearchParams(location.search).has('still')
     ) {
-      void select(chapters.length - 1);
-      parent.postMessage({ type: 'xts:overview-ended' }, '*');
+      void select(
+        valid ? position.chapter : 0,
+        false,
+        valid ? position.time : 0,
+      );
+      send({ type: 'xts:overview-ended', still: true });
     } else {
-      mode = 'hover';
-      void select(0, true);
+      mode =
+        valid && position.sequence === false
+          ? 'selected'
+          : data.interaction === 'expanded'
+            ? 'explicit'
+            : 'hover';
+      void select(
+        valid ? position.chapter : 0,
+        !valid || position.playing !== false,
+        valid ? position.time : 0,
+      );
     }
   });
+  bind(video);
   root.dataset.state = 'idle';
   sync();
-  parent.postMessage({ type: 'xts:overview-ready' }, '*');
+  send({ type: 'xts:overview-ready' });
 })();

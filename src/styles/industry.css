@@ -478,3 +478,24 @@ html:has(.overview-dialog[open]) {
 .overview-dialog[data-tour-interactive='true'] [data-overview-size] {
   display: none;
 }
+
+/* One accessible expand control also covers the tour image for pointer/touch input. */
+.industry-card[data-journey-preview='true'] .overview-control::before {
+  content: '';
+  position: absolute;
+  inset: 0.65rem 0.65rem 4.15rem;
+  z-index: 3;
+  cursor: zoom-in;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  transition: border-color var(--dur-1) var(--ease-out);
+}
+.industry-card[data-journey-preview='true']
+  .overview-control:is(:hover, :focus-visible)::before {
+  border-color: var(--color-gold-hi);
+}
+@media (prefers-reduced-motion: reduce) {
+  .industry-card[data-journey-preview='true'] .overview-control::before {
+    transition: none;
+  }
+}

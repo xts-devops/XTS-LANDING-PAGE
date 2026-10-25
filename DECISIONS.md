@@ -118,3 +118,6 @@ Service screenshot autoplay and the progress fill now use 6 seconds per slide, s
 
 ### D37 · 2026-10-25 · user · Higgsfield re-enabled for property/hotel journeys
 The user explicitly re-enables Higgsfield for this task, with a credit-cost check first. D31 remains the default for unrelated tasks. Preflight: 114 credits available; Hailuo 6s/native1080 costs 10 credits per clip, six planned clips total60 and leave54. Proceed with one pilot first; no automatic paid retries or spending beyond this six-clip allocation.
+
+### D38 · 2026-10-25 · user · Buffered journey cleanup
+For the delivered property/hotel preview films, permit one upcoming native-video buffer after playback intent rather than D37's strictly current-only loading. No eager full-tour download. Suppress or cancel speculation for reduced motion, data saver, slow connections, manual single-chapter playback and inactive states. Preserve the outgoing decoded frame during chapter preparation, distinguish hover from explicit viewer control, retain playback position/pause/completion on expansion, and remove duplicate arrow controls. No new generation or hosting changes.
