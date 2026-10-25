@@ -12,7 +12,7 @@ export function initSlides(root: ParentNode = document) {
     const slides = [...track.children] as HTMLElement[];
     if (slides.length < 2) return;
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
-    const interval = Math.max(3000, Number(wrap.dataset.interval) || 3000);
+    const interval = Math.max(6000, Number(wrap.dataset.interval) || 6000);
     const idleDelay = 6000;
     let current = 0,
       paused = false,

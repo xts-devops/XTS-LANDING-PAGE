@@ -59,7 +59,7 @@ const demo = presentation.demo;
               ))}
             </ul>
           </div>
-          <div class="slides" data-slides data-interval="3000">
+          <div class="slides" data-slides data-interval="6000">
             <div class="slides-navigation">
               <div class="slide-picker" aria-label={demo.choose} role="group">
                 {system.slides.map((slide, i) => (
@@ -146,7 +146,7 @@ const demo = presentation.demo;
                   aria-label={demo.pause}
                   aria-pressed="false"
                   aria-controls={`slides-${system.id}`}
-                  style={`--interval:3000ms;--segments:${system.slides.length}`}
+                  style={`--interval:6000ms;--segments:${system.slides.length}`}
                 >
                   <span class="slides-progress-track" aria-hidden="true">
                     <span class="slides-progress-fill" />

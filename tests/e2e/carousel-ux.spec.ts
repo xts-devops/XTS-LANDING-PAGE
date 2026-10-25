@@ -65,7 +65,7 @@ for (const width of [375, 768, 1440]) {
   }
 }
 
-test('automatic 3s rotation resumes after 6s idle; explicit pause remains stopped', async ({
+test('automatic 6s rotation resumes after 6s idle; explicit pause remains stopped', async ({
   page,
 }) => {
   test.setTimeout(60_000);
@@ -84,7 +84,7 @@ test('automatic 3s rotation resumes after 6s idle; explicit pause remains stoppe
     0,
   );
   await expect(count).toHaveClass('sr-only');
-  await page.clock.runFor(2900);
+  await page.clock.runFor(5900);
   await expect(count).toHaveText('1 of 6');
   await page.clock.runFor(1100);
   await expect(count).toHaveText('2 of 6');
@@ -96,7 +96,7 @@ test('automatic 3s rotation resumes after 6s idle; explicit pause remains stoppe
   await page.clock.runFor(2000);
   await expect(count).toHaveText('6 of 6');
   await expect(wrap).toHaveAttribute('data-rotating', 'true');
-  await page.clock.runFor(3000);
+  await page.clock.runFor(6000);
   await expect(count).toHaveText('1 of 6');
   await panel
     .getByRole('button', { name: 'Pause slideshow', exact: true })
@@ -106,7 +106,7 @@ test('automatic 3s rotation resumes after 6s idle; explicit pause remains stoppe
   await panel
     .getByRole('button', { name: 'Resume slideshow', exact: true })
     .click();
-  await page.clock.runFor(2500);
+  await page.clock.runFor(5500);
   await expect(count).toHaveText('2 of 6');
 });
 
@@ -130,7 +130,7 @@ test('navigation arrows reset the idle window even with the pointer left on them
   await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
   await page.clock.runFor(4000);
   await expect(count).toHaveText('3 of 6');
-  await page.clock.runFor(6000);
+  await page.clock.runFor(9000);
   await expect(count).toHaveText('4 of 6');
 });
 
@@ -207,7 +207,7 @@ test('single-screen concepts omit redundant navigation and rotation hints', asyn
   await expect(panel.locator('[data-screen-open]')).toBeVisible();
 });
 
-test('POS keeps a three-second cadence through all four views and loops', async ({
+test('POS keeps a six-second cadence through all four views and loops', async ({
   page,
 }) => {
   test.setTimeout(60_000);
@@ -223,12 +223,16 @@ test('POS keeps a three-second cadence through all four views and loops', async 
     'true',
   );
   const count = panel.locator('[data-count-label]');
-  await page.clock.runFor(2900);
+  await expect(panel.locator('.slides-progress-fill')).toHaveCSS(
+    'animation-duration',
+    '6s',
+  );
+  await page.clock.runFor(5900);
   await expect(count).toHaveText('1 of 4');
   await page.clock.runFor(600);
   await expect(count).toHaveText('2 of 4');
   for (const expected of ['3 of 4', '4 of 4', '1 of 4']) {
-    await page.clock.runFor(3000);
+    await page.clock.runFor(6000);
     await expect(count).toHaveText(expected);
   }
 });
@@ -285,7 +289,7 @@ test('progress line freezes on Pause and resumes its remaining fill without a la
     ),
   ).toBeGreaterThan(400);
   await expect(panel.locator('[data-count-label]')).toHaveText('2 of 4', {
-    timeout: 3300,
+    timeout: 6300,
   });
   expect(
     await panel
@@ -320,7 +324,7 @@ test('manual slide changes freeze a reset fill for the reading window, then comp
     .poll(() => fillScale(fill), { intervals: [50] })
     .toBeGreaterThan(0.1);
   await expect(panel.locator('[data-count-label]')).toHaveText('3 of 4', {
-    timeout: 3500,
+    timeout: 6500,
   });
 });
 
@@ -375,7 +379,7 @@ test('offscreen progress freezes and returns at the remaining fraction', async (
     ),
   ).toBeGreaterThan(400);
   await expect(panel.locator('[data-count-label]')).toHaveText('2 of 4', {
-    timeout: 3300,
+    timeout: 6300,
   });
 });
 

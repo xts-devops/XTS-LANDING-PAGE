@@ -112,3 +112,6 @@ User requests a scroll-triggered stop for viewing the arm. Add a short native st
 
 ### D35 · 2026-10-25 · user via Claude · Thin slideshow progress control
 Replace D32's icon-only pause and visible count with a 2px CSS progress line in a minimum 24px button below the image, with accessible Pause/Resume and hidden “n of total” announcements. Freeze CSS progress during manual grace, explicit pause and inactive states; resume its remaining time against a stable deadline. A new slide resets fill to zero, so manual selection receives 6s grace then its 3s fill. Reduced motion shows static current-view segments; single views omit the line. No per-frame JS or layout shift. Details: docs/CAROUSEL-UX.md.
+
+### D36 · 2026-10-25 · user · Six-second slideshow interval
+Service screenshot autoplay and the progress fill now use 6 seconds per slide, superseding the 3s cadence in D32/D35. Manual grace remains 6s; pause/resume continues the remaining fill.
