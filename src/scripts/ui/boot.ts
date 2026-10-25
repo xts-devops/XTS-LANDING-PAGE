@@ -1,4 +1,4 @@
-/** A short brand ritual, not a loading dependency. The head guard owns a hard fail-open timer. */
+/** A finite brand ritual, not a loading dependency. The head guard owns a hard fail-open timer. */
 export function initBootIntro() {
   const root = document.documentElement;
   const screen = document.querySelector<HTMLElement>('[data-boot-screen]');

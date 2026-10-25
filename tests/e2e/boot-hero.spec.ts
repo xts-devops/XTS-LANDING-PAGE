@@ -21,7 +21,7 @@ test('brand intro runs once per session, then shows the new hero', async ({
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect.poll(() => history(page)).toContain('on');
   await expect(page.locator('html')).not.toHaveAttribute('data-boot', 'on', {
-    timeout: 2200,
+    timeout: 4500,
   });
   await expect(page.locator('#hero-heading')).toHaveText(
     'Ambition, engineered.',
@@ -86,7 +86,7 @@ test('entrance fails open if the deferred UI bundle cannot load', async ({
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect.poll(() => history(page)).toContain('on');
   await expect(page.locator('html')).not.toHaveAttribute('data-boot', 'on', {
-    timeout: 2200,
+    timeout: 4500,
   });
   await expect(page.locator('#hero-heading')).toBeVisible();
 });
@@ -109,3 +109,66 @@ test('global team wording and capability routes are consistent', async ({
     '/services/robotics',
   ]);
 });
+
+test('extended entrance holds for its sequence then opens without a download dependency', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.addInitScript(() => {
+    const timing = { start: 0, end: 0 };
+    Object.defineProperty(window, 'introTiming', { value: timing });
+    new MutationObserver(() => {
+      if (document.documentElement.hasAttribute('data-boot'))
+        timing.start ||= performance.now();
+      else if (timing.start && !timing.end) timing.end = performance.now();
+    }).observe(document, {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['data-boot'],
+    });
+  });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('html')).not.toHaveAttribute('data-boot', 'on', {
+    timeout: 4500,
+  });
+  const duration = await page.evaluate(() => {
+    const timing = (
+      window as unknown as { introTiming: { start: number; end: number } }
+    ).introTiming;
+    return timing.end - timing.start;
+  });
+  expect(duration).toBeGreaterThan(2600);
+  expect(duration).toBeLessThan(3900);
+});
+
+for (const viewport of [
+  { width: 320, height: 667 },
+  { width: 812, height: 375 },
+  { width: 1440, height: 900 },
+]) {
+  test(
+    'intro skip and signature fit the viewport @ ' +
+      viewport.width +
+      'x' +
+      viewport.height,
+    async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'no-preference' });
+      await page.setViewportSize(viewport);
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+      const skip = page.locator('[data-boot-skip]');
+      await expect(skip).toBeVisible();
+      const bounds = await skip.boundingBox();
+      expect(bounds!.height).toBeGreaterThanOrEqual(44);
+      expect(bounds!.x).toBeGreaterThanOrEqual(0);
+      expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(viewport.width);
+      expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport.height);
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth > innerWidth,
+        ),
+      ).toBe(false);
+      await skip.click();
+      await expect(page.locator('[data-boot-screen]')).not.toBeVisible();
+    },
+  );
+}

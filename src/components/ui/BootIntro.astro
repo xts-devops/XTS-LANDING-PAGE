@@ -7,26 +7,40 @@ const copy = heroDirection.boot;
 ---
 
 <div class="boot-screen" data-boot-screen role="region" aria-label={copy.label}>
+  <div class="boot-grid" aria-hidden="true"></div>
+  <p class="boot-edition" aria-hidden="true">
+    {copy.edition}
+  </p>
   <div class="boot-corner boot-corner-top" aria-hidden="true"></div>
   <div class="boot-corner boot-corner-bottom" aria-hidden="true"></div>
   <div class="boot-signature" aria-hidden="true">
-    <Image
-      src={mark}
-      alt=""
-      width={96}
-      height={96}
-      format="webp"
-      quality={90}
-      class="boot-mark"
-    />
-    <p class="boot-code">{copy.code}</p>
+    <div class="boot-emblem">
+      <span class="boot-orbit" aria-hidden="true"></span>
+      <Image
+        src={mark}
+        alt=""
+        width={96}
+        height={96}
+        format="webp"
+        quality={90}
+        class="boot-mark"
+      />
+    </div>
+    <p class="boot-code">
+      {[...copy.code].map((letter) => (
+        <span>{letter}</span>
+      ))}
+    </p>
     <p class="boot-name">{copy.name}</p>
     <div class="boot-track">
       <i></i>
     </div>
     <div class="boot-steps">
       {copy.steps.map((step) => (
-        <span>{step}</span>
+        <span>
+          <i aria-hidden="true"></i>
+          {step}
+        </span>
       ))}
     </div>
     <p class="boot-status">{copy.status}</p>

@@ -88,3 +88,6 @@ User explicitly requests automatic sample-screen previews and image-side arrows.
 
 ### D27 · 2026-10-25 · user + codex · Descriptive systems and finite workflow overviews
 User replaces fictional company/product branding with system-purpose names, including core sample UIs. Industry cards replace Try-the-demo CTAs and full-screen sandboxes with compact hover/tap overviews: one lazy iframe, finite cursor actions on real local controls, explicit stop/replay, static reduced-motion output and cleanup on exit/offscreen/hidden. Existing internal screen keys remain stable; no fake client or company claims. Current direction: docs/INDUSTRY-DEMOS.md.
+
+### D28 · 2026-10-25 · user + codex · Longer finite XTS brand entrance
+User explicitly requests a longer entrance with more suspense and richer motion. Supersedes D25 timing only: about 2.9s with an independent 3.4s fail-open guard. Keep the same supplied mark, no fake progress percentages/system checks, no network dependency or continuous loops. Logo/letter reveals, a decorative orbit/grid and one light sweep resolve into an aperture exit. Preserve Skip, input interruption, reduced-motion, direct-hash/service-page/no-JS/storage bypass and a versioned once-per-tab session flag.

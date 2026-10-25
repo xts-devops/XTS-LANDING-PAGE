@@ -35,10 +35,10 @@ const speculationRules = {
         matchMedia('(prefers-reduced-motion:no-preference)').matches
       ) {
         try {
-          if (!sessionStorage.getItem('xts:brand-intro:v1')) {
-            sessionStorage.setItem('xts:brand-intro:v1', 'seen');
+          if (!sessionStorage.getItem('xts:brand-intro:v2')) {
+            sessionStorage.setItem('xts:brand-intro:v2', 'seen');
             root.setAttribute('data-boot', 'on');
-            setTimeout(() => root.removeAttribute('data-boot'), 1100);
+            setTimeout(() => root.removeAttribute('data-boot'), 3400);
           }
         } catch {
           /* Storage unavailable: show the page immediately. */

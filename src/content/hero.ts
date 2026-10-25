@@ -37,6 +37,7 @@ export const heroDirection = {
   ],
   boot: {
     label: 'XTS brand introduction',
+    edition: 'XZEN / Engineering what’s next',
     code: 'XTS',
     name: 'XZEN TECH SOLUTIONS',
     status: 'Ideas connected. Possibilities ahead.',
