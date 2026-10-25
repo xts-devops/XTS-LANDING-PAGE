@@ -261,7 +261,7 @@
   {
     "key": "industry/daybreak",
     "title": "Hospitality & leisure",
-    "product": "Hotel & court booking",
+    "product": "Hotel booking & room experiences",
     "width": 1440,
     "height": 900
   },
@@ -297,6 +297,20 @@
     "key": "industry/relaydock",
     "title": "Infrastructure operations",
     "product": "Server & deployment management",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/retail",
+    "title": "Retail & branch operations",
+    "product": "Retail store & branch management",
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "key": "industry/warehouse",
+    "title": "Distribution & fulfilment",
+    "product": "Warehouse & distribution management",
     "width": 1440,
     "height": 900
   }

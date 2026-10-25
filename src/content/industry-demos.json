@@ -105,5 +105,27 @@
       "Deployment and enablement checklist"
     ],
     "title": "Server & deployment management"
+  },
+  {
+    "id": "retail",
+    "industry": "Retail & branch operations",
+    "service": "business-systems",
+    "title": "Retail store & branch management",
+    "summary": "Connect shelf availability, branch replenishment and click-and-collect orders in one store workspace.",
+    "capabilities": [
+      "Product-level stock across branches",
+      "Replenishment and collection handoffs"
+    ]
+  },
+  {
+    "id": "warehouse",
+    "industry": "Distribution & fulfilment",
+    "service": "business-systems",
+    "title": "Warehouse & distribution management",
+    "summary": "Follow a high-volume sample wave from inbound checks through zone picking, packing and carrier dispatch.",
+    "capabilities": [
+      "Receiving-to-dispatch visibility",
+      "Quality holds and traceable handoffs"
+    ]
   }
 ]

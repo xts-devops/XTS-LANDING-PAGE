@@ -8,5 +8,7 @@
   "industry/support",
   "industry/documents",
   "industry/factory",
-  "industry/relaydock"
+  "industry/relaydock",
+  "industry/retail",
+  "industry/warehouse"
 ]

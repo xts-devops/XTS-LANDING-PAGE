@@ -33,6 +33,18 @@ for (const d of industryDemos) {
       timeout: 15000,
     });
     await expect(button).toHaveAccessibleName(`View full screen: ${d.title}`);
+    if (d.id === 'retail') {
+      await expect(
+        frame.locator('[data-retail-transfer-status]'),
+      ).toContainText('27 units to Cebu City');
+      await expect(frame.locator('[data-retail-collect-status]')).toContainText(
+        'Ready for collection',
+      );
+    }
+    if (d.id === 'warehouse')
+      await expect(frame.locator('[data-wave-row]').first()).toHaveText(
+        'Dispatch confirmed',
+      );
     if (d.id === 'morrow')
       await expect(frame.locator('[data-total]')).toContainText('0.00');
     if (d.id === 'formafield')

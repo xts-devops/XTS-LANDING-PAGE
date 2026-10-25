@@ -564,3 +564,15 @@ html:has(.overview-dialog[open]) {
     transform: none;
   }
 }
+
+@media (min-width: 1024px) {
+  .industry-grid-five {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .industry-grid-five > .industry-card {
+    grid-column: span 2;
+  }
+  .industry-grid-five > .industry-card:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+}

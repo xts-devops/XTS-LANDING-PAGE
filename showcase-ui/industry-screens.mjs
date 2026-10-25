@@ -1,3 +1,4 @@
+import { commerceBodies } from './commerce.mjs';
 import { constructionBody } from './construction.mjs';
 import { automationOverviews } from './automation-overviews.mjs';
 import fs from 'node:fs';
@@ -111,6 +112,7 @@ $ system deploy --preview
 Waiting for your command…</pre></div></section><aside>${panel('Release checklist', `<ol class="release-list">${['Validate configuration', 'Check data backup', 'Verify application health', 'Prepare team handover'].map((x, i) => `<li data-release-step="${i}"><span>0${i + 1}</span><b>${x}</b><small>Ready</small></li>`).join('')}</ol><button type="button" class="primary" data-deploy>Run dry deployment</button>`)}${panel('Implementation & enablement', `<div class="enablement"><div><span>01</span><p><b>Discovery & environment plan</b><small>Map roles, integrations and rollout needs</small></p></div><div><span>02</span><p><b>Operator workshop</b><small>Hands-on workflows with sample records</small></p></div><div><span>03</span><p><b>Handover & support guide</b><small>Runbook, ownership and recovery paths</small></p></div></div>`, 'Sample delivery plan')}</aside></div>`;
 export function buildIndustry() {
   Object.assign(bodies, automationOverviews({ head, pill }));
+  Object.assign(bodies, commerceBodies({ head, metric, panel, pill }));
   const manifest = [];
   for (const d of records) {
     const nav =
@@ -148,6 +150,11 @@ export function buildIndustry() {
       path.join(base, 'showcase-ui/automation-actions.js'),
       'utf8',
     ) +
+      '\n' +
+      fs.readFileSync(
+        path.join(base, 'showcase-ui/commerce-actions.js'),
+        'utf8',
+      ) +
       '\n' +
       fs.readFileSync(path.join(base, 'showcase-ui/industry.js'), 'utf8'),
   );

@@ -20,6 +20,17 @@ if (
   contract.some((k) => !manifest.some((s) => s.key === k))
 )
   throw Error('The screen filename contract is incomplete');
+const onlyArg = process.argv.find((arg) => arg.startsWith('--only='));
+const requested = onlyArg?.slice(7).split(',');
+if (requested?.some((key) => !contract.includes(key)))
+  throw Error('Unknown screen key in --only');
+const selectedScreens = requested
+  ? manifest.filter((screen) => requested.includes(screen.key))
+  : manifest;
+const captureRoutes = {
+  'industry/daybreak': '/demos/tours/hotel.html',
+  'industry/vista': '/demos/tours/property.html',
+};
 const server = createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(
@@ -76,7 +87,7 @@ if (serving) {
         ? { channel: process.env.PLAYWRIGHT_CHANNEL }
         : {},
     );
-    for (const screen of manifest) {
+    for (const screen of selectedScreens) {
       const context = await browser.newContext({
         viewport: { width: screen.width, height: screen.height },
         deviceScaleFactor: 2,
@@ -89,7 +100,7 @@ if (serving) {
       const errors = [];
       page.on('pageerror', (e) => errors.push(e.message));
       const response = await page.goto(
-        `${url}/showcase-ui/${screen.key}.html`,
+        `${url}${captureRoutes[screen.key] ?? `/showcase-ui/${screen.key}.html`}`,
         { waitUntil: 'networkidle' },
       );
       if (!response?.ok()) throw Error(`Missing HTML: ${screen.key}`);
@@ -125,7 +136,9 @@ if (serving) {
       );
     }
     if (failures.length) throw Error(failures.join('\n'));
-    console.log(`All ${manifest.length} screens captured at DPR 2.`);
+    console.log(
+      `All ${selectedScreens.length} selected screens captured at DPR 2.`,
+    );
   } finally {
     await browser?.close();
     await new Promise((resolve) => server.close(resolve));

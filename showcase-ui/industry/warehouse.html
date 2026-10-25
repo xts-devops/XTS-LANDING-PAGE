@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Warehouse & distribution management — Interactive concept</title>
+    <link rel="stylesheet" href="/demos/demo.css" />
+    <script defer src="/demos/demo.js"></script>
+  </head>
+  <body class="demo-warehouse" data-demo="warehouse">
+    <div class="demo-banner" role="banner">
+      <span>ILLUSTRATIVE SYSTEM / SAMPLE DATA</span
+      ><a href="/services/business-systems#industry-demos" target="_top"
+        >XZEN system previews ↗</a
+      >
+    </div>
+    <div class="demo-shell">
+      <aside
+        class="demo-sidebar"
+        aria-label="Warehouse & distribution management workspace"
+      >
+        <div class="demo-brand">
+          <span>▦</span><b>Warehouse & distribution management</b>
+        </div>
+        <p class="nav-caption">WORKSPACE</p>
+        <nav aria-label="Demo overview">
+          <span class="active"><i>▦</i>Overview</span
+          ><span class=""><i>◈</i>Operations</span
+          ><span class=""><i>▤</i>Reports</span
+          ><span class=""><i>⚙</i>Settings</span>
+        </nav>
+        <div class="sidebar-note">
+          <span>BUILT AROUND PEOPLE</span>
+          <p>
+            An illustrative system workflow.<br />Try the controls in the main
+            view.
+          </p>
+          <div class="profile">
+            <span class="avatar">AR</span
+            ><span>Alex Reyes<small>Demo workspace</small></span>
+          </div>
+        </div>
+      </aside>
+      <main class="demo-main">
+        <header class="demo-topbar">
+          <span>Distribution & fulfilment</span>
+          <div>
+            <span class="pill">Demo workspace</span
+            ><span class="avatar">AR</span>
+          </div>
+        </header>
+        <div class="demo-content">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">DISTRIBUTION / SAMPLE CONTROL TOWER</p>
+              <h1>From dock to doorstep.</h1>
+              <p>
+                Central distribution centre · Sample day shift · 08:00–17:00
+              </p>
+            </div>
+            <span class="pill">Illustrative workload</span>
+          </div>
+          <div class="metrics">
+            <article class="metric">
+              <span>Orders in sample wave</span><strong>1,248</strong
+              ><small>Retail + ecommerce allocation</small>
+            </article>
+            <article class="metric">
+              <span>Active SKUs</span><strong>8,640</strong
+              ><small>Across four storage zones</small>
+            </article>
+            <article class="metric">
+              <span>Inbound appointments</span><strong>24</strong
+              ><small>Scheduled across four docks</small>
+            </article>
+            <article class="metric">
+              <span>Quality hold</span><strong>12 cartons</strong
+              ><small>Excluded from release</small>
+            </article>
+          </div>
+          <div
+            class="warehouse-stage-nav"
+            role="group"
+            aria-label="Fulfilment stage"
+          >
+            <button data-warehouse-stage="0" aria-pressed="true">
+              <small>01</small><span>Receive</span></button
+            ><button data-warehouse-stage="1" aria-pressed="false">
+              <small>02</small><span>Release wave</span></button
+            ><button data-warehouse-stage="2" aria-pressed="false">
+              <small>03</small><span>Pick & pack</span></button
+            ><button data-warehouse-stage="3" aria-pressed="false">
+              <small>04</small><span>Dispatch</span>
+            </button>
+          </div>
+          <div class="commerce-layout warehouse-layout">
+            <section>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Warehouse floor & flow</h2>
+                  <small>Not to scale · Sample layout</small>
+                </div>
+                <svg
+                  viewBox="0 0 680 195"
+                  role="img"
+                  aria-labelledby="warehouse-map-title"
+                >
+                  <title id="warehouse-map-title">
+                    Warehouse zones with receiving and dispatch lanes
+                  </title>
+                  <rect
+                    x="8"
+                    y="10"
+                    width="84"
+                    height="172"
+                    rx="8"
+                    class="warehouse-dock"
+                  />
+                  <text x="50" y="88" text-anchor="middle">INBOUND</text>
+                  <text x="50" y="109" text-anchor="middle">Docks 01–04</text>
+                  <g class="warehouse-zone" data-zone="0">
+                    <rect x="112" y="10" width="108" height="128" rx="8" />
+                    <text x="166" y="34" text-anchor="middle">A</text>
+                    <path d="M127 54h78" />
+                    <path d="M127 80h78" />
+                    <path d="M127 106h78" />
+                    <text x="166" y="159" text-anchor="middle">
+                      Fast movers
+                    </text>
+                  </g>
+                  <g class="warehouse-zone" data-zone="1">
+                    <rect x="234" y="10" width="108" height="128" rx="8" />
+                    <text x="288" y="34" text-anchor="middle">B</text>
+                    <path d="M249 54h78" />
+                    <path d="M249 80h78" />
+                    <path d="M249 106h78" />
+                    <text x="288" y="159" text-anchor="middle">
+                      General stock
+                    </text>
+                  </g>
+                  <g class="warehouse-zone" data-zone="2">
+                    <rect x="356" y="10" width="108" height="128" rx="8" />
+                    <text x="410" y="34" text-anchor="middle">C</text>
+                    <path d="M371 54h78" />
+                    <path d="M371 80h78" />
+                    <path d="M371 106h78" />
+                    <text x="410" y="159" text-anchor="middle">
+                      Bulk storage
+                    </text>
+                  </g>
+                  <g class="warehouse-zone" data-zone="3">
+                    <rect x="478" y="10" width="108" height="128" rx="8" />
+                    <text x="532" y="34" text-anchor="middle">D</text>
+                    <path d="M493 54h78" />
+                    <path d="M493 80h78" />
+                    <path d="M493 106h78" />
+                    <text x="532" y="159" text-anchor="middle">
+                      Quality hold
+                    </text>
+                  </g>
+                  <path d="M112 181h476" class="warehouse-route" />
+                  <text x="352" y="191" text-anchor="middle">
+                    Consolidation → packing → outbound docks
+                  </text>
+                  <rect
+                    x="610"
+                    y="10"
+                    width="62"
+                    height="172"
+                    rx="8"
+                    class="warehouse-dock"
+                  />
+                  <text x="641" y="88" text-anchor="middle">OUT</text>
+                  <text x="641" y="109" text-anchor="middle">05–08</text>
+                </svg>
+              </section>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Wave W-1026-048 · order allocation</h2>
+                  <small>Carrier cutoff · 16:30</small>
+                </div>
+                <div
+                  class="commerce-table"
+                  tabindex="0"
+                  role="region"
+                  aria-label="Wave order allocation"
+                >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Orders</th>
+                        <th scope="col">Pick zone</th>
+                        <th scope="col">Handoff</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Makati stores</td>
+                        <td>416</td>
+                        <td>A / B</td>
+                        <td data-wave-row>Awaiting release</td>
+                      </tr>
+                      <tr>
+                        <td>Cebu distribution</td>
+                        <td>352</td>
+                        <td>B / C</td>
+                        <td data-wave-row>Awaiting release</td>
+                      </tr>
+                      <tr>
+                        <td>Ecommerce parcels</td>
+                        <td>480</td>
+                        <td>A / C</td>
+                        <td data-wave-row>Awaiting release</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
+            <aside class="commerce-aside">
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Operator workspace</h2>
+                  <small></small>
+                </div>
+                <span class="pill" data-warehouse-pill>01 / Receiving</span>
+                <h3 class="warehouse-task" data-warehouse-title>
+                  Verify the inbound shipment
+                </h3>
+                <p class="commerce-muted" data-warehouse-detail>
+                  Match the advance shipping notice, scan pallet labels and
+                  separate damaged cartons before putaway.
+                </p>
+                <ol class="warehouse-checks" data-warehouse-checks>
+                  <li>ASN-2026-086 matched</li>
+                  <li>96 pallets counted</li>
+                  <li>12 cartons on quality hold</li>
+                </ol>
+                <button class="primary" data-warehouse-action>
+                  Confirm receipt checks
+                </button>
+                <p class="commerce-status" role="status" data-warehouse-status>
+                  Waiting for operator review · Sample data only
+                </p>
+              </section>
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>Quality & traceability</h2>
+                  <small></small>
+                </div>
+                <div class="warehouse-exception">
+                  <span class="pill amber">QA-0012 · Held</span>
+                  <h3>Damaged outer cartons</h3>
+                  <p>12 cartons · Zone D</p>
+                  <small
+                    >Requires a quality decision; excluded from pickable stock
+                    throughout this preview.</small
+                  >
+                </div>
+                <div class="warehouse-audit">
+                  <span>Latest handoff</span
+                  ><b data-warehouse-audit>Receiving review pending</b
+                  ><small>No carrier or inventory service connected</small>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+        <p class="demo-footnote">
+          Illustrative system and sample people · Demonstration data · No live
+          transactions
+        </p>
+      </main>
+    </div>
+    <div
+      class="demo-toast"
+      role="status"
+      aria-live="polite"
+      data-toast
+      hidden
+    ></div>
+  </body>
+</html>

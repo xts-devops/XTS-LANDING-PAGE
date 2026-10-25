@@ -3174,3 +3174,398 @@ td {
     padding: 0;
   }
 }
+
+/* Retail: warm product-led store operations. Warehouse: cool logistics control tower. */
+.demo-retail {
+  --accent: #9b421e;
+  --ink: #422b20;
+  --soft: #f9eee5;
+  --line: #e6ded4;
+  --muted: #665d54;
+  background: #f6f3ed;
+  color: #302a25;
+}
+.demo-warehouse {
+  --accent: #12556d;
+  --ink: #143541;
+  --soft: #e7f0f4;
+  --line: #d8e2e8;
+  --muted: #506572;
+  background: #eef3f6;
+  color: #223a49;
+}
+.commerce-select {
+  display: grid;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.commerce-select select {
+  min-height: 40px;
+  padding: 8px 32px 8px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.commerce-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+  align-items: start;
+}
+.commerce-layout > section,
+.commerce-aside {
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
+.retail-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 11px;
+}
+.retail-products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.retail-product {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+.retail-product img {
+  width: 100%;
+  height: 104px;
+  display: block;
+  background: #f3eee4;
+  object-fit: contain;
+}
+.retail-product > div {
+  padding: 10px 12px;
+}
+.retail-product h3 {
+  font-size: 12px;
+  margin: 3px 0 6px;
+}
+.retail-product p {
+  color: var(--muted);
+  font-size: 10px;
+  margin: 7px 0;
+}
+.retail-product .pill {
+  font-size: 9px;
+}
+.commerce-muted,
+.collection-order p,
+.warehouse-exception p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.commerce-transfer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--soft);
+  border-radius: 8px;
+  margin: 14px 0;
+  font-size: 12px;
+}
+.commerce-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.commerce-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+}
+.commerce-aside button {
+  min-height: 40px;
+  width: 100%;
+}
+.commerce-status {
+  min-height: 36px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.collection-order {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.warehouse-stage-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.warehouse-stage-nav button {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  font-size: 12px;
+}
+.warehouse-stage-nav button[aria-pressed='true'] {
+  color: white;
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.warehouse-stage-nav button[aria-pressed='true'] small {
+  color: #d8e7ee;
+}
+.warehouse-layout svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.warehouse-layout svg text {
+  font:
+    10px 'Segoe UI',
+    sans-serif;
+  fill: #294d5e;
+}
+.warehouse-dock {
+  fill: #e4edf2;
+}
+.warehouse-zone rect {
+  fill: #f1f5f7;
+  stroke: #bfced7;
+}
+.warehouse-zone path {
+  stroke: #b5c8d2;
+  stroke-width: 10;
+}
+.warehouse-zone.is-active rect {
+  fill: #dceef0;
+  stroke: #247b83;
+}
+.warehouse-zone.is-active path {
+  stroke: #62a3a7;
+}
+.warehouse-route {
+  stroke: #bd8645;
+  stroke-width: 3;
+  stroke-dasharray: 7 5;
+}
+.warehouse-task {
+  font-size: 20px;
+  margin: 14px 0 10px;
+  letter-spacing: -0.4px;
+}
+.warehouse-checks {
+  padding-left: 20px;
+  font-size: 12px;
+  line-height: 2;
+  margin: 14px 0;
+}
+.warehouse-exception {
+  display: grid;
+  gap: 8px;
+}
+.warehouse-audit {
+  display: grid;
+  gap: 6px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 16px;
+  font-size: 11px;
+}
+.warehouse-audit > span {
+  color: var(--muted);
+}
+.commerce-table {
+  overflow: auto;
+}
+.commerce-table table {
+  min-width: 480px;
+}
+@media (max-width: 1100px) {
+  .commerce-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .commerce-aside {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .retail-products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .commerce-aside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .warehouse-stage-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .retail-toolbar {
+    flex-wrap: wrap;
+  }
+  .commerce-select {
+    width: 100%;
+  }
+  .commerce-select select {
+    width: 100%;
+  }
+  .warehouse-layout .panel {
+    padding: 14px;
+  }
+}
+
+.commerce-layout .panel {
+  min-width: 0;
+}
+.commerce-aside .secondary {
+  color: var(--accent);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+@media (min-width: 1101px) {
+  .demo-retail .demo-content,
+  .demo-warehouse .demo-content {
+    padding-top: 14px;
+  }
+  .demo-retail .page-head,
+  .demo-warehouse .page-head {
+    margin-bottom: 14px;
+  }
+  .demo-retail .metrics,
+  .demo-warehouse .metrics {
+    margin-bottom: 16px;
+  }
+  .demo-retail .metric,
+  .demo-warehouse .metric {
+    padding: 10px 14px;
+  }
+  .commerce-layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 16px;
+  }
+  .commerce-layout .panel {
+    padding: 16px;
+  }
+  .commerce-layout .panel-head {
+    margin-bottom: 12px;
+  }
+  .commerce-aside {
+    gap: 12px;
+  }
+  .commerce-aside .commerce-status {
+    font-size: 10px;
+    min-height: 28px;
+    margin-top: 6px;
+  }
+  .commerce-transfer {
+    margin: 10px 0;
+    padding: 10px;
+  }
+  .commerce-list {
+    margin-bottom: 12px;
+  }
+  .commerce-list li {
+    padding: 5px 0;
+  }
+  .collection-order {
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+  .warehouse-task {
+    margin: 8px 0 6px;
+    font-size: 17px;
+  }
+  .warehouse-checks {
+    line-height: 1.6;
+    margin: 6px 0;
+    font-size: 11px;
+  }
+  .warehouse-exception {
+    gap: 4px;
+  }
+  .warehouse-audit {
+    margin-top: 8px;
+    padding-top: 8px;
+    gap: 4px;
+    line-height: 1.3;
+  }
+  .warehouse-layout svg {
+    max-height: 190px;
+  }
+  .warehouse-layout th,
+  .warehouse-layout td {
+    padding: 10px;
+  }
+  .demo-retail .demo-topbar,
+  .demo-warehouse .demo-topbar {
+    height: 48px;
+  }
+  .demo-retail .page-head h1,
+  .demo-warehouse .page-head h1 {
+    font-size: 26px;
+  }
+  .demo-retail .page-head h1 + p,
+  .demo-warehouse .page-head h1 + p {
+    margin-top: 6px;
+  }
+  .demo-retail .metric strong,
+  .demo-warehouse .metric strong {
+    margin: 5px 0 3px;
+  }
+  .commerce-aside .panel {
+    padding: 12px 14px;
+  }
+  .commerce-aside .panel-head {
+    margin-bottom: 8px;
+  }
+  .commerce-aside .panel-head h2 {
+    font-size: 14px;
+  }
+  .commerce-aside .pill {
+    font-size: 9px;
+    padding: 3px 7px;
+  }
+  .warehouse-audit small,
+  .warehouse-exception small {
+    font-size: 10px;
+  }
+  .warehouse-stage-nav {
+    margin-bottom: 14px;
+  }
+  .retail-product img {
+    height: 86px;
+  }
+  .retail-product > div {
+    padding: 8px 10px;
+  }
+  .demo-warehouse .commerce-muted,
+  .demo-warehouse .warehouse-exception p {
+    font-size: 11px;
+  }
+  .warehouse-exception small {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .demo-warehouse .demo-footnote {
+    padding-bottom: 6px;
+  }
+}

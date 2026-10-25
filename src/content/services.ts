@@ -10,7 +10,7 @@ export const services: Service[] = [
     title: 'Business Systems',
     tagline: 'ERP, POS, CRM and warehouse systems, set up around how you work.',
     intro:
-      'We implement and integrate the systems that run your day: sales, stock, finance, people. One connected setup, configured for your branches and rolled out with your team.',
+      'Connect the work from store shelves to distribution centres: sales, branch stock, purchasing, finance and people. We configure the systems around your operations and roll them out with your team.',
     photo: 'home/service-business',
     photoAlt:
       'Store owner using a tablet point-of-sale terminal at the counter',
@@ -81,10 +81,10 @@ export const services: Service[] = [
         id: 'wms',
         name: 'WMS',
         summary:
-          'Receiving, put-away, picking and transfers, guided on handheld scanners.',
+          'From receiving and put-away to wave picking, packing and dispatch, with traceable stock movements across distribution sites.',
         features: [
           'Barcode and RFID',
-          'Guided pick paths',
+          'Wave picking and packing checks',
           'Bin-level stock visibility',
         ],
         slides: [

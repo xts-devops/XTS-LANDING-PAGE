@@ -11,6 +11,8 @@ const ids = [
   'support',
   'documents',
   'factory',
+  'retail',
+  'warehouse',
 ];
 for (const id of ids)
   for (const width of [375, 768, 1440])

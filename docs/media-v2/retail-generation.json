@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-25",
+  "source": "Built-in imagegen",
+  "master": "exec-b9ce1333-9f0f-4dbc-a1e7-c41acde56280.png",
+  "prompt": "Create one photorealistic product photography contact sheet for a hardware retail inventory UI. Exact layout: three columns and two rows of equal cells, six separate product packshots, each centered fully inside its own cell with generous empty margin. No cell borders. Uniform warm ivory background and soft studio shadow. Top row left to right: unbranded cordless power drill in deep navy, yellow retractable measuring tape, white safety hard hat. Bottom row left to right: neatly coiled orange electrical extension cable, small plain sage green paint tin with lid closed, pair of tan work gloves. No logos, no text, no watermarks, no numbers, no hands or people. Premium realistic ecommerce photography, sharp natural materials, consistent camera angle and soft daylight, commercially polished. Landscape aspect ratio 3:2.",
+  "derivatives": [
+    {
+      "filename": "public/demos/media/retail/drill.webp",
+      "cell": 1,
+      "width": 400,
+      "height": 300,
+      "format": "WebP",
+      "quality": 86
+    },
+    {
+      "filename": "public/demos/media/retail/tape.webp",
+      "cell": 2,
+      "width": 400,
+      "height": 300,
+      "format": "WebP",
+      "quality": 86
+    },
+    {
+      "filename": "public/demos/media/retail/helmet.webp",
+      "cell": 3,
+      "width": 400,
+      "height": 300,
+      "format": "WebP",
+      "quality": 86
+    },
+    {
+      "filename": "public/demos/media/retail/cable.webp",
+      "cell": 4,
+      "width": 400,
+      "height": 300,
+      "format": "WebP",
+      "quality": 86
+    },
+    {
+      "filename": "public/demos/media/retail/paint.webp",
+      "cell": 5,
+      "width": 400,
+      "height": 300,
+      "format": "WebP",
+      "quality": 86
+    },
+    {
+      "filename": "public/demos/media/retail/gloves.webp",
+      "cell": 6,
+      "width": 400,
+      "height": 300,
+      "format": "WebP",
+      "quality": 86
+    }
+  ],
+  "rights": "Generated illustrative products. No logos, stock photography or real manufacturer attribution."
+}

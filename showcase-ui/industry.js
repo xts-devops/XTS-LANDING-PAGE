@@ -503,6 +503,20 @@
   const reduced =
     query.has('still') || matchMedia('(prefers-reduced-motion:reduce)').matches;
   const workflows = {
+    retail: [
+      ['[data-retail-branch]', 'Choose the destination branch', 'Cebu City'],
+      ['[data-retail-transfer]', 'Draft a stock replenishment transfer'],
+      ['[data-retail-collect]', 'Prepare a collection handoff'],
+    ],
+    warehouse: [
+      ['[data-warehouse-action]', 'Verify receiving checks'],
+      ['[data-warehouse-stage="1"]', 'Allocate a multi-zone wave'],
+      ['[data-warehouse-action]', 'Release eligible stock'],
+      ['[data-warehouse-stage="2"]', 'Follow picking and packing'],
+      ['[data-warehouse-action]', 'Verify packed orders'],
+      ['[data-warehouse-stage="3"]', 'Prepare the carrier handoff'],
+      ['[data-warehouse-action]', 'Record the sample dispatch'],
+    ],
     support: [
       ['[data-support-classify]', 'Route the conversation'],
       ['[data-support-draft]', 'Prepare a reply'],
