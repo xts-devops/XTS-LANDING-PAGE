@@ -16,20 +16,20 @@
   const hold = root.querySelector('[data-tour-hold]');
   const chapters = [...root.querySelectorAll('[data-tour-chapter]')];
   const motion = matchMedia('(prefers-reduced-motion:reduce)');
-  const fine = matchMedia('(hover:hover) and (pointer:fine)');
   const embedded = parent !== window;
   const connection = navigator.connection;
   let video = root.querySelector('[data-journey-video]');
   let prepared = null,
     index = 0,
     operation = 0,
-    mode = 'idle',
     running = false,
     wantPlay = false,
-    visible = true,
+    visible = false,
+    automaticReady = false,
+    manuallyPaused = false,
+    resumeWhenVisible = false,
     displayPixels = 0,
     savedTime = 0,
-    hoverTimer,
     warmTimer,
     cancelLoad,
     checkpointAt = 0;
@@ -113,7 +113,6 @@
     ++operation;
     cancelLoad?.();
     cancelLoad = undefined;
-    clearTimeout(hoverTimer);
     clearTimeout(warmTimer);
     warmTimer = undefined;
   };
@@ -135,15 +134,20 @@
         video.hasAttribute('src') && Number.isFinite(video.currentTime)
           ? video.currentTime
           : savedTime,
-      sequence: mode !== 'selected',
-      playing: wantPlay,
+      sequence: true,
+      playing: wantPlay || resumeWhenVisible,
       complete: root.dataset.state === 'complete',
     });
-  const pause = (detach = false) => {
+  const pause = (detach = false, manual = true) => {
+    if (manual) {
+      manuallyPaused = true;
+      resumeWhenVisible = false;
+    }
     const complete = root.dataset.state === 'complete';
-    savedTime = Number.isFinite(video.currentTime)
-      ? video.currentTime
-      : savedTime;
+    savedTime =
+      video.hasAttribute('src') && Number.isFinite(video.currentTime)
+        ? video.currentTime
+        : savedTime;
     cancel();
     clearBuffer();
     running = false;
@@ -159,7 +163,7 @@
     );
     sync();
     checkpoint();
-    send({ type: 'xts:tour-state', state: 'paused' });
+    send({ type: 'xts:tour-state', state: 'paused', manual: manuallyPaused });
   };
   const snapshot = () => {
     if (
@@ -214,7 +218,6 @@
     if (warmTimer) return;
     if (
       !running ||
-      mode === 'selected' ||
       motion.matches ||
       connection?.saveData ||
       /(^|-)2g$/.test(connection?.effectiveType || '') ||
@@ -297,20 +300,16 @@
       }
     });
     on('ended', () => {
+      if (target !== video || !wantPlay) return;
       running = false;
       wantPlay = false;
       savedTime = 0;
       chapters[index].style.setProperty('--played', '1');
-      if (index + 1 < chapters.length && mode !== 'selected')
-        void select(index + 1, true);
+      if (index + 1 < chapters.length) void select(index + 1, true);
       else {
         clearBuffer();
         root.dataset.state = 'complete';
-        setStatus(
-          mode === 'selected'
-            ? 'Chapter complete. Choose another space or replay the journey.'
-            : 'Journey complete. Replay or explore a chapter.',
-        );
+        setStatus('Journey complete. Replay or explore a chapter.');
         sync();
         checkpoint();
         send({ type: 'xts:overview-ended' });
@@ -319,7 +318,11 @@
   };
   const begin = async () => {
     cancel();
-    if (document.hidden || !visible) return;
+    wantPlay = true;
+    if (document.hidden || !visible) {
+      resumeWhenVisible = true;
+      return;
+    }
     const source = sourceFor(config.chapters[index]);
     if (!source) {
       root.dataset.state = 'draft';
@@ -426,24 +429,22 @@
   };
   const choose = (next) => {
     const autoplay = wantPlay || (!motion.matches && !connection?.saveData);
-    mode = 'selected';
+    manuallyPaused = false;
     if (next === index && wantPlay) {
-      clearBuffer();
+      warmNext();
       return;
     }
     void select(next, autoplay);
   };
   play.addEventListener('click', () => {
+    if (!wantPlay) manuallyPaused = false;
     if (wantPlay) {
-      if (mode === 'hover') mode = 'explicit';
       pause();
       return;
     }
     if (root.dataset.state === 'complete') {
-      mode = 'explicit';
       void select(0, true);
     } else {
-      if (mode !== 'selected') mode = 'explicit';
       void begin();
     }
   });
@@ -458,31 +459,6 @@
       if (event.key === 'Escape') send({ type: 'xts:overview-close' });
     });
   }
-  stage.addEventListener('pointerenter', () => {
-    if (
-      embedded ||
-      !fine.matches ||
-      motion.matches ||
-      connection?.saveData ||
-      mode !== 'idle' ||
-      !config.chapters.every((c) => sourceFor(c))
-    )
-      return;
-    clearTimeout(hoverTimer);
-    hoverTimer = setTimeout(() => {
-      mode = 'hover';
-      void select(0, true);
-    }, 250);
-  });
-  stage.addEventListener('pointerleave', () => {
-    clearTimeout(hoverTimer);
-    if (!embedded && mode === 'hover') {
-      release();
-      savedTime = 0;
-      mode = 'idle';
-      void select(0);
-    }
-  });
   stage.addEventListener('keydown', (event) => {
     if (event.target !== stage) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
@@ -497,8 +473,6 @@
     }
   });
   expand.addEventListener('click', async () => {
-    clearTimeout(hoverTimer);
-    mode = 'explicit';
     try {
       if (document.fullscreenElement) await document.exitFullscreen();
       else await stage.requestFullscreen();
@@ -515,23 +489,76 @@
     );
     if (!document.fullscreenElement) expand.focus({ preventScroll: true });
   });
-  new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
-    if (!visible) pause(true);
-  }).observe(stage);
+  const canAutoplay = () =>
+    !motion.matches &&
+    !connection?.saveData &&
+    !/(^|-)2g$/.test(connection?.effectiveType || '');
+  const resumeVisible = () => {
+    if (
+      document.hidden ||
+      !visible ||
+      manuallyPaused ||
+      root.dataset.state === 'complete' ||
+      root.dataset.state === 'error'
+    )
+      return;
+    if (resumeWhenVisible || (!embedded && automaticReady && canAutoplay())) {
+      resumeWhenVisible = false;
+      if (wantPlay && (running || root.dataset.state === 'loading')) return;
+      void begin();
+    }
+  };
+  new IntersectionObserver(
+    ([entry]) => {
+      visible = entry.isIntersecting;
+      const rect = stage.getBoundingClientRect();
+      const available = Math.max(
+        1,
+        Math.min(rect.height, innerHeight - (embedded ? 0 : 80)),
+      );
+      automaticReady =
+        visible &&
+        entry.intersectionRect.height >= available * 0.7 &&
+        entry.intersectionRect.width >= Math.min(rect.width, innerWidth) * 0.7;
+      if (!visible) {
+        resumeWhenVisible = wantPlay;
+        if (wantPlay || video.hasAttribute('src')) pause(true, false);
+      } else resumeVisible();
+    },
+    {
+      threshold: [0, 0.25, 0.5, 0.7, 0.9, 1],
+      rootMargin: embedded ? '0px' : '-64px 0px -16px 0px',
+    },
+  ).observe(stage);
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) pause(true);
+    if (document.hidden) {
+      resumeWhenVisible = wantPlay;
+      if (wantPlay) pause(true, false);
+    } else resumeVisible();
   });
   motion.addEventListener('change', () => {
     detail.getAnimations().forEach((animation) => animation.cancel());
     pause(true);
-    mode = 'idle';
   });
   connection?.addEventListener?.('change', () => {
     if (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || ''))
       clearBuffer();
   });
   addEventListener('pagehide', release);
+  addEventListener('message', (event) => {
+    if (
+      !embedded ||
+      event.source !== parent ||
+      event.data?.type !== 'xts:tour-control'
+    )
+      return;
+    if (event.data.action === 'pause') pause();
+    else if (event.data.action === 'resume') {
+      manuallyPaused = false;
+      if (root.dataset.state === 'complete') void select(0, true);
+      else void begin();
+    }
+  });
   addEventListener('message', (event) => {
     if (
       !embedded ||
@@ -573,12 +600,7 @@
       );
       send({ type: 'xts:overview-ended', still: true });
     } else {
-      mode =
-        valid && position.sequence === false
-          ? 'selected'
-          : data.interaction === 'expanded'
-            ? 'explicit'
-            : 'hover';
+      manuallyPaused = valid && position.playing === false;
       void select(
         valid ? position.chapter : 0,
         !valid || position.playing !== false,

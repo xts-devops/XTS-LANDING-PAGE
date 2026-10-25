@@ -480,7 +480,7 @@ html:has(.overview-dialog[open]) {
 }
 
 /* One accessible expand control also covers the tour image for pointer/touch input. */
-.industry-card[data-journey-preview='true'] .overview-control::before {
+.industry-card[data-journey-preview='true'] [data-overview-open]::before {
   content: '';
   position: absolute;
   inset: 0.65rem 0.65rem 4.15rem;
@@ -491,11 +491,11 @@ html:has(.overview-dialog[open]) {
   transition: border-color var(--dur-1) var(--ease-out);
 }
 .industry-card[data-journey-preview='true']
-  .overview-control:is(:hover, :focus-visible)::before {
+  [data-overview-open]:is(:hover, :focus-visible)::before {
   border-color: var(--color-gold-hi);
 }
 @media (prefers-reduced-motion: reduce) {
-  .industry-card[data-journey-preview='true'] .overview-control::before {
+  .industry-card[data-journey-preview='true'] [data-overview-open]::before {
     transition: none;
   }
 }
@@ -575,4 +575,17 @@ html:has(.overview-dialog[open]) {
   .industry-grid-five > .industry-card:nth-last-child(-n + 2) {
     grid-column: span 3;
   }
+}
+
+.overview-motion-control {
+  min-width: 3.5rem;
+  justify-content: center;
+  padding-inline: 0.75rem;
+  flex-shrink: 0;
+}
+.overview-motion-control[aria-pressed='true'] {
+  border-color: var(--color-gold);
+}
+.overview-motion-control[hidden] {
+  display: none;
 }

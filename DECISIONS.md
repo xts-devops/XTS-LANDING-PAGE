@@ -121,3 +121,6 @@ The user explicitly re-enables Higgsfield for this task, with a credit-cost chec
 
 ### D38 · 2026-10-25 · user · Buffered journey cleanup
 For the delivered property/hotel preview films, permit one upcoming native-video buffer after playback intent rather than D37's strictly current-only loading. No eager full-tour download. Suppress or cancel speculation for reduced motion, data saver, slow connections, manual single-chapter playback and inactive states. Preserve the outgoing decoded frame during chapter preparation, distinguish hover from explicit viewer control, retain playback position/pause/completion on expansion, and remove duplicate arrow controls. No new generation or hosting changes.
+
+### D39 · 2026-10-25 · user · Viewport journey autoplay and chapter continuation
+Supersedes the single-chapter override in D38: property/hotel journeys should start as the viewing area becomes visible, and chapter selection continues automatically to following chapters. Retain explicit Pause, reduced-motion/data-saver opt-outs, one active preview and bounded buffering. No new media generation.

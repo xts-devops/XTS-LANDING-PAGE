@@ -22,9 +22,13 @@ export function initIndustryDemos() {
   )!;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
-  const saveData = (
-    navigator as Navigator & { connection?: { saveData?: boolean } }
-  ).connection?.saveData;
+  const connection = (
+    navigator as Navigator & {
+      connection?: EventTarget & { saveData?: boolean; effectiveType?: string };
+    }
+  ).connection;
+  const automaticBlocked = () =>
+    connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '');
   type TourPosition = {
     chapter: number;
     time: number;
@@ -44,6 +48,26 @@ export function initIndustryDemos() {
     restoringFocus = false;
   let timer: ReturnType<typeof setTimeout> | undefined,
     failure: ReturnType<typeof setTimeout> | undefined;
+  const journeyPositions = new WeakMap<HTMLElement, TourPosition>();
+  const pausedJourneys = new WeakSet<HTMLElement>();
+  const visibleJourneys = new Set<HTMLElement>();
+  let interactionCard: HTMLElement | null = null;
+  let autoTimer: ReturnType<typeof setTimeout> | undefined;
+  const journeyToggle = (card: HTMLElement, playing: boolean, show = true) => {
+    const control = card.querySelector<HTMLButtonElement>(
+      '[data-journey-toggle]',
+    );
+    if (!control) return;
+    control.hidden = !show;
+    control.setAttribute('aria-pressed', String(!playing));
+    control.setAttribute(
+      'aria-label',
+      (playing ? control.dataset.pauseLabel : control.dataset.resumeLabel) ??
+        '',
+    );
+    control.querySelector('span')!.textContent =
+      (playing ? control.dataset.pauseText : control.dataset.resumeText) ?? '';
+  };
   const status = (card: HTMLElement, text: string) => {
     card.querySelector('[data-overview-status]')!.textContent = text;
     if (expanded === card)
@@ -60,6 +84,8 @@ export function initIndustryDemos() {
     clearTimeout(timer);
     clearTimeout(failure);
     if (active) {
+      if (tourPosition) journeyPositions.set(active, tourPosition);
+      journeyToggle(active, false, pausedJourneys.has(active));
       active.dataset.preview = 'idle';
       status(active, active.dataset.idleLabel ?? '');
     }
@@ -74,12 +100,15 @@ export function initIndustryDemos() {
   const start = (
     card: HTMLElement,
     explicit = false,
-    position: TourPosition | null = null,
+    position: TourPosition | null = journeyPositions.get(card) ?? null,
   ) => {
     if (
       document.hidden ||
       (dialog.open && expanded !== card) ||
-      (!explicit && (motion.matches || !fine.matches || saveData))
+      (!explicit &&
+        (motion.matches ||
+          (card.dataset.journeyPreview !== 'true' && !fine.matches) ||
+          automaticBlocked()))
     )
       return;
     if (active === card && frame) return;
@@ -115,8 +144,64 @@ export function initIndustryDemos() {
     frame.addEventListener('error', failed, { once: true });
     failure = setTimeout(failed, 12000);
   };
+  const scheduleJourney = () => {
+    clearTimeout(autoTimer);
+    if (
+      dialog.open ||
+      document.hidden ||
+      motion.matches ||
+      automaticBlocked() ||
+      active ||
+      interactionCard
+    )
+      return;
+    autoTimer = setTimeout(() => {
+      if (
+        active ||
+        interactionCard ||
+        dialog.open ||
+        document.hidden ||
+        motion.matches ||
+        automaticBlocked()
+      )
+        return;
+      const candidates = cards
+        .filter((card) => {
+          if (
+            card.dataset.journeyPreview !== 'true' ||
+            suppressed === card ||
+            pausedJourneys.has(card) ||
+            journeyPositions.get(card)?.complete
+          )
+            return false;
+          const rect = card
+            .querySelector('[data-overview-stage]')!
+            .getBoundingClientRect();
+          const height = Math.max(
+            0,
+            Math.min(rect.bottom, innerHeight - 24) - Math.max(rect.top, 80),
+          );
+          const width = Math.max(
+            0,
+            Math.min(rect.right, innerWidth) - Math.max(rect.left, 0),
+          );
+          return height * width >= rect.height * rect.width * 0.7;
+        })
+        .sort((a, b) => {
+          const distance = (card: HTMLElement) => {
+            const rect = card.getBoundingClientRect();
+            return Math.abs((rect.left + rect.right) / 2 - innerWidth / 2);
+          };
+          return distance(a) - distance(b);
+        });
+      if (candidates[0]) start(candidates[0]);
+    }, 250);
+  };
+
   const openViewer = (card: HTMLElement, button: HTMLButtonElement) => {
-    const position = active === card ? tourPosition : null;
+    const position =
+      active === card ? tourPosition : (journeyPositions.get(card) ?? null);
+    clearTimeout(autoTimer);
     stop();
     expanded = card;
     opener = button;
@@ -189,7 +274,33 @@ export function initIndustryDemos() {
       );
     new ResizeObserver(resize).observe(stage);
     resize();
+    const toggle = card.querySelector<HTMLButtonElement>(
+      '[data-journey-toggle]',
+    );
+    toggle?.addEventListener('click', () => {
+      if (active !== card || !frame) {
+        pausedJourneys.delete(card);
+        suppressed = null;
+        const position = journeyPositions.get(card);
+        start(
+          card,
+          true,
+          position ? { ...position, playing: true, complete: false } : null,
+        );
+        return;
+      }
+      const paused = toggle.getAttribute('aria-pressed') !== 'true';
+      if (paused) pausedJourneys.add(card);
+      else pausedJourneys.delete(card);
+      journeyToggle(card, !paused);
+      frame.contentWindow?.postMessage(
+        { type: 'xts:tour-control', action: paused ? 'pause' : 'resume' },
+        '*',
+      );
+    });
     stage.addEventListener('pointerenter', (event) => {
+      interactionCard = card;
+      clearTimeout(autoTimer);
       if (
         event.pointerType !== 'mouse' ||
         motion.matches ||
@@ -202,16 +313,19 @@ export function initIndustryDemos() {
       timer = setTimeout(() => start(card), 250);
     });
     stage.addEventListener('pointerleave', () => {
+      if (interactionCard === card) interactionCard = null;
       clearTimeout(timer);
       if (dialog.open) return;
       if (suppressed === card) suppressed = null;
-      if (active === card) stop();
+      if (active === card && !visibleJourneys.has(card)) stop();
+      scheduleJourney();
     });
     button.addEventListener('click', () => openViewer(card, button));
     button.addEventListener('focus', () => {
+      clearTimeout(autoTimer);
       if (
         !motion.matches &&
-        !saveData &&
+        !automaticBlocked() &&
         !dialog.open &&
         !restoringFocus &&
         suppressed !== card &&
@@ -225,12 +339,30 @@ export function initIndustryDemos() {
       if (!card.contains(event.relatedTarget as Node) && !dialog.open) {
         clearTimeout(timer);
         if (suppressed === card) suppressed = null;
-        if (active === card) stop();
+        if (active === card && !visibleJourneys.has(card)) {
+          stop();
+          scheduleJourney();
+        }
       }
     });
-    new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting && !dialog.open && active === card) stop();
-    }).observe(stage);
+    new IntersectionObserver(
+      ([entry]) => {
+        if (card.dataset.journeyPreview === 'true') {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.7)
+            visibleJourneys.add(card);
+          else visibleJourneys.delete(card);
+          if (!entry.isIntersecting) {
+            if (suppressed === card) suppressed = null;
+            if (!dialog.open && active === card) stop();
+          }
+          scheduleJourney();
+        } else if (!entry.isIntersecting && !dialog.open && active === card) {
+          stop();
+          scheduleJourney();
+        }
+      },
+      { threshold: [0, 0.25, 0.5, 0.7, 1], rootMargin: '-80px 0px -24px 0px' },
+    ).observe(stage);
   });
   addEventListener('message', (event) => {
     if (!active || !frame || event.source !== frame.contentWindow) return;
@@ -267,12 +399,18 @@ export function initIndustryDemos() {
       active.dataset.journeyPreview === 'true'
     ) {
       if (event.data.state === 'playing') {
+        pausedJourneys.delete(active);
+        journeyToggle(active, true);
         active.dataset.preview = 'playing';
         dialog.dataset.preview = 'playing';
       }
       if (event.data.state === 'error')
         status(active, active.dataset.failureLabel ?? '');
-      if (event.data.state === 'paused') status(active, 'Journey paused');
+      if (event.data.state === 'paused') {
+        if (event.data.manual === true) pausedJourneys.add(active);
+        journeyToggle(active, false);
+        status(active, 'Journey paused');
+      }
     }
     if (event.data?.type === 'xts:overview-ready') {
       if (readyHandled) return;
@@ -304,6 +442,7 @@ export function initIndustryDemos() {
           ? 'Ready to explore'
           : (active.dataset.completeLabel ?? ''),
       );
+      journeyToggle(active, false, false);
       active.dataset.preview = 'complete';
       dialog.dataset.preview = 'complete';
     }
@@ -311,15 +450,18 @@ export function initIndustryDemos() {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && !dialog.open) {
       suppressed = active;
+      clearTimeout(autoTimer);
       stop();
     }
   });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
+      clearTimeout(autoTimer);
       const position = tourPosition;
       stop();
       resumePosition = position;
     } else if (dialog.open && expanded) start(expanded, true, resumePosition);
+    else scheduleJourney();
   });
   motion.addEventListener('change', () => {
     const position = tourPosition;
@@ -327,9 +469,13 @@ export function initIndustryDemos() {
     if (dialog.open && expanded) start(expanded, true, position);
   });
   fine.addEventListener('change', () => {
-    if (!dialog.open) stop();
+    if (!dialog.open) {
+      stop();
+      scheduleJourney();
+    }
   });
   addEventListener('pagehide', () => {
+    clearTimeout(autoTimer);
     stop();
     if (dialog.open) closeViewer();
   });

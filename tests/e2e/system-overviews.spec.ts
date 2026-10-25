@@ -88,7 +88,7 @@ for (const d of industryDemos) {
     await expect(card.locator('iframe')).toHaveCount(0);
   });
 }
-test('hover starts one preview and leaving unloads it without page scroll changes', async ({
+test('hover changes the active preview and viewport films continue after pointer exit', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -102,6 +102,8 @@ test('hover starts one preview and leaving unloads it without page scroll change
   await expect(cards.nth(1)).toHaveAttribute('data-preview', 'playing');
   expect(await page.evaluate(() => scrollY)).toBe(y);
   await page.mouse.move(0, 0);
+  await expect(cards.nth(1)).toHaveAttribute('data-preview', 'playing');
+  await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await expect(page.locator('[data-overview] iframe')).toHaveCount(0);
 });
 for (const width of [375, 768, 1440])

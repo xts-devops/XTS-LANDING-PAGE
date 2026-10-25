@@ -117,7 +117,7 @@ test('native journey loads on demand, pauses, and completes a finite four-chapte
   await expect(play).toHaveText('Replay journey');
 });
 
-test('hover preview is muted and releases media on exit; reduced motion avoids hover playback', async ({
+test('viewport playback is muted and ignores pointer exit; reduced motion avoids autoplay', async ({
   page,
 }) => {
   await mediaFixture(page);
@@ -128,17 +128,22 @@ test('hover preview is muted and releases media on exit; reduced motion avoids h
   await expect(video).not.toHaveAttribute('src');
   await page.mouse.move(0, 0);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await stage.hover();
+  await page.reload();
+  await stage.scrollIntoViewIfNeeded();
   await expect(page.locator('[data-journey]')).toHaveAttribute(
     'data-state',
     'playing',
   );
   expect(await video.evaluate((el: HTMLVideoElement) => el.muted)).toBe(true);
   await page.mouse.move(0, 0);
-  await expect(video).not.toHaveAttribute('src');
   await expect(page.locator('[data-journey]')).toHaveAttribute(
-    'data-frame',
-    'false',
+    'data-state',
+    'playing',
+  );
+  await page.locator('[data-tour-play]').click();
+  await expect(page.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'paused',
   );
 });
 
@@ -170,7 +175,6 @@ test('live reduced motion releases active media instead of restarting it', async
   await mediaFixture(page);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/demos/tours/property.html');
-  await page.locator('[data-tour-play]').click();
   await expect(page.locator('[data-journey]')).toHaveAttribute(
     'data-state',
     'playing',
@@ -184,7 +188,7 @@ test('live reduced motion releases active media instead of restarting it', async
 });
 
 for (const id of ['property', 'hotel'])
-  test(`${id} actual HD journey decodes and manual chapter stops the route`, async ({
+  test(`${id} actual HD journey decodes and the final chapter completes the route`, async ({
     page,
   }) => {
     await page.goto('/demos/tours/' + id + '.html');
@@ -295,7 +299,7 @@ test('data saver suppresses automatic tour requests while keeping explicit playb
   );
 });
 
-test('one upcoming clip buffers only after intent and remains outside the active DOM', async ({
+test('viewport autoplay buffers only one upcoming clip outside the active DOM', async ({
   page,
 }) => {
   await mediaFixture(page);
@@ -305,8 +309,6 @@ test('one upcoming clip buffers only after intent and remains outside the active
     if (/fixture-\d.mp4$/.test(r.url())) requests.push(r.url());
   });
   await page.goto('/demos/tours/property.html');
-  expect(requests).toEqual([]);
-  await page.locator('[data-tour-play]').click();
   await expect(page.locator('[data-journey]')).toHaveAttribute(
     'data-state',
     'playing',
@@ -337,7 +339,6 @@ test('an automatic chapter change holds the outgoing frame while the next reques
     });
   });
   await page.goto('/demos/tours/property.html');
-  await page.locator('[data-tour-play]').click();
   await expect(page.locator('[data-journey]')).toHaveAttribute(
     'data-state',
     'playing',
@@ -384,7 +385,6 @@ test('a cancelled load and rapid chapter clicks cannot restart an obsolete film'
   await page.goto('/demos/tours/property.html');
   const play = page.locator('[data-tour-play]'),
     root = page.locator('[data-journey]');
-  await play.click();
   await expect(root).toHaveAttribute('data-state', 'loading');
   await play.click();
   await page.waitForTimeout(650);
@@ -460,7 +460,7 @@ test('expanded playback survives movement from film to chapter controls and pres
   expect(page.url()).toBe(url);
 });
 
-test('manual chapter pause/resume preserves the single-chapter override', async ({
+test('manual chapter pause/resume continues through the remaining route', async ({
   page,
 }) => {
   await mediaFixture(page);
@@ -473,14 +473,23 @@ test('manual chapter pause/resume preserves the single-chapter override', async 
   );
   await page.locator('[data-tour-play]').click();
   await page.locator('[data-tour-play]').click();
-  await page.locator('video').evaluate((el: HTMLVideoElement) => {
-    el.playbackRate = 8;
-  });
+  for (let chapter = 1; chapter < 4; chapter++) {
+    await expect(
+      page.locator('[data-tour-chapter="' + chapter + '"]'),
+    ).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('[data-journey]')).toHaveAttribute(
+      'data-state',
+      'playing',
+    );
+    await page.locator('video').evaluate((el: HTMLVideoElement) => {
+      el.dispatchEvent(new Event('ended'));
+    });
+  }
   await expect(page.locator('[data-journey]')).toHaveAttribute(
     'data-state',
     'complete',
   );
-  await expect(page.locator('[data-tour-chapter="1"]')).toHaveAttribute(
+  await expect(page.locator('[data-tour-chapter="3"]')).toHaveAttribute(
     'aria-pressed',
     'true',
   );

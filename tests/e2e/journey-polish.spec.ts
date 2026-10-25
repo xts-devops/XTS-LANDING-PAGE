@@ -88,9 +88,11 @@ test('chapter details remain still for reduced motion and rapid inputs never sta
       .evaluate((el) => el.getAnimations().length),
   ).toBeLessThanOrEqual(1);
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  expect(
-    await page
-      .locator('.route-description')
-      .evaluate((el) => el.getAnimations().length),
-  ).toBe(0);
+  await expect
+    .poll(() =>
+      page
+        .locator('.route-description')
+        .evaluate((el) => el.getAnimations().length),
+    )
+    .toBe(0);
 });

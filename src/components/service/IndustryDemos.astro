@@ -78,6 +78,22 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
                 >
                   {copy.previewLabel}
                 </p>
+                {journeyUrls[d.id] && (
+                  <button
+                    type="button"
+                    class="overview-control overview-motion-control"
+                    data-journey-toggle
+                    data-pause-label={copy.pausePreview}
+                    data-resume-label={copy.resumePreview}
+                    data-pause-text={copy.pause}
+                    data-resume-text={copy.resume}
+                    aria-label={copy.pausePreview}
+                    aria-pressed="false"
+                    hidden
+                  >
+                    <span>{copy.pause}</span>
+                  </button>
+                )}
                 <button
                   type="button"
                   class="overview-control"

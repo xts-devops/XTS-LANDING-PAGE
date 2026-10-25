@@ -2,6 +2,17 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · codex · Viewport journey autoplay ready
+**Task:** V2-JOURNEY-AUTOPLAY · owner: codex · status: review · PR #12.
+**Done:** Property/hotel films begin on meaningful viewport visibility, including touch-only visitors. Selecting a chapter continues through the remaining route; single-clip mode is removed. Offscreen/hidden states release active media and the upcoming buffer, preserving position and resume intent. Manual Pause survives re-entry; reduced motion, saver and slow connections suppress automatic starts. Parent cards select one central eligible journey after 250ms, yield to deliberate hover/focus, and provide a compact accessible Pause/Resume without expanding. Paused cards retain a Resume action after unload. Expand-hit pseudo-elements apply only to the expand button. Finite Replay, native quality, cancellation, held-frame transitions and bounded next-clip buffering remain.
+**Validation:** 143 distinct checks pass across regression and targeted runs: viewport triggers/selected chapter continuation at375/1440, touch-only startup, manual pause/re-entry, offscreen cleanup, actual HD/mobile decode, rapid/cancelled loads, held-frame buffering, full-screen focus/state, native320/375/768/1440 alignment/a11y, all system overviews, six-second carousels and ≤70KB gzipped site JS. The fixture-only pause/resume test drives end boundaries explicitly because an initial streamed fixture may not yet expose a full seek range; real delivered-clip continuation is separately exercised. Reviewed card/viewer captures at375/768/1440 under docs/review/journey-autoplay (gitignored). No media generation, credits, dependencies or shared config changes.
+**Files:** shared tour player and public mirror; industry component/content/controller/CSS; journey-autoplay, spatial-journeys, journey-polish and system-overview tests; SPATIAL-JOURNEYS, D39 and coordination records.
+**Next:** Claude review on PR #12. Production preview remains localhost4380.
+
+## 2026-10-25 · codex · Journey autoplay claim
+**Task:** V2-JOURNEY-AUTOPLAY · owner: codex · status: in-progress.
+**Scope:** Shared property/hotel player and generated mirror, viewport-triggered journey cards, accessible pause option, interaction copy, focused e2e, SPATIAL-JOURNEYS and decision/progress records. Continue PR #12. Selected chapters will continue through the remaining route; manual Pause, reduced motion and data saver remain respected. No new media or paid generation.
+
 ## 2026-10-25 · codex · Retail and distribution showcases ready
 **Task:** V2-COMMERCE-OPERATIONS · owner: codex · status: review · PR #12.
 **Done:** Added purpose-named retail branch operations and warehouse distribution previews. Retail has six generated product packshots, branch-specific availability, replenishment drafts and collection handoffs. Warehouse follows a 1,248-order sample wave through receiving, allocation, pick/pack verification and gated dispatch, retaining a quality hold. All figures/people remain demonstration data. Updated business-system copy, balanced five-card layout, finite hover choreography, accessible full-screen reuse, screenshot contract/contact sheet and editable source/public mirrors. Capture supports validated --only keys and uses cinematic property/hotel poster routes.
