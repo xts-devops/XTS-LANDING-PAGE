@@ -44,21 +44,21 @@
     "id": "daybreak",
     "industry": "Hospitality & leisure",
     "service": "custom-software",
-    "summary": "Plan a short stay or book a pickleball session without a complicated form.",
+    "summary": "Preview a welcoming lobby and sea-view suite, with the hotel booking sample a step away.",
     "capabilities": [
-      "Rooms and sports-court availability",
-      "Transparent sample pricing"
+      "Lobby-to-suite architectural film",
+      "Room tour and booking interface"
     ],
-    "title": "Hotel & court booking"
+    "title": "Hotel booking & room experiences"
   },
   {
     "id": "vista",
     "industry": "Property sales",
     "service": "custom-software",
-    "summary": "Explore an architectural concept, move between spaces and arrange a viewing.",
+    "summary": "Follow a waterfront tower from its construction concept to the lobby, residence and view.",
     "capabilities": [
-      "Exterior and interior concept views",
-      "Simple viewing requests"
+      "Construction-to-residence film chapters",
+      "Landscape, lobby and living-space previews"
     ],
     "title": "Real estate & property discovery"
   },

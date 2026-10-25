@@ -1,0 +1,234 @@
+{
+  "provider": "Higgsfield",
+  "model": "minimax_hailuo",
+  "variant": "minimax",
+  "quotedCreditsPerClip": 10,
+  "balanceBefore": 114,
+  "spendingLimit": 60,
+  "pilot": {
+    "id": "property-arrival",
+    "jobId": "8629522f-41c0-44bd-baf8-b471e0816590",
+    "prompt": "Photorealistic architectural property film, single continuous six-second stabilized gimbal approach. Begin exactly from this waterfront residential tower reference. Glide smoothly forward and slightly right ALONG THE DRY PALE STONE PATH ON THE RIGHT SIDE OF THE REFLECTING POOL, keeping the water to camera left, toward the bronze-framed entrance under the limestone canopy. Natural human-eye approach, gentle constant speed, no cuts, no sudden acceleration or lens zoom. Finish closer to the entrance beneath the canopy, without passing through glass. Preserve the exact tower facade, bronze fins, palms, landscaping, portal and skyline: architecture stays rigid and coherent with natural perspective parallax. Crisp native 1080p architectural detail, deep focus, warm late-afternoon light, delicate natural water ripples and palm frond motion. No people, text, logos, watermarks, morphing, flicker, camera shake, swimming geometry, travel through water, walls or furniture. This is an illustrative fictional property concept.",
+    "mediaId": "a727bae3-f01e-407a-a531-7c5a00250a80",
+    "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_113749_8629522f-41c0-44bd-baf8-b471e0816590.mp4"
+  },
+  "shots": [
+    {
+      "id": "property-build",
+      "prompt": "Locked-off tripod construction TIMELAPSE from the supplied early construction to the exact supplied finished tower. Camera and background skyline never move. Concrete core and floor slabs rise progressively upward from the existing three floors, then glass panels and bronze fins install floor by floor, cranes dismantle, construction fencing clears and the finished limestone entrance, palms and reflecting pool appear last. Keep the exact footprint, coastline, framing and tower design. Smooth accelerated construction progression, no building melting, no crossfade substitute. Hold completed building for final half second. Photoreal architectural cinema, native 1080p, crisp deep focus, stable rigid geometry and consistent warm afternoon sunlight. No people, text, logos, watermarks, flicker, morphing, furniture moving, wall penetration or sudden camera jumps. One continuous six-second shot, no cuts.",
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "fbf83bb6-d006-416e-af7f-eff6ea286732"
+        },
+        {
+          "role": "end_image",
+          "value": "3563c4c3-2270-4a5c-a4b2-38619e2b1ea1"
+        }
+      ],
+      "jobId": "a9871522-5fc1-4dd8-8103-7451c11bb5e6",
+      "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_120254_a9871522-5fc1-4dd8-8103-7451c11bb5e6.mp4"
+    },
+    {
+      "id": "property-lobby",
+      "prompt": "Smooth human-eye stabilized gimbal WALK FORWARD along the wide CLEAR stone aisle on the RIGHT side of the reception desk toward the bronze elevator bank at back right. Translate camera forward four meters with gentle right pan to center the lifts, modest natural perspective parallax. Keep desk, lounge seats and plants stationary on left; avoid them. Finish facing elevator doors, do not enter or invent lift travel. Preserve double-height limestone lobby and bronze fins exactly. Photoreal architectural cinema, native 1080p, crisp deep focus, stable rigid geometry and consistent warm afternoon sunlight. No people, text, logos, watermarks, flicker, morphing, furniture moving, wall penetration or sudden camera jumps. One continuous six-second shot, no cuts.",
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "99bb21e3-5af7-48ca-afaa-52c35e813f8d"
+        }
+      ],
+      "jobId": "ea00a62e-3569-4e27-9a48-40eb36a91e5d",
+      "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_121256_ea00a62e-3569-4e27-9a48-40eb36a91e5d.mp4"
+    },
+    {
+      "id": "property-residence",
+      "prompt": "Stabilized human-eye walkthrough into this luxury apartment. Move forward three meters through the already open doorway along the CLEAR center-right floor aisle beside the sofa and coffee table, then gently pan left to reveal waterfront windows and living room. Camera must genuinely translate with near doorjambs passing out of view; no stationary zoom. Furniture remains fixed, stop safely inside room before the glass. Late-afternoon bronze and limestone residential interior exactly as reference. Photoreal architectural cinema, native 1080p, crisp deep focus, stable rigid geometry and consistent warm afternoon sunlight. No people, text, logos, watermarks, flicker, morphing, furniture moving, wall penetration or sudden camera jumps. One continuous six-second shot, no cuts.",
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "4e932eee-a049-46ef-bcee-646319842dae"
+        }
+      ],
+      "jobId": "f7d67257-6833-4aa0-b3d5-7448d85f966f",
+      "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_121428_f7d67257-6833-4aa0-b3d5-7448d85f966f.mp4"
+    },
+    {
+      "id": "hotel-arrival",
+      "prompt": "Stabilized eye-level hotel walkthrough. Glide forward and gently RIGHT along the clear limestone floor aisle to the pair of bronze lift doors at back right. Keep seafoam lounge and stone reception on LEFT, courtyard tree and oak ceiling fins fixed. Natural walking pace with obvious gentle foreground parallax, end closer to bronze lift bank, never move through a chair, reception desk, wall or closed door. Preserve the reference hotel layout. Photoreal architectural cinema, native 1080p, crisp deep focus, stable rigid geometry and consistent warm afternoon sunlight. No people, text, logos, watermarks, flicker, morphing, furniture moving, wall penetration or sudden camera jumps. One continuous six-second shot, no cuts.",
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "baf8cb03-40b5-4a8d-aadc-0accc59fe248"
+        }
+      ],
+      "jobId": "1fa71f7e-d661-4655-980f-cc83db363e1e",
+      "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_121924_1fa71f7e-d661-4655-980f-cc83db363e1e.mp4"
+    },
+    {
+      "id": "hotel-suite",
+      "prompt": "Smooth stabilized eye-level guest-room walkthrough. Move FORWARD through the already OPEN room door along the clear floor aisle on the RIGHT of the bed. Pass the near doorjamb, keep bed and bench on LEFT, gently reveal the already open terrace doorway ahead and blue ocean beyond. Four meters of smooth camera translation, slight right pan, stop inside at terrace threshold before any table or glass. Furniture, bed, walls and window frames stay rigid and stationary. Crisp warm oak, pale limestone and seafoam hotel palette. Photoreal architectural cinema, native 1080p, crisp deep focus, stable rigid geometry and consistent warm afternoon sunlight. No people, text, logos, watermarks, flicker, morphing, furniture moving, wall penetration or sudden camera jumps. One continuous six-second shot, no cuts.",
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "92731724-f17b-45c0-be18-e3eb21fb4b43"
+        }
+      ],
+      "jobId": "50e23f73-676f-40fc-8749-67a321680efd",
+      "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_122154_50e23f73-676f-40fc-8749-67a321680efd.mp4"
+    }
+  ],
+  "keyframes": [
+    {
+      "mediaId": "fbf83bb6-d006-416e-af7f-eff6ea286732",
+      "name": "property-build-start",
+      "generatedSource": "exec-7f303e67-54ea-4d26-a725-78c4cb93f61b.png",
+      "file": "docs/media-v2/journey-keyframes/property-build-start.jpg",
+      "export": "1600x900 cover crop, JPEG quality94"
+    },
+    {
+      "mediaId": "3563c4c3-2270-4a5c-a4b2-38619e2b1ea1",
+      "name": "property-build-end",
+      "generatedSource": "exec-1c46b5b0-54ef-42b9-bf91-5ac59822c341.png",
+      "file": "docs/media-v2/journey-keyframes/property-build-end.jpg",
+      "export": "1600x900 cover crop, JPEG quality94"
+    },
+    {
+      "mediaId": "99bb21e3-5af7-48ca-afaa-52c35e813f8d",
+      "name": "property-lobby",
+      "generatedSource": "exec-2f671378-97ff-4bc2-a1e9-b3ceb7edb3cc.png",
+      "file": "docs/media-v2/journey-keyframes/property-lobby.jpg",
+      "export": "1600x900 cover crop, JPEG quality94"
+    },
+    {
+      "mediaId": "4e932eee-a049-46ef-bcee-646319842dae",
+      "name": "property-residence",
+      "generatedSource": "exec-4a0f8a78-e5b5-4efd-a3c5-92c0594a024b.png",
+      "file": "docs/media-v2/journey-keyframes/property-residence.jpg",
+      "export": "1600x900 cover crop, JPEG quality94"
+    },
+    {
+      "mediaId": "92731724-f17b-45c0-be18-e3eb21fb4b43",
+      "name": "hotel-suite",
+      "generatedSource": "exec-e4d9ff6d-f433-4654-a9e2-c55a592bfcb8.png",
+      "file": "docs/media-v2/journey-keyframes/hotel-suite.jpg",
+      "export": "1600x900 cover crop, JPEG quality94"
+    },
+    {
+      "mediaId": "baf8cb03-40b5-4a8d-aadc-0accc59fe248",
+      "name": "hotel-arrival"
+    }
+  ],
+  "actualCredits": 60,
+  "balanceAfter": 54,
+  "hdDelivery": "Lossless H.264 stream copy, audio removed, MP4 faststart; original native 1920x1080/24 fps preserved.",
+  "mobileDelivery": "1280x720 H.264, CRF20, slow preset, yuv420p, 48-frame GOP, silent MP4 faststart.",
+  "deliverySources": [
+    {
+      "id": "property-arrival-1080",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/89af4c6a-2be0-4d7b-a6aa-1839e25a21a0.mp4"
+    },
+    {
+      "id": "property-arrival-720",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/552f2851-61e4-4a98-a064-fc51a3dbe9e8.mp4"
+    },
+    {
+      "id": "property-build-1080",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/3ba1aa56-1c70-4efa-8ab3-6a5dfcd23cac.mp4"
+    },
+    {
+      "id": "property-build-720",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/1bd9fe96-e8f6-4dcc-b4a4-ce773a3d94ff.mp4"
+    },
+    {
+      "id": "property-lobby-1080",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/b5fb583b-4dad-40de-a018-7d090144700c.mp4"
+    },
+    {
+      "id": "property-lobby-720",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/d9fbe3ea-cb88-4fc4-b60f-8e25b47a2036.mp4"
+    },
+    {
+      "id": "property-residence-1080",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/23996088-d9a4-4016-9692-6cf083a4b6f1.mp4"
+    },
+    {
+      "id": "property-residence-720",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/564fdade-61f8-4434-93af-531af6c8b61c.mp4"
+    },
+    {
+      "id": "hotel-arrival-1080",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/7ef32247-a80b-4c82-bc75-cad4ffcabdcb.mp4"
+    },
+    {
+      "id": "hotel-arrival-720",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/c166e1b7-060f-4a84-8148-c79582261aed.mp4"
+    },
+    {
+      "id": "hotel-suite-1080",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/6caa35c2-7486-481d-bf7a-80e32a350d74.mp4"
+    },
+    {
+      "id": "hotel-suite-720",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/952807ac-2d62-49b2-bcc8-c284c5a0004b.mp4"
+    }
+  ],
+  "notes": "No duplicate billed jobs or paid retries. A missing submission response was reconciled against history and balance before submitting the lobby job. Arrival/interior films have restrained camera movement; chapter copy describes reveals and explicit floor-change cuts, not a surveyed continuous or 360 tour.",
+  "keyframePrompts": {
+    "propertyLobby": "Photorealistic architectural interior keyframe, single 16:9 landscape photograph. Reference image is the EXTERIOR DESIGN AND MATERIAL reference for the same fictional waterfront residential tower. Place camera at human eye height just INSIDE its bronze-framed glass entrance facing INTO the lobby. A double-height pale limestone lobby with elegant vertical bronze fins, slender cream travertine reception desk on left, a few restrained ivory lounge chairs on left, sculptural brass pendant light, and a clearly visible pair of bronze ELEVATOR DOORS toward the back RIGHT. A wide clear pale stone pedestrian path runs from foreground center toward those lifts. Warm late-afternoon daylight from tall entrance glazing at left, turquoise waterfront subtly visible through left windows. Luxurious but plausible scale; crisp material detail, rigid perspective, no exaggerated wide angle, no people, logos, words, watermarks, UI, collage. Distinct from a boutique hotel: taller double-height space, bronze architectural fins and limestone match this tower.",
+    "propertyResidence": "Photorealistic luxury residential interior film START KEYFRAME, ONE landscape16:9 image. Reference supplies architectural MATERIALS AND DAYLIGHT only; this is an upper-floor apartment within that same bronze-and-limestone waterfront tower. Camera human-eye height at an OPEN APARTMENT DOORWAY, looking down a short clear limestone entry hall into a refined living room with cream sofa on the LEFT, low pale stone coffee table safely left of the walking line, warm oak cabinetry and bronze trims, floor-to-ceiling windows across far wall with a real blue waterfront and distant urban skyline, warm late-afternoon sunlight from left. The CENTER-RIGHT floor path from foreground doorway through living room toward waterfront window must be fully clear and walkable. Visible door jamb near foreground edges establishes transition from corridor, elegant welcoming home with subtle greenery, no people, logos, words, UI, watermarks, collage, blurry detail, giant empty rooms or surreal mirrors. Deep focus, realistic proportions, exact stable perspective. Space should remain distinct from lobby, domestic furniture, not hotel bedroom.",
+    "hotelSuite": "Photorealistic boutique HOTEL SUITE architectural film start keyframe, landscape16:9 ONE image. Reference is MATERIAL AND HOTEL DESIGN CONTINUITY: same warm oak ceiling fins, pale limestone, soft seafoam textiles, bronze fittings and lush tropical daylight as its lobby. Camera eye height in a short private room ENTRY CORRIDOR at an OPEN door, looking into a finished inviting guest suite. KING BED and white linen on LEFT, oak headboard, seafoam upholstered bench kept left, pale limestone or cream rug floor. Wide unobstructed walkway along RIGHT of bed leads directly to already OPEN sliding balcony doors centered-right at far wall, beyond them an inviting shaded TERRACE with plants, two woven chairs to sides and a blue ocean view. Keep walk line clear. Warm natural late-afternoon light, realistic premium hospitality scale, crisp deep focus, no people, room numbers, signs, logos, words, watermarks, collage or UI. Door jamb visible near edges establishes a real entry. Different from residential living room, prominently hotel bedroom.",
+    "propertyBuildEnd": "Create ONE photorealistic architectural keyframe for a construction timelapse. Reference image defines the FINAL building's exact bronze vertical fins, glass balconies, limestone entrance and oval reflecting pool. Change only camera distance and height: much wider distant elevated locked-off architectural viewpoint across the waterfront promenade, showing the ENTIRE fictional slender 32-storey tower from foundation footprint to roof with sky margin and the completed landscaped approach, pool and palms. Preserve same facade design, warm late afternoon light, same water on the LEFT, same neighboring skyline. Real plausible highrise, crisp structure, no people, text, logos, watermarks, crane or construction at this finished stage. Landscape 16:9, no montage or border. This is the completed final frame, later matched to earlier construction stages.",
+    "propertyBuildStart": "Edit this architectural photograph into the EARLY CONSTRUCTION frame of the SAME tower. LOCK the camera, lens, horizon, coastline, surrounding skyline, neighboring palms outside the construction boundary, sunlight and exact perspective. Remove ONLY the central bronze residential tower and its immediately adjacent finished entrance landscaping/reflection pool. In its EXACT footprint show a realistic construction site with a substantial excavated basement raft foundation, concrete retaining walls, reinforcement cages, two tower cranes and the FIRST THREE concrete floors rising on the same alignment. The rest of the central tower is not built yet. Bare compacted site around foundation, fenced safely off from waterfront. Do not change ANY background building or waterline. Landscape16:9 edge-to-edge photographic image, no words, logo, diagrams, overlays or collage. This is the start frame of a locked-off construction timelapse that will finish at the reference."
+  },
+  "files": [
+    {
+      "file": "public/demos/media/tours/hotel-arrival-1080.mp4",
+      "bytes": 5177966
+    },
+    {
+      "file": "public/demos/media/tours/hotel-arrival-720.mp4",
+      "bytes": 3449136
+    },
+    {
+      "file": "public/demos/media/tours/hotel-suite-1080.mp4",
+      "bytes": 3289316
+    },
+    {
+      "file": "public/demos/media/tours/hotel-suite-720.mp4",
+      "bytes": 2258229
+    },
+    {
+      "file": "public/demos/media/tours/property-arrival-1080.mp4",
+      "bytes": 5372132
+    },
+    {
+      "file": "public/demos/media/tours/property-arrival-720.mp4",
+      "bytes": 3742560
+    },
+    {
+      "file": "public/demos/media/tours/property-build-1080.mp4",
+      "bytes": 3187398
+    },
+    {
+      "file": "public/demos/media/tours/property-build-720.mp4",
+      "bytes": 2648034
+    },
+    {
+      "file": "public/demos/media/tours/property-lobby-1080.mp4",
+      "bytes": 3928716
+    },
+    {
+      "file": "public/demos/media/tours/property-lobby-720.mp4",
+      "bytes": 2572931
+    },
+    {
+      "file": "public/demos/media/tours/property-residence-1080.mp4",
+      "bytes": 2699428
+    },
+    {
+      "file": "public/demos/media/tours/property-residence-720.mp4",
+      "bytes": 1927643
+    }
+  ]
+}

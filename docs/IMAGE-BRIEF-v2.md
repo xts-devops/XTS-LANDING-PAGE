@@ -173,4 +173,23 @@ These are generated capability concepts, not client photos or real deployed syst
 | `public/demos/media/tours/property-cover.webp` | Generated · built-in imagegen | Fictional waterfront tower/arrival concept for the route review prototype. Full prompt, source path and export: `docs/media-v2/journey-covers.json`. |
 | `public/demos/media/tours/hotel-cover.webp` | Generated · built-in imagegen | Fictional boutique lobby concept with a legible lift/corridor path. Full prompt, source path and export: `docs/media-v2/journey-covers.json`. |
 
-These are static concept covers, not generated video, an actual filmed walkthrough, a famous landmark or client evidence. Tour footage is pending a source choice; current marketing cards are unchanged. See SPATIAL-JOURNEYS.md. No Higgsfield calls.
+These are static concept covers, not generated video, an actual filmed walkthrough, a famous landmark or client evidence. Subsequent user authorization and generated-film delivery are documented in SPATIAL-JOURNEYS.md and the record below.
+
+
+## Architectural journey films and reference frames — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `docs/media-v2/journey-keyframes/property-build-start.jpg` | Generated · built-in imagegen | Fictional architectural reference. Prompt/reference/export: `docs/media-v2/journey-generation.json`. |
+| `docs/media-v2/journey-keyframes/property-build-end.jpg` | Generated · built-in imagegen | Fictional architectural reference. Prompt/reference/export: `docs/media-v2/journey-generation.json`. |
+| `docs/media-v2/journey-keyframes/property-lobby.jpg` | Generated · built-in imagegen | Fictional architectural reference. Prompt/reference/export: `docs/media-v2/journey-generation.json`. |
+| `docs/media-v2/journey-keyframes/property-residence.jpg` | Generated · built-in imagegen | Fictional architectural reference. Prompt/reference/export: `docs/media-v2/journey-generation.json`. |
+| `docs/media-v2/journey-keyframes/hotel-suite.jpg` | Generated · built-in imagegen | Fictional architectural reference. Prompt/reference/export: `docs/media-v2/journey-generation.json`. |
+| `public/demos/media/tours/property-build-{1080,720}.mp4` and `property-build-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
+| `public/demos/media/tours/property-arrival-{1080,720}.mp4` and `property-arrival-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
+| `public/demos/media/tours/property-lobby-{1080,720}.mp4` and `property-lobby-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
+| `public/demos/media/tours/property-residence-{1080,720}.mp4` and `property-residence-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
+| `public/demos/media/tours/hotel-arrival-{1080,720}.mp4` and `hotel-arrival-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
+| `public/demos/media/tours/hotel-suite-{1080,720}.mp4` and `hotel-suite-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
+
+HD videos preserve native1920x1080 source quality via lossless faststart remux;720 versions are derivatives. Illustrative concepts, no stock footage, real listing/client claim or verified engineering chronology. Cost preflight and final balance are documented under D37 and SPATIAL-JOURNEYS.md.

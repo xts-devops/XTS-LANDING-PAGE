@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>HOSPITALITY EXPERIENCE — Journey design preview</title>
+    <title>HOSPITALITY EXPERIENCE — Architectural journey</title>
     <link rel="stylesheet" href="/demos/demo.css" />
     <link rel="stylesheet" href="/demos/tours/player.css" />
     <script defer src="/demos/tours/player.js"></script>
@@ -16,7 +16,7 @@
           ><span class="journey-mark" aria-hidden="true">↗</span
           ><span
             >HOSPITALITY EXPERIENCE<small
-              >Spatial storytelling / design preview</small
+              >Spatial storytelling / architectural film</small
             ></span
           ></a
         ><a class="journey-back" href="/demos/daybreak.html"
@@ -27,9 +27,12 @@
         <div>
           <p class="journey-eyebrow">EXPERIENCE THE SPACE</p>
           <h1>Arrive. Unwind. Feel at home.</h1>
-          <p>A brief guest journey from the lobby to a quiet suite.</p>
+          <p>
+            A short architectural film from a welcoming lobby to a sea-view
+            suite.
+          </p>
         </div>
-        <span class="journey-badge">Design preview · footage pending</span>
+        <span class="journey-badge">Generated architectural concept</span>
       </div>
       <main class="journey-layout">
         <div class="journey-main">
@@ -41,7 +44,7 @@
           >
             <img
               class="tour-cover"
-              src="/demos/media/tours/hotel-cover.webp"
+              src="/demos/media/tours/hotel-arrival-poster.webp"
               alt="Generated boutique hotel lobby with limestone reception, seafoam seating and a bronze lift bank to the right"
               width="1600"
               height="900"
@@ -53,8 +56,8 @@
               aria-label="Hotel journey film"
             ></video>
             <div class="tour-topline">
-              <span>CONCEPT COVER / ROUTE REVIEW</span
-              ><span data-tour-quality>Generated concept</span>
+              <span data-tour-index>JOURNEY / 01</span
+              ><span data-tour-quality>Video on demand</span>
             </div>
             <div class="tour-overlay">
               <p class="tour-location" data-tour-location>
@@ -62,8 +65,8 @@
               </p>
               <h2 data-tour-title>Lobby & arrival</h2>
               <div class="tour-controls">
-                <button type="button" class="tour-play" data-tour-play disabled>
-                  Footage pending
+                <button type="button" class="tour-play" data-tour-play>
+                  Play journey
                 </button>
                 <div>
                   <button
@@ -104,7 +107,7 @@
               <span class="chapter-number">02</span
               ><span
                 ><b>Suite & terrace</b
-                ><small>Guest corridor → suite → terrace</small></span
+                ><small>Editorial cut → suite & terrace</small></span
               ><span class="chapter-fill" aria-hidden="true"></span>
             </button>
           </nav>
@@ -114,16 +117,13 @@
             role="status"
             aria-live="polite"
           >
-            Review the route and controls. Actual video is awaiting a footage
-            source; this cover is not a walkthrough.
+            Hover to preview, or press Play. Choose any chapter to explore.
           </p>
         </div>
         <aside class="journey-details">
           <p class="journey-eyebrow">THE ROUTE</p>
           <h2>One connected experience.</h2>
-          <p class="route-meta">
-            2 chapters · approximately 12 seconds planned
-          </p>
+          <p class="route-meta">2 chapters · approximately 12 seconds</p>
           <ol class="journey-route">
             <li data-route-step="0" aria-current="step">
               <span>01</span>
@@ -135,7 +135,7 @@
               <span>02</span>
               <div>
                 <b>Suite & terrace</b
-                ><small>Guest corridor → suite → terrace</small>
+                ><small>Editorial cut → suite & terrace</small>
               </div>
             </li>
           </ol>
@@ -143,14 +143,13 @@
             <span>SELECTED CHAPTER</span>
             <h3 data-tour-detail-title>Lobby & arrival</h3>
             <p data-tour-summary>
-              Enter the lobby, pass reception and turn right toward the bronze
-              lift bank.
+              A gentle approach passes the seafoam lounge and limestone
+              reception toward the bronze lift bank.
             </p>
           </div>
           <p class="journey-notice">
-            Concept cover and planned route only. No continuous filmed
-            walkthrough is represented. Source footage must match the route
-            before publishing.
+            Generated architectural concept. No listing or client project is
+            represented.
           </p>
         </aside>
       </main>
@@ -164,36 +163,38 @@
         "id": "hotel",
         "eyebrow": "HOSPITALITY EXPERIENCE",
         "title": "Arrive. Unwind. Feel at home.",
-        "subtitle": "A brief guest journey from the lobby to a quiet suite.",
+        "subtitle": "A short architectural film from a welcoming lobby to a sea-view suite.",
         "theme": "sage",
         "back": "/demos/daybreak.html",
         "backLabel": "Hotel booking system",
-        "cover": "/demos/media/tours/hotel-cover.webp",
+        "cover": "/demos/media/tours/hotel-arrival-poster.webp",
         "alt": "Generated boutique hotel lobby with limestone reception, seafoam seating and a bronze lift bank to the right",
         "chapters": [
           {
             "id": "arrival",
             "title": "Lobby & arrival",
             "location": "Entrance → reception → lift",
-            "seconds": 6,
-            "summary": "Enter the lobby, pass reception and turn right toward the bronze lift bank.",
+            "seconds": 5.875,
+            "summary": "A gentle approach passes the seafoam lounge and limestone reception toward the bronze lift bank.",
             "continuity": "Pale limestone, oak ceiling fins, seafoam seating and the courtyard tree stay in their reference positions. Keep the guest walking line clear.",
             "desktop": "/demos/media/tours/hotel-arrival-1080.mp4",
             "mobile": "/demos/media/tours/hotel-arrival-720.mp4",
-            "src": null,
-            "mobileSrc": null
+            "poster": "/demos/media/tours/hotel-arrival-poster.webp",
+            "src": "/demos/media/tours/hotel-arrival-1080.mp4",
+            "mobileSrc": "/demos/media/tours/hotel-arrival-720.mp4"
           },
           {
             "id": "suite",
             "title": "Suite & terrace",
-            "location": "Guest corridor → suite → terrace",
-            "seconds": 6,
-            "summary": "A matched-door cut leads into the suite, then a short reveal opens toward its terrace.",
+            "location": "Editorial cut → suite & terrace",
+            "seconds": 5.875,
+            "summary": "After a deliberate room-entry cut, explore the oak-and-sage suite and its open sea-view terrace.",
             "continuity": "Continue the same limestone, oak and bronze palette. The corridor leads naturally through one room door; keep the bed, window and terrace fixed throughout the shot.",
             "desktop": "/demos/media/tours/hotel-suite-1080.mp4",
             "mobile": "/demos/media/tours/hotel-suite-720.mp4",
-            "src": null,
-            "mobileSrc": null
+            "poster": "/demos/media/tours/hotel-suite-poster.webp",
+            "src": "/demos/media/tours/hotel-suite-1080.mp4",
+            "mobileSrc": "/demos/media/tours/hotel-suite-720.mp4"
           }
         ]
       }

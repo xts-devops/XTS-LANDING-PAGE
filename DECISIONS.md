@@ -115,3 +115,6 @@ Replace D32's icon-only pause and visible count with a 2px CSS progress line in 
 
 ### D36 · 2026-10-25 · user · Six-second slideshow interval
 Service screenshot autoplay and the progress fill now use 6 seconds per slide, superseding the 3s cadence in D32/D35. Manual grace remains 6s; pause/resume continues the remaining fill.
+
+### D37 · 2026-10-25 · user · Higgsfield re-enabled for property/hotel journeys
+The user explicitly re-enables Higgsfield for this task, with a credit-cost check first. D31 remains the default for unrelated tasks. Preflight: 114 credits available; Hailuo 6s/native1080 costs 10 credits per clip, six planned clips total60 and leave54. Proceed with one pilot first; no automatic paid retries or spending beyond this six-clip allocation.

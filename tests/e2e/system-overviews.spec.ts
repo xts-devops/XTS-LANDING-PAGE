@@ -1,9 +1,7 @@
 import { expect, test } from '@playwright/test';
 import industryDemos from '../../src/content/industry-demos.json' with { type: 'json' };
 for (const d of industryDemos) {
-  test(`${d.id} overview performs a finite workflow with a visible cursor`, async ({
-    page,
-  }) => {
+  test(`${d.id} overview performs a finite preview`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.goto('/services/' + d.service);
     const card = page.locator(`[data-overview="${d.id}"]`),
@@ -12,8 +10,25 @@ for (const d of industryDemos) {
     await card.locator('[data-overview-stage]').hover();
     await expect(card).toHaveAttribute('data-preview', 'playing');
     const frame = card.frameLocator('iframe');
-    await expect(frame.locator('.overview-cursor')).toBeVisible();
-    await expect(frame.locator('.overview-caption')).not.toHaveText('');
+    const tour = d.id === 'vista' || d.id === 'daybreak';
+    if (tour) {
+      await expect
+        .poll(() =>
+          frame
+            .locator('video')
+            .evaluate((el: HTMLVideoElement) => el.videoWidth),
+        )
+        .toBeGreaterThanOrEqual(1280);
+      await frame.locator('video').evaluate((el: HTMLVideoElement) => {
+        el.addEventListener('playing', () => {
+          el.playbackRate = 4;
+        });
+        el.playbackRate = 4;
+      });
+    } else {
+      await expect(frame.locator('.overview-cursor')).toBeVisible();
+      await expect(frame.locator('.overview-caption')).not.toHaveText('');
+    }
     await expect(card).toHaveAttribute('data-preview', 'complete', {
       timeout: 15000,
     });
@@ -32,9 +47,15 @@ for (const d of industryDemos) {
         'Dr Maya Reyes',
       );
     if (d.id === 'daybreak')
-      await expect(frame.locator('[data-reservation="Courts"]')).toBeVisible();
+      await expect(frame.locator('[data-tour-chapter="1"]')).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      );
     if (d.id === 'vista')
-      await expect(frame.locator('[data-viewing-panel]')).toBeVisible();
+      await expect(frame.locator('[data-tour-chapter="3"]')).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      );
     if (d.id === 'support')
       await expect(frame.locator('[data-support-status]')).toHaveText(
         'Assigned to an agent',

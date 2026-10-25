@@ -530,3 +530,35 @@
     transition: none;
   }
 }
+
+.journey-embedded .journey-back {
+  display: none;
+}
+.journey-embedded .journey-brand {
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .tour-stage {
+    min-height: 0;
+    aspect-ratio: auto;
+    padding-top: 56.25%;
+  }
+  .tour-cover,
+  .tour-stage video {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+  }
+  .tour-stage::after {
+    bottom: auto;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 55%);
+  }
+  .tour-overlay {
+    position: relative;
+    inset: auto;
+    padding: 16px 14px;
+    background: var(--journey-panel);
+  }
+}

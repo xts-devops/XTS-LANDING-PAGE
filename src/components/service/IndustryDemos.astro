@@ -11,6 +11,10 @@ import '../../styles/industry.css';
 interface Props {
   service: string;
 }
+const journeyUrls: Record<string, string> = {
+  vista: '/demos/tours/property.html',
+  daybreak: '/demos/tours/hotel.html',
+};
 const demos = industryDemos.filter((d) => d.service === Astro.props.service);
 ---
 
@@ -42,7 +46,8 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
           <li
             class="industry-card"
             data-overview={d.id}
-            data-overview-url={`/demos/${d.id}.html?preview=1`}
+            data-overview-url={`${journeyUrls[d.id] ?? `/demos/${d.id}.html`}?preview=1`}
+            data-journey-preview={journeyUrls[d.id] ? 'true' : undefined}
             data-title={d.title}
             data-idle-label={copy.previewLabel}
             data-loading-label={copy.loading}
@@ -108,7 +113,10 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
                 ))}
               </ul>
               <noscript>
-                <a class="overview-fallback" href={`/demos/${d.id}.html`}>
+                <a
+                  class="overview-fallback"
+                  href={journeyUrls[d.id] ?? `/demos/${d.id}.html`}
+                >
                   {copy.fallback}
                 </a>
               </noscript>

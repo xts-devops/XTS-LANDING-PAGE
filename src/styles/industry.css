@@ -456,3 +456,25 @@ html:has(.overview-dialog[open]) {
     transition: none;
   }
 }
+
+.overview-dialog[data-tour-interactive='true'] .overview-expanded-live {
+  pointer-events: auto;
+}
+
+.overview-dialog[data-tour-interactive='true'] .overview-expanded-surface {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.overview-dialog[data-tour-interactive='true'] .overview-expanded-canvas {
+  width: 100%;
+  height: 100%;
+  transform: none;
+}
+.overview-dialog[data-tour-interactive='true'] .overview-expanded-live iframe {
+  width: 100%;
+  height: 100%;
+}
+.overview-dialog[data-tour-interactive='true'] [data-overview-size] {
+  display: none;
+}

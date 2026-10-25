@@ -17,7 +17,8 @@
     token = 0,
     mode = 'idle',
     running = false,
-    visible = true;
+    visible = true,
+    displayPixels = 0;
   let hoverTimer,
     cancelLoad,
     savedTime = 0;
@@ -26,8 +27,10 @@
     /^\/demos\/media\/tours\/[a-z0-9-]+\.mp4$/.test(url);
   const sourceFor = (chapter) => {
     const mobile =
-      (innerWidth < 768 &&
-        stage.clientWidth * (devicePixelRatio || 1) <= 1280) ||
+      (displayPixels > 0
+        ? displayPixels <= 1280
+        : innerWidth < 768 &&
+          stage.clientWidth * (devicePixelRatio || 1) <= 1280) ||
       navigator.connection?.saveData;
     const source =
       mobile && chapter.mobileSrc ? chapter.mobileSrc : chapter.src;
@@ -38,6 +41,11 @@
   };
   const sync = () => {
     const chapter = config.chapters[index];
+    root.querySelector('[data-tour-index]').textContent =
+      'JOURNEY / ' + String(index + 1).padStart(2, '0');
+    const cover = root.querySelector('.tour-cover');
+    const poster = chapter.poster || config.cover;
+    if (cover.getAttribute('src') !== poster) cover.src = poster;
     chapters.forEach((button, i) =>
       button.setAttribute('aria-pressed', String(i === index)),
     );
@@ -82,6 +90,7 @@
     video.pause();
     if (detach) release();
     root.dataset.state = 'paused';
+    setStatus('Journey paused. Press Play or Resume to continue.');
     sync();
   };
   const ready = () =>
@@ -254,6 +263,16 @@
       parent.postMessage({ type: 'xts:overview-ended' }, '*');
     }
   });
+  const embedded = parent !== window;
+  if (embedded) {
+    root.classList.add('journey-embedded');
+    root.querySelector('.journey-brand').removeAttribute('href');
+    expand.hidden = true;
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape')
+        parent.postMessage({ type: 'xts:overview-close' }, '*');
+    });
+  }
   stage.addEventListener('pointerenter', () => {
     if (
       !fine.matches ||
@@ -323,7 +342,19 @@
   addEventListener('message', (event) => {
     if (event.source !== parent || event.data?.type !== 'xts:overview-start')
       return;
-    if (motion.matches || new URLSearchParams(location.search).has('still')) {
+    if (
+      typeof event.data.pixelWidth === 'number' &&
+      event.data.pixelWidth > 0 &&
+      event.data.pixelWidth <= 20000
+    )
+      displayPixels = event.data.pixelWidth;
+    if (navigator.connection?.saveData) {
+      void select(0);
+      parent.postMessage({ type: 'xts:overview-ended' }, '*');
+    } else if (
+      motion.matches ||
+      new URLSearchParams(location.search).has('still')
+    ) {
       void select(chapters.length - 1);
       parent.postMessage({ type: 'xts:overview-ended' }, '*');
     } else {

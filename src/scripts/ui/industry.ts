@@ -22,6 +22,9 @@ export function initIndustryDemos() {
   )!;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const saveData = (
+    navigator as Navigator & { connection?: { saveData?: boolean } }
+  ).connection?.saveData;
   let active: HTMLElement | null = null,
     expanded: HTMLElement | null = null,
     suppressed: HTMLElement | null = null,
@@ -59,7 +62,7 @@ export function initIndustryDemos() {
     if (
       document.hidden ||
       (dialog.open && expanded !== card) ||
-      (!explicit && (motion.matches || !fine.matches))
+      (!explicit && (motion.matches || !fine.matches || saveData))
     )
       return;
     if (active === card && frame) return;
@@ -74,7 +77,12 @@ export function initIndustryDemos() {
     frame.title = `${card.dataset.title} workflow overview`;
     frame.setAttribute('sandbox', 'allow-scripts');
     frame.referrerPolicy = 'no-referrer';
-    frame.tabIndex = -1;
+    const interactive =
+      expanded === card && card.dataset.journeyPreview === 'true';
+    frame.tabIndex = interactive ? 0 : -1;
+    expandedHost.inert = !interactive;
+    expandedHost.setAttribute('aria-hidden', String(!interactive));
+    dialog.dataset.tourInteractive = String(interactive);
     frame.src =
       (card.dataset.overviewUrl ?? '') + (motion.matches ? '&still=1' : '');
     host.append(frame);
@@ -182,6 +190,7 @@ export function initIndustryDemos() {
     button.addEventListener('focus', () => {
       if (
         !motion.matches &&
+        !saveData &&
         !dialog.open &&
         !restoringFocus &&
         suppressed !== card &&
@@ -204,11 +213,23 @@ export function initIndustryDemos() {
   });
   addEventListener('message', (event) => {
     if (!active || !frame || event.source !== frame.contentWindow) return;
+    if (event.data?.type === 'xts:overview-close' && dialog.open) {
+      closeViewer();
+      return;
+    }
     if (event.data?.type === 'xts:overview-ready') {
       clearTimeout(failure);
       active.dataset.preview = 'playing';
       dialog.dataset.preview = 'playing';
-      frame.contentWindow?.postMessage({ type: 'xts:overview-start' }, '*');
+      frame.contentWindow?.postMessage(
+        {
+          type: 'xts:overview-start',
+          pixelWidth: Math.ceil(
+            frame.getBoundingClientRect().width * (devicePixelRatio || 1),
+          ),
+        },
+        '*',
+      );
     }
     if (
       event.data?.type === 'xts:overview-step' &&
