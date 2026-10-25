@@ -1,15 +1,26 @@
-# Sharp studio screens
+# Hero workspace displays
 
-The approved panorama, copy and service index stay in place. Two native SVG interfaces replace only the monitor and laptop display areas in the existing studio photo: a connected business-app / automation / device workflow and an illustrative integration editor. Native vector text/lines remain crisp as the page scales. The labels describe a sample architecture, without live telemetry, client figures or actual network activity. The original photo and its provenance are unchanged.
+The hero keeps its approved panorama, headline and responsive layout. The main monitor shows an illustrative operations application: navigation, order-fulfilment modules, a task queue and a connected handover track. The laptop shows a customer-portal design canvas with a mobile layout, component tools and a small style inspector. Content is purpose-named, with no fictional companies, client figures or live-system claims. Both are native SVG, without new raster media, dependencies or external requests.
 
-Screen corners are measured in the photo's native 2400×1400 plane and mapped with the existing homography helper. The responsive fitter now respects the image's computed percentage object-position as well as cover/contain cropping. The mobile zoom is applied to the whole photo figure, so the background and overlays move together. Gallery phone and full-photo inspection behavior remain supported by the same fitter.
+## Mounting
 
-Two small travelling signals and the editor caret use transform/opacity animations. A visible pause/resume control stops all screen activity; mobile uses an accessible 44px icon control. Reduced motion renders the static interface and hides the unnecessary toggle. IntersectionObserver and document visibility suspend activity when the photographed area is offscreen or the tab is hidden. Manual pause survives those changes; pageshow restores eligible activity. No-JS keeps the original studio photograph as the fallback. No image generator, video, canvas, external API or new dependency is needed.
+The same 2400×1400 photograph is the coordinate plane. Active-glass insets preserve the monitor bezel and laptop webcam strip; the existing homography helper maps each SVG to its four measured corners.
 
-Checks cover image-plane registration at 375/768/1440, manual pause/resume, offscreen pause and live reduced-motion changes, plus the existing phone/galleries, intro, navigation, accessibility and motion JS budget. Review captures, source-coordinate reference, normal-motion recording and performance logs are under docs/review/hero-workspace (gitignored).
+| Screen | Top left | Top right | Bottom right | Bottom left | SVG plane |
+|---|---|---|---|---|---|
+| Monitor | 1402, 514 | 1821, 528 | 1827, 817 | 1418, 844 | 720×460 |
+| Laptop | 1171, 738 | 1374, 728 | 1419, 915 | 1219, 941 | 512×440 |
 
-Validation: npm run verify passes with zero errors/warnings; all 173 e2e checks and 3 homepage capture checks pass. The missing-controller intro check now finishes only its own finite exit animation, so the new decorative loops are excluded. The existing carousel clock test gets a 60s case budget because it advances 21s of animation time plus browser actions; its rotation/hover/manual-stop assertions are unchanged. Review captures at 375/768/1440 and workspace-motion.webm were inspected/recorded after the final build.
+The previous equally specific shared phone-mockup styles could win by stylesheet order, applying 34px corners and a tint/filter to both screens. Hero-scoped selectors now explicitly set the monitor to square corners and laptop to 3px native-plane corners, with no filter and a restrained glass reflection. Shared phone styles are unchanged. The photo figure isolates its image and vector layers, with the picture at z-index 0 and fitted workspace at 1; this also prevents the desktop 3D projection from obscuring the photograph. The shared object-position fitter and whole-figure mobile zoom are unchanged.
 
-Tablet widths through 1023px use separate copy and photo rows; the tablet photo is 24rem tall to keep both fitted screens in view. This prevents the sharpened interfaces competing with the summary text. Three mobile Lighthouse runs for the screen pass scored Performance 96/97/96 and Accessibility 100, LCP 1.89–1.94s, CLS 0, TBT 29–60ms. The final tablet-only breakpoint refinement does not alter that mobile layout.
+## Motion and fallback
 
-After the final tablet refinement, npm run verify passes again and all 15 focused registration/media/motion checks pass. Final captures at 375/768/1440 were reviewed again.
+A quiet scan travels along the monitor's handover track; a soft selection outline accents the laptop design canvas. Only transform/opacity animate. The existing visible-photo/tab-visibility controller and Pause/Resume button manage both loops. Reduced motion keeps a static presentation and hides the unnecessary toggle. No JS retains the original photograph. Tablet copy and photo remain in separate rows through 1023px.
+
+## Review
+
+No Higgsfield tools were called. D31 records the user's prohibition for future work. Local source crops were made only for measuring the photographed glass; they are gitignored diagnostic artifacts, not replacement photos.
+
+The focused suite passes all 38 checks, including screen registration and corner/filter regression checks at 375/768/1440/2048, pause/resume/offscreen/reduced-motion behavior, intro failure paths, existing phone overlays, accessibility and the 70KB motion JS budget. npm run verify passes with zero errors/warnings. Final full-view stills, bezel closeups and a normal-motion recording are in docs/review/workspace-mount (gitignored).
+
+Three final mobile homepage Lighthouse runs: Performance 97/96/96, Accessibility 100, LCP 1.90–1.96s, CLS 0 and TBT 50–67ms. No fresh robotics-page performance result is claimed for this hero-only correction.

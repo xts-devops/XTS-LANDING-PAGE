@@ -97,3 +97,6 @@ User requests another smoother, more futuristic direction. Replace D28 orbit/gri
 
 ### D30 · 2026-10-25 · user + codex · Full-HD arm with finite viewport transition
 User requests a sharper 1080p regeneration after checking cost and a faster arm transition with much less scrolling. Replace the continuous 200–260vh arm scrub with a normal-flow scene and about 1.8s viewport-triggered explosion, reverse on upward exit, and explicit Replay. Preserve the supplied 5:3 shot at native 1800×1080; optimize with short-GOP H.264 and no audio. Lazy load near the stage, wait for a ready buffered clip, suspend unfinished work offscreen/hidden, and retain static reduced-motion/no-JS plus photo failure/data-saver fallbacks. One quoted 10-credit generation, not an upscaled 768p export. Supersedes only the arm interaction/delivery details of PLAN-v2 and its media handoff.
+
+### D31 · 2026-10-25 · user · Higgsfield disabled for subsequent work
+User explicitly says not to use Higgsfield starting now. Do not call its generation, processing, discovery or other MCP tools unless the user explicitly re-enables it. Existing locally saved assets can remain in the site. The hero display correction uses native SVG/CSS only.

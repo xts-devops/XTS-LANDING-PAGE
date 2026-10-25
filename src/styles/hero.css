@@ -364,13 +364,36 @@
   }
 }
 
-/* The vector preview and the studio image share the same native photo plane. */
+/* Hero glass has flat hardware corners; phone mockup styling must not leak here. */
 .hero-photo-frame {
   overflow: hidden;
 }
-.hero-workspace .on-photo-screen {
-  border-radius: 2px;
+.hero-photo-frame > .hero-studio {
+  isolation: isolate;
+}
+.hero-studio > picture {
+  position: relative;
+  z-index: 0;
+  display: block;
+  height: 100%;
+}
+.hero-workspace {
+  z-index: 1;
+}
+.hero-studio .hero-workspace .on-photo-screen {
+  border-radius: 0;
   filter: none;
+}
+.hero-studio .hero-workspace .workspace-laptop {
+  border-radius: 3px;
+}
+.hero-studio .hero-workspace .on-photo-screen::after {
+  background: linear-gradient(
+    115deg,
+    rgb(255 255 255 / 0.035),
+    transparent 48%,
+    rgb(0 0 0 / 0.06)
+  );
 }
 .workspace-ui {
   display: block;
@@ -379,85 +402,195 @@
   font-family: var(--font-sans);
 }
 .workspace-bg {
-  fill: #0c1520;
+  fill: #111c26;
+}
+.workspace-rail {
+  fill: #0b151f;
 }
 .workspace-top {
-  fill: #142231;
+  fill: #192733;
+}
+.workspace-selected {
+  fill: #293e44;
 }
 .workspace-accent,
-.workspace-packet,
-.workspace-caret {
+.workspace-trace {
   fill: var(--color-gold-hi);
 }
-.workspace-eyebrow {
-  fill: #a7bfce;
-  font-size: 15px;
+.workspace-muted-fill {
+  fill: #78918e;
+}
+.workspace-brand {
+  fill: #e9e7dd;
+  font-size: 20px;
+  font-weight: 700;
   letter-spacing: 2px;
 }
+.workspace-nav-label {
+  fill: #a9bcbf;
+  font-size: 12px;
+}
+.workspace-app-title {
+  fill: #e1e8e7;
+  font-size: 22px;
+  font-weight: 600;
+}
 .workspace-title {
-  fill: var(--color-text);
+  fill: #f3f1e8;
   font-size: 32px;
   font-weight: 650;
 }
-.workspace-node {
-  fill: #162c35;
-  stroke: #315b6b;
+.workspace-detail {
+  fill: #9ab0b8;
+  font-size: 14px;
 }
-.workspace-node-1 {
-  fill: #2d2922;
-  stroke: #77603b;
+.workspace-caption {
+  fill: #b6c8c7;
+  font-size: 13px;
 }
-.workspace-node-2 {
-  fill: #1b302b;
-  stroke: #376651;
+.workspace-card {
+  fill: #1a3039;
+  stroke: #35515b;
 }
-.workspace-chip {
-  fill: #263f48;
+.workspace-card-1 {
+  fill: #26352f;
+  stroke: #405b4a;
 }
-.workspace-glyph {
-  fill: none;
-  stroke: var(--color-gold-hi);
-  stroke-width: 2;
-  stroke-linecap: round;
+.workspace-card-2 {
+  fill: #373024;
+  stroke: #65553a;
 }
-.workspace-node-label {
-  fill: var(--color-text);
-  font-size: 18px;
+.workspace-card-title {
+  fill: #f0eee3;
+  font-size: 20px;
   font-weight: 600;
 }
-.workspace-detail {
-  fill: #a5b9c9;
-  font-size: 14px;
+.workspace-panel {
+  fill: #192733;
+  stroke: #2b3c48;
+}
+.workspace-section-title {
+  fill: #e0e7e6;
+  font-size: 17px;
+  font-weight: 600;
+}
+.workspace-row-title {
+  fill: #d3dfde;
+  font-size: 17px;
+}
+.workspace-rule {
+  fill: none;
+  stroke: #2a3e49;
 }
 .workspace-wire {
   fill: none;
-  stroke: #466170;
+  stroke: #3a515d;
   stroke-width: 2;
 }
-.workspace-panel {
-  fill: #142231;
+.workspace-marker {
+  fill: #deb569;
+}
+.workspace-marker-1 {
+  fill: #7ba6a6;
+}
+.workspace-marker-2 {
+  fill: #8eb99c;
 }
 .workspace-step {
-  fill: #1c363b;
-  stroke: #40666b;
+  fill: #203834;
+  stroke: #86aa95;
+  stroke-width: 2;
 }
-.workspace-editor-title {
-  fill: #d6e4eb;
+.workspace-canvas {
+  fill: #c7d0cb;
+}
+.workspace-studio-label {
+  fill: #d9e2df;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+.workspace-glyph {
+  fill: none;
+  stroke: #98b6af;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.workspace-design-title {
+  fill: #334a43;
   font-size: 19px;
+  font-weight: 650;
 }
-.workspace-code-number {
-  fill: #607c90;
-  font-size: 18px;
+.workspace-device {
+  fill: #162420;
 }
-.workspace-code-line {
-  fill: #bcd6e4;
-  font-family: monospace;
-  font-size: 18px;
+.workspace-portal-bg {
+  fill: #e9eee6;
 }
-.workspace-code-comment {
-  fill: #719a8d;
-  font-family: monospace;
+.workspace-device-slot {
+  fill: none;
+  stroke: #778c7f;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.workspace-portal-heading {
+  fill: #27483a;
+  font-size: 20px;
+  font-weight: 650;
+}
+.workspace-portal-banner {
+  fill: #325849;
+}
+.workspace-portal-message {
+  fill: #f0f2df;
   font-size: 16px;
+  font-weight: 600;
+}
+.workspace-portal-line {
+  fill: none;
+  stroke: #98b2a1;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.workspace-portal-row {
+  fill: #f9faf4;
+}
+.workspace-portal-label {
+  fill: #3a5547;
+  font-size: 14px;
+}
+.workspace-portal-icon {
+  fill: #779a7f;
+}
+.workspace-portal-arrow {
+  fill: none;
+  stroke: #779a7f;
+  stroke-width: 2;
+}
+.workspace-portal-action {
+  fill: #ecf0df;
+  font-size: 14px;
+  font-weight: 600;
+}
+.workspace-design-focus {
+  fill: none;
+  stroke: #4f8166;
+  stroke-width: 2;
+}
+.workspace-inspector {
+  fill: #e1e8df;
+}
+.workspace-inspector-rule {
+  fill: none;
+  stroke: #8fa798;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.workspace-blue {
+  fill: #698c9c;
+}
+.workspace-canvas-note {
+  fill: #4d6858;
+  font-size: 13px;
 }
 .hero-motion {
   position: absolute;
@@ -493,14 +626,11 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .workspace-packet {
-    animation: workspace-transfer 4s var(--ease-inout) infinite;
+  .workspace-trace {
+    animation: workspace-transfer 6s var(--ease-inout) infinite;
   }
-  .workspace-packet-next {
-    animation-delay: 1.2s;
-  }
-  .workspace-caret {
-    animation: workspace-caret 2s var(--ease-inout) infinite;
+  .workspace-design-focus {
+    animation: workspace-focus 4s var(--ease-inout) infinite;
   }
   .workspace-anim {
     animation-play-state: paused;
@@ -510,29 +640,27 @@
   }
   @keyframes workspace-transfer {
     0%,
-    15% {
+    10% {
       opacity: 0;
-      transform: translateX(-14px);
+      transform: translateX(0);
     }
-    30%,
-    55% {
+    25%,
+    70% {
       opacity: 1;
     }
-    70%,
+    90%,
     100% {
       opacity: 0;
-      transform: translateX(14px);
+      transform: translateX(466px);
     }
   }
-  @keyframes workspace-caret {
+  @keyframes workspace-focus {
     0%,
-    35%,
     100% {
-      opacity: 0.2;
+      opacity: 0.25;
     }
-    55%,
-    80% {
-      opacity: 1;
+    50% {
+      opacity: 0.9;
     }
   }
 }

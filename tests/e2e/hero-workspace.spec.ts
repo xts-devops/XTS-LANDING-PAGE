@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-for (const width of [375, 768, 1440]) {
+for (const width of [375, 768, 1440, 2048]) {
   test(
     'workspace remains on the photographed image plane @ ' + width,
     async ({ page }) => {
@@ -37,9 +37,25 @@ for (const width of [375, 768, 1440]) {
         const visual = await page.locator('.hero-visual').boundingBox();
         expect(visual!.y).toBeGreaterThanOrEqual(copy!.y + copy!.height);
       }
+      const mounting = await stage
+        .locator('.on-photo-screen')
+        .evaluateAll((screens) =>
+          screens.map((screen) => {
+            const css = getComputedStyle(screen);
+            return {
+              radius: parseFloat(css.borderTopLeftRadius),
+              filter: css.filter,
+            };
+          }),
+        );
+      expect(mounting[0]).toEqual({ radius: 0, filter: 'none' });
+      expect(mounting[1]).toEqual({ radius: 3, filter: 'none' });
+      await expect(page.locator('.workspace-portal-heading')).toHaveText(
+        'Your workspace',
+      );
       await expect(page.locator('.hero-motion')).not.toBeVisible();
       await expect(page.locator('.workspace-title')).toHaveText(
-        'Connected workspace',
+        'Order fulfilment',
       );
       expect(
         await page.evaluate(

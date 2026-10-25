@@ -2,17 +2,18 @@
 import { quadMatrix3d } from '../../lib/homography';
 import { heroDirection } from '../../content/hero';
 const copy = heroDirection.workspace;
-const monitor = quadMatrix3d(640, 420, [
-  [1398, 514],
-  [1822, 528],
-  [1822, 818],
-  [1422, 848],
+// Insets follow the active glass, preserving the bezel and laptop webcam strip.
+const monitor = quadMatrix3d(720, 460, [
+  [1402, 514],
+  [1821, 528],
+  [1827, 817],
+  [1418, 844],
 ]);
-const laptop = quadMatrix3d(480, 440, [
-  [1164, 722],
-  [1374, 716],
-  [1416, 916],
-  [1212, 942],
+const laptop = quadMatrix3d(512, 440, [
+  [1171, 738],
+  [1374, 728],
+  [1419, 915],
+  [1219, 941],
 ]);
 ---
 
@@ -24,107 +25,298 @@ const laptop = quadMatrix3d(480, 440, [
 >
   <div
     class="on-photo-screen workspace-monitor"
-    style={`width:640px;height:420px;transform:${monitor}`}
+    style={`width:720px;height:460px;transform:${monitor}`}
   >
-    <svg viewBox="0 0 640 420" width="640" height="420" class="workspace-ui">
-      <rect width="640" height="420" class="workspace-bg" />
-      <rect x="0" y="0" width="640" height="55" class="workspace-top" />
-      <circle cx="30" cy="28" r="7" class="workspace-accent" />
-      <text x="48" y="33" class="workspace-eyebrow">
-        {copy.eyebrow}
+    <svg viewBox="0 0 720 460" width="720" height="460" class="workspace-ui">
+      <rect width="720" height="460" class="workspace-bg" />
+      <rect width="110" height="460" class="workspace-rail" />
+      <path d="M24 29h17l-8 13H16z" class="workspace-accent" />
+      <text x="49" y="40" class="workspace-brand">
+        XTS
       </text>
-      <text x="30" y="104" class="workspace-title">
+      {copy.nav.map((label, i) => (
+        <g>
+          {i === 0 && (
+            <rect
+              x="10"
+              y={72 + i * 48}
+              width="90"
+              height="38"
+              rx="5"
+              class="workspace-selected"
+            />
+          )}
+          <rect
+            x="20"
+            y={84 + i * 48}
+            width="9"
+            height="9"
+            rx="2"
+            class="workspace-muted-fill"
+          />
+          <text x="36" y={93 + i * 48} class="workspace-nav-label">
+            {label}
+          </text>
+        </g>
+      ))}
+      <rect x="110" width="610" height="60" class="workspace-top" />
+      <text x="134" y="37" class="workspace-app-title">
         {copy.title}
       </text>
-      <path d="M202 198H234M406 198H438" class="workspace-wire" />
-      {copy.stages.map((stage, i) => (
+      <rect
+        x="568"
+        y="17"
+        width="130"
+        height="28"
+        rx="14"
+        class="workspace-selected"
+      />
+      <text x="633" y="36" text-anchor="middle" class="workspace-caption">
+        {copy.concept}
+      </text>
+      <text x="134" y="105" class="workspace-title">
+        {copy.heading}
+      </text>
+      <text x="134" y="129" class="workspace-detail">
+        {copy.summary}
+      </text>
+      {copy.modules.map((module, i) => (
         <g>
           <rect
-            x={30 + i * 204}
-            y="143"
-            width="172"
-            height="112"
-            rx="12"
-            class={`workspace-node workspace-node-${i}`}
+            x={134 + i * 193}
+            y="150"
+            width="177"
+            height="72"
+            rx="7"
+            class={`workspace-card workspace-card-${i}`}
           />
-          <rect
-            x={48 + i * 204}
-            y="162"
-            width="25"
-            height="25"
-            rx="6"
-            class="workspace-chip"
-          />
-          <path d={`M${54 + i * 204} 170h13m-13 6h9`} class="workspace-glyph" />
-          <text x={48 + i * 204} y="214" class="workspace-node-label">
-            {stage}
+          <text x={150 + i * 193} y="176" class="workspace-caption">
+            {module.label}
           </text>
-          <text x={48 + i * 204} y="236" class="workspace-detail">
-            {copy.details[i]}
+          <text x={150 + i * 193} y="203" class="workspace-card-title">
+            {module.value}
           </text>
         </g>
       ))}
-      <circle cx="218" cy="198" r="4" class="workspace-packet workspace-anim" />
-      <circle
-        cx="422"
-        cy="198"
-        r="4"
-        class="workspace-packet workspace-packet-next workspace-anim"
-      />
       <rect
-        x="30"
-        y="284"
-        width="580"
-        height="77"
-        rx="10"
+        x="134"
+        y="240"
+        width="563"
+        height="150"
+        rx="7"
         class="workspace-panel"
       />
-      <path d="M52 324H580" class="workspace-wire" />
-      {[90, 246, 402, 558].map((x) => (
+      <text x="150" y="266" class="workspace-section-title">
+        {copy.queue}
+      </text>
+      {copy.tasks.map((task, i) => (
         <g>
-          <circle cx={x} cy="324" r="13" class="workspace-step" />
-          <path d={`M${x - 5} 324l3 3 7-7`} class="workspace-glyph" />
+          <path d={`M150 ${280 + i * 34}H680`} class="workspace-rule" />
+          <circle
+            cx="161"
+            cy={298 + i * 34}
+            r="6"
+            class={`workspace-marker workspace-marker-${i}`}
+          />
+          <text x="181" y={303 + i * 34} class="workspace-row-title">
+            {task.label}
+          </text>
+          <text x="339" y={303 + i * 34} class="workspace-detail">
+            {task.detail}
+          </text>
+          <rect
+            x="606"
+            y={286 + i * 34}
+            width="74"
+            height="24"
+            rx="12"
+            class="workspace-selected"
+          />
+          <text
+            x="643"
+            y={302 + i * 34}
+            text-anchor="middle"
+            class="workspace-caption"
+          >
+            {task.status}
+          </text>
         </g>
       ))}
-      <text x="30" y="398" class="workspace-detail">
-        {copy.footer}
-      </text>
+      <path d="M150 417H680" class="workspace-wire" />
+      <rect
+        x="150"
+        y="416"
+        width="64"
+        height="2"
+        class="workspace-trace workspace-anim"
+      />
+      {copy.steps.map((step, i) => (
+        <g>
+          <circle cx={174 + i * 230} cy="417" r="7" class="workspace-step" />
+          <text
+            x={190 + i * 230}
+            y="441"
+            class="workspace-caption"
+            text-anchor="middle"
+          >
+            {step}
+          </text>
+        </g>
+      ))}
     </svg>
   </div>
   <div
     class="on-photo-screen workspace-laptop"
-    style={`width:480px;height:440px;transform:${laptop}`}
+    style={`width:512px;height:440px;transform:${laptop}`}
   >
-    <svg viewBox="0 0 480 440" width="480" height="440" class="workspace-ui">
-      <rect width="480" height="440" class="workspace-bg" />
-      <rect width="480" height="58" class="workspace-top" />
-      <circle cx="25" cy="28" r="5" class="workspace-accent" />
-      <text x="44" y="34" class="workspace-editor-title">
-        {copy.editor}
+    <svg viewBox="0 0 512 440" width="512" height="440" class="workspace-ui">
+      <rect width="512" height="440" class="workspace-canvas" />
+      <rect width="512" height="54" class="workspace-top" />
+      <circle cx="23" cy="27" r="5" class="workspace-accent" />
+      <text x="40" y="33" class="workspace-studio-label">
+        {copy.studio}
       </text>
-      {copy.code.map((line, i) => (
+      <rect
+        x="377"
+        y="15"
+        width="117"
+        height="25"
+        rx="12"
+        class="workspace-selected"
+      />
+      <text x="435" y="32" text-anchor="middle" class="workspace-caption">
+        {copy.concept}
+      </text>
+      <rect x="0" y="54" width="82" height="386" class="workspace-rail" />
+      {copy.tools.map((tool, i) => (
         <g>
-          <text x="24" y={112 + i * 40} class="workspace-code-number">
-            {i + 1}
-          </text>
-          <text
-            x="60"
-            y={112 + i * 40}
-            class={i === 0 ? 'workspace-code-comment' : 'workspace-code-line'}
-          >
-            {line}
+          <rect
+            x="18"
+            y={82 + i * 80}
+            width="25"
+            height="25"
+            rx="5"
+            class="workspace-selected"
+          />
+          <path d={`M24 ${90 + i * 80}h13m-13 8h8`} class="workspace-glyph" />
+          <text x="17" y={128 + i * 80} class="workspace-caption">
+            {tool}
           </text>
         </g>
       ))}
+      <text x="104" y="83" class="workspace-design-title">
+        {copy.portal}
+      </text>
       <rect
-        x="75"
-        y="332"
-        width="8"
-        height="20"
-        class="workspace-caret workspace-anim"
+        x="147"
+        y="101"
+        width="240"
+        height="307"
+        rx="15"
+        class="workspace-device"
       />
-      <path d="M24 385H456" class="workspace-wire" />
-      <text x="24" y="415" class="workspace-code-comment">
+      <rect
+        x="155"
+        y="109"
+        width="224"
+        height="291"
+        rx="9"
+        class="workspace-portal-bg"
+      />
+      <path d="M241 117h53" class="workspace-device-slot" />
+      <text x="172" y="151" class="workspace-portal-heading">
+        {copy.portalGreeting}
+      </text>
+      <rect
+        x="170"
+        y="165"
+        width="194"
+        height="62"
+        rx="7"
+        class="workspace-portal-banner"
+      />
+      <text x="183" y="192" class="workspace-portal-message">
+        {copy.portalMessage}
+      </text>
+      <path d="M184 208h70m8 0h35" class="workspace-portal-line" />
+      {copy.portalSections.map((label, i) => (
+        <g>
+          <rect
+            x="170"
+            y={242 + i * 35}
+            width="194"
+            height="28"
+            rx="5"
+            class="workspace-portal-row"
+          />
+          <rect
+            x="181"
+            y={250 + i * 35}
+            width="10"
+            height="10"
+            rx="2"
+            class="workspace-portal-icon"
+          />
+          <text x="200" y={261 + i * 35} class="workspace-portal-label">
+            {label}
+          </text>
+          <path
+            d={`M345 ${251 + i * 35}l4 4-4 4`}
+            class="workspace-portal-arrow"
+          />
+        </g>
+      ))}
+      <rect
+        x="168"
+        y="240"
+        width="198"
+        height="32"
+        rx="6"
+        class="workspace-design-focus workspace-anim"
+      />
+      <rect
+        x="170"
+        y="352"
+        width="194"
+        height="28"
+        rx="5"
+        class="workspace-portal-banner"
+      />
+      <text
+        x="267"
+        y="371"
+        text-anchor="middle"
+        class="workspace-portal-action"
+      >
+        {copy.portalAction}
+      </text>
+      <rect
+        x="417"
+        y="110"
+        width="74"
+        height="145"
+        rx="5"
+        class="workspace-inspector"
+      />
+      {[0, 1, 2, 3].map((i) => (
+        <path
+          d={`M429 ${127 + i * 28}h49m-49 9h29`}
+          class="workspace-inspector-rule"
+        />
+      ))}
+      {['workspace-portal-icon', 'workspace-accent', 'workspace-blue'].map(
+        (tone, i) => (
+          <rect
+            x={417 + i * 25}
+            y="273"
+            width="20"
+            height="20"
+            rx="4"
+            class={tone}
+          />
+        ),
+      )}
+      <text x="104" y="431" class="workspace-canvas-note">
         {copy.footer}
       </text>
     </svg>
