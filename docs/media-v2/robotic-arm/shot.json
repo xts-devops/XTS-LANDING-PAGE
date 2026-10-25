@@ -1,6 +1,6 @@
 {
   "id": "xts-arm-exploded-01",
-  "status": "awaiting-higgsfield-connection",
+  "status": "higgsfield-generated-integrated-for-review",
   "inputs": [
     {
       "role": "start",
@@ -46,5 +46,6 @@
     "audio": false,
     "preferredMaxBytes": 8388608
   },
-  "fallback": "registered-photo-pair"
+  "fallback": "registered-photo-pair",
+  "generationRecord": "generation.json"
 }

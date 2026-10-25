@@ -103,3 +103,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-SIGNAL Futuristic intro direction** — logo assembly, connection light and smooth hero dissolve ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-WORKSPACE Hero screen content** — sharp perspective-mapped workspace and controlled motion ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-ARM-VIDEO Higgsfield robotic arm transition** — one budgeted start/end-frame clip, review and scroll integration ... owner: codex · status: review (codex/v2-ui-refinement)

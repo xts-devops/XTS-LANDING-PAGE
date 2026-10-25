@@ -1,0 +1,74 @@
+{
+  "jobId": "4f4f5384-ae39-48b8-bfe7-56967afb348c",
+  "status": "completed-integrated-for-review",
+  "provider": "Higgsfield",
+  "quotedCredits": 6,
+  "balanceBefore": 130,
+  "request": {
+    "model": "minimax_hailuo",
+    "variant": "minimax",
+    "duration": 6,
+    "resolution": "768",
+    "count": 1,
+    "medias": [
+      {
+        "role": "start_image",
+        "value": "7eb856fb-3c9b-421b-ba8b-3453f4d318fc"
+      },
+      {
+        "role": "end_image",
+        "value": "927d11c2-8bd2-4dfd-9d7d-f798b9a95264"
+      }
+    ],
+    "prompt": "A single locked-off tripod product shot of the exact six-axis industrial robot in the start reference, transitioning to the precise technical exploded configuration in the end reference. Preserve the fixed rectangular mounting base at exactly the same pixel position, the dark plain laboratory background, floor, warm gold key light, camera angle, scale, framing and focus throughout. Hold the assembled state for the first 0.6 seconds. From 0.6 to 4.8 seconds, smoothly separate the existing joint covers, fasteners, bearings, shafts and wrist components along their local assembly axes into the evenly spaced end-reference positions. Rigid mechanical parts translate with controlled ease-in/ease-out, no bending, melting or changing geometry. Keep the main support structure and base stationary. Hold the exact exploded end configuration for the final 1.2 seconds. One forward transition only, suitable for reversible scroll scrubbing. No camera pan, orbit, zoom, shake, cuts, rotation of the whole arm, reverse cycle, extra parts, new props, text, logos, particles, smoke, flares, music or narration. Photoreal materials and stable illumination. This is an illustrative mechanical visualization."
+  },
+  "rejectedPreflightAttempt": {
+    "variant": "minimax-2.3",
+    "reason": "backend rejects end_image",
+    "jobCreated": false,
+    "balanceAfter": 130
+  },
+  "balanceAfter": 124,
+  "actualCredits": 6,
+  "output": {
+    "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_035718_4f4f5384-ae39-48b8-bfe7-56967afb348c.mp4",
+    "webMediaId": "77d935fd-0e03-49b1-a4fe-b4122d8ac4a4",
+    "file": "src/assets/video/arm-exploded.mp4",
+    "width": 1280,
+    "height": 768,
+    "fps": 24,
+    "frames": 142,
+    "durationSeconds": 5.916667,
+    "bytes": 3786739,
+    "sha256": "37e35a35bade6f427b9e47631a4888b52c95773059c95d0b8eaf7c610bf02b84",
+    "codec": "H.264",
+    "pixelFormat": "yuv420p",
+    "audio": false,
+    "allKeyframes": true,
+    "faststart": true,
+    "encode": "libx264 preset slow crf 24 g 1 keyint_min 1 sc_threshold 0; metadata stripped"
+  },
+  "review": {
+    "sampledFrames": "Start, intermediate progression and end inspected; no conspicuous base/camera displacement or abrupt jump observed. Illustrative concept, not an engineering assembly simulation.",
+    "browserWidths": [
+      375,
+      768,
+      1440
+    ],
+    "verified": [
+      "forward/reverse scroll seeking",
+      "seek target settles within 0.16s",
+      "no autoplay",
+      "near-stage lazy load",
+      "live reduced-motion cleanup",
+      "save-data fallback",
+      "no-JS fallback",
+      "video-error fallback"
+    ],
+    "artifacts": "docs/review/arm-video (gitignored)",
+    "limitations": [
+      "Real iOS-device seeking remains a release review check; automated checks used Chromium.",
+      "Generated source is 142 frames / 5.917 seconds, billed as the requested 6-second generation."
+    ]
+  }
+}

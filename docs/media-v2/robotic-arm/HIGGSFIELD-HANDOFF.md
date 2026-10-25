@@ -1,6 +1,6 @@
 # Higgsfield handoff — robotic arm
 
-Status: prepared; no generated video is claimed or connected yet. Connect the intended Higgsfield MCP later, then use the two approved source frames and the attached motion brief. Do not replace these frames before checking their registration.
+Status: generated and integrated for review on 2026-10-25. One Higgsfield Hailuo clip now drives the existing scroll player; the approved photo pair remains the fallback. Detailed request, job/media IDs, checksum, cost and review notes: `generation.json`.
 
 ## Inputs and shot
 
@@ -46,3 +46,10 @@ Do not commit the master or a blank/placeholder MP4. The existing photos remain 
 ## Adjacent future footage
 
 FormaField currently has an interactive build-phase diagram; a photoreal construction timelapse needs its own approved start/end scene and phase consistency. Vista Grove currently has two generated architectural concept views. Before a filmed walking route, plan a consistent floor layout and camera path with matching doorway landmarks. Do not imply that two unrelated image views already define a traversable building.
+## Delivered clip · 2026-10-25
+
+One compatible MiniMax Hailuo (`variant: minimax`) generation, requested as 6 seconds at 768 resolution, using the existing start/end frames. The newer 2.3 variant was rejected before job creation because its backend does not accept end frames; the balance remained 130. The compatible generation cost exactly 6 credits, leaving 124. No paid retry, upscaling generation or additional variants.
+
+The source returned 1280×768, 24 fps, 142 frames (5.917s). Reviewed sampled start/intermediate/end frames before producing a 3,786,739-byte H.264 derivative with all keyframes, faststart and no audio. Source master stays outside runtime in the gitignored review folder. The website picks up the MP4 automatically; no playback-code change or dependency was required.
+
+Validation: npm run verify passes; 8 existing motion/UI checks pass. Dedicated desktop/mobile browser checks validate forward/reverse seeking, no autoplay, near-stage loading and reduced-motion/save-data/no-JS/error fallbacks. Captures and a scroll recording are in docs/review/arm-video. Real iOS-device seeking remains a release review check, not claimed as tested.
