@@ -182,3 +182,47 @@ test('single-screen concepts omit redundant navigation and rotation hints', asyn
   await expect(panel.locator('[data-next]')).toHaveCount(0);
   await expect(panel.locator('[data-screen-open]')).toBeVisible();
 });
+
+test('POS keeps a three-second cadence through all four views and loops', async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const start = new Date('2026-10-25T00:00:00Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(start);
+  await page.goto('/services/business-systems#system-pos');
+  const panel = page.locator('#system-pos');
+  await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
+  await expect(panel.locator('[data-slides]')).toHaveAttribute(
+    'data-rotating',
+    'true',
+  );
+  const count = panel.locator('[data-count-label]');
+  await page.clock.runFor(2900);
+  await expect(count).toHaveText('1 / 4');
+  await page.clock.runFor(600);
+  await expect(count).toHaveText('2 / 4');
+  for (const expected of ['3 / 4', '4 / 4', '1 / 4']) {
+    await page.clock.runFor(3000);
+    await expect(count).toHaveText(expected);
+  }
+});
+
+for (const width of [375, 1440]) {
+  test(
+    'POS side arrows wrap in both directions at ' + width,
+    async ({ page }) => {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.goto('/services/business-systems#system-pos');
+      const panel = page.locator('#system-pos');
+      const count = panel.locator('[data-count-label]');
+      await panel.locator('[data-prev]').click();
+      await expect(count).toHaveText('4 / 4');
+      await expect(panel.locator('[data-next]')).toBeEnabled();
+      await panel.locator('[data-next]').click();
+      await expect(count).toHaveText('1 / 4');
+      await expect(panel.locator('[data-prev]')).toBeEnabled();
+    },
+  );
+}

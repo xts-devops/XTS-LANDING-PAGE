@@ -113,3 +113,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-SLIDE-IDLE Automatic showcase idle resumption** — compact controls, 3s cadence and 6s manual grace ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-OVERVIEW-FULL Hover workflow and fullscreen viewer** — automatic previews and accessible enlarged inspection ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-SLIDE-CADENCE POS automatic timing and looping** — stable 3s deadlines and cyclic navigation ... owner: codex · status: review (codex/v2-ui-refinement)

@@ -18,7 +18,8 @@ export function initSlides(root: ParentNode = document) {
       keyboardFocused = false,
       pointerActive = false,
       visible = false,
-      idleUntil = 0;
+      idleUntil = 0,
+      advanceAt = 0;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const eligible = () =>
       !paused &&
@@ -49,21 +50,27 @@ export function initSlides(root: ParentNode = document) {
         rotation.setAttribute('aria-pressed', String(paused));
         rotation.title = copy ?? '';
       }
-      if (running)
+      if (!running) advanceAt = 0;
+      else {
+        // Scroll/resize updates must not restart the three-second cadence.
+        advanceAt = Math.max(advanceAt || Date.now() + interval, idleUntil);
         timer = setTimeout(
           () => {
             if (eligible()) {
               idleUntil = 0;
+              advanceAt = Date.now() + interval;
               label?.setAttribute('aria-live', 'off');
               go((current + 1) % slides.length);
             }
             syncRotation();
           },
-          Math.max(interval, idle),
+          Math.max(0, advanceAt - Date.now()),
         );
+      }
     };
     const override = () => {
       idleUntil = Date.now() + idleDelay;
+      advanceAt = idleUntil;
       syncRotation();
     };
     const update = () => {
@@ -82,8 +89,6 @@ export function initSlides(root: ParentNode = document) {
         slide.inert = i !== current;
       });
       if (label) label.textContent = `${current + 1} / ${slides.length}`;
-      if (prev) prev.disabled = current === 0;
-      if (next) next.disabled = current === slides.length - 1;
       syncRotation();
     };
     const go = (index: number, instant = false) => {
@@ -106,16 +111,17 @@ export function initSlides(root: ParentNode = document) {
       );
     prev?.addEventListener('click', () => {
       override();
-      go(current - 1);
+      go((current - 1 + slides.length) % slides.length);
     });
     next?.addEventListener('click', () => {
       override();
-      go(current + 1);
+      go((current + 1) % slides.length);
     });
     rotation?.addEventListener('click', () => {
       paused = !paused;
       keyboardFocused = false;
       idleUntil = 0;
+      advanceAt = 0;
       syncRotation();
     });
     wrap.addEventListener(
@@ -160,7 +166,10 @@ export function initSlides(root: ParentNode = document) {
       if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
       event.preventDefault();
       override();
-      go(current + (event.key === 'ArrowRight' ? 1 : -1));
+      go(
+        (current + (event.key === 'ArrowRight' ? 1 : -1) + slides.length) %
+          slides.length,
+      );
     });
     let raf = 0;
     track.addEventListener(
