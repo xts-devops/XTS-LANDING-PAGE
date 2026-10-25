@@ -34,7 +34,7 @@ for (const id of ids)
         animations: 'disabled',
       });
     });
-test('workflow previews load on request, stay inline and stop with Escape', async ({
+test('full-screen workflows load on request and restore focus with Escape', async ({
   page,
 }) => {
   const requests: string[] = [];
@@ -42,17 +42,18 @@ test('workflow previews load on request, stay inline and stop with Escape', asyn
     if (/\/demos\/.*\.html/.test(r.url())) requests.push(r.url());
   });
   await page.goto('/services/custom-software');
-  await expect(page.locator('[data-overview-play]')).toHaveCount(3);
+  await expect(page.locator('[data-overview-open]')).toHaveCount(3);
   expect(requests).toHaveLength(0);
-  const button = page.locator('[data-overview-play]').first();
+  const button = page.locator('[data-overview-open]').first();
   await button.click();
   const card = page.locator('[data-overview]').first();
   await expect(card).toHaveAttribute('data-preview', 'complete');
-  await expect(card.locator('iframe')).toHaveAttribute(
+  const viewer = page.locator('[data-overview-dialog]');
+  await expect(viewer.locator('iframe')).toHaveAttribute(
     'sandbox',
     'allow-scripts',
   );
-  await expect(card.locator('iframe')).toHaveAttribute('tabindex', '-1');
+  await expect(viewer.locator('iframe')).toHaveAttribute('tabindex', '-1');
   expect(requests).toHaveLength(1);
   await page.keyboard.press('Escape');
   await expect(card.locator('iframe')).toHaveCount(0);
@@ -179,7 +180,7 @@ test('no-JS visitors have a direct concept preview link', async ({
   });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4380/services/custom-software');
-  await expect(page.locator('[data-overview-play]').first()).not.toBeVisible();
+  await expect(page.locator('[data-overview-open]').first()).not.toBeVisible();
   const link = page.locator('.industry-card noscript a').first();
   await expect(link).toBeVisible();
   await link.click();

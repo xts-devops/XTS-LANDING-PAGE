@@ -68,20 +68,22 @@ for (const width of [320, 375, 768]) {
           });
         }
         const first = cards.first();
-        await first.locator('[data-overview-play]').click();
+        await first.locator('[data-overview-open]').click();
         await expect(first).toHaveAttribute('data-preview', 'complete');
-        const alignment = await first.evaluate((el) => {
-          const frame = el.querySelector('iframe')!.getBoundingClientRect();
-          const still = el
-            .querySelector('.screen-view')!
-            .getBoundingClientRect();
-          return Math.max(
-            Math.abs(frame.x - still.x),
-            Math.abs(frame.y - still.y),
-            Math.abs(frame.width - still.width),
-            Math.abs(frame.height - still.height),
-          );
-        });
+        const alignment = await page
+          .locator('[data-overview-dialog]')
+          .evaluate((el) => {
+            const frame = el.querySelector('iframe')!.getBoundingClientRect();
+            const still = el
+              .querySelector('.overview-expanded-poster .screen-view')!
+              .getBoundingClientRect();
+            return Math.max(
+              Math.abs(frame.x - still.x),
+              Math.abs(frame.y - still.y),
+              Math.abs(frame.width - still.width),
+              Math.abs(frame.height - still.height),
+            );
+          });
         expect(alignment).toBeLessThan(1);
         await page.keyboard.press('Escape');
         expect(

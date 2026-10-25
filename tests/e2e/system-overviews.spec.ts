@@ -7,10 +7,9 @@ for (const d of industryDemos) {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.goto('/services/' + d.service);
     const card = page.locator(`[data-overview="${d.id}"]`),
-      button = card.locator('[data-overview-play]');
+      button = card.locator('[data-overview-open]');
     await card.scrollIntoViewIfNeeded();
-    await button.focus();
-    await page.keyboard.press('Enter');
+    await card.locator('[data-overview-stage]').hover();
     await expect(card).toHaveAttribute('data-preview', 'playing');
     const frame = card.frameLocator('iframe');
     await expect(frame.locator('.overview-cursor')).toBeVisible();
@@ -18,7 +17,7 @@ for (const d of industryDemos) {
     await expect(card).toHaveAttribute('data-preview', 'complete', {
       timeout: 15000,
     });
-    await expect(button).toHaveAccessibleName(`Replay overview: ${d.title}`);
+    await expect(button).toHaveAccessibleName(`View full screen: ${d.title}`);
     if (d.id === 'morrow')
       await expect(frame.locator('[data-total]')).toContainText('0.00');
     if (d.id === 'formafield')
@@ -91,7 +90,7 @@ for (const width of [375, 768, 1440])
         (await card.locator('.industry-card-body').boundingBox())!.height,
       ).toBeLessThan(350);
       expect(
-        (await card.locator('[data-overview-play]').boundingBox())!.height,
+        (await card.locator('[data-overview-open]').boundingBox())!.height,
       ).toBeGreaterThanOrEqual(44);
     }
   });
@@ -103,13 +102,15 @@ test('reduced motion skips hover animation and tap presents a static overview', 
   const card = page.locator('[data-overview="morrow"]');
   await card.locator('[data-overview-stage]').hover();
   await expect(card.locator('iframe')).toHaveCount(0);
-  await card.locator('[data-overview-play]').click();
+  await card.locator('[data-overview-open]').click();
+  const viewer = page.locator('[data-overview-dialog]');
+  await expect(viewer).toBeVisible();
   await expect(card).toHaveAttribute('data-preview', 'complete');
   await expect(
-    card.frameLocator('iframe').locator('.overview-cursor'),
+    viewer.frameLocator('iframe').locator('.overview-cursor'),
   ).toHaveCount(0);
   await expect(
-    card.frameLocator('iframe').locator('[data-product] img'),
+    viewer.frameLocator('iframe').locator('[data-product] img'),
   ).toHaveCount(6);
   await page.keyboard.press('Escape');
   await expect(card.locator('iframe')).toHaveCount(0);

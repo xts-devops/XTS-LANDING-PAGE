@@ -39,7 +39,16 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
         role="list"
       >
         {demos.map((d) => (
-          <li class="industry-card" data-overview={d.id}>
+          <li
+            class="industry-card"
+            data-overview={d.id}
+            data-overview-url={`/demos/${d.id}.html?preview=1`}
+            data-title={d.title}
+            data-idle-label={copy.previewLabel}
+            data-loading-label={copy.loading}
+            data-complete-label={copy.complete}
+            data-failure-label={copy.unavailable}
+          >
             <div class="industry-thumb" data-overview-stage>
               <div class="overview-media">
                 <Screen
@@ -66,26 +75,26 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
                 <button
                   type="button"
                   class="overview-control"
-                  data-overview-play
-                  data-overview-url={`/demos/${d.id}.html?preview=1`}
-                  data-title={d.title}
-                  data-play-label={copy.play}
-                  data-idle-label={copy.previewLabel}
-                  data-loading-label={copy.loading}
-                  data-stop-label={copy.pause}
-                  data-replay-label={copy.replay}
-                  data-still-label={copy.still}
-                  data-complete-label={copy.complete}
-                  aria-label={`${copy.play}: ${d.title}`}
-                  aria-pressed="false"
+                  data-overview-open
+                  aria-haspopup="dialog"
+                  aria-controls="overview-dialog"
+                  aria-label={`${copy.fullscreen}: ${d.title}`}
                 >
-                  <span class="overview-symbol" aria-hidden="true">
-                    ▶
-                  </span>
-                  <span data-overview-label>{copy.play}</span>
+                  <Icon name="arrow-up-right" />
+                  <span>{copy.fullscreen}</span>
                 </button>
               </div>
             </div>
+            <template data-overview-poster>
+              <Screen
+                screen={`industry/${d.id}`}
+                alt={`${d.title}: sample system interface`}
+                sizes="100vw"
+                widths={[1440, 2880]}
+                format="webp"
+                eager
+              />
+            </template>
             <div class="industry-card-body">
               <p class="industry-category">{d.industry}</p>
               <h3>{d.title}</h3>
@@ -107,6 +116,55 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
           </li>
         ))}
       </ul>
+      <dialog
+        id="overview-dialog"
+        class="overview-dialog"
+        data-overview-dialog
+        aria-labelledby="overview-dialog-title"
+        data-actual-label={copy.actual}
+        data-fit-label={copy.fit}
+      >
+        <header class="overview-dialog-head">
+          <h2 id="overview-dialog-title" data-overview-title></h2>
+          <div class="overview-dialog-actions">
+            <button type="button" data-overview-size aria-pressed="false">
+              {copy.actual}
+            </button>
+            <button type="button" data-overview-close>
+              {copy.close}
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </header>
+        <div
+          class="overview-inspect"
+          data-overview-inspect
+          tabindex="0"
+          role="region"
+          aria-label={copy.inspect}
+        >
+          <div class="overview-expanded-surface">
+            <div class="overview-expanded-canvas">
+              <div
+                class="overview-expanded-poster"
+                data-overview-expanded-poster
+              ></div>
+              <div
+                class="overview-expanded-live"
+                data-overview-expanded-live
+                aria-hidden="true"
+                inert
+              ></div>
+            </div>
+          </div>
+        </div>
+        <footer class="overview-dialog-footer">
+          <p data-overview-dialog-status aria-hidden="true">
+            {copy.previewLabel}
+          </p>
+          <p>{copy.note}</p>
+        </footer>
+      </dialog>
       <div class="industry-footer">
         <p>{copy.note}</p>
         <a href="#systems">

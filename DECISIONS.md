@@ -103,3 +103,6 @@ User explicitly says not to use Higgsfield starting now. Do not call its generat
 
 ### D32 · 2026-10-25 · user + codex · Showcase automatic idle resumption
 User requests removal of the large Play slideshow/cadence block, automatic 3s views, manual navigation override and automatic return after inactivity. Supersede D26 persistent stop after pointer/manual navigation: resume after 6s without further input. Keep a compact persistent Pause/Resume icon beside the count, keyboard-focus suspension, reduced-motion suppression and hidden/offscreen/dialog suspension. Image-side arrows, native swipe, count and named-view selection remain.
+
+### D33 · 2026-10-25 · user + codex · Hover workflows with fullscreen inspection
+User removes industry-card play/stop preview toggles and requests automatic hover initiation plus View full screen. Keep finite hover/focus playback and one lazy inert sandbox at a time. A native modal offers enlarged fit/actual-size inspection with Close/Escape, focus return and static reduced-motion/failure fallback. Supersedes only D27’s explicit inline playback control and no-modal choice; system-gallery controls and actual sample-app behavior remain unchanged.
