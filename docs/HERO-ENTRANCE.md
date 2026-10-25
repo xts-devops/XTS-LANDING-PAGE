@@ -2,7 +2,7 @@
 
 ## Direction
 
-Replace the dashboard collage with a studio-led editorial composition: a direct two-line headline, a sharp engineering image, a numbered four-service index and the existing approved proof points. Keep photography inside a clear frame, with no blurred background panel or moving camera. On small screens, retain the same story with two-column capability links and readable CTAs.
+The current direction is a full-width studio panorama with the headline “Ambition, engineered.”, clear consultation/service actions, a short Discover / Build / Connect line and the existing four-service index and approved proof points. Desktop text sits over the image’s naturally quiet left side with a contrast gradient. Mobile separates copy from a tighter workstation crop, so the photo never competes with the text. The illustration label and image alt remain explicit. The brief session entrance below is preserved.
 
 Copy reflects the user's confirmed international team and global client direction. Keep the Philippines base, use “globally” instead of “abroad”, and do not invent offices, countries, team sizes or delivery results.
 

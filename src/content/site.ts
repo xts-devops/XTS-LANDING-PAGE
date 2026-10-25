@@ -43,12 +43,12 @@ export const site = {
   menuLabel: 'Menu',
   buildCta: 'Let’s Build',
   hero: {
-    eyebrow: 'International team · Working globally',
-    heading: 'Engineering',
-    lines: ['Engineering'],
-    emphasis: 'what’s next.',
+    eyebrow: 'Technology. People. Real impact.',
+    heading: 'Ambition,',
+    lines: ['Ambition,'],
+    emphasis: 'engineered.',
     summary:
-      'From the first idea to the systems your business runs on. We connect software, automation and engineering — built together, wherever you work.',
+      'Business software, automation and robotics — connected around the way you work. From the first idea to everyday operations, we build it together.',
     primaryCta: 'Book a Consultation',
     secondaryCta: 'Explore services',
   },

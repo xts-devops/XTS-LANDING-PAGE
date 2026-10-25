@@ -10,8 +10,22 @@ import '../../styles/hero.css';
 ---
 
 <section id="top" class="hero" aria-labelledby="hero-heading" data-hero>
-  <Container class="hero-inner">
-    <div class="hero-main">
+  <div class="hero-stage">
+    <div class="hero-visual" role="group" aria-label={direction.label}>
+      <div class="hero-photo-frame">
+        <Photo
+          photo="home/hero-studio-v3"
+          alt={direction.imageAlt}
+          ratio="auto"
+          class="hero-studio"
+          widths={[640, 960, 1280, 1920]}
+          sizes="(min-width: 761px) 100vw, 100vw"
+          formats={['webp']}
+          eager
+        />
+      </div>
+    </div>
+    <Container class="hero-main">
       <div class="hero-copy">
         <Eyebrow>{site.hero.eyebrow}</Eyebrow>
         <h1 id="hero-heading">
@@ -27,31 +41,22 @@ import '../../styles/hero.css';
             {site.hero.secondaryCta}
           </Button>
         </div>
+        <ol class="hero-delivery" aria-label={direction.deliveryLabel}>
+          {direction.delivery.map((step, i) => (
+            <li>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              {step}
+            </li>
+          ))}
+        </ol>
       </div>
-      <div class="hero-visual" role="group" aria-label={direction.label}>
-        <div class="hero-frame-meta">
-          <span aria-hidden="true">{direction.frameCode}</span>
-          <span>{direction.frameNote}</span>
-        </div>
-        <div class="hero-photo-frame">
-          <Photo
-            photo="home/hero-studio-v3"
-            alt={direction.imageAlt}
-            ratio="auto"
-            class="hero-studio"
-            widths={[640, 960, 1280]}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            formats={['webp']}
-            eager
-          />
-          <div class="hero-photo-caption">
-            <span class="hero-frame-line" aria-hidden="true"></span>
-            <p>{direction.frameTitle}</p>
-          </div>
-        </div>
-        <p class="hero-image-note">{direction.imageNote}</p>
+      <div class="hero-photo-caption">
+        <p>{direction.frameTitle}</p>
+        <small>{direction.imageNote}</small>
       </div>
-    </div>
+    </Container>
+  </div>
+  <Container class="hero-footer">
     <nav class="hero-capabilities" aria-label={direction.indexLabel}>
       {direction.capabilities.map((c) => (
         <a href={`/services/${c.slug}`}>

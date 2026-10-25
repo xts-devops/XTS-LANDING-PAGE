@@ -41,42 +41,50 @@ const demos = industryDemos.filter((d) => d.service === Astro.props.service);
         {demos.map((d) => (
           <li class="industry-card" data-overview={d.id}>
             <div class="industry-thumb" data-overview-stage>
-              <Screen
-                screen={`industry/${d.id}`}
-                alt={`${d.title}: sample system interface`}
-                sizes="(min-width: 1024px) 32vw, 100vw"
-                widths={[480, 800]}
-              />
-              <div
-                class="overview-live"
-                data-overview-live
-                aria-hidden="true"
-                inert
-              ></div>
-              <p
-                class="overview-status"
-                data-overview-status
-                aria-hidden="true"
-              ></p>
-              <button
-                type="button"
-                class="overview-control"
-                data-overview-play
-                data-overview-url={`/demos/${d.id}.html?preview=1`}
-                data-title={d.title}
-                data-play-label={copy.play}
-                data-stop-label={copy.pause}
-                data-replay-label={copy.replay}
-                data-still-label={copy.still}
-                data-complete-label={copy.complete}
-                aria-label={`${copy.play}: ${d.title}`}
-                aria-pressed="false"
-              >
-                <span class="overview-symbol" aria-hidden="true">
-                  ▶
-                </span>
-                <span data-overview-label>{copy.play}</span>
-              </button>
+              <div class="overview-media">
+                <Screen
+                  screen={`industry/${d.id}`}
+                  alt={`${d.title}: sample system interface`}
+                  sizes="(min-width: 1024px) 32vw, 100vw"
+                  widths={[480, 800]}
+                />
+                <div
+                  class="overview-live"
+                  data-overview-live
+                  aria-hidden="true"
+                  inert
+                ></div>
+              </div>
+              <div class="overview-toolbar">
+                <p
+                  class="overview-status"
+                  data-overview-status
+                  aria-hidden="true"
+                >
+                  {copy.previewLabel}
+                </p>
+                <button
+                  type="button"
+                  class="overview-control"
+                  data-overview-play
+                  data-overview-url={`/demos/${d.id}.html?preview=1`}
+                  data-title={d.title}
+                  data-play-label={copy.play}
+                  data-idle-label={copy.previewLabel}
+                  data-loading-label={copy.loading}
+                  data-stop-label={copy.pause}
+                  data-replay-label={copy.replay}
+                  data-still-label={copy.still}
+                  data-complete-label={copy.complete}
+                  aria-label={`${copy.play}: ${d.title}`}
+                  aria-pressed="false"
+                >
+                  <span class="overview-symbol" aria-hidden="true">
+                    ▶
+                  </span>
+                  <span data-overview-label>{copy.play}</span>
+                </button>
+              </div>
             </div>
             <div class="industry-card-body">
               <p class="industry-category">{d.industry}</p>

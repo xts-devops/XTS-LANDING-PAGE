@@ -32,6 +32,8 @@ export function initIndustryDemos() {
     if (active) {
       active.dataset.preview = 'idle';
       label(active, 'play');
+      active.querySelector('[data-overview-status]')!.textContent =
+        control(active).dataset.idleLabel ?? '';
       active.querySelector('[data-overview-live]')?.replaceChildren();
     }
     frame = null;
@@ -54,6 +56,8 @@ export function initIndustryDemos() {
     frame.src = button.dataset.overviewUrl ?? '';
     if (motion.matches) frame.src += '&still=1';
     host.append(frame);
+    card.querySelector('[data-overview-status]')!.textContent =
+      button.dataset.loadingLabel ?? '';
     label(card, 'stop');
     failure = setTimeout(() => {
       if (active === card) stop();

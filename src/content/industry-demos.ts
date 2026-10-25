@@ -14,4 +14,5 @@ export const industryCopy = {
   note: 'Illustrative systems · Sample data · No live transactions',
   modules: 'Explore system modules',
   previewLabel: 'Workflow overview',
+  loading: 'Preparing preview…',
 } as const;

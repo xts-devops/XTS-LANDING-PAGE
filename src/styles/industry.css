@@ -49,9 +49,14 @@
 .industry-thumb .screen-view {
   border-radius: 0.5rem;
 }
+.overview-media {
+  position: relative;
+  min-width: 0;
+  isolation: isolate;
+}
 .overview-live {
   position: absolute;
-  inset: 0.65rem;
+  inset: 0;
   overflow: hidden;
   border-radius: 0.5rem;
   pointer-events: none;
@@ -71,10 +76,17 @@
   .overview-live {
   opacity: 1;
 }
+.overview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 3.5rem;
+  padding-top: 0.5rem;
+}
 .overview-control {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  position: static;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -230,32 +242,24 @@
   }
 }
 .overview-status {
-  display: none;
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  max-width: calc(100% - 2rem);
-  border-radius: 0.4rem;
-  padding: 0.4rem 0.65rem;
-  background: var(--color-bg);
-  color: var(--color-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 1.95rem;
+  flex: 1;
+  min-width: 0;
+  color: var(--color-muted);
   font-size: 0.65rem;
-  pointer-events: none;
+  line-height: 1.5;
 }
-.industry-card:is([data-preview='playing'], [data-preview='complete'])
-  .overview-status:not(:empty) {
-  display: block;
-}
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .industry-card[data-preview='idle'] .overview-control,
-  .industry-card:not([data-preview]) .overview-control {
-    opacity: 0;
-    pointer-events: none;
+@media (max-width: 380px) {
+  .overview-toolbar {
+    gap: 0.5rem;
   }
-  .industry-thumb:hover .overview-control,
-  .industry-thumb:focus-within .overview-control {
-    opacity: 1 !important;
-    pointer-events: auto !important;
+  .overview-control {
+    padding-inline: 0.55rem;
+    font-size: 0.6rem;
   }
 }
 @media (min-width: 1024px) {

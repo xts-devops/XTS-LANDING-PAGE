@@ -24,7 +24,7 @@ test('brand intro runs once per session, then shows the new hero', async ({
     timeout: 2200,
   });
   await expect(page.locator('#hero-heading')).toHaveText(
-    'Engineering what’s next.',
+    'Ambition, engineered.',
   );
   await page.reload({ waitUntil: 'domcontentloaded' });
   expect(await history(page)).not.toContain('on');

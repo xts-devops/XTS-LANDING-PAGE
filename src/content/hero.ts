@@ -3,7 +3,9 @@ export const heroDirection = {
   imageAlt:
     'Illustrative engineering studio with electronics prototypes, a workstation and warm evening light',
   frameCode: 'XTS / 01',
-  frameTitle: 'Where ideas become systems.',
+  frameTitle: 'From possibility to working reality.',
+  deliveryLabel: 'Our delivery approach',
+  delivery: ['Discover', 'Build', 'Connect'],
   frameNote: 'Software · Automation · Engineering',
   imageNote: 'Illustrative studio concept',
   indexLabel: 'Explore our capabilities',
