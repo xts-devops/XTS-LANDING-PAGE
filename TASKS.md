@@ -115,3 +115,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-OVERVIEW-FULL Hover workflow and fullscreen viewer** — automatic previews and accessible enlarged inspection ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-SLIDE-CADENCE POS automatic timing and looping** — stable 3s deadlines and cyclic navigation ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-PHOTO-VARIETY Distinct service gallery imagery** — audit repeated scenes and diversify software/hardware stories ... owner: codex · status: review (codex/v2-ui-refinement)

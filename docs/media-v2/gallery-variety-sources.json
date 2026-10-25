@@ -1,0 +1,34 @@
+{
+  "source": "Generated with built-in imagegen",
+  "usage": "Illustrative concepts only; no client, equipment ownership or result claims.",
+  "export": "JPEG quality 86, mozjpeg; Astro generates responsive AVIF/WebP and lazy-loads gallery images. Original PNGs retained outside repo.",
+  "images": [
+    {
+      "key": "software/device-testing-v2",
+      "source": "exec-49de960f-079f-491c-9fd1-a1363a3d87ee.png",
+      "prompt": "Create a premium photorealistic editorial photograph for a custom software engineering website gallery. Landscape 8:5 composition. A carefully arranged responsive device testing bench in a clean graphite and pale stone studio: large desktop monitor on left, tablet on a stand and two phones on right, small USB testing hub and neat cables, a human hand adjusting the tablet at right edge only. Screens show a coherent crisp minimalist appointment scheduling interface with pale sage appointment blocks, dark navy navigation and a warm amber selected day; use simple geometric UI elements, no readable text, no logos, no brands, no invented metrics. Every device is physically plausible with screens accurately inside their bezels, no floating overlays, sharp details. Straight-on slightly elevated camera with moderate depth of field; neutral daylight, subtle warm side lighting, teal and sage accents, restrained cinematic contrast, true-to-life materials. Make this feel like product quality assurance, not an office meeting or cafe. No faces. Edge-to-edge photograph only, no borders or collage. Generated illustrative concept, not evidence of actual client work.",
+      "width": 1586,
+      "height": 992,
+      "file": "src/assets/photos/software/device-testing-v2.jpg",
+      "bytes": 173995
+    },
+    {
+      "key": "software/field-inspection-v2",
+      "source": "exec-694a05f0-4069-485b-a7a5-13c1929f1d36.png",
+      "prompt": "Photorealistic editorial photograph for a custom software website, landscape 8:5 composition. A purposeful close-up of a mobile inspection app being used by a field engineer in a bright indoor clean-energy plant. Only hands and forearms visible, no faces or identifiable people. A rugged tablet held naturally in both hands occupies foreground, precisely mounted within its bezel a crisp simple inspection checklist made of sage green cards, tiny check marks and one amber status dot, no readable words or numbers. Background conveys stainless pipes, orderly cabinets and soft teal conduit in daylight, distinctly unlike a cafe or desk office. Physically accurate tablet screen perspective and fingers; no floating graphics or screen overlays. Center all essential objects to survive responsive cropping. Refined real photography, tactile materials, soft natural daylight with subtle warm highlights, deep charcoal shadows, restrained sage/teal accents, no neon. No logos, brand names, watermarks, invented results, or text. Illustrative generated technology use, not actual client evidence. Edge-to-edge single photograph.",
+      "width": 1586,
+      "height": 992,
+      "file": "src/assets/photos/software/field-inspection-v2.jpg",
+      "bytes": 198636
+    },
+    {
+      "key": "robotics/inspection-rig-v2",
+      "source": "exec-d570db19-dd3f-4058-a756-fd1f68c277ab.png",
+      "prompt": "A premium photorealistic industrial editorial close-up for a robotics and electronics engineering website gallery, landscape 4:3 composition. Automated circuit board functional testing fixture on a clean technical bench: one believable green PCB firmly clamped in a machined aluminum bed with gold pogo pin probes, a compact inspection camera on a vertical rail above, neat blue test leads and a few amber status LEDs. No people or hands. A digital oscilloscope sits behind to left with a single clear cyan waveform, no readable labels or numbers. Composition focuses on the tangible test fixture rather than a person soldering. Accurate components and wiring, carefully organized cables, no sci-fi floating panels. Crisp moderate depth of field, cool daylight and warm edge light, honest metal and electronics textures, dark neutral graphite background and restrained teal accents. Professional, natural realistic photography, no logos, words, watermarks or invented claims. Single edge-to-edge photograph, no collage. Illustrative generated testing concept, not actual client equipment.",
+      "width": 1448,
+      "height": 1086,
+      "file": "src/assets/photos/robotics/inspection-rig-v2.jpg",
+      "bytes": 244115
+    }
+  ]
+}

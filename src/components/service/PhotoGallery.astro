@@ -91,8 +91,10 @@ const photos = await Promise.all(
               ratio={row ? (g.ratio ?? '4 / 3') : i === 0 ? '4 / 5' : '4 / 3'}
               sizes={
                 row
-                  ? '(min-width: 1024px) 50vw, 100vw'
-                  : '(min-width: 1024px) 33vw, 100vw'
+                  ? '(min-width: 1280px) 600px, (min-width: 721px) 50vw, 100vw'
+                  : i === photos.length - 1 && photos.length % 3 === 1
+                    ? '(min-width: 1280px) 800px, (min-width: 901px) 67vw, (min-width: 561px) 50vw, 100vw'
+                    : '(min-width: 1280px) 400px, (min-width: 901px) 33vw, (min-width: 561px) 50vw, 100vw'
               }
             >
               {g.onPhoto && <ScreenOnPhoto {...g.onPhoto} />}

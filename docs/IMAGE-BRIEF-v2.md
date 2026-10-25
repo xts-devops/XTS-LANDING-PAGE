@@ -143,3 +143,13 @@ The six live-demo thumbnails are also exported under `public/demos/media/product
 |---|---|---|
 | `src/assets/photos/automation/connected-factory.jpg` | Generated · built-in imagegen | Illustrative robot/conveyor/sensor/edge-controller cell; not client evidence. Full prompt and 1600×1200 JPEG export: `docs/media-v2/automation-sources.json`. |
 | `public/demos/media/connected-factory.webp` | Generated derivative | 960×720 WebP for the factory system sample; same source/prompt record. |
+
+## Distinct service gallery photographs — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `src/assets/photos/software/device-testing-v2.jpg` | Generated · built-in imagegen | Illustrative responsive device testing; replaces the generic sticky-note meeting scene. Full prompt, source and export: `docs/media-v2/gallery-variety-sources.json`. |
+| `src/assets/photos/software/field-inspection-v2.jpg` | Generated · built-in imagegen | Illustrative mobile inspection in a plant; replaces the café phone scene and its separately composited UI. Full prompt, source and export: `docs/media-v2/gallery-variety-sources.json`. |
+| `src/assets/photos/robotics/inspection-rig-v2.jpg` | Generated · built-in imagegen | Illustrative circuit-board test fixture; replaces another soldering portrait. Full prompt, source and export: `docs/media-v2/gallery-variety-sources.json`. |
+
+These are generated capability concepts, not client photos or real deployed systems. No Higgsfield calls. Versioned source assets preserve the earlier originals. Gallery exports are lazy responsive AVIF/WebP; full-size inspection uses WebP.

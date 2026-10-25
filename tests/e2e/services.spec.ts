@@ -90,28 +90,11 @@ test.describe('system showcase', () => {
     const counter = panel.locator('[data-count-label]');
     const total = services[0].systems![0].slides.length;
     await expect(counter).toHaveText(`1 / ${total}`);
-    await expect(panel.locator('[data-prev]')).toBeDisabled();
+    await expect(panel.locator('[data-prev]')).toBeEnabled();
     await panel.locator('[data-next]').click();
     await expect(counter).toHaveText(`2 / ${total}`);
     await panel.locator('[data-prev]').click();
     await expect(counter).toHaveText(`1 / ${total}`);
-  });
-});
-
-test.describe('screen on photo', () => {
-  test('phone screen is scaled onto the photo and stays inside it', async ({
-    page,
-  }) => {
-    await page.goto('/services/custom-software');
-    const fig = page.locator('.photo:has([data-fit-stage])');
-    await fig.scrollIntoViewIfNeeded();
-    const screen = fig.locator('.on-photo-screen');
-    await expect(screen).toBeVisible();
-    const [f, s] = await Promise.all([fig.boundingBox(), screen.boundingBox()]);
-    expect(s!.width).toBeGreaterThan(f!.width * 0.15);
-    expect(s!.x).toBeGreaterThan(f!.x);
-    expect(s!.x + s!.width).toBeLessThan(f!.x + f!.width);
-    expect(s!.y + s!.height).toBeLessThan(f!.y + f!.height);
   });
 });
 
