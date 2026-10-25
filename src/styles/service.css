@@ -690,6 +690,25 @@
   }
 }
 
+/* Brief native hold: the transition keeps its own clock; wheel/touch input stays native.
+   Size the whole stage (including Replay) below the header before enabling sticky. */
+@media (min-width: 1024px) and (min-height: 650px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .js .exploded-scroll::after {
+    content: '';
+    display: block;
+    height: min(55svh, 32rem);
+  }
+  .js .exploded-stage {
+    position: sticky;
+    top: 6rem;
+    width: min(
+      var(--container),
+      calc(100% - var(--gutter) * 2),
+      calc((100svh - 14rem) * 5 / 3)
+    );
+  }
+}
+
 /* ---- Gallery (bento) ---- */
 .gallery h2 {
   max-width: 32rem;

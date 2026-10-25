@@ -115,7 +115,10 @@ test.describe('robotics exploded view', () => {
     await page.waitForTimeout(400);
     const scroller = page.locator('.exploded-scroll');
     const box = await scroller.boundingBox();
-    expect(box!.height, 'no long sticky scroll runway').toBeLessThan(900);
+    expect(
+      box!.height,
+      'brief hold stays below 1.5 viewport heights',
+    ).toBeLessThan(1350);
     await page.evaluate(() => {
       const el = document.querySelector('.exploded-stage')!;
       const top = el.getBoundingClientRect().top + scrollY;

@@ -5,13 +5,15 @@ const progress = (page: Page) =>
     .evaluate((el) => Number(getComputedStyle(el).getPropertyValue('--p')));
 async function enter(page: Page) {
   await page.evaluate(() => {
-    const el = document.querySelector('.exploded-stage')!;
+    const el = document.querySelector('.exploded-scroll')!;
+    const stage = document.querySelector<HTMLElement>('.exploded-stage')!;
+    const style = getComputedStyle(stage);
+    const inset =
+      style.position === 'sticky'
+        ? parseFloat(style.top)
+        : Math.max(104, (innerHeight - stage.clientHeight) / 2);
     scrollTo({
-      top:
-        el.getBoundingClientRect().top +
-        scrollY -
-        Math.max(104, (innerHeight - el.clientHeight) / 2) +
-        24,
+      top: el.getBoundingClientRect().top + scrollY - inset + 24,
       behavior: 'instant',
     });
   });
@@ -100,7 +102,7 @@ test('leaving the scene suspends the unfinished transition', async ({
     .poll(() => progress(page), { intervals: [50] })
     .toBeGreaterThan(0.1);
   await page.evaluate(() => {
-    const el = document.querySelector('.exploded-stage')!;
+    const el = document.querySelector('.exploded-scroll')!;
     scrollTo({
       top: el.getBoundingClientRect().bottom + scrollY + 100,
       behavior: 'instant',
@@ -112,4 +114,89 @@ test('leaving the scene suspends the unfinished transition', async ({
   expect(await progress(page)).toBeCloseTo(stopped, 2);
   await enter(page);
   await expect.poll(() => progress(page)).toBeGreaterThan(0.98);
+});
+
+for (const viewport of [
+  { width: 1440, height: 900 },
+  { width: 1920, height: 1080 },
+]) {
+  test(
+    'arm holds briefly, fits controls and releases at ' + viewport.width,
+    async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await page.emulateMedia({ reducedMotion: 'no-preference' });
+      await page.goto('/services/robotics');
+      await page.mouse.move(100, 100);
+      await enter(page);
+      const stage = page.locator('.exploded-stage');
+      await expect(stage).toHaveCSS('position', 'sticky');
+      const initial = (await stage.boundingBox())!;
+      expect(initial.y).toBeGreaterThanOrEqual(72);
+      expect(initial.y + initial.height).toBeLessThan(viewport.height);
+      await page.evaluate(() => scrollBy({ top: 180, behavior: 'instant' }));
+      await expect
+        .poll(async () => Math.abs((await stage.boundingBox())!.y - initial.y))
+        .toBeLessThan(2);
+      await expect.poll(() => progress(page)).toBeGreaterThan(0.98);
+      await page.evaluate(() => {
+        const el = document.querySelector('.exploded-scroll')!;
+        scrollTo({
+          top: el.getBoundingClientRect().bottom + scrollY + 50,
+          behavior: 'instant',
+        });
+      });
+      await expect
+        .poll(
+          async () =>
+            (await stage.boundingBox())!.y +
+            (await stage.boundingBox())!.height,
+        )
+        .toBeLessThan(0);
+      await page.setViewportSize({ width: 375, height: 812 });
+      await expect(stage).toHaveCSS('position', 'relative');
+      await expect(page.locator('.exploded-scroll')).toHaveCSS(
+        'padding-bottom',
+        '0px',
+      );
+      await page.setViewportSize(viewport);
+      await expect(stage).toHaveCSS('position', 'sticky');
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await expect(stage).toHaveCSS('position', 'relative');
+      await expect(page.locator('.exploded-scroll')).toHaveCSS(
+        'padding-bottom',
+        '0px',
+      );
+    },
+  );
+}
+
+test('short desktops retain normal arm flow', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.setViewportSize({ width: 1440, height: 600 });
+  await page.goto('/services/robotics');
+  await expect(page.locator('.exploded-stage')).toHaveCSS(
+    'position',
+    'relative',
+  );
+  await expect(page.locator('.exploded-scroll')).toHaveCSS(
+    'padding-bottom',
+    '0px',
+  );
+});
+
+test('coarse-pointer desktop viewport keeps normal flow', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+    hasTouch: true,
+    reducedMotion: 'no-preference',
+  });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:4380/services/robotics');
+  await expect(page.locator('.exploded-stage')).toHaveCSS(
+    'position',
+    'relative',
+  );
+  await context.close();
 });

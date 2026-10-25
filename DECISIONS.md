@@ -106,3 +106,6 @@ User requests removal of the large Play slideshow/cadence block, automatic 3s vi
 
 ### D33 · 2026-10-25 · user + codex · Hover workflows with fullscreen inspection
 User removes industry-card play/stop preview toggles and requests automatic hover initiation plus View full screen. Keep finite hover/focus playback and one lazy inert sandbox at a time. A native modal offers enlarged fit/actual-size inspection with Close/Escape, focus return and static reduced-motion/failure fallback. Supersedes only D27’s explicit inline playback control and no-modal choice; system-gallery controls and actual sample-app behavior remain unchanged.
+
+### D34 · 2026-10-25 · user + codex · Brief desktop arm showcase hold
+User requests a scroll-triggered stop for viewing the arm. Add a short native sticky runway (55svh, capped at 32rem) only on fine-pointer hover desktops at least 1024×650. The entire media/control stage fits below the header. Preserve D30's finite 1.8s viewport-triggered animation, independent of scroll progress; scrolling is never locked or intercepted. Mobile, short screens, reduced motion and no-JS retain normal flow. Supersedes only D30's desktop normal-flow framing; no media regeneration or Higgsfield use.

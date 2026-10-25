@@ -308,10 +308,15 @@ function initExploded(gsap: Gsap, ScrollTrigger: ST) {
     });
   ScrollTrigger.create({
     trigger: scroller,
-    start: () =>
-      'top ' +
-      (Math.max(104, (innerHeight - stage.offsetHeight) / 2) + 48) +
-      'px',
+    start: () => {
+      // Match the native sticky inset; smaller screens keep the centered entry.
+      const style = getComputedStyle(stage);
+      const inset =
+        style.position === 'sticky'
+          ? Number.parseFloat(style.top)
+          : Math.max(104, (innerHeight - stage.offsetHeight) / 2) + 48;
+      return 'top ' + inset + 'px';
+    },
     end: 'bottom top',
     invalidateOnRefresh: true,
     onEnter: () => move(1),
