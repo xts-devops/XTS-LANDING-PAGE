@@ -172,3 +172,23 @@ for (const viewport of [
     },
   );
 }
+
+test('completed visual cover cannot intercept clicks if the UI controller is missing', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.route('**/*.js', (route) => route.abort());
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('[data-boot-screen]')).toBeVisible();
+  await page.evaluate(() =>
+    document.getAnimations().forEach((animation) => animation.finish()),
+  );
+  const blocked = await page.evaluate(() =>
+    Boolean(
+      document
+        .elementFromPoint(innerWidth / 2, innerHeight / 2)
+        ?.closest('[data-boot-screen]'),
+    ),
+  );
+  expect(blocked).toBe(false);
+});

@@ -7,40 +7,65 @@ const copy = heroDirection.boot;
 ---
 
 <div class="boot-screen" data-boot-screen role="region" aria-label={copy.label}>
-  <div class="boot-grid" aria-hidden="true"></div>
+  <div class="boot-light-field" aria-hidden="true">
+    <i></i>
+    <i></i>
+  </div>
+  <svg
+    class="boot-connections"
+    viewBox="0 0 900 500"
+    fill="none"
+    aria-hidden="true"
+  >
+    <g class="boot-route boot-route-left">
+      <path d="M40 140H200L270 210H350M0 330H180L250 260H345" />
+      <circle cx="40" cy="140" r="3" />
+      <circle cx="180" cy="330" r="3" />
+    </g>
+    <g class="boot-route boot-route-right">
+      <path d="M860 140H700L630 210H550M900 330H720L650 260H555" />
+      <circle cx="860" cy="140" r="3" />
+      <circle cx="720" cy="330" r="3" />
+    </g>
+  </svg>
   <p class="boot-edition" aria-hidden="true">
     {copy.edition}
   </p>
-  <div class="boot-corner boot-corner-top" aria-hidden="true"></div>
-  <div class="boot-corner boot-corner-bottom" aria-hidden="true"></div>
   <div class="boot-signature" aria-hidden="true">
     <div class="boot-emblem">
-      <span class="boot-orbit" aria-hidden="true"></span>
+      <span class="boot-horizon"></span>
+      {[0, 1, 2].map((piece) => (
+        <span class={`boot-mark-piece boot-mark-piece-${piece}`}>
+          <Image
+            src={mark}
+            alt=""
+            width={128}
+            height={128}
+            format="webp"
+            quality={90}
+            loading="eager"
+          />
+        </span>
+      ))}
       <Image
         src={mark}
         alt=""
-        width={96}
-        height={96}
+        width={128}
+        height={128}
         format="webp"
         quality={90}
+        loading="eager"
         class="boot-mark"
       />
     </div>
-    <p class="boot-code">
-      {[...copy.code].map((letter) => (
-        <span>{letter}</span>
-      ))}
-    </p>
+    <p class="boot-code">{copy.code}</p>
     <p class="boot-name">{copy.name}</p>
-    <div class="boot-track">
+    <div class="boot-divider">
       <i></i>
     </div>
     <div class="boot-steps">
       {copy.steps.map((step) => (
-        <span>
-          <i aria-hidden="true"></i>
-          {step}
-        </span>
+        <span>{step}</span>
       ))}
     </div>
     <p class="boot-status">{copy.status}</p>

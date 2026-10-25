@@ -91,3 +91,6 @@ User replaces fictional company/product branding with system-purpose names, incl
 
 ### D28 · 2026-10-25 · user + codex · Longer finite XTS brand entrance
 User explicitly requests a longer entrance with more suspense and richer motion. Supersedes D25 timing only: about 2.9s with an independent 3.4s fail-open guard. Keep the same supplied mark, no fake progress percentages/system checks, no network dependency or continuous loops. Logo/letter reveals, a decorative orbit/grid and one light sweep resolve into an aperture exit. Preserve Skip, input interruption, reduced-motion, direct-hash/service-page/no-JS/storage bypass and a versioned once-per-tab session flag.
+
+### D29 · 2026-10-25 · user + codex · Signal-based entrance visual revision
+User requests another smoother, more futuristic direction. Replace D28 orbit/grid/progress-like line and aperture styling with three-region supplied-logo assembly, decorative connection traces, horizon light and a unified wordmark reveal, followed by a dissolve into the hero. Retain D28 duration, independent guard, bypass and input behavior. Functional session key v3 lets existing tabs see the revised composition once. No new bitmap source, continuous loop or actual system-status claim.

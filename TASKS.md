@@ -99,3 +99,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-HEADER Header balance** — brand scale, grouped navigation, action hierarchy and mobile menu ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-INTRO Extended XTS entrance** — deliberate staged reveal, visual polish and bounded accessible exit ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-SIGNAL Futuristic intro direction** — logo assembly, connection light and smooth hero dissolve ... owner: codex · status: review (codex/v2-ui-refinement)

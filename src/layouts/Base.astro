@@ -35,8 +35,8 @@ const speculationRules = {
         matchMedia('(prefers-reduced-motion:no-preference)').matches
       ) {
         try {
-          if (!sessionStorage.getItem('xts:brand-intro:v2')) {
-            sessionStorage.setItem('xts:brand-intro:v2', 'seen');
+          if (!sessionStorage.getItem('xts:brand-intro:v3')) {
+            sessionStorage.setItem('xts:brand-intro:v3', 'seen');
             root.setAttribute('data-boot', 'on');
             setTimeout(() => root.removeAttribute('data-boot'), 3400);
           }
