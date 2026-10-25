@@ -89,12 +89,12 @@ test.describe('system showcase', () => {
     const panel = page.getByRole('tabpanel');
     const counter = panel.locator('[data-count-label]');
     const total = services[0].systems![0].slides.length;
-    await expect(counter).toHaveText(`1 / ${total}`);
+    await expect(counter).toHaveText(`1 of ${total}`);
     await expect(panel.locator('[data-prev]')).toBeEnabled();
     await panel.locator('[data-next]').click();
-    await expect(counter).toHaveText(`2 / ${total}`);
+    await expect(counter).toHaveText(`2 of ${total}`);
     await panel.locator('[data-prev]').click();
-    await expect(counter).toHaveText(`1 / ${total}`);
+    await expect(counter).toHaveText(`1 of ${total}`);
   });
 });
 

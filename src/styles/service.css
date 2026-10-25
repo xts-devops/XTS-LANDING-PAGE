@@ -273,7 +273,8 @@
 .slides-stage {
   display: grid;
   grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
-  gap: 0.75rem;
+  column-gap: 0.75rem;
+  row-gap: 0;
   align-items: center;
   padding: 1rem 0.75rem;
   border: var(--border);
@@ -413,13 +414,7 @@
   width: 1rem;
   height: 1rem;
 }
-.slides-count {
-  min-width: 3rem;
-  font-size: 0.75rem;
-  color: var(--color-muted);
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
+
 .screen-dialog {
   width: min(94vw, 90rem);
   max-width: none;
@@ -561,9 +556,7 @@
   .slides-controls {
     gap: 0.3rem;
   }
-  .slides-count {
-    min-width: 2rem;
-  }
+
   .screen-dialog {
     width: 100%;
     height: 100svh;
@@ -798,58 +791,98 @@ html:has(.screen-dialog[open]) {
   margin: 0;
   padding-block: 0.25rem;
 }
-.slides-toolbar {
+.slides-progress {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  order: 2;
-  flex-shrink: 0;
-}
-.slides-toolbar .slides-count {
-  margin-left: auto;
-}
-.slides-play {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 2.75rem;
-  width: 2.75rem;
-  justify-content: center;
+  width: 100%;
+  max-width: 64rem;
+  height: 1.5rem;
+  min-height: 24px;
+  transform: translateY(var(--frame-offset, 0px));
   padding: 0;
-  border: var(--border);
-  border-radius: 50%;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-size: 0.7rem;
+  border: 0;
+  background: transparent;
   cursor: pointer;
 }
-.slides-play[hidden] {
-  display: none;
+.slides:has(.slide:not([inert]) .screen-mobile) .slides-progress {
+  max-width: 15rem;
 }
-.slides-play:is(:hover, :focus-visible) {
-  border-color: var(--color-gold-hi);
+@media (max-width: 760px) {
+  .slides:has(.slide:not([inert]) .screen-mobile) .slides-progress {
+    max-width: 14rem;
+  }
 }
-.slides-play-symbol {
-  width: 0.6rem;
-  height: 0.75rem;
-  border-inline: 0.18rem solid currentColor;
+.slides-progress:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
 }
-.slides-play[aria-pressed='true'] .slides-play-symbol {
-  border: 0;
-  background: currentColor;
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
+.slides-progress-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--segments), minmax(0, 1fr));
+  width: 100%;
+  height: 2px;
+  background: var(--color-line);
+  overflow: hidden;
+}
+.slides-progress-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.slides-progress[aria-pressed='true'] .slides-progress-fill {
+  opacity: 0.6;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .is-timing .slides-progress-fill {
+    animation: slides-fill var(--interval) linear both;
+    animation-delay: calc(-1 * var(--elapsed, 0ms));
+    animation-play-state: paused;
+  }
+  .slides[data-rotating='true'] .slides-progress-fill {
+    animation-play-state: running;
+  }
+}
+@keyframes slides-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slides-progress {
+    cursor: default;
+  }
+  .slides-progress-track {
+    gap: 0.25rem;
+    background: transparent;
+  }
+  .slides-progress-fill {
+    display: none;
+    animation: none;
+  }
+  .slides-progress-segment {
+    background: var(--color-line);
+  }
+  .slides-progress-segment[data-current='true'] {
+    background: var(--color-gold);
+  }
 }
 .no-js .slides-navigation,
-.no-js .slides-toolbar,
+.no-js .slides-progress,
 .no-js .slides-btn,
 .no-js .slide-picker,
 .no-js .sample-zoom {
   display: none;
 }
 @media (max-width: 760px) {
-  .slides-toolbar {
-    gap: 0.4rem;
-  }
   .slides-btn {
     translate: 0 2.375rem;
   }
@@ -881,7 +914,7 @@ html:has(.screen-dialog[open]) {
   grid-column: 1;
 }
 /* A single screen needs only its title and inspection action. */
-.slides:not(:has([data-slides-play])) .slides-navigation {
+.slides:not(:has([data-slides-progress])) .slides-navigation {
   display: none;
 }
 

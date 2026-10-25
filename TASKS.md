@@ -119,3 +119,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-PHOTO-VARIETY Distinct service gallery imagery** — audit repeated scenes and diversify software/hardware stories ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-ARM-HOLD Brief responsive arm showcase hold** — sticky desktop framing and finite viewport animation ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-SLIDE-LINE Thin playback progress control** — CSS fill, accessible pause and remaining-time rotation ... owner: codex · status: review (codex/v2-ui-refinement)

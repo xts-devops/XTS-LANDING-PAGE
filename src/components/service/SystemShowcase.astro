@@ -61,23 +61,6 @@ const demo = presentation.demo;
           </div>
           <div class="slides" data-slides data-interval="3000">
             <div class="slides-navigation">
-              <div class="slides-toolbar">
-                {system.slides.length > 1 && (
-                  <button
-                    type="button"
-                    class="slides-play"
-                    data-slides-play
-                    data-play-label={demo.play}
-                    data-pause-label={demo.pause}
-                    aria-label={demo.pause}
-                  >
-                    <span class="slides-play-symbol" aria-hidden="true"></span>
-                  </button>
-                )}
-                <span class="slides-count" aria-live="off" data-count-label>
-                  1 / {system.slides.length}
-                </span>
-              </div>
               <div class="slide-picker" aria-label={demo.choose} role="group">
                 {system.slides.map((slide, i) => (
                   <button
@@ -153,7 +136,40 @@ const demo = presentation.demo;
                   <Icon name="arrow-right" />
                 </button>
               )}
+              {system.slides.length > 1 && (
+                <button
+                  type="button"
+                  class="slides-progress is-timing"
+                  data-slides-progress
+                  data-resume-label={demo.play.replace('Play', 'Resume')}
+                  data-pause-label={demo.pause}
+                  aria-label={demo.pause}
+                  aria-pressed="false"
+                  aria-controls={`slides-${system.id}`}
+                  style={`--interval:3000ms;--segments:${system.slides.length}`}
+                >
+                  <span class="slides-progress-track" aria-hidden="true">
+                    <span class="slides-progress-fill" />
+                    {system.slides.map((_, i) => (
+                      <span
+                        class="slides-progress-segment"
+                        data-progress-segment
+                        data-current={String(i === 0)}
+                      />
+                    ))}
+                  </span>
+                </button>
+              )}
             </div>
+            <span
+              class="sr-only"
+              aria-live="off"
+              aria-atomic="true"
+              data-count-label
+              data-slide-of={copy.slideOf}
+            >
+              1 {copy.slideOf} {system.slides.length}
+            </span>
             <div class="slides-footer">
               <p class="system-note">{copy.sampleNote}</p>
             </div>

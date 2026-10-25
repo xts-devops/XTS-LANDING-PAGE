@@ -109,3 +109,6 @@ User removes industry-card play/stop preview toggles and requests automatic hove
 
 ### D34 · 2026-10-25 · user + codex · Brief desktop arm showcase hold
 User requests a scroll-triggered stop for viewing the arm. Add a short native sticky runway (55svh, capped at 32rem) only on fine-pointer hover desktops at least 1024×650. The entire media/control stage fits below the header. Preserve D30's finite 1.8s viewport-triggered animation, independent of scroll progress; scrolling is never locked or intercepted. Mobile, short screens, reduced motion and no-JS retain normal flow. Supersedes only D30's desktop normal-flow framing; no media regeneration or Higgsfield use.
+
+### D35 · 2026-10-25 · user via Claude · Thin slideshow progress control
+Replace D32's icon-only pause and visible count with a 2px CSS progress line in a minimum 24px button below the image, with accessible Pause/Resume and hidden “n of total” announcements. Freeze CSS progress during manual grace, explicit pause and inactive states; resume its remaining time against a stable deadline. A new slide resets fill to zero, so manual selection receives 6s grace then its 3s fill. Reduced motion shows static current-view segments; single views omit the line. No per-frame JS or layout shift. Details: docs/CAROUSEL-UX.md.

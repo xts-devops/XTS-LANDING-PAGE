@@ -88,7 +88,7 @@ test('view picker jumps to the requested screen', async ({ page }) => {
   await page.goto('/services/business-systems');
   const panel = page.getByRole('tabpanel');
   await panel.locator('[data-slide-index="5"]').click();
-  await expect(panel.locator('[data-count-label]')).toHaveText('6 / 6');
+  await expect(panel.locator('[data-count-label]')).toHaveText('6 of 6');
   await expect(panel.locator('[data-slide-index="5"]')).toHaveAttribute(
     'aria-pressed',
     'true',
