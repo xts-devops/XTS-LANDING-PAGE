@@ -50,11 +50,7 @@
   },
   "review": {
     "sampledFrames": "Start, intermediate progression and end inspected; no conspicuous base/camera displacement or abrupt jump observed. Illustrative concept, not an engineering assembly simulation.",
-    "browserWidths": [
-      375,
-      768,
-      1440
-    ],
+    "browserWidths": [375, 768, 1440],
     "verified": [
       "forward/reverse scroll seeking",
       "seek target settles within 0.16s",
