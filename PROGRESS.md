@@ -2,6 +2,15 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-25 · codex · codex/v2-ui-refinement (header balance review)
+**Did:** Strengthened the header-only brand mark and wordmark, including clearer secondary text; grouped desktop navigation in an outlined capsule with gold-tinted active state and explicit hover/focus treatment; made the existing consultation action gold-filled. Equal outer grid columns center navigation between identity and action on the same body alignment grid. The separator is visible immediately; final height is 73px desktop and 69px mobile, including the border.
+**Mobile:** The native details menu has a clear pill toggle, retains 44px targets and opens outside document flow. Existing Escape/outside/link-selection handling and expanded state remain; no new script, media or dependency. Original supplied mark is unchanged.
+**Verify:** npm run verify passes (0 errors/0 warnings). Sixty-four browser checks pass for the header pass, including home/service axe, menu/intro/anchor behavior and 15 marketing captures. After final desktop centering, 22 focused checks/captures pass. Seven new cases cover collision-free aligned groups at 320/375/768/1024/1440/1920 on home/service deep links, plus mobile menu size/state/selection. Reviewed final header crops, full desktop and open mobile menu captures in docs/review/header-balance (gitignored). No fresh Lighthouse result claimed for this CSS-only header refinement.
+**Next:** Existing PR #12 updated; local preview http://127.0.0.1:4380/. Layout rationale: docs/HEADER-UX.md.
+
+## 2026-10-25 · codex · codex/v2-ui-refinement (header balance claim)
+**Claim:** User requests a more proportionate logo/header/navigation. Measured current header at 77px; issue is small brand and equally separated navigation groups rather than a 197px header. Scope: Header component/header styles, focused responsive header checks and documentation/screenshots. Strengthen the header-only lockup, group navigation with clear active/hover states, emphasize the existing consultation action, refine mobile menu and retain the body alignment grid. No new logo asset, content facts, dependency/shared config/type or Claude-owned app-source edits.
+
 ## 2026-10-25 · codex · codex/v2-ui-refinement (hero panorama and sample audit review)
 **Did:** Replaced the split framed homepage hero with a full-width studio panorama and “Ambition, engineered.” headline, clear consultation/service actions, Discover/Build/Connect sequence and the retained service index/proof. Mobile separates copy from a tighter workstation crop; there is no blurred overlay, delayed hero-image fade or extra animation library. The existing bounded session intro and international/global facts remain.
 **Audit:** Reviewed a 43-screen contact sheet and verified every native DPR-2 source dimension against the manifest. Rendered all ten standalone industry examples at 375px: zero horizontal overflow and zero broken images. Existing phone perspective/crop fitting and inspection overlays remain. Media did not require regeneration; the confirmed problems were presentation-layer placement.
