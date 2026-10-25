@@ -4,37 +4,59 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>PROPERTY EXPERIENCE — Architectural journey</title>
-    <link rel="stylesheet" href="/demos/demo.css" />
+    <meta name="theme-color" content="#131615" />
+    <title>Waterfront residences — An architectural experience</title>
     <link rel="stylesheet" href="/demos/tours/player.css" />
     <script defer src="/demos/tours/player.js"></script>
   </head>
   <body class="journey-page theme-bronze">
     <div class="journey-shell" data-journey>
       <header class="journey-header">
-        <a class="journey-brand" href="/demos/vista.html"
-          ><span class="journey-mark" aria-hidden="true">↗</span
+        <div class="journey-brand">
+          <span class="journey-mark"
+            ><svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="m4 17 8-12 8 12M7 13h10M6 20h12" /></svg></span
           ><span
-            >PROPERTY EXPERIENCE<small
-              >Spatial storytelling / architectural film</small
-            ></span
-          ></a
-        ><a class="journey-back" href="/demos/vista.html">Property system ↗</a>
+            >Waterfront residences<small>An XTS interface concept</small></span
+          >
+        </div>
+        <nav class="journey-links" aria-label="Page sections">
+          <a href="#film">The film</a><a href="#details">Design notes</a>
+        </nav>
+        <span class="journey-edition"
+          >RESIDENTIAL<span aria-hidden="true"> / </span>01</span
+        >
       </header>
       <div class="journey-heading">
         <div>
-          <p class="journey-eyebrow">EXPERIENCE THE SPACE</p>
-          <h1>From vision to a place to call home.</h1>
-          <p>
-            A chaptered architectural film: from construction to waterfront
-            living.
-          </p>
+          <p class="journey-eyebrow">ARCHITECTURE &amp; LIVING</p>
+          <h1>Designed around <em>the view.</em></h1>
         </div>
-        <span class="journey-badge">Generated architectural concept</span>
+        <div class="journey-intro">
+          <p>
+            A waterfront perspective, from first impressions to everyday living.
+          </p>
+          <span class="journey-intro-meta"
+            >4 perspectives <span aria-hidden="true">·</span> 24-second film
+            <span class="quiet-dot" aria-hidden="true"></span> Sound off</span
+          >
+        </div>
       </div>
       <main class="journey-layout">
         <div class="journey-main">
           <section
+            id="film"
             class="tour-stage"
             data-tour-stage
             tabindex="0"
@@ -59,25 +81,92 @@
               aria-label="Property journey film"
             ></video>
             <div class="tour-topline">
-              <span data-tour-index>JOURNEY / 01</span
-              ><span data-tour-quality>Video on demand</span>
+              <span data-tour-index>CHAPTER / 01</span
+              ><span class="tour-quality" data-tour-quality
+                >Explore the film</span
+              >
             </div>
             <div class="tour-overlay">
-              <p class="tour-location" data-tour-location>Site / exterior</p>
-              <h2 data-tour-title>Build to opening</h2>
+              <div class="tour-caption">
+                <p class="tour-location" data-tour-location>The beginning</p>
+                <h2 data-tour-title>Build to opening</h2>
+              </div>
               <div class="tour-controls">
-                <button type="button" class="tour-play" data-tour-play>
-                  Play journey
-                </button>
-                <div>
-                  <button
-                    type="button"
-                    data-tour-expand
-                    aria-label="Expand journey viewer"
+                <button
+                  type="button"
+                  class="tour-play"
+                  data-tour-play
+                  data-play-mode="play"
+                >
+                  <span class="tour-play-symbol"
+                    ><svg
+                      class="play-symbol"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path
+                        d="m9 6 9 6-9 6Z"
+                        fill="currentColor"
+                        stroke="none"
+                      /></svg
+                    ><svg
+                      class="pause-symbol"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M9 6v12M15 6v12" /></svg
+                    ><svg
+                      class="replay-symbol"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M4 10a8 8 0 1 1 1 7M4 4v6h6" /></svg></span
+                  ><span data-tour-play-label>Play journey</span></button
+                ><button
+                  type="button"
+                  class="tour-expand"
+                  data-tour-expand
+                  aria-label="Expand journey viewer"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
                   >
-                    ⛶
-                  </button>
-                </div>
+                    <path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4" />
+                  </svg>
+                </button>
               </div>
             </div>
           </section>
@@ -87,26 +176,72 @@
             style="--chapters: 4"
           >
             <button type="button" data-tour-chapter="0" aria-pressed="true">
-              <span class="chapter-number">01</span
-              ><span><b>Build to opening</b><small>Site / exterior</small></span
+              <img
+                class="chapter-preview"
+                src="/demos/media/tours/property-build-thumb.webp"
+                width="80"
+                height="48"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              /><span class="chapter-copy"
+                ><span class="chapter-number"
+                  >01<span
+                    class="chapter-active-dot"
+                    aria-hidden="true"
+                  ></span></span
+                ><b>Build to opening</b></span
               ><span class="chapter-fill" aria-hidden="true"></span></button
             ><button type="button" data-tour-chapter="1" aria-pressed="false">
-              <span class="chapter-number">02</span
-              ><span
-                ><b>Landscape & arrival</b
-                ><small>Promenade → entrance</small></span
+              <img
+                class="chapter-preview"
+                src="/demos/media/tours/property-arrival-thumb.webp"
+                width="80"
+                height="48"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              /><span class="chapter-copy"
+                ><span class="chapter-number"
+                  >02<span
+                    class="chapter-active-dot"
+                    aria-hidden="true"
+                  ></span></span
+                ><b>Landscape &amp; arrival</b></span
               ><span class="chapter-fill" aria-hidden="true"></span></button
             ><button type="button" data-tour-chapter="2" aria-pressed="false">
-              <span class="chapter-number">03</span
-              ><span
-                ><b>Lobby & lift</b
-                ><small>Entrance → right lift bank</small></span
+              <img
+                class="chapter-preview"
+                src="/demos/media/tours/property-lobby-thumb.webp"
+                width="80"
+                height="48"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              /><span class="chapter-copy"
+                ><span class="chapter-number"
+                  >03<span
+                    class="chapter-active-dot"
+                    aria-hidden="true"
+                  ></span></span
+                ><b>Lobby &amp; lift</b></span
               ><span class="chapter-fill" aria-hidden="true"></span></button
             ><button type="button" data-tour-chapter="3" aria-pressed="false">
-              <span class="chapter-number">04</span
-              ><span
-                ><b>Residence & view</b
-                ><small>Editorial cut → residence</small></span
+              <img
+                class="chapter-preview"
+                src="/demos/media/tours/property-residence-thumb.webp"
+                width="80"
+                height="48"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              /><span class="chapter-copy"
+                ><span class="chapter-number"
+                  >04<span
+                    class="chapter-active-dot"
+                    aria-hidden="true"
+                  ></span></span
+                ><b>Residence &amp; view</b></span
               ><span class="chapter-fill" aria-hidden="true"></span>
             </button>
           </nav>
@@ -116,62 +251,72 @@
             role="status"
             aria-live="polite"
           >
-            Hover to preview, or press Play. Choose any chapter to explore.
+            Hover to watch. Select a perspective to explore.
           </p>
         </div>
-        <aside class="journey-details">
-          <p class="journey-eyebrow">THE ROUTE</p>
-          <h2>One connected experience.</h2>
-          <p class="route-meta">4 chapters · approximately 24 seconds</p>
-          <ol class="journey-route">
-            <li data-route-step="0" aria-current="step">
-              <span>01</span>
-              <div><b>Build to opening</b><small>Site / exterior</small></div>
-            </li>
-            <li data-route-step="1" aria-current="false">
-              <span>02</span>
-              <div>
-                <b>Landscape & arrival</b><small>Promenade → entrance</small>
-              </div>
-            </li>
-            <li data-route-step="2" aria-current="false">
-              <span>03</span>
-              <div>
-                <b>Lobby & lift</b><small>Entrance → right lift bank</small>
-              </div>
-            </li>
-            <li data-route-step="3" aria-current="false">
-              <span>04</span>
-              <div>
-                <b>Residence & view</b><small>Editorial cut → residence</small>
-              </div>
-            </li>
-          </ol>
-          <div class="route-description">
-            <span>SELECTED CHAPTER</span>
-            <h3 data-tour-detail-title>Build to opening</h3>
-            <p data-tour-summary>
-              An accelerated architectural concept sequence moves from early
-              structure to the finished tower and landscaped opening.
+        <aside class="journey-details" id="details" aria-label="Design notes">
+          <div>
+            <p class="journey-eyebrow">THE RESIDENCE</p>
+            <h2>Space, thoughtfully considered.</h2>
+            <div class="route-description">
+              <span class="detail-label">IN FOCUS</span>
+              <h3 data-tour-detail-title>Build to opening</h3>
+              <p data-tour-summary>
+                From the first structure to a finished waterfront silhouette.
+                Explore an architectural concept taking shape.
+              </p>
+            </div>
+          </div>
+          <dl class="journey-features">
+            <div>
+              <dt>Setting</dt>
+              <dd>Waterfront outlook</dd>
+            </div>
+            <div>
+              <dt>Materiality</dt>
+              <dd>Bronze &amp; pale limestone</dd>
+            </div>
+            <div>
+              <dt>Experience</dt>
+              <dd>Arrival to living space</dd>
+            </div>
+          </dl>
+          <div class="journey-details-end">
+            <a class="journey-back" href="/demos/vista.html"
+              ><span>Explore the property sample</span
+              ><svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M5 12h14m-5-5 5 5-5 5" /></svg
+            ></a>
+            <p class="journey-notice">
+              Illustrative spaces. No real property listing or client project is
+              represented.
             </p>
           </div>
-          <p class="journey-notice">
-            Generated architectural concept. No listing or client project is
-            represented.
-          </p>
         </aside>
       </main>
       <footer class="journey-footer">
-        <span>Illustrative architecture · no real property listing</span
-        ><span>Quiet playback · chapter navigation · motion-aware</span>
+        <span class="journey-signature"
+          >Architecture. Perspective. Possibility.</span
+        ><span class="journey-badge">Generated architectural concept</span>
       </footer>
     </div>
     <script type="application/json" data-journey-config>
       {
         "id": "property",
         "eyebrow": "PROPERTY EXPERIENCE",
-        "title": "From vision to a place to call home.",
-        "subtitle": "A chaptered architectural film: from construction to waterfront living.",
+        "title": "Designed around the view.",
+        "subtitle": "A waterfront perspective, from first impressions to everyday living.",
         "theme": "bronze",
         "back": "/demos/vista.html",
         "backLabel": "Property system",
@@ -181,56 +326,75 @@
           {
             "id": "build",
             "title": "Build to opening",
-            "location": "Site / exterior",
+            "location": "The beginning",
             "seconds": 5.875,
-            "summary": "An accelerated architectural concept sequence moves from early structure to the finished tower and landscaped opening.",
+            "summary": "From the first structure to a finished waterfront silhouette. Explore an architectural concept taking shape.",
             "continuity": "Same tower silhouette, footprint, shoreline and approach. Do not morph a different building into the final structure.",
             "desktop": "/demos/media/tours/property-build-1080.mp4",
             "mobile": "/demos/media/tours/property-build-720.mp4",
             "poster": "/demos/media/tours/property-build-poster.webp",
+            "thumbnail": "/demos/media/tours/property-build-thumb.webp",
             "src": "/demos/media/tours/property-build-1080.mp4",
             "mobileSrc": "/demos/media/tours/property-build-720.mp4"
           },
           {
             "id": "arrival",
             "title": "Landscape & arrival",
-            "location": "Promenade → entrance",
+            "location": "A landscaped arrival",
             "seconds": 5.875,
-            "summary": "A gentle landscape reveal establishes the reflecting pool, promenade and bronze-framed entrance before the interior cut.",
+            "summary": "A stone promenade, a reflecting pool and a warm bronze entrance establish the arrival.",
             "continuity": "The landscape shot establishes the entrance; an editorial cut moves inside. It does not depict walking through the pool or glass.",
             "desktop": "/demos/media/tours/property-arrival-1080.mp4",
             "mobile": "/demos/media/tours/property-arrival-720.mp4",
             "poster": "/demos/media/tours/property-arrival-poster.webp",
+            "thumbnail": "/demos/media/tours/property-arrival-thumb.webp",
             "src": "/demos/media/tours/property-arrival-1080.mp4",
             "mobileSrc": "/demos/media/tours/property-arrival-720.mp4"
           },
           {
             "id": "lobby",
             "title": "Lobby & lift",
-            "location": "Entrance → right lift bank",
+            "location": "The entrance lobby",
             "seconds": 5.875,
-            "summary": "Explore the double-height limestone lobby and its bronze lift bank along a clear floor aisle.",
+            "summary": "Pale stone, bronze detailing and generous light create a considered first impression.",
             "continuity": "Repeat entrance fins, limestone floor and pool sightline. Follow an unobstructed floor path; no camera passing through furniture or walls.",
             "desktop": "/demos/media/tours/property-lobby-1080.mp4",
             "mobile": "/demos/media/tours/property-lobby-720.mp4",
             "poster": "/demos/media/tours/property-lobby-poster.webp",
+            "thumbnail": "/demos/media/tours/property-lobby-thumb.webp",
             "src": "/demos/media/tours/property-lobby-1080.mp4",
             "mobileSrc": "/demos/media/tours/property-lobby-720.mp4"
           },
           {
             "id": "residence",
             "title": "Residence & view",
-            "location": "Editorial cut → residence",
+            "location": "The living space",
             "seconds": 5.875,
-            "summary": "A clear editorial cut bridges the change of floor, revealing an open residence and the waterfront beyond.",
+            "summary": "Light-filled interiors, quiet materials and a living space oriented toward the water.",
             "continuity": "Bronze, limestone and warm daylight continue across a deliberate cut to the apartment entry. No continuous lift ride or surveyed floor plan is implied.",
             "desktop": "/demos/media/tours/property-residence-1080.mp4",
             "mobile": "/demos/media/tours/property-residence-720.mp4",
             "poster": "/demos/media/tours/property-residence-poster.webp",
+            "thumbnail": "/demos/media/tours/property-residence-thumb.webp",
             "src": "/demos/media/tours/property-residence-1080.mp4",
             "mobileSrc": "/demos/media/tours/property-residence-720.mp4"
           }
-        ]
+        ],
+        "presentation": {
+          "label": "Waterfront residences",
+          "category": "ARCHITECTURE & LIVING",
+          "lead": "Designed around",
+          "accent": "the view.",
+          "notesTitle": "Space, thoughtfully considered.",
+          "notesLabel": "THE RESIDENCE",
+          "features": [
+            ["Setting", "Waterfront outlook"],
+            ["Materiality", "Bronze & pale limestone"],
+            ["Experience", "Arrival to living space"]
+          ],
+          "cta": "Explore the property sample",
+          "signature": "Architecture. Perspective. Possibility."
+        }
       }
     </script>
   </body>

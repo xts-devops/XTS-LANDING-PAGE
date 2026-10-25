@@ -2,8 +2,8 @@
   {
     "id": "property",
     "eyebrow": "PROPERTY EXPERIENCE",
-    "title": "From vision to a place to call home.",
-    "subtitle": "A chaptered architectural film: from construction to waterfront living.",
+    "title": "Designed around the view.",
+    "subtitle": "A waterfront perspective, from first impressions to everyday living.",
     "theme": "bronze",
     "back": "/demos/vista.html",
     "backLabel": "Property system",
@@ -13,54 +13,73 @@
       {
         "id": "build",
         "title": "Build to opening",
-        "location": "Site / exterior",
+        "location": "The beginning",
         "seconds": 5.875,
-        "summary": "An accelerated architectural concept sequence moves from early structure to the finished tower and landscaped opening.",
+        "summary": "From the first structure to a finished waterfront silhouette. Explore an architectural concept taking shape.",
         "continuity": "Same tower silhouette, footprint, shoreline and approach. Do not morph a different building into the final structure.",
         "desktop": "/demos/media/tours/property-build-1080.mp4",
         "mobile": "/demos/media/tours/property-build-720.mp4",
-        "poster": "/demos/media/tours/property-build-poster.webp"
+        "poster": "/demos/media/tours/property-build-poster.webp",
+        "thumbnail": "/demos/media/tours/property-build-thumb.webp"
       },
       {
         "id": "arrival",
         "title": "Landscape & arrival",
-        "location": "Promenade → entrance",
+        "location": "A landscaped arrival",
         "seconds": 5.875,
-        "summary": "A gentle landscape reveal establishes the reflecting pool, promenade and bronze-framed entrance before the interior cut.",
+        "summary": "A stone promenade, a reflecting pool and a warm bronze entrance establish the arrival.",
         "continuity": "The landscape shot establishes the entrance; an editorial cut moves inside. It does not depict walking through the pool or glass.",
         "desktop": "/demos/media/tours/property-arrival-1080.mp4",
         "mobile": "/demos/media/tours/property-arrival-720.mp4",
-        "poster": "/demos/media/tours/property-arrival-poster.webp"
+        "poster": "/demos/media/tours/property-arrival-poster.webp",
+        "thumbnail": "/demos/media/tours/property-arrival-thumb.webp"
       },
       {
         "id": "lobby",
         "title": "Lobby & lift",
-        "location": "Entrance → right lift bank",
+        "location": "The entrance lobby",
         "seconds": 5.875,
-        "summary": "Explore the double-height limestone lobby and its bronze lift bank along a clear floor aisle.",
+        "summary": "Pale stone, bronze detailing and generous light create a considered first impression.",
         "continuity": "Repeat entrance fins, limestone floor and pool sightline. Follow an unobstructed floor path; no camera passing through furniture or walls.",
         "desktop": "/demos/media/tours/property-lobby-1080.mp4",
         "mobile": "/demos/media/tours/property-lobby-720.mp4",
-        "poster": "/demos/media/tours/property-lobby-poster.webp"
+        "poster": "/demos/media/tours/property-lobby-poster.webp",
+        "thumbnail": "/demos/media/tours/property-lobby-thumb.webp"
       },
       {
         "id": "residence",
         "title": "Residence & view",
-        "location": "Editorial cut → residence",
+        "location": "The living space",
         "seconds": 5.875,
-        "summary": "A clear editorial cut bridges the change of floor, revealing an open residence and the waterfront beyond.",
+        "summary": "Light-filled interiors, quiet materials and a living space oriented toward the water.",
         "continuity": "Bronze, limestone and warm daylight continue across a deliberate cut to the apartment entry. No continuous lift ride or surveyed floor plan is implied.",
         "desktop": "/demos/media/tours/property-residence-1080.mp4",
         "mobile": "/demos/media/tours/property-residence-720.mp4",
-        "poster": "/demos/media/tours/property-residence-poster.webp"
+        "poster": "/demos/media/tours/property-residence-poster.webp",
+        "thumbnail": "/demos/media/tours/property-residence-thumb.webp"
       }
-    ]
+    ],
+    "presentation": {
+      "label": "Waterfront residences",
+      "category": "ARCHITECTURE & LIVING",
+      "lead": "Designed around",
+      "accent": "the view.",
+      "notesTitle": "Space, thoughtfully considered.",
+      "notesLabel": "THE RESIDENCE",
+      "features": [
+        ["Setting", "Waterfront outlook"],
+        ["Materiality", "Bronze & pale limestone"],
+        ["Experience", "Arrival to living space"]
+      ],
+      "cta": "Explore the property sample",
+      "signature": "Architecture. Perspective. Possibility."
+    }
   },
   {
     "id": "hotel",
     "eyebrow": "HOSPITALITY EXPERIENCE",
-    "title": "Arrive. Unwind. Feel at home.",
-    "subtitle": "A short architectural film from a welcoming lobby to a sea-view suite.",
+    "title": "Somewhere to slow down.",
+    "subtitle": "Warm materials, thoughtful spaces and a little room to simply be.",
     "theme": "sage",
     "back": "/demos/daybreak.html",
     "backLabel": "Hotel booking system",
@@ -70,25 +89,42 @@
       {
         "id": "arrival",
         "title": "Lobby & arrival",
-        "location": "Entrance → reception → lift",
+        "location": "Your arrival",
         "seconds": 5.875,
-        "summary": "A gentle approach passes the seafoam lounge and limestone reception toward the bronze lift bank.",
+        "summary": "Natural oak, pale stone and soft greens frame a welcoming arrival and a quieter pace.",
         "continuity": "Pale limestone, oak ceiling fins, seafoam seating and the courtyard tree stay in their reference positions. Keep the guest walking line clear.",
         "desktop": "/demos/media/tours/hotel-arrival-1080.mp4",
         "mobile": "/demos/media/tours/hotel-arrival-720.mp4",
-        "poster": "/demos/media/tours/hotel-arrival-poster.webp"
+        "poster": "/demos/media/tours/hotel-arrival-poster.webp",
+        "thumbnail": "/demos/media/tours/hotel-arrival-thumb.webp"
       },
       {
         "id": "suite",
         "title": "Suite & terrace",
-        "location": "Editorial cut → suite & terrace",
+        "location": "The suite & terrace",
         "seconds": 5.875,
-        "summary": "After a deliberate room-entry cut, explore the oak-and-sage suite and its open sea-view terrace.",
+        "summary": "A softly layered suite opens toward a terrace and the sea beyond. Take a closer look at the space.",
         "continuity": "Continue the same limestone, oak and bronze palette. The corridor leads naturally through one room door; keep the bed, window and terrace fixed throughout the shot.",
         "desktop": "/demos/media/tours/hotel-suite-1080.mp4",
         "mobile": "/demos/media/tours/hotel-suite-720.mp4",
-        "poster": "/demos/media/tours/hotel-suite-poster.webp"
+        "poster": "/demos/media/tours/hotel-suite-poster.webp",
+        "thumbnail": "/demos/media/tours/hotel-suite-thumb.webp"
       }
-    ]
+    ],
+    "presentation": {
+      "label": "Seaside stays",
+      "category": "A QUIETER KIND OF STAY",
+      "lead": "Somewhere to",
+      "accent": "slow down.",
+      "notesTitle": "A softer sense of arrival.",
+      "notesLabel": "THE STAY",
+      "features": [
+        ["Setting", "Sea-view terrace"],
+        ["Materiality", "Natural oak & soft greens"],
+        ["Experience", "Lobby to private suite"]
+      ],
+      "cta": "Explore the booking sample",
+      "signature": "Arrive gently. Stay a little longer."
+    }
   }
 ]

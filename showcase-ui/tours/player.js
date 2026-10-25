@@ -7,6 +7,9 @@
   const config = JSON.parse(configNode.textContent);
   const stage = root.querySelector('[data-tour-stage]');
   const play = root.querySelector('[data-tour-play]');
+  const playLabel = root.querySelector('[data-tour-play-label]');
+  const detail = root.querySelector('.route-description');
+  let renderedIndex = -1;
   const status = root.querySelector('[data-tour-status]');
   const expand = root.querySelector('[data-tour-expand]');
   const cover = root.querySelector('.tour-cover');
@@ -53,7 +56,7 @@
   const sync = () => {
     const chapter = config.chapters[index];
     root.querySelector('[data-tour-index]').textContent =
-      'JOURNEY / ' + String(index + 1).padStart(2, '0');
+      'CHAPTER / ' + String(index + 1).padStart(2, '0');
     const poster = chapter.poster || config.cover;
     if (cover.getAttribute('src') !== poster) cover.src = poster;
     chapters.forEach((button, i) =>
@@ -65,7 +68,7 @@
     root.querySelector('[data-tour-summary]').textContent = chapter.summary;
     stage.setAttribute('aria-busy', String(root.dataset.state === 'loading'));
     play.disabled = !sourceFor(chapter);
-    play.textContent = play.disabled
+    playLabel.textContent = play.disabled
       ? 'Footage pending'
       : wantPlay
         ? 'Pause journey'
@@ -74,7 +77,23 @@
           : savedTime > 0
             ? 'Resume journey'
             : 'Play journey';
+    play.dataset.playMode = wantPlay
+      ? 'pause'
+      : root.dataset.state === 'complete'
+        ? 'replay'
+        : 'play';
     play.setAttribute('aria-pressed', String(wantPlay));
+    if (renderedIndex >= 0 && renderedIndex !== index && !motion.matches) {
+      detail.getAnimations().forEach((animation) => animation.cancel());
+      detail.animate?.(
+        [
+          { opacity: 0.55, transform: 'translateY(4px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        { duration: 260, easing: 'cubic-bezier(.22,1,.36,1)' },
+      );
+    }
+    renderedIndex = index;
   };
   const clearVideo = (target) => {
     bindings.get(target)?.abort();
@@ -504,6 +523,7 @@
     if (document.hidden) pause(true);
   });
   motion.addEventListener('change', () => {
+    detail.getAnimations().forEach((animation) => animation.cancel());
     pause(true);
     mode = 'idle';
   });

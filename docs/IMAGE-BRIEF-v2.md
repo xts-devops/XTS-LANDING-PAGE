@@ -193,3 +193,10 @@ These are static concept covers, not generated video, an actual filmed walkthrou
 | `public/demos/media/tours/hotel-suite-{1080,720}.mp4` and `hotel-suite-poster.webp` | Generated · Higgsfield Hailuo / built-in imagegen reference | Fictional architectural film and matching still poster. Full video prompt, reference IDs, master/delivery sources and sizes: `docs/media-v2/journey-generation.json`. |
 
 HD videos preserve native1920x1080 source quality via lossless faststart remux;720 versions are derivatives. Illustrative concepts, no stock footage, real listing/client claim or verified engineering chronology. Cost preflight and final balance are documented under D37 and SPATIAL-JOURNEYS.md.
+
+
+## Journey chapter thumbnail derivatives — 2026-10-25
+
+| Files | Source | Licence / export |
+|---|---|---|
+| public/demos/media/tours/{property-build,property-arrival,property-lobby,property-residence,hotel-arrival,hotel-suite}-thumb.webp | Derived from the existing generated architectural posters | 240x135 WebP, quality78; six files total42,606 bytes. Source filenames/export: docs/media-v2/journey-polish.json. Original prompts/provenance: journey-generation.json. No new generated image/video or stock use. |

@@ -1,0 +1,53 @@
+{
+  "source": "Existing generated architectural poster frames; no new generation",
+  "export": {
+    "width": 240,
+    "height": 135,
+    "format": "WebP",
+    "quality": 78
+  },
+  "files": [
+    {
+      "source": "public/demos/media/tours/property-build-poster.webp",
+      "file": "public/demos/media/tours/property-build-thumb.webp",
+      "bytes": 7368
+    },
+    {
+      "source": "public/demos/media/tours/property-arrival-poster.webp",
+      "file": "public/demos/media/tours/property-arrival-thumb.webp",
+      "bytes": 7612
+    },
+    {
+      "source": "public/demos/media/tours/property-lobby-poster.webp",
+      "file": "public/demos/media/tours/property-lobby-thumb.webp",
+      "bytes": 7050
+    },
+    {
+      "source": "public/demos/media/tours/property-residence-poster.webp",
+      "file": "public/demos/media/tours/property-residence-thumb.webp",
+      "bytes": 5730
+    },
+    {
+      "source": "public/demos/media/tours/hotel-arrival-poster.webp",
+      "file": "public/demos/media/tours/hotel-arrival-thumb.webp",
+      "bytes": 8724
+    },
+    {
+      "source": "public/demos/media/tours/hotel-suite-poster.webp",
+      "file": "public/demos/media/tours/hotel-suite-thumb.webp",
+      "bytes": 6122
+    }
+  ],
+  "references": [
+    {
+      "title": "Aman Amangiri suites",
+      "url": "https://www.aman.com/resorts/amangiri/accommodation/suites",
+      "purpose": "Hospitality content hierarchy and clear accommodation exploration; no copied assets or property claims."
+    },
+    {
+      "title": "Four Seasons San Francisco",
+      "url": "https://www.fourseasons.com/sanfrancisco/",
+      "purpose": "Overview, accommodation and media navigation separation; no copied branding, media or availability."
+    }
+  ]
+}

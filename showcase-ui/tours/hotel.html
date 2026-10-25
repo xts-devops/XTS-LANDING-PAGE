@@ -4,39 +4,57 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>HOSPITALITY EXPERIENCE — Architectural journey</title>
-    <link rel="stylesheet" href="/demos/demo.css" />
+    <meta name="theme-color" content="#f3f0e8" />
+    <title>Seaside stays — An architectural experience</title>
     <link rel="stylesheet" href="/demos/tours/player.css" />
     <script defer src="/demos/tours/player.js"></script>
   </head>
   <body class="journey-page theme-sage">
     <div class="journey-shell" data-journey>
       <header class="journey-header">
-        <a class="journey-brand" href="/demos/daybreak.html"
-          ><span class="journey-mark" aria-hidden="true">↗</span
-          ><span
-            >HOSPITALITY EXPERIENCE<small
-              >Spatial storytelling / architectural film</small
-            ></span
-          ></a
-        ><a class="journey-back" href="/demos/daybreak.html"
-          >Hotel booking system ↗</a
+        <div class="journey-brand">
+          <span class="journey-mark"
+            ><svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="m4 17 8-12 8 12M7 13h10M6 20h12" /></svg></span
+          ><span>Seaside stays<small>An XTS interface concept</small></span>
+        </div>
+        <nav class="journey-links" aria-label="Page sections">
+          <a href="#film">The film</a><a href="#details">Design notes</a>
+        </nav>
+        <span class="journey-edition"
+          >HOSPITALITY<span aria-hidden="true"> / </span>01</span
         >
       </header>
       <div class="journey-heading">
         <div>
-          <p class="journey-eyebrow">EXPERIENCE THE SPACE</p>
-          <h1>Arrive. Unwind. Feel at home.</h1>
-          <p>
-            A short architectural film from a welcoming lobby to a sea-view
-            suite.
-          </p>
+          <p class="journey-eyebrow">A QUIETER KIND OF STAY</p>
+          <h1>Somewhere to <em>slow down.</em></h1>
         </div>
-        <span class="journey-badge">Generated architectural concept</span>
+        <div class="journey-intro">
+          <p>
+            Warm materials, thoughtful spaces and a little room to simply be.
+          </p>
+          <span class="journey-intro-meta"
+            >2 perspectives <span aria-hidden="true">·</span> 12-second film
+            <span class="quiet-dot" aria-hidden="true"></span> Sound off</span
+          >
+        </div>
       </div>
       <main class="journey-layout">
         <div class="journey-main">
           <section
+            id="film"
             class="tour-stage"
             data-tour-stage
             tabindex="0"
@@ -61,27 +79,92 @@
               aria-label="Hotel journey film"
             ></video>
             <div class="tour-topline">
-              <span data-tour-index>JOURNEY / 01</span
-              ><span data-tour-quality>Video on demand</span>
+              <span data-tour-index>CHAPTER / 01</span
+              ><span class="tour-quality" data-tour-quality
+                >Explore the film</span
+              >
             </div>
             <div class="tour-overlay">
-              <p class="tour-location" data-tour-location>
-                Entrance → reception → lift
-              </p>
-              <h2 data-tour-title>Lobby & arrival</h2>
+              <div class="tour-caption">
+                <p class="tour-location" data-tour-location>Your arrival</p>
+                <h2 data-tour-title>Lobby &amp; arrival</h2>
+              </div>
               <div class="tour-controls">
-                <button type="button" class="tour-play" data-tour-play>
-                  Play journey
-                </button>
-                <div>
-                  <button
-                    type="button"
-                    data-tour-expand
-                    aria-label="Expand journey viewer"
+                <button
+                  type="button"
+                  class="tour-play"
+                  data-tour-play
+                  data-play-mode="play"
+                >
+                  <span class="tour-play-symbol"
+                    ><svg
+                      class="play-symbol"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path
+                        d="m9 6 9 6-9 6Z"
+                        fill="currentColor"
+                        stroke="none"
+                      /></svg
+                    ><svg
+                      class="pause-symbol"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M9 6v12M15 6v12" /></svg
+                    ><svg
+                      class="replay-symbol"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M4 10a8 8 0 1 1 1 7M4 4v6h6" /></svg></span
+                  ><span data-tour-play-label>Play journey</span></button
+                ><button
+                  type="button"
+                  class="tour-expand"
+                  data-tour-expand
+                  aria-label="Expand journey viewer"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
                   >
-                    ⛶
-                  </button>
-                </div>
+                    <path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4" />
+                  </svg>
+                </button>
               </div>
             </div>
           </section>
@@ -91,16 +174,38 @@
             style="--chapters: 2"
           >
             <button type="button" data-tour-chapter="0" aria-pressed="true">
-              <span class="chapter-number">01</span
-              ><span
-                ><b>Lobby & arrival</b
-                ><small>Entrance → reception → lift</small></span
+              <img
+                class="chapter-preview"
+                src="/demos/media/tours/hotel-arrival-thumb.webp"
+                width="80"
+                height="48"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              /><span class="chapter-copy"
+                ><span class="chapter-number"
+                  >01<span
+                    class="chapter-active-dot"
+                    aria-hidden="true"
+                  ></span></span
+                ><b>Lobby &amp; arrival</b></span
               ><span class="chapter-fill" aria-hidden="true"></span></button
             ><button type="button" data-tour-chapter="1" aria-pressed="false">
-              <span class="chapter-number">02</span
-              ><span
-                ><b>Suite & terrace</b
-                ><small>Editorial cut → suite & terrace</small></span
+              <img
+                class="chapter-preview"
+                src="/demos/media/tours/hotel-suite-thumb.webp"
+                width="80"
+                height="48"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              /><span class="chapter-copy"
+                ><span class="chapter-number"
+                  >02<span
+                    class="chapter-active-dot"
+                    aria-hidden="true"
+                  ></span></span
+                ><b>Suite &amp; terrace</b></span
               ><span class="chapter-fill" aria-hidden="true"></span>
             </button>
           </nav>
@@ -110,53 +215,72 @@
             role="status"
             aria-live="polite"
           >
-            Hover to preview, or press Play. Choose any chapter to explore.
+            Hover to watch. Select a perspective to explore.
           </p>
         </div>
-        <aside class="journey-details">
-          <p class="journey-eyebrow">THE ROUTE</p>
-          <h2>One connected experience.</h2>
-          <p class="route-meta">2 chapters · approximately 12 seconds</p>
-          <ol class="journey-route">
-            <li data-route-step="0" aria-current="step">
-              <span>01</span>
-              <div>
-                <b>Lobby & arrival</b><small>Entrance → reception → lift</small>
-              </div>
-            </li>
-            <li data-route-step="1" aria-current="false">
-              <span>02</span>
-              <div>
-                <b>Suite & terrace</b
-                ><small>Editorial cut → suite & terrace</small>
-              </div>
-            </li>
-          </ol>
-          <div class="route-description">
-            <span>SELECTED CHAPTER</span>
-            <h3 data-tour-detail-title>Lobby & arrival</h3>
-            <p data-tour-summary>
-              A gentle approach passes the seafoam lounge and limestone
-              reception toward the bronze lift bank.
+        <aside class="journey-details" id="details" aria-label="Design notes">
+          <div>
+            <p class="journey-eyebrow">THE STAY</p>
+            <h2>A softer sense of arrival.</h2>
+            <div class="route-description">
+              <span class="detail-label">IN FOCUS</span>
+              <h3 data-tour-detail-title>Lobby &amp; arrival</h3>
+              <p data-tour-summary>
+                Natural oak, pale stone and soft greens frame a welcoming
+                arrival and a quieter pace.
+              </p>
+            </div>
+          </div>
+          <dl class="journey-features">
+            <div>
+              <dt>Setting</dt>
+              <dd>Sea-view terrace</dd>
+            </div>
+            <div>
+              <dt>Materiality</dt>
+              <dd>Natural oak &amp; soft greens</dd>
+            </div>
+            <div>
+              <dt>Experience</dt>
+              <dd>Lobby to private suite</dd>
+            </div>
+          </dl>
+          <div class="journey-details-end">
+            <a class="journey-back" href="/demos/daybreak.html"
+              ><span>Explore the booking sample</span
+              ><svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M5 12h14m-5-5 5 5-5 5" /></svg
+            ></a>
+            <p class="journey-notice">
+              Illustrative spaces. No real property listing or client project is
+              represented.
             </p>
           </div>
-          <p class="journey-notice">
-            Generated architectural concept. No listing or client project is
-            represented.
-          </p>
         </aside>
       </main>
       <footer class="journey-footer">
-        <span>Illustrative architecture · no real property listing</span
-        ><span>Quiet playback · chapter navigation · motion-aware</span>
+        <span class="journey-signature"
+          >Arrive gently. Stay a little longer.</span
+        ><span class="journey-badge">Generated architectural concept</span>
       </footer>
     </div>
     <script type="application/json" data-journey-config>
       {
         "id": "hotel",
         "eyebrow": "HOSPITALITY EXPERIENCE",
-        "title": "Arrive. Unwind. Feel at home.",
-        "subtitle": "A short architectural film from a welcoming lobby to a sea-view suite.",
+        "title": "Somewhere to slow down.",
+        "subtitle": "Warm materials, thoughtful spaces and a little room to simply be.",
         "theme": "sage",
         "back": "/demos/daybreak.html",
         "backLabel": "Hotel booking system",
@@ -166,30 +290,47 @@
           {
             "id": "arrival",
             "title": "Lobby & arrival",
-            "location": "Entrance → reception → lift",
+            "location": "Your arrival",
             "seconds": 5.875,
-            "summary": "A gentle approach passes the seafoam lounge and limestone reception toward the bronze lift bank.",
+            "summary": "Natural oak, pale stone and soft greens frame a welcoming arrival and a quieter pace.",
             "continuity": "Pale limestone, oak ceiling fins, seafoam seating and the courtyard tree stay in their reference positions. Keep the guest walking line clear.",
             "desktop": "/demos/media/tours/hotel-arrival-1080.mp4",
             "mobile": "/demos/media/tours/hotel-arrival-720.mp4",
             "poster": "/demos/media/tours/hotel-arrival-poster.webp",
+            "thumbnail": "/demos/media/tours/hotel-arrival-thumb.webp",
             "src": "/demos/media/tours/hotel-arrival-1080.mp4",
             "mobileSrc": "/demos/media/tours/hotel-arrival-720.mp4"
           },
           {
             "id": "suite",
             "title": "Suite & terrace",
-            "location": "Editorial cut → suite & terrace",
+            "location": "The suite & terrace",
             "seconds": 5.875,
-            "summary": "After a deliberate room-entry cut, explore the oak-and-sage suite and its open sea-view terrace.",
+            "summary": "A softly layered suite opens toward a terrace and the sea beyond. Take a closer look at the space.",
             "continuity": "Continue the same limestone, oak and bronze palette. The corridor leads naturally through one room door; keep the bed, window and terrace fixed throughout the shot.",
             "desktop": "/demos/media/tours/hotel-suite-1080.mp4",
             "mobile": "/demos/media/tours/hotel-suite-720.mp4",
             "poster": "/demos/media/tours/hotel-suite-poster.webp",
+            "thumbnail": "/demos/media/tours/hotel-suite-thumb.webp",
             "src": "/demos/media/tours/hotel-suite-1080.mp4",
             "mobileSrc": "/demos/media/tours/hotel-suite-720.mp4"
           }
-        ]
+        ],
+        "presentation": {
+          "label": "Seaside stays",
+          "category": "A QUIETER KIND OF STAY",
+          "lead": "Somewhere to",
+          "accent": "slow down.",
+          "notesTitle": "A softer sense of arrival.",
+          "notesLabel": "THE STAY",
+          "features": [
+            ["Setting", "Sea-view terrace"],
+            ["Materiality", "Natural oak & soft greens"],
+            ["Experience", "Lobby to private suite"]
+          ],
+          "cta": "Explore the booking sample",
+          "signature": "Arrive gently. Stay a little longer."
+        }
       }
     </script>
   </body>
