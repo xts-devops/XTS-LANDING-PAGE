@@ -1,13 +1,15 @@
 # Robotic arm showcase
 
-The arm uses the existing local 1800×1080 silent clip. No new generation or Higgsfield use.
+The existing silent 1800×1080 master remains unchanged. A 1280×768 local delivery derivative is selected only for compact/coarse displays when it covers rendered width times DPR; larger views keep HD. It is 1,600,535 bytes versus the 5,076,759-byte master. Provenance and exact encoding command: media-v2/robotic-arm/mobile-delivery.json. No new generation, credits or runtime dependency.
 
-On fine-pointer hover desktops at least 1024×650, the media stage sticks below the header for 55svh of additional scroll distance, capped at 32rem. Its 5:3 image and Replay control fit inside the viewport. Native CSS sticky reserves the brief hold before motion boots, with no pin spacer or extra scroll listener. ScrollTrigger aligns playback with the sticky inset. The existing eased 1.8s explosion runs on its own clock rather than scrubbing for every wheel movement. The stage releases naturally at the end of the short runway; scrolling is never stopped, snapped or cancelled.
+## Visible native loop (D40)
 
-Mobile, touch/coarse pointer, short screens, reduced motion and no-JS keep normal document flow. Live resizing and motion preferences restore the appropriate layout through CSS and the existing GSAP cleanup. No content is trapped behind an enforced playback delay. Returning above the entry reassembles the arm; Replay remains available. Hidden/offscreen, buffering, media-error and data-saver behavior remain unchanged.
+The lightweight UI controller starts native video playback when 60% of the available scene area is visible, independent of GSAP boot or pointer interaction. Playback finishes on its own clock: approximately 3.2 seconds on compact/touch screens and 2.5 seconds on desktop, bounded by native playback-rate limits. The exploded frame holds for 2.2 seconds, dissolves to the assembled still, rests for 1.2 seconds, then repeats. Only the reset/replay seeks to zero; wheel movement never seeks individual frames. Native timeupdate events drive an interpolated progress line; there is no per-frame JS loop.
 
-This updates D30's desktop framing only; D34 records the user request. Original media provenance and native iOS release limitation remain in media-v2/robotic-arm/HIGGSFIELD-HANDOFF.md.
+Pause/Resume persists through viewport exit/re-entry. Replay restarts directly. Hidden/offscreen states, open previews and fast return-to-top pause playback and timers; return-to-top resets without reversing the film. A nearby scroll-triggered preload avoids entry downloads. Failed media, data saver and 2G use a lightweight two-photo dissolve loop. Reduced motion keeps stills and no autoplay/download; no-JS retains accessible images.
 
-Review: arm-transition.spec.ts validates independent completion, reverse/replay, visible control framing, short hold/release, resize/reduced-motion cleanup, buffering and fallback behavior. Screenshots/recording: docs/review/arm-hold (gitignored).
+Fine-pointer desktop retains a brief CSS sticky runway; touch/coarse and short screens keep normal document flow. Portrait and landscape framing reserves room for 44px controls below the scene, with additional short-screen clearance. No scroll lock, snap or forced viewing delay.
 
-Final revision validation: npm run verify passes with zero errors/warnings/hints; all 19 focused arm/motion/UI checks pass. Reviewed 375/768/1440/1920 captures and held/release states, with a recorded desktop wheel-scroll sequence. Motion JS stays within 70KB gzipped. Native iOS playback remains a release-device check.
+## Verification
+
+Focused browser coverage includes native looping, rapid viewport exit/re-entry, persistent manual pause, delayed/failed media and data-saver fallback, reduced motion, desktop HD, touch portrait/landscape framing, return-to-top, and playback with GSAP blocked. Native iOS release-device verification remains a separate check. Review captures/logs: docs/review/showcase-loops (gitignored).

@@ -74,7 +74,7 @@ for (const width of [375, 768, 1440])
     });
   }
 
-test('native journey loads on demand, pauses, and completes a finite four-chapter route', async ({
+test('native journey loads on demand, pauses, and loops a four-chapter route', async ({
   page,
 }) => {
   await mediaFixture(page);
@@ -113,8 +113,12 @@ test('native journey loads on demand, pauses, and completes a finite four-chapte
         '/demos/media/tours/fixture-' + (i + 1) + '.mp4',
       );
   }
-  await expect(root).toHaveAttribute('data-state', 'complete');
-  await expect(play).toHaveText('Replay journey');
+  await expect(page.locator('[data-tour-chapter="0"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(root).toHaveAttribute('data-state', 'playing');
+  await expect(play).toHaveText('Pause journey');
 });
 
 test('viewport playback is muted and ignores pointer exit; reduced motion avoids autoplay', async ({
@@ -188,7 +192,7 @@ test('live reduced motion releases active media instead of restarting it', async
 });
 
 for (const id of ['property', 'hotel'])
-  test(`${id} actual HD journey decodes and the final chapter completes the route`, async ({
+  test(`${id} actual HD journey decodes and the final chapter loops to the first`, async ({
     page,
   }) => {
     await page.goto('/demos/tours/' + id + '.html');
@@ -204,8 +208,12 @@ for (const id of ['property', 'hotel'])
     await video.evaluate((el: HTMLVideoElement) => {
       el.playbackRate = 8;
     });
-    await expect(root).toHaveAttribute('data-state', 'complete');
-    await expect(page.locator('[data-tour-chapter]').last()).toHaveAttribute(
+    await expect(page.locator('[data-tour-chapter="0"]')).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(root).toHaveAttribute('data-state', 'playing');
+    await expect(page.locator('[data-tour-chapter]').first()).toHaveAttribute(
       'aria-pressed',
       'true',
     );
@@ -487,15 +495,15 @@ test('manual chapter pause/resume continues through the remaining route', async 
   }
   await expect(page.locator('[data-journey]')).toHaveAttribute(
     'data-state',
-    'complete',
+    'playing',
   );
-  await expect(page.locator('[data-tour-chapter="3"]')).toHaveAttribute(
+  await expect(page.locator('[data-tour-chapter="0"]')).toHaveAttribute(
     'aria-pressed',
     'true',
   );
 });
 
-test('expanding a finished hover preview offers Replay instead of replaying its last instant', async ({
+test('expanding a looping preview preserves live playback', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -507,23 +515,35 @@ test('expanding a finished hover preview offers Replay instead of replaying its 
     'data-state',
     'playing',
   );
-  await inline.locator('video').evaluate((el: HTMLVideoElement) => {
-    el.playbackRate = 8;
-  });
-  await expect(card).toHaveAttribute('data-preview', 'complete');
-  await card.locator('[data-overview-open]').click();
-  const frame = page.locator('[data-overview-dialog]').frameLocator('iframe');
-  await expect(frame.locator('[data-tour-play]')).toHaveText('Replay journey');
-  await expect(frame.locator('video')).not.toHaveAttribute('src');
-  await frame.locator('[data-tour-play]').click();
-  await expect(frame.locator('[data-tour-chapter="0"]')).toHaveAttribute(
+  await inline
+    .locator('video')
+    .evaluate((v: HTMLVideoElement) => v.dispatchEvent(new Event('ended')));
+  await expect(inline.locator('[data-tour-chapter="1"]')).toHaveAttribute(
     'aria-pressed',
     'true',
   );
+  await expect(inline.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await inline
+    .locator('video')
+    .evaluate((v: HTMLVideoElement) => v.dispatchEvent(new Event('ended')));
+  await expect(inline.locator('[data-tour-chapter="0"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(inline.locator('[data-journey]')).toHaveAttribute(
+    'data-state',
+    'playing',
+  );
+  await card.locator('[data-overview-open]').click();
+  const frame = page.locator('[data-overview-dialog]').frameLocator('iframe');
   await expect(frame.locator('[data-journey]')).toHaveAttribute(
     'data-state',
     'playing',
   );
+  await expect(frame.locator('[data-tour-play]')).toHaveText('Pause journey');
 });
 
 test('a hidden expanded viewer releases media and restores the user pause at the same chapter', async ({

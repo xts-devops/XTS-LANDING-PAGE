@@ -69,6 +69,8 @@ export const site = {
     explodedSummary:
       'See how every part connects. We design, source and assemble each component, then put it to work.',
     replayArm: 'Replay transition',
+    pauseArm: 'Pause animation',
+    resumeArm: 'Resume animation',
     cta: 'Start a project like this',
     prev: 'Previous slide',
     next: 'Next slide',

@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-26",
+  "type": "Local delivery derivative; no new generation or credits",
+  "provenance": "generation-1080p.json; HIGGSFIELD-HANDOFF.md",
+  "source": {
+    "path": "src/assets/video/arm-exploded.mp4",
+    "width": 1800,
+    "height": 1080,
+    "bytes": 5076759,
+    "sha256": "75c2203657fc1add90d292a7a15fcdfb3a90a84167717bccb8af41084b7074bd"
+  },
+  "delivery": {
+    "path": "src/assets/video/arm-exploded-mobile.mp4",
+    "width": 1280,
+    "height": 768,
+    "bytes": 1600535,
+    "sha256": "cca527406ccb6d950b1069893520b27683dc23f9c1290ccf764217ebfbe0e59d"
+  },
+  "tool": "@ffmpeg-installer/win32-x64@4.1.0 (local review tool only)",
+  "command": "ffmpeg -i src/assets/video/arm-exploded.mp4 -vf scale=1280:-2 -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -g 48 -movflags +faststart -an src/assets/video/arm-exploded-mobile.mp4",
+  "selection": "Compact/coarse displays only when 1280 pixels covers rendered width times DPR. Original HD retained for larger views."
+}

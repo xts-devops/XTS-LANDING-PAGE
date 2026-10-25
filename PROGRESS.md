@@ -2,6 +2,16 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-26 · codex · Looping showcases and mobile arm ready
+**Task:** V2-SHOWCASE-LOOPS · owner: codex · status: review · PR #12 / xts-devops main.
+**Done:** Property/hotel films loop last-to-first with held-frame transitions and one upcoming buffer. Screenshot galleries retain six-second rotation and soften large/wrap jumps with a cancellable opacity fade. The arm now uses native visible-only playback independent of GSAP/pointer interaction, holds the exploded state then dissolves/reset-loops, and has persistent Pause/Resume plus Replay. Touch portrait/landscape keeps normal scroll flow and 44px controls inside the viewport. A 1280×768 derivative is 68.5% lighter and used only when it covers displayed pixels; original1800×1080 is unchanged. No paid generation, new runtime dependencies or per-frame JS loops.
+**Validation:** npm run verify passes. Combined126-case regression had125 passes and caught a short-landscape wrapped-control issue; after fixing it, all16 focused arm/loop checks pass, covering both touch sizes, native HD/no seek-scrubbing, fallback, offscreen/re-entry, reduced motion and controls. The combined suite also covers journeys, carousels, overviews, return-to-top, navigation, performance and JS budget. Captures375/568/768/1440 and logs: docs/review/showcase-loops (gitignored). Native iOS release-device testing remains separate.
+**Publication:** Push verified branch to origin PR #12 and xts-devops/main; localhost4380 serves rebuilt dist. No public-hosting/DNS changes.
+
+## 2026-10-26 · codex · Looping showcases and mobile arm claim
+**Task:** V2-SHOWCASE-LOOPS · owner: codex · status: in-progress.
+**Scope:** Cyclic property/hotel playback and bounded wrap prebuffering, carousel wrap transitions, native visible-only robotic-arm controller and mobile trigger/layout/controls, viewport-sized local media derivative if useful, focused tests and docs. Preserve explicit pause, reduced motion/data saver and original HD masters. No Higgsfield or paid generation. Publish verified changes to origin PR #12, xts-devops/main and localhost4380.
+
 ## 2026-10-26 · codex · Cold-load and performance audit ready
 **Task:** V2-PERFORMANCE · owner: codex · status: review · origin PR #12 / xts-devops main.
 **Done:** New headline Technology. Made to work. and broader supporting/intro copy. Original hero HTML/SVG display planes mount via CSS before the UI bundle, with an early resize-aware fallback for older engines; shared fitting skips managed hero planes and batches other reads before writes. Conditional form-module initialization cuts initial minified JS from52,238 to34,643 bytes (33.7%). Fixed preview event detail and made Lenis stop its ticker under dialogs/hidden documents. No source image/video/font changes, lower resolutions, removed effects, dependencies or shared config edits.

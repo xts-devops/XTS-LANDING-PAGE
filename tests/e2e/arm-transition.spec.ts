@@ -38,8 +38,11 @@ for (const width of [375, 768, 1440]) {
     await expect.poll(() => progress(page)).toBeLessThan(0.4);
     await expect(replay).toBeEnabled();
     await expect.poll(() => progress(page)).toBeGreaterThan(0.98);
-    await page.evaluate(() => scrollBy({ top: -100, behavior: 'instant' }));
-    await expect.poll(() => progress(page)).toBeLessThan(0.02);
+    await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+    await expect(page.locator('[data-exploded-video]')).toHaveJSProperty(
+      'paused',
+      true,
+    );
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(replay).not.toBeVisible();
     await expect(page.locator('[data-exploded-video]')).not.toHaveAttribute(
@@ -71,7 +74,7 @@ test('late media waits at the assembled frame then performs the whole transition
     .toBeGreaterThan(0.98);
 });
 for (const mode of ['save-data', 'failed-video']) {
-  test(`${mode} keeps a finite photo fallback`, async ({ page }) => {
+  test(`${mode} keeps a looping photo fallback`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     if (mode === 'save-data')
       await page.addInitScript(() =>

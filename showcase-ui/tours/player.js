@@ -223,10 +223,10 @@
       /(^|-)2g$/.test(connection?.effectiveType || '') ||
       document.hidden ||
       !visible ||
-      index + 1 >= chapters.length
+      chapters.length < 2
     )
       return;
-    const next = sourceFor(config.chapters[index + 1]);
+    const next = sourceFor(config.chapters[(index + 1) % chapters.length]);
     if (!next || prepared?.getAttribute('src') === next) return;
     const request = operation;
     warmTimer = setTimeout(() => {
@@ -305,15 +305,7 @@
       wantPlay = false;
       savedTime = 0;
       chapters[index].style.setProperty('--played', '1');
-      if (index + 1 < chapters.length) void select(index + 1, true);
-      else {
-        clearBuffer();
-        root.dataset.state = 'complete';
-        setStatus('Journey complete. Replay or explore a chapter.');
-        sync();
-        checkpoint();
-        send({ type: 'xts:overview-ended' });
-      }
+      void select((index + 1) % chapters.length, true);
     });
   };
   const begin = async () => {

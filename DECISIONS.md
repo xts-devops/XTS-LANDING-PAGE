@@ -124,3 +124,6 @@ For the delivered property/hotel preview films, permit one upcoming native-video
 
 ### D39 · 2026-10-25 · user · Viewport journey autoplay and chapter continuation
 Supersedes the single-chapter override in D38: property/hotel journeys should start as the viewing area becomes visible, and chapter selection continues automatically to following chapters. Retain explicit Pause, reduced-motion/data-saver opt-outs, one active preview and bounded buffering. No new media generation.
+
+### D40 · 2026-10-26 · user · Visible showcase loops and mobile arm
+Supersedes finite video-tour completion in D39: showcase films loop last-to-first while visible, including after chapter selection. Keep explicit Pause, reduced motion/data saver, one active frame and bounded next-clip buffering. Screenshot carousels keep six-second rotation and receive softer wrap transitions. Improve the arm trigger/preview on phones without scroll capture or a long touch pin; use native media playback rather than per-frame seeking where possible. Original HD media remains available. No paid generation.

@@ -1,9 +1,10 @@
 ---
+import mobileVideoUrl from '../../assets/video/arm-exploded-mobile.mp4?url';
 /**
- * Robotics centrepiece (PLAN-v2 §4): a robotic arm that comes apart as you scroll.
+ * Robotics centrepiece (PLAN-v2 §4): a robotic arm that loops while its scene is visible.
  * Media, best available first:
- *   1. video  src/assets/video/arm-exploded.(mp4|webm) → finite viewport transition (short-GOP encode)
- *   2. photos robotics/hero-arm + robotics/arm-exploded → finite transition between the two
+ *   1. video  src/assets/video/arm-exploded.(mp4|webm) → native visible-only playback
+ *   2. photos robotics/hero-arm + robotics/arm-exploded → a compositor-driven photo loop
  *   3. neither yet → placeholders (still laid out, so the page is complete)
  * No JS / reduced motion: both states side by side, static. Lazy: nothing heavy loads before
  * the visitor scrolls near it.
@@ -65,6 +66,7 @@ const copy = site.servicePage;
           class="exploded-video"
           data-exploded-video
           data-src={videoUrl}
+          data-mobile-src={mobileVideoUrl}
           muted
           playsinline
           preload="none"
@@ -74,10 +76,23 @@ const copy = site.servicePage;
       <div class="exploded-progress" aria-hidden="true">
         <i data-exploded-bar />
       </div>
-      <button type="button" class="exploded-replay" data-arm-replay hidden>
-        <span aria-hidden="true">↻</span>
-        {copy.replayArm}
-      </button>
+      <div class="exploded-controls">
+        <button
+          type="button"
+          class="exploded-replay"
+          data-arm-toggle
+          data-pause-label={copy.pauseArm}
+          data-resume-label={copy.resumeArm}
+          aria-pressed="false"
+          hidden
+        >
+          {copy.pauseArm}
+        </button>
+        <button type="button" class="exploded-replay" data-arm-replay hidden>
+          <span aria-hidden="true">↻</span>
+          {copy.replayArm}
+        </button>
+      </div>
     </div>
   </div>
 </section>

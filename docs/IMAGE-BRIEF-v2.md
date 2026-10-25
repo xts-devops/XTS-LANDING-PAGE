@@ -211,3 +211,9 @@ HD videos preserve native1920x1080 source quality via lossless faststart remux;7
 | public/demos/media/retail/cable.webp | Generated · built-in imagegen | One generated contact sheet, cropped and resized to 400 × 300 WebP. Exact prompt and provenance: docs/media-v2/retail-generation.json. No real brand or stock source. |
 | public/demos/media/retail/paint.webp | Generated · built-in imagegen | One generated contact sheet, cropped and resized to 400 × 300 WebP. Exact prompt and provenance: docs/media-v2/retail-generation.json. No real brand or stock source. |
 | public/demos/media/retail/gloves.webp | Generated · built-in imagegen | One generated contact sheet, cropped and resized to 400 × 300 WebP. Exact prompt and provenance: docs/media-v2/retail-generation.json. No real brand or stock source. |
+
+### Robotic-arm mobile delivery derivative — 2026-10-26
+
+| Filename | Source | Prompt / rights record |
+| --- | --- | --- |
+| src/assets/video/arm-exploded-mobile.mp4 | Derived from existing generated arm-exploded.mp4 master | Local 1280×768 H.264/CRF18/faststart delivery export. Original generated provenance: docs/media-v2/robotic-arm/generation-1080p.json. Export command, hashes and sizes: mobile-delivery.json in that folder. No new prompt, generation, stock or credits. |

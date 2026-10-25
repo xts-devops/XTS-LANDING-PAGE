@@ -1,3 +1,4 @@
+import { initArmPreview } from './arm';
 import { initBackToTop } from './back-top';
 import { initHeroWorkspace } from './hero-workspace';
 import { observePhotoStages } from './photo-fit';
@@ -153,3 +154,5 @@ initPhotoGallery();
 initHeroWorkspace();
 
 initBackToTop();
+
+initArmPreview();

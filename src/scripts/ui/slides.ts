@@ -139,10 +139,19 @@ export function initSlides(root: ParentNode = document) {
       if (label && label.textContent !== count) label.textContent = count;
       syncRotation();
     };
+    let wrapFade: Animation | undefined;
     const go = (index: number, instant = false) => {
+      wrapFade?.cancel();
+      const soften =
+        !instant && !preference.matches && Math.abs(index - current) > 1;
       const target = slides[Math.min(slides.length - 1, Math.max(0, index))];
       resetProgress(Math.min(slides.length - 1, Math.max(0, index)));
       syncRotation();
+      if (soften)
+        wrapFade = track.animate([{ opacity: 0.45 }, { opacity: 1 }], {
+          duration: 220,
+          easing: 'ease-out',
+        });
       track.scrollTo({
         left: target.offsetLeft - slides[0].offsetLeft,
         behavior:
@@ -280,7 +289,10 @@ export function initSlides(root: ParentNode = document) {
     addEventListener('blur', release);
     track.addEventListener('lostpointercapture', release);
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) pointerActive = false;
+      if (document.hidden) {
+        pointerActive = false;
+        wrapFade?.cancel();
+      }
       syncRotation();
     });
     document.querySelectorAll('dialog').forEach((dialog) => {
@@ -291,6 +303,7 @@ export function initSlides(root: ParentNode = document) {
     });
     document.addEventListener('site:preview', syncRotation);
     preference.addEventListener('change', () => {
+      wrapFade?.cancel();
       idleUntil = 0;
       syncRotation();
     });

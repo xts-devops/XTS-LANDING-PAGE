@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import industryDemos from '../../src/content/industry-demos.json' with { type: 'json' };
 for (const d of industryDemos) {
-  test(`${d.id} overview performs a finite preview`, async ({ page }) => {
+  test(`${d.id} overview follows its playback policy`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.goto('/services/' + d.service);
     const card = page.locator(`[data-overview="${d.id}"]`),
@@ -29,9 +29,18 @@ for (const d of industryDemos) {
       await expect(frame.locator('.overview-cursor')).toBeVisible();
       await expect(frame.locator('.overview-caption')).not.toHaveText('');
     }
-    await expect(card).toHaveAttribute('data-preview', 'complete', {
-      timeout: 15000,
-    });
+    if (!tour)
+      await expect(card).toHaveAttribute('data-preview', 'complete', {
+        timeout: 15000,
+      });
+    else {
+      await expect(
+        frame.locator(
+          '[data-tour-chapter="' + (d.id === 'vista' ? 3 : 1) + '"]',
+        ),
+      ).toHaveAttribute('aria-pressed', 'true', { timeout: 15000 });
+      await expect(card).toHaveAttribute('data-preview', 'playing');
+    }
     await expect(button).toHaveAccessibleName(`View full screen: ${d.title}`);
     if (d.id === 'retail') {
       await expect(
