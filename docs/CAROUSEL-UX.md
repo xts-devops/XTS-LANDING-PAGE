@@ -29,3 +29,10 @@ The fictional coffee shop POS uses nine generated photographic product thumbnail
 Check 375/768/1440 layouts, navigation geometry, 6-second timing, looping, 6-second idle/reset behavior, persistent pause/resume, keyboard/reduced motion, hidden panels, product asset loading and the full-screen inspector. Capture all 40 sample screens with `npm run capture:ui`, then run `npm run verify` and the browser suite. Review artifacts remain gitignored under `docs/review/carousel-ux`.
 
 Current revision validation: npm run verify passes with zero errors/warnings/hints, and all 23 carousel checks pass at the six-second interval, including the CSS duration, complete POS loop, manual grace, pause/resume, offscreen remaining-time recovery and responsive line placement. Updated captures/logs: docs/review/slideshow-six (gitignored). Prior service/accessibility and motion-budget results are recorded in PROGRESS.md.
+
+
+## Initiation reliability — 2026-10-25
+
+The active preview starts when it intersects the readable viewport area; a tall frame no longer needs 35% of its entire area visible. Normal vertical wheel/touch page scrolling does not start the manual reading grace. Horizontal wheel/swipe gestures and explicit navigation still freeze/reset the six-second grace; pointer contact itself freezes only while held. Pointer cancellation, lost capture, window blur and visibility changes recover a missing release. Dialog open-state mutations independently suspend/resume rotation, including inspectors opened without a preview event. Six-second intervals, CSS progress/deadline synchronization, explicit Pause, keyboard-focus suspension and reduced-motion behavior remain.
+
+Native scroll-end finalizes active-slide bookkeeping in addition to the event-driven scroll-frame update, so settled smooth transitions do not depend on one pending animation frame. Regression timing separates the mocked deadline from native compositor settling.

@@ -18,6 +18,8 @@ export function initSlides(root: ParentNode = document) {
       paused = false,
       keyboardFocused = false,
       pointerActive = false,
+      pointerX = 0,
+      pointerY = 0,
       visible = false,
       idleUntil = 0,
       advanceAt = 0,
@@ -175,17 +177,29 @@ export function initSlides(root: ParentNode = document) {
       'pointerdown',
       (event) => {
         pointerActive = true;
+        pointerX = event.clientX;
+        pointerY = event.clientY;
         keyboardFocused = false;
         if (event.target instanceof Node && rotation?.contains(event.target))
           syncRotation();
-        else override();
+        else if (
+          event.target instanceof Element &&
+          event.target.closest('button')
+        )
+          override();
+        else syncRotation();
       },
       { passive: true },
     );
     wrap.addEventListener(
       'pointermove',
-      () => {
-        if (pointerActive) override();
+      (event) => {
+        if (
+          pointerActive &&
+          Math.abs(event.clientX - pointerX) >
+            Math.max(6, Math.abs(event.clientY - pointerY))
+        )
+          override();
       },
       { passive: true },
     );
@@ -210,7 +224,15 @@ export function initSlides(root: ParentNode = document) {
         }
       }),
     );
-    track.addEventListener('wheel', override, { passive: true });
+    track.addEventListener(
+      'wheel',
+      (event) => {
+        // Vertical wheel input scrolls the page, not the slideshow.
+        if (event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY))
+          override();
+      },
+      { passive: true },
+    );
     track.addEventListener('keydown', (event) => {
       if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
       event.preventDefault();
@@ -232,12 +254,17 @@ export function initSlides(root: ParentNode = document) {
       },
       { passive: true },
     );
+    track.addEventListener('scrollend', () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+      update();
+    });
     new IntersectionObserver(
       ([entry]) => {
-        visible = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+        visible = entry.isIntersecting;
         syncRotation();
       },
-      { threshold: [0, 0.35] },
+      { threshold: 0, rootMargin: '-64px 0px -24px 0px' },
     ).observe(wrap.querySelector('.slides-stage') ?? track);
     new ResizeObserver(() => {
       go(current, true);
@@ -250,7 +277,18 @@ export function initSlides(root: ParentNode = document) {
         attributes: true,
         attributeFilter: ['hidden'],
       });
-    document.addEventListener('visibilitychange', syncRotation);
+    addEventListener('blur', release);
+    track.addEventListener('lostpointercapture', release);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pointerActive = false;
+      syncRotation();
+    });
+    document.querySelectorAll('dialog').forEach((dialog) => {
+      new MutationObserver(syncRotation).observe(dialog, {
+        attributes: true,
+        attributeFilter: ['open'],
+      });
+    });
     document.addEventListener('site:preview', syncRotation);
     preference.addEventListener('change', () => {
       idleUntil = 0;

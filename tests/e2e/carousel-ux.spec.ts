@@ -407,3 +407,121 @@ test('the line follows a shorter active frame without changing stage height', as
     height,
   );
 });
+
+test('vertical page scrolling does not delay autoplay; horizontal input still gets reading grace', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const start = new Date('2026-10-25T00:00:00Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(start);
+  await page.goto('/services/business-systems');
+  const panel = page.getByRole('tabpanel'),
+    wrap = panel.locator('[data-slides]'),
+    track = panel.locator('[data-slides-track]'),
+    count = panel.locator('[data-count-label]');
+  await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
+  await expect(wrap).toHaveAttribute('data-rotating', 'true');
+  await track.dispatchEvent('wheel', { deltaY: 150, deltaX: 0 });
+  await expect(wrap).toHaveAttribute('data-idle', 'false');
+  await page.clock.runFor(6800);
+  await expect(count).toHaveText('2 of 6');
+  await track.dispatchEvent('wheel', { deltaX: 120, deltaY: 0 });
+  await expect(wrap).toHaveAttribute('data-idle', 'true');
+});
+test('a tall partially visible preview starts without requiring 35 percent of its full height', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 500 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const start = new Date('2026-10-25T00:00:00Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(start);
+  await page.goto('/services/business-systems');
+  const panel = page.getByRole('tabpanel'),
+    stage = panel.locator('.slides-stage'),
+    wrap = panel.locator('[data-slides]');
+  await stage.evaluate((el) =>
+    scrollTo({
+      top: scrollY + el.getBoundingClientRect().bottom - 180,
+      behavior: 'instant',
+    }),
+  );
+  await expect(wrap).toHaveAttribute('data-rotating', 'true');
+  await page.clock.runFor(6800);
+  await expect
+    .poll(async () => {
+      await page.clock.runFor(100);
+      return panel.locator('[data-count-label]').textContent();
+    })
+    .toBe('2 of 6');
+});
+test('lost pointer release recovers rotation instead of leaving it permanently suspended', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const start = new Date('2026-10-25T00:00:00Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(start);
+  await page.goto('/services/business-systems');
+  const panel = page.getByRole('tabpanel'),
+    wrap = panel.locator('[data-slides]');
+  await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
+  await wrap.dispatchEvent('pointerdown', {
+    pointerId: 1,
+    pointerType: 'mouse',
+  });
+  await expect(wrap).toHaveAttribute('data-rotating', 'false');
+  await page.evaluate(() => dispatchEvent(new Event('blur')));
+  await page.clock.runFor(13000);
+  await expect(wrap).toHaveAttribute('data-rotating', 'true');
+  await expect(panel.locator('[data-count-label]')).not.toHaveText('1 of 6');
+});
+
+test('vertical touch movement resumes without grace while a horizontal swipe gets reading time', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const start = new Date('2026-10-25T00:00:00Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(start);
+  await page.goto('/services/business-systems');
+  const panel = page.getByRole('tabpanel'),
+    track = panel.locator('[data-slides-track]'),
+    wrap = panel.locator('[data-slides]');
+  await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
+  await track.dispatchEvent('pointerdown', {
+    pointerId: 7,
+    pointerType: 'touch',
+    clientX: 100,
+    clientY: 100,
+  });
+  await track.dispatchEvent('pointermove', {
+    pointerId: 7,
+    pointerType: 'touch',
+    clientX: 102,
+    clientY: 200,
+  });
+  await page.evaluate(() =>
+    dispatchEvent(new PointerEvent('pointerup', { pointerId: 7 })),
+  );
+  await expect(wrap).toHaveAttribute('data-idle', 'false');
+  await page.clock.runFor(6800);
+  await expect(panel.locator('[data-count-label]')).toHaveText('2 of 6');
+  await track.dispatchEvent('pointerdown', {
+    pointerId: 8,
+    pointerType: 'touch',
+    clientX: 100,
+    clientY: 100,
+  });
+  await track.dispatchEvent('pointermove', {
+    pointerId: 8,
+    pointerType: 'touch',
+    clientX: 160,
+    clientY: 104,
+  });
+  await page.evaluate(() =>
+    dispatchEvent(new PointerEvent('pointerup', { pointerId: 8 })),
+  );
+  await expect(wrap).toHaveAttribute('data-idle', 'true');
+});

@@ -6,7 +6,33 @@ export function initBackToTop() {
   if (!link) return;
   const root = document.documentElement;
   const motion = matchMedia('(prefers-reduced-motion:reduce)');
-  let running = false;
+  let running = false,
+    nearFooter = false;
+  const syncVisibility = () => {
+    const available =
+      !document.querySelector('dialog[open]') &&
+      (nearFooter || running || document.activeElement === link);
+    link.dataset.visible = String(available);
+    link.inert = !available;
+    link.setAttribute('aria-hidden', String(!available));
+  };
+  const footer = link.closest('footer');
+  if (footer)
+    new IntersectionObserver(
+      ([entry]) => {
+        nearFooter = entry.isIntersecting;
+        syncVisibility();
+      },
+      { rootMargin: '0px 0px 120px 0px' },
+    ).observe(footer);
+  document.querySelectorAll('dialog').forEach((dialog) =>
+    new MutationObserver(syncVisibility).observe(dialog, {
+      attributes: true,
+      attributeFilter: ['open'],
+    }),
+  );
+  link.addEventListener('blur', () => queueMicrotask(syncVisibility));
+  syncVisibility();
   link.addEventListener('click', (event) => {
     if (
       event.button !== 0 ||
@@ -32,6 +58,7 @@ export function initBackToTop() {
       clearTimeout(timeout);
       input.abort();
       root.removeAttribute('data-returning-top');
+      syncVisibility();
     };
     const finish = () => {
       if (done) return;

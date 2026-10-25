@@ -14,7 +14,7 @@ for (const path of [
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(path);
     const link = page.locator('[data-back-top]');
-    await link.scrollIntoViewIfNeeded();
+    await page.locator('.site-footer').scrollIntoViewIfNeeded();
     await expect(link).toBeVisible();
     await expect(link).toHaveAccessibleName('Back to top');
     const r = await link.boundingBox();
@@ -49,8 +49,8 @@ for (const path of ['/', '/services/custom-software']) {
     await expect(link).toBeInViewport();
     const start = await page.evaluate(() => scrollY);
     expect(start).toBeGreaterThan(1000);
-    const time = Date.now();
     await link.click();
+    const time = Date.now();
     await page.waitForTimeout(100);
     const intermediate = await page.evaluate(() => scrollY);
     expect(intermediate).toBeGreaterThan(0);
@@ -75,7 +75,7 @@ test('touch fallback returns quickly without loading a desktop scroll engine', a
   });
   const p = await c.newPage();
   await p.goto('http://127.0.0.1:4380/services/custom-software');
-  await p.locator('[data-back-top]').scrollIntoViewIfNeeded();
+  await p.locator('.site-footer').scrollIntoViewIfNeeded();
   await p.locator('[data-back-top]').tap();
   await expect
     .poll(() => p.evaluate(() => scrollY), { timeout: 1200 })
@@ -91,7 +91,7 @@ test('new user input interrupts a return without stealing focus', async ({
   await page.waitForFunction(() =>
     document.querySelector('.has-gallery-motion'),
   );
-  await page.locator('[data-back-top]').scrollIntoViewIfNeeded();
+  await page.locator('.site-footer').scrollIntoViewIfNeeded();
   await page.locator('[data-back-top]').click();
   await page.waitForTimeout(80);
   await page.mouse.wheel(0, 100);
@@ -108,3 +108,29 @@ test('native return works without JavaScript', async ({ browser }) => {
   await expect.poll(() => p.evaluate(() => scrollY)).toBeLessThanOrEqual(1);
   await c.close();
 });
+
+for (const width of [375, 768, 1440])
+  test(`return control floats clear of footer links at ${width}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/services/custom-software');
+    const link = page.locator('[data-back-top]');
+    await expect(link).toBeHidden();
+    await page.locator('.site-footer').scrollIntoViewIfNeeded();
+    await expect(link).toBeVisible();
+    const r = await link.boundingBox();
+    expect(r!.height).toBeGreaterThanOrEqual(48);
+    expect(r!.x + r!.width).toBeLessThanOrEqual(width - 12);
+    expect(r!.y + r!.height).toBeLessThanOrEqual(900 - 12);
+    expect(await link.evaluate((el) => getComputedStyle(el).position)).toBe(
+      'fixed',
+    );
+    for (const legal of await page.locator('.footer-legal a').all()) {
+      const b = await legal.boundingBox();
+      expect(b!.y + b!.height <= r!.y || b!.x + b!.width <= r!.x).toBe(true);
+    }
+    await link.click();
+    await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+    await expect(link).toBeHidden();
+  });

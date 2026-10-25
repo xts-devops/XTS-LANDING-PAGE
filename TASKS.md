@@ -131,3 +131,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-JOURNEY-POLISH Editorial property/hotel samples** — editorial themes, precise controls, lightweight thumbnails and 108 checks ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-BACK-TOP Quick footer return** — 550ms accessible footer return, native fallback and 31 checks ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-CAROUSEL-RECOVERY Autoplay and return positioning** — reliable visible autoplay, directional input and lower-right return; 61 checks ... owner: codex · status: review (codex/v2-ui-refinement)

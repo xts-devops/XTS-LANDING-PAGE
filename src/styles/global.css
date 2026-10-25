@@ -430,3 +430,52 @@ html {
     transform: translateY(-2px);
   }
 }
+
+/* Near-footer return, anchored to the viewport edge with room for native safe areas. */
+.js .footer-bottom {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+.js .footer-bottom .footer-back-top {
+  position: fixed;
+  right: max(1.25rem, calc(env(safe-area-inset-right) + 0.75rem));
+  bottom: max(1.25rem, calc(env(safe-area-inset-bottom) + 0.75rem));
+  z-index: 40;
+  min-height: 48px;
+  background: var(--color-surface);
+  box-shadow: 0 0.35rem 1.2rem rgb(0 0 0 / 0.25);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition:
+    opacity var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+.js .footer-bottom .footer-back-top[data-visible='true'] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+@media (max-width: 700px) {
+  .js .footer-bottom .footer-back-top {
+    width: 48px;
+    height: 48px;
+    padding: 0.75rem;
+    justify-content: center;
+  }
+  .js .footer-back-top .back-top-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .footer-bottom .footer-back-top {
+    transition: none;
+    transform: none;
+  }
+}
