@@ -218,7 +218,9 @@ export function initIndustryDemos() {
     viewport.scrollTo(0, 0);
     fit();
     close.focus({ preventScroll: true });
-    document.dispatchEvent(new Event('site:preview'));
+    document.dispatchEvent(
+      new CustomEvent('site:preview', { detail: { open: true } }),
+    );
     start(card, true, position);
   };
   const closeViewer = () => {
@@ -251,7 +253,9 @@ export function initIndustryDemos() {
     queueMicrotask(() => {
       restoringFocus = false;
     });
-    document.dispatchEvent(new Event('site:preview'));
+    document.dispatchEvent(
+      new CustomEvent('site:preview', { detail: { open: false } }),
+    );
   });
   sizing.addEventListener('click', () => {
     actual = !actual;

@@ -8,7 +8,6 @@ import { initScreenPreview } from './preview';
 import { initAnchors } from './anchors';
 import { initTabs } from './tabs';
 import { initSlides } from './slides';
-import { initForm } from '../form';
 
 /** Header gains its border/backdrop once the page scrolls. */
 function initHeader() {
@@ -83,7 +82,13 @@ initActiveNav();
 initMobileMenu();
 initTabs();
 initSlides();
-initForm();
+// Disabled forms and pages without a form do not need the validation/schema bundle.
+const inquiry = document.querySelector<HTMLFormElement>(
+  'form[data-form="inquiry"]',
+);
+if (inquiry?.dataset.accessKey) {
+  void import('../form').then(({ initForm }) => initForm()).catch(() => {});
+}
 
 /** Buttons work with native swipe and with the desktop scroll-driven gallery. */
 function initWorkControls() {

@@ -386,16 +386,35 @@ function initSmoothScroll(
         : {}),
     });
   };
-  const onPreview = (event: Event) => {
-    if ((event as CustomEvent<{ open: boolean }>).detail.open) lenis.stop();
-    else lenis.start();
+  let modalOpen = Boolean(document.querySelector('dialog[open]'));
+  const activity = () => {
+    if (
+      document.hidden ||
+      modalOpen ||
+      document.querySelector('dialog[open]')
+    ) {
+      lenis.stop();
+      gsap.ticker.remove(tick);
+    } else {
+      lenis.start();
+      gsap.ticker.add(tick);
+    }
   };
+  const onPreview = (event: Event) => {
+    modalOpen =
+      (event as CustomEvent<{ open?: boolean }>).detail?.open ??
+      Boolean(document.querySelector('dialog[open]'));
+    activity();
+  };
+  document.addEventListener('visibilitychange', activity);
+  activity();
   document.addEventListener('site:preview', onPreview);
   document.addEventListener('site:anchor', onAnchor);
   return {
     lenis,
     destroy: () => {
       document.removeEventListener('site:anchor', onAnchor);
+      document.removeEventListener('visibilitychange', activity);
       document.removeEventListener('site:preview', onPreview);
       gsap.ticker.remove(tick);
       lenis.destroy();

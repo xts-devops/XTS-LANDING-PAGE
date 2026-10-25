@@ -1,0 +1,516 @@
+{
+  "date": "2026-10-26",
+  "method": {
+    "browser": "Playwright Chromium",
+    "viewportWidths": [375, 1440],
+    "height": 900,
+    "cpuSlowdown": 4,
+    "latencyMs": 40,
+    "downloadBytesPerSecond": 1250000,
+    "cacheDisabled": true,
+    "notes": "Fresh context per route. Isolated after run. Single-run diagnostic timings, not field Core Web Vitals or a universal speed guarantee. Terms has no baseline sample."
+  },
+  "bundle": {
+    "beforeMinifiedBytes": 52238,
+    "afterMinifiedBytes": 34643,
+    "reductionPercent": 33.7
+  },
+  "before": [
+    {
+      "width": 375,
+      "route": "/",
+      "cold": {
+        "lcp": 1516,
+        "cls": 0.0028,
+        "longTasks": 1,
+        "blockingMs": 44,
+        "bytes": 138345,
+        "requests": 8,
+        "dcl": 1633
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 316449,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/business-systems",
+      "cold": {
+        "lcp": 836,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 76,
+        "bytes": 114055,
+        "requests": 7,
+        "dcl": 1160
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 243335,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/custom-software",
+      "cold": {
+        "lcp": 968,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 909,
+        "bytes": 111188,
+        "requests": 7,
+        "dcl": 887
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 206753,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/automation",
+      "cold": {
+        "lcp": 1344,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 954,
+        "bytes": 118288,
+        "requests": 7,
+        "dcl": 1218
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 208400,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/robotics",
+      "cold": {
+        "lcp": 968,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 833,
+        "bytes": 207253,
+        "requests": 9,
+        "dcl": 302
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 341794,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/privacy",
+      "cold": {
+        "lcp": 716,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 48,
+        "bytes": 61426,
+        "requests": 4,
+        "dcl": 298
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 111503,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/",
+      "cold": {
+        "lcp": 1892,
+        "cls": 0.0321,
+        "longTasks": 3,
+        "blockingMs": 1931,
+        "bytes": 266872,
+        "requests": 10,
+        "dcl": 292
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 757577,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/business-systems",
+      "cold": {
+        "lcp": 1016,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 30,
+        "bytes": 174144,
+        "requests": 10,
+        "dcl": 1070
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 325778,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/custom-software",
+      "cold": {
+        "lcp": 1172,
+        "cls": 0,
+        "longTasks": 3,
+        "blockingMs": 1072,
+        "bytes": 152881,
+        "requests": 8,
+        "dcl": 1055
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 339339,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/automation",
+      "cold": {
+        "lcp": 1120,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 51,
+        "bytes": 179702,
+        "requests": 9,
+        "dcl": 979
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 321110,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/robotics",
+      "cold": {
+        "lcp": 1160,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 723,
+        "bytes": 210059,
+        "requests": 7,
+        "dcl": 277
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 506317,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/privacy",
+      "cold": {
+        "lcp": 640,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 162,
+        "bytes": 61426,
+        "requests": 4,
+        "dcl": 216
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 111503,
+        "mediaRequests": 0
+      },
+      "errors": []
+    }
+  ],
+  "after": [
+    {
+      "width": 375,
+      "route": "/",
+      "cold": {
+        "lcp": 1284,
+        "cls": 0,
+        "longTasks": 3,
+        "blockingMs": 38,
+        "bytes": 132311,
+        "requests": 8,
+        "dcl": 1321
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 310415,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/business-systems",
+      "cold": {
+        "lcp": 848,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 115,
+        "bytes": 108021,
+        "requests": 7,
+        "dcl": 986
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 237301,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/custom-software",
+      "cold": {
+        "lcp": 1008,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 34,
+        "bytes": 105154,
+        "requests": 7,
+        "dcl": 1062
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 200719,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/automation",
+      "cold": {
+        "lcp": 1148,
+        "cls": 0,
+        "longTasks": 3,
+        "blockingMs": 1108,
+        "bytes": 112254,
+        "requests": 7,
+        "dcl": 892
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 202366,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/services/robotics",
+      "cold": {
+        "lcp": 916,
+        "cls": 0,
+        "longTasks": 0,
+        "blockingMs": 0,
+        "bytes": 201219,
+        "requests": 9,
+        "dcl": 925
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 335760,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/terms",
+      "cold": {
+        "lcp": 560,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 222,
+        "bytes": 55392,
+        "requests": 4,
+        "dcl": 183
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 105469,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 375,
+      "route": "/privacy",
+      "cold": {
+        "lcp": 572,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 260,
+        "bytes": 55392,
+        "requests": 4,
+        "dcl": 182
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 105469,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/",
+      "cold": {
+        "lcp": 1548,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 1138,
+        "bytes": 260838,
+        "requests": 10,
+        "dcl": 275
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 686000,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/business-systems",
+      "cold": {
+        "lcp": 768,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 61,
+        "bytes": 168110,
+        "requests": 10,
+        "dcl": 1025
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 319744,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/custom-software",
+      "cold": {
+        "lcp": 1244,
+        "cls": 0,
+        "longTasks": 2,
+        "blockingMs": 817,
+        "bytes": 146847,
+        "requests": 8,
+        "dcl": 847
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 333305,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/automation",
+      "cold": {
+        "lcp": 924,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 49,
+        "bytes": 173668,
+        "requests": 9,
+        "dcl": 856
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 315076,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/services/robotics",
+      "cold": {
+        "lcp": 644,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 4,
+        "bytes": 204025,
+        "requests": 7,
+        "dcl": 818
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 500283,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/terms",
+      "cold": {
+        "lcp": 520,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 128,
+        "bytes": 55392,
+        "requests": 4,
+        "dcl": 241
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 105469,
+        "mediaRequests": 0
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "route": "/privacy",
+      "cold": {
+        "lcp": 484,
+        "cls": 0,
+        "longTasks": 1,
+        "blockingMs": 136,
+        "bytes": 55392,
+        "requests": 4,
+        "dcl": 179
+      },
+      "final": {
+        "horizontal": false,
+        "totalBytes": 105469,
+        "mediaRequests": 0
+      },
+      "errors": []
+    }
+  ]
+}

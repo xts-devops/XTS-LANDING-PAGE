@@ -20,6 +20,7 @@ const laptop = quadMatrix3d(512, 440, [
 <div
   class="on-photo hero-workspace"
   data-fit-stage="2400"
+  data-css-cover
   style="width:2400px;height:1400px"
   aria-hidden="true"
 >
@@ -322,3 +323,34 @@ const laptop = quadMatrix3d(512, 440, [
     </svg>
   </div>
 </div>
+
+<script is:inline>
+  // Older browsers get their first fit before paint, without waiting for the UI bundle.
+  (() => {
+    if (CSS.supports('scale', 'calc(1px / 1px)')) return;
+    const stage = document.currentScript?.previousElementSibling;
+    if (!(stage instanceof HTMLElement) || !stage.parentElement) return;
+    const photo = stage.parentElement;
+    const image = photo.querySelector('img');
+    if (!image) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      if (!width || !height) return;
+      const scale = Math.max(width / 2400, height / 1400);
+      const position = getComputedStyle(image)
+        .objectPosition.split(' ')
+        .map((value) => parseFloat(value) / 100);
+      stage.style.setProperty('--s', String(scale));
+      stage.style.setProperty(
+        '--photo-x',
+        (width - 2400 * scale) * position[0] + 'px',
+      );
+      stage.style.setProperty(
+        '--photo-y',
+        (height - 1400 * scale) * position[1] + 'px',
+      );
+    });
+    observer.observe(photo);
+    stage.dataset.fitManaged = 'early';
+  })();
+</script>

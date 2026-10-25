@@ -2,6 +2,17 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-26 · codex · Cold-load and performance audit ready
+**Task:** V2-PERFORMANCE · owner: codex · status: review · origin PR #12 / xts-devops main.
+**Done:** New headline Technology. Made to work. and broader supporting/intro copy. Original hero HTML/SVG display planes mount via CSS before the UI bundle, with an early resize-aware fallback for older engines; shared fitting skips managed hero planes and batches other reads before writes. Conditional form-module initialization cuts initial minified JS from52,238 to34,643 bytes (33.7%). Fixed preview event detail and made Lenis stop its ticker under dialogs/hidden documents. No source image/video/font changes, lower resolutions, removed effects, dependencies or shared config edits.
+**Validation:** 284 distinct checks verified across full and focused runs:283 full-regression passes, corrected disabled-fieldset test asserted the user-facing submit control, all8 focused performance checks pass. Covers blocked/no-JS first paint, legacy resize, enabled/disabled forms, motion-enabled modal locking, geometry/crops, all workflows/journeys/carousels, accessibility and the70KB JS budget. All14 isolated route/width samples return successfully with no page errors, overflow, observed layout shift or unsolicited entry MP4 loads. Home local LCP sample:1516→1284ms at375;1892→1548ms at1440 (4×CPU/10Mbps). Not all route timing samples improved; full table/limitations retained.
+**Files:** hero content/component/CSS; UI initialization, photo fitting, industry event integration and motion lifecycle; focused e2e and copy assertions; PERFORMANCE-AUDIT.md and performance/2026-10-26.json. Reviewed Chromium375/768/1440/2048 captures and WebKit smoke checks. No public hosting/DNS changes.
+**Next:** Final verify, push origin PR #12 and deploy the commit to xts-devops/main plus localhost4380.
+
+## 2026-10-26 · codex · Cold-load and performance audit claim
+**Task:** V2-PERFORMANCE · owner: codex · status: in-progress.
+**Scope:** Broad route/cold-load audit, immediate hero display mounting, broad technology marketing copy, measured image/motion/preview optimizations, related UI/components/styles and focused tests/docs. Base layout/font/resource hints may be adjusted if measured; shared astro/package/config changes only after explicit scope flag. Preserve original media quality and existing effects; no paid generation. Verify and deploy localhost plus xts-devops/main; retain origin PR #12.
+
 ## 2026-10-25 · codex · Viewport journey autoplay ready
 **Task:** V2-JOURNEY-AUTOPLAY · owner: codex · status: review · PR #12.
 **Done:** Property/hotel films begin on meaningful viewport visibility, including touch-only visitors. Selecting a chapter continues through the remaining route; single-clip mode is removed. Offscreen/hidden states release active media and the upcoming buffer, preserving position and resume intent. Manual Pause survives re-entry; reduced motion, saver and slow connections suppress automatic starts. Parent cards select one central eligible journey after 250ms, yield to deliberate hover/focus, and provide a compact accessible Pause/Resume without expanding. Paused cards retain a Resume action after unload. Expand-hit pseudo-elements apply only to the expand button. Finite Replay, native quality, cancellation, held-frame transitions and bounded next-clip buffering remain.

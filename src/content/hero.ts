@@ -1,5 +1,5 @@
 export const heroDirection = {
-  label: 'Engineering, from idea to implementation',
+  label: 'Technology, from idea to everyday impact',
   imageAlt:
     'Illustrative engineering studio with electronics prototypes, a workstation and warm evening light',
   workspace: {
@@ -79,11 +79,11 @@ export const heroDirection = {
   ],
   boot: {
     label: 'XTS brand introduction',
-    edition: 'XZEN / Engineering what’s next',
+    edition: 'XZEN / Technology with real impact',
     code: 'XTS',
     name: 'XZEN TECH SOLUTIONS',
     status: 'Ideas connected. Possibilities ahead.',
-    steps: ['Engineer', 'Build', 'Connect'],
+    steps: ['Discover', 'Build', 'Connect'],
     skip: 'Skip intro',
   },
 };

@@ -8,7 +8,7 @@ for (const width of [320, 375, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto('/');
       await expect(page.locator('#hero-heading')).toHaveText(
-        'Ambition, engineered.',
+        'Technology. Made to work.',
       );
       await expect(page.locator('.hero-actions a')).toHaveCount(2);
       await expect(page.locator('.hero-capabilities a')).toHaveCount(4);
@@ -48,7 +48,7 @@ for (const width of [320, 375, 768]) {
               .querySelector('.overview-media')!
               .getBoundingClientRect();
             const button = el
-              .querySelector('.overview-control')!
+              .querySelector('[data-overview-open]')!
               .getBoundingClientRect();
             const status = el
               .querySelector('.overview-status')!

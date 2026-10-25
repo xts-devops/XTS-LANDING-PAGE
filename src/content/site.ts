@@ -44,11 +44,11 @@ export const site = {
   buildCta: 'Let’s Build',
   hero: {
     eyebrow: 'Technology. People. Real impact.',
-    heading: 'Ambition,',
-    lines: ['Ambition,'],
-    emphasis: 'engineered.',
+    heading: 'Technology.',
+    lines: ['Technology.'],
+    emphasis: 'Made to work.',
     summary:
-      'Business software, automation and robotics — connected around the way you work. From the first idea to everyday operations, we build it together.',
+      'From business systems and custom software to automation and robotics, we turn complex challenges into practical solutions — built around your people, connected to your goals.',
     primaryCta: 'Book a Consultation',
     secondaryCta: 'Explore services',
   },

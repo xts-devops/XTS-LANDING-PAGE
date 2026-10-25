@@ -1,13 +1,22 @@
 /** Match the overlay to the photographed image's painted rectangle, including crop/letterbox. */
 export function observePhotoStages(root: ParentNode = document) {
-  const stages = root.querySelectorAll<HTMLElement>('[data-fit-stage]');
+  const stages = [
+    ...root.querySelectorAll<HTMLElement>('[data-fit-stage]'),
+  ].filter(
+    (stage) =>
+      stage.dataset.fitManaged !== 'early' &&
+      !(
+        stage.hasAttribute('data-css-cover') &&
+        CSS.supports('scale', 'calc(1px / 1px)')
+      ),
+  );
   const observer = new ResizeObserver((entries) => {
-    for (const entry of entries) {
+    const updates = entries.flatMap((entry) => {
       const stage = entry.target.querySelector<HTMLElement>('[data-fit-stage]');
-      if (!stage) continue;
+      if (!stage) return [];
       const nativeWidth = Number(stage.dataset.fitStage);
       const nativeHeight = stage.offsetHeight;
-      if (!nativeWidth || !nativeHeight) continue;
+      if (!nativeWidth || !nativeHeight) return [];
       const { width, height } = entry.contentRect;
       const fit = stage.dataset.fitMode === 'contain' ? Math.min : Math.max;
       const scale = fit(width / nativeWidth, height / nativeHeight);
@@ -19,15 +28,20 @@ export function observePhotoStages(root: ParentNode = document) {
         : [];
       const fraction = (value: string | undefined) =>
         value?.endsWith('%') ? Number.parseFloat(value) / 100 : 0.5;
+      return [
+        {
+          stage,
+          scale,
+          x: (width - nativeWidth * scale) * fraction(position[0]),
+          y: (height - nativeHeight * scale) * fraction(position[1]),
+        },
+      ];
+    });
+    // Measure all planes first, then write: no alternating layout/style reads and writes.
+    for (const { stage, scale, x, y } of updates) {
       stage.style.setProperty('--s', String(scale));
-      stage.style.setProperty(
-        '--photo-x',
-        (width - nativeWidth * scale) * fraction(position[0]) + 'px',
-      );
-      stage.style.setProperty(
-        '--photo-y',
-        (height - nativeHeight * scale) * fraction(position[1]) + 'px',
-      );
+      stage.style.setProperty('--photo-x', x + 'px');
+      stage.style.setProperty('--photo-y', y + 'px');
     }
   });
   stages.forEach((stage) => {

@@ -23,7 +23,8 @@
 }
 .hero-studio img {
   object-fit: cover;
-  object-position: 70% 50%;
+  object-position: calc(var(--workspace-x, 0.7) * 100%)
+    calc(var(--workspace-y, 0.5) * 100%);
 }
 .hero-visual::after {
   content: '';
@@ -288,11 +289,14 @@
     height: 15rem;
   }
   .hero-photo-frame > .hero-studio {
+    --workspace-x: 0.86;
+    --workspace-y: 0.64;
     transform: scale(1.8);
     transform-origin: right 65%;
   }
   .hero-studio img {
-    object-position: 86% 64%;
+    object-position: calc(var(--workspace-x, 0.86) * 100%)
+      calc(var(--workspace-y, 0.64) * 100%);
   }
   .hero-visual::after {
     background: linear-gradient(
@@ -370,6 +374,7 @@
 }
 .hero-photo-frame > .hero-studio {
   isolation: isolate;
+  container-type: size;
 }
 .hero-studio > picture {
   position: relative;
@@ -379,6 +384,13 @@
 }
 .hero-workspace {
   z-index: 1;
+}
+@supports (scale: calc(1px / 1px)) {
+  .hero-workspace {
+    --s: max(calc(100cqw / 2400px), calc(100cqh / 1400px));
+    --photo-x: calc((100cqw - 2400px * var(--s)) * var(--workspace-x, 0.7));
+    --photo-y: calc((100cqh - 1400px * var(--s)) * var(--workspace-y, 0.5));
+  }
 }
 .hero-studio .hero-workspace .on-photo-screen {
   border-radius: 0;
