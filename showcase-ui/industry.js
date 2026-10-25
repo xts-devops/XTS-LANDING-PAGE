@@ -141,53 +141,151 @@
       filterProducts();
     }),
   );
-  const phaseNames = ['Foundation', 'Frame', 'Envelope', 'Fit-out'];
+  const phaseData = JSON.parse(
+    $('[data-construction-phases]')?.textContent || '[]',
+  );
   let buildTimer,
     playing = false,
-    phase = 2;
-  const setPhase = (i) => {
+    phase = 2,
+    phaseRequest = 0;
+  const siteStatus = () => {
+    const status = $('[data-site-status]');
+    if (status)
+      status.textContent = `${$$('[data-site-task]:checked').length} of 4 coordination items recorded`;
+  };
+  const setPhase = async (i) => {
+    const scene = $('[data-build-scene]'),
+      record = phaseData[i];
+    if (!scene || !record) return;
+    const request = ++phaseRequest;
+    scene.setAttribute('aria-busy', 'true');
+    const photos = $$('[data-construction-photo]');
+    const next = photos.find(
+      (image) => !image.classList.contains('is-current'),
+    );
+    let failed = false,
+      timeout;
+    if (next) {
+      next.src = '/demos/media/construction/' + record.id + '.webp';
+      try {
+        await Promise.race([
+          next.decode(),
+          new Promise((_, reject) => {
+            timeout = setTimeout(
+              () => reject(new Error('Phase photograph unavailable')),
+              4000,
+            );
+          }),
+        ]);
+      } catch {
+        failed = true;
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    if (request !== phaseRequest) return;
     phase = i;
-    const scene = $('[data-build-scene]');
-    if (!scene) return;
     scene.dataset.phase = String(i);
-    $('[data-phase-label]').textContent = `0${i + 1} / ${phaseNames[i]}`;
+    scene.setAttribute('aria-busy', 'false');
+    const fallback = $('[data-build-fallback]');
+    if (fallback) fallback.hidden = !failed;
+    if (failed)
+      photos.forEach((image) => {
+        image.setAttribute('aria-hidden', 'true');
+        image.alt = '';
+      });
+    if (next && !failed) {
+      photos.forEach((image) => {
+        image.classList.toggle('is-current', image === next);
+        image.setAttribute('aria-hidden', String(image !== next));
+        image.alt =
+          image === next
+            ? 'Illustrative residential build: ' +
+              record.name.toLowerCase() +
+              ' stage'
+            : '';
+      });
+    }
+    $('[data-phase-label]').textContent = `0${i + 1} / ${record.name}`;
     pressed($$('[data-phase-button]'), $(`[data-phase-button="${i}"]`));
+    $('[data-build-progress]').textContent = record.progress + '%';
+    $('[data-build-current]').textContent = record.name;
+    $('[data-build-period]').textContent =
+      'Week ' + record.week + ' · sample programme';
+    $('[data-build-open]').textContent = String(record.open);
+    $('[data-build-gate]').textContent = record.gate;
+    $('[data-build-note]').textContent = record.note;
+    $('[data-build-documents]').textContent = record.document;
+    $('[data-build-status]').textContent =
+      i === phaseData.length - 1
+        ? 'Sample closeout complete'
+        : record.name + ' in progress';
+    const completion = $('[data-build-completion]');
+    completion.style.setProperty('--completion', record.progress / 100);
+    completion.setAttribute('aria-valuenow', String(record.progress));
+    $$('[data-site-task]').forEach((input, n) => {
+      const [title, owner, done] = record.tasks[n];
+      input.checked = done;
+      input.parentElement.querySelector('[data-site-task-title]').textContent =
+        title;
+      input.parentElement.querySelector('[data-site-task-owner]').textContent =
+        owner;
+    });
+    $$('[data-build-milestone]').forEach((item, n) => {
+      item.classList.toggle('current', n === i && i < phaseData.length - 1);
+      item.querySelector('[data-build-milestone-state]').textContent =
+        n < i || i === phaseData.length - 1
+          ? 'Complete'
+          : n === i
+            ? 'In progress'
+            : 'Up next';
+    });
+    siteStatus();
+    scene.dispatchEvent(new Event('construction:ready'));
   };
   const stopBuild = () => {
     clearTimeout(buildTimer);
     playing = false;
     const button = $('[data-build-play]');
-    if (button) button.textContent = 'Play sequence';
+    if (button) {
+      button.textContent = 'Play sequence';
+      button.setAttribute('aria-pressed', 'false');
+    }
   };
-  const stepBuild = () => {
+  const stepBuild = async () => {
     if (!playing) return;
-    if (phase >= 3) {
+    if (phase >= phaseData.length - 1) {
       stopBuild();
       return;
     }
-    setPhase(phase + 1);
-    buildTimer = setTimeout(stepBuild, 1300);
+    await setPhase(phase + 1);
+    if (playing) buildTimer = setTimeout(stepBuild, 2500);
   };
-  $$('[data-phase-button]').forEach((b) =>
-    b.addEventListener('click', () => {
+  $$('[data-phase-button]').forEach((button) =>
+    button.addEventListener('click', () => {
       stopBuild();
-      setPhase(Number(b.dataset.phaseButton));
+      void setPhase(Number(button.dataset.phaseButton));
     }),
   );
-  $('[data-build-play]')?.addEventListener('click', () => {
+  $('[data-build-play]')?.addEventListener('click', async () => {
     if (playing) {
       stopBuild();
       return;
     }
-    setPhase(0);
+    if (matchMedia('(prefers-reduced-motion:reduce)').matches) {
+      await setPhase(phaseData.length - 1);
+      return;
+    }
     playing = true;
     $('[data-build-play]').textContent = 'Pause sequence';
-    buildTimer = setTimeout(stepBuild, 1300);
+    $('[data-build-play]').setAttribute('aria-pressed', 'true');
+    await setPhase(0);
+    if (playing) buildTimer = setTimeout(stepBuild, 2500);
   });
-  $$('[data-site-task]').forEach((i) =>
-    i.addEventListener('change', () => {
-      $('[data-site-status]').textContent =
-        `${$$('[data-site-task]:checked').length} of 4 coordination tasks complete`;
+  $$('[data-site-task]').forEach((input, n) =>
+    input.addEventListener('change', () => {
+      phaseData[phase].tasks[n][2] = input.checked;
+      siteStatus();
     }),
   );
   let roster = 'Students';
@@ -434,8 +532,9 @@
     formafield: [
       ['[data-phase-button="0"]', 'Foundation'],
       ['[data-phase-button="1"]', 'Structural frame'],
-      ['[data-phase-button="2"]', 'Envelope'],
-      ['[data-phase-button="3"]', 'Fit-out & handover'],
+      ['[data-phase-button="2"]', 'Enclosure and weatherproofing'],
+      ['[data-phase-button="3"]', 'Services testing and finishes'],
+      ['[data-phase-button="4"]', 'Closeout and handover records'],
     ],
     brightlane: [
       ['[data-segment="roster"][data-value="Staff"]', 'See the staff roster'],
@@ -475,7 +574,11 @@
       ['[data-deploy]', 'Run deployment checks'],
     ],
   };
-  const steps = workflows[document.body.dataset.demo] ?? [];
+  const sequence = workflows[document.body.dataset.demo] ?? [];
+  const steps =
+    reduced && document.body.dataset.demo === 'formafield'
+      ? sequence.slice(-1)
+      : sequence;
   const cursor = document.createElement('div');
   cursor.className = 'overview-cursor';
   cursor.setAttribute('aria-hidden', 'true');
@@ -511,7 +614,17 @@
         target.value = value;
         target.dispatchEvent(new Event('change', { bubbles: true }));
       } else target.click();
-      if (!reduced) await wait(900);
+      if (document.body.dataset.demo === 'formafield') {
+        const scene = document.querySelector('[data-build-scene]');
+        if (scene?.getAttribute('aria-busy') === 'true')
+          await new Promise((resolve) =>
+            scene.addEventListener('construction:ready', resolve, {
+              once: true,
+            }),
+          );
+      }
+      if (!reduced)
+        await wait(document.body.dataset.demo === 'formafield' ? 1300 : 900);
       if (cancelled) return;
       target.classList.remove('overview-target');
       cursor.classList.remove('is-clicking');

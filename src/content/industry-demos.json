@@ -11,10 +11,10 @@
     "id": "formafield",
     "industry": "Project delivery",
     "service": "business-systems",
-    "summary": "A clear view of site progress, dependencies and the next handover.",
+    "summary": "Follow one residential build from foundations to handover, with phase records, coordination tasks and review gates.",
     "capabilities": [
-      "Phase-by-phase building view",
-      "Tasks and site milestones"
+      "Realistic phase-by-phase site views",
+      "Inspections, documents and milestones"
     ],
     "title": "Construction project management"
   },

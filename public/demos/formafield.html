@@ -53,106 +53,91 @@
         <div class="demo-content">
           <div class="page-head">
             <div>
-              <p class="eyebrow">PROJECT / FF-024</p>
-              <h1>Courtyard House</h1>
-              <p>Site coordination · Planning through handover</p>
+              <p class="eyebrow">SAMPLE PROJECT / SC-024</p>
+              <h1>Residential build</h1>
+              <p>Two-storey house · Project phase snapshots</p>
             </div>
-            <span class="pill green">On schedule</span>
+            <span class="pill green" data-build-status
+              >Enclosure in progress</span
+            >
           </div>
-          <div class="metrics">
+          <div class="metrics construction-metrics">
             <article class="metric">
-              <span>Overall progress</span><strong>68%</strong
-              ><small>Sample project status</small>
+              <span>Project progress</span
+              ><strong data-build-progress>62%</strong
+              ><small>Illustrative snapshot</small>
             </article>
             <article class="metric">
-              <span>Open tasks</span><strong>12</strong
-              ><small>4 due this week</small>
+              <span>Current phase</span
+              ><strong data-build-current>Enclosure</strong
+              ><small data-build-period>Week 16 · sample programme</small>
             </article>
             <article class="metric">
-              <span>Next milestone</span><strong>Envelope</strong
-              ><small>30 October · Sample date</small>
+              <span>Open coordination items</span
+              ><strong data-build-open>7</strong
+              ><small>Across the sample project</small>
             </article>
             <article class="metric">
-              <span>Site team</span><strong>8 people</strong
-              ><small>Design · Engineering · Delivery</small>
+              <span>Next review gate</span
+              ><strong class="construction-gate" data-build-gate
+                >Roof and window inspection</strong
+              ><small>Evidence and sign-off tracked</small>
             </article>
           </div>
-          <div class="build-layout">
+          <div class="build-layout construction-layout">
             <section class="panel build-panel">
               <div class="panel-head">
                 <div>
-                  <h2>From the ground up</h2>
+                  <h2>One project. Every phase.</h2>
                   <small
-                    >Concept build sequence · Diagram, not engineering
-                    documentation</small
+                    >Generated site illustrations · consistent camera
+                    view</small
                   >
                 </div>
-                <button type="button" data-build-play class="soft">
+                <button
+                  type="button"
+                  data-build-play
+                  class="soft"
+                  aria-pressed="false"
+                >
                   Play sequence
                 </button>
               </div>
-              <div class="build-scene" data-build-scene data-phase="2">
-                <svg
-                  viewBox="0 0 800 400"
-                  role="img"
-                  aria-label="Building phase diagram"
+              <div
+                class="build-scene construction-scene"
+                data-build-scene
+                data-phase="2"
+                aria-busy="false"
+              >
+                <img
+                  class="construction-photo is-current"
+                  data-construction-photo
+                  src="/demos/media/construction/enclosure.webp"
+                  width="1600"
+                  height="900"
+                  alt="Illustrative two-storey residential project during enclosure works"
+                />
+                <img
+                  class="construction-photo"
+                  data-construction-photo
+                  src="/demos/media/construction/enclosure.webp"
+                  width="1600"
+                  height="900"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <span class="scene-tag" data-phase-label>03 / Enclosure</span
+                ><span class="construction-photo-note"
+                  >Illustrative phase record</span
                 >
-                  <defs>
-                    <pattern
-                      id="ground"
-                      width="40"
-                      height="20"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <path
-                        d="M0 20L40 0M0 0l40 20"
-                        stroke="#dbe2dd"
-                        stroke-width=".8"
-                      />
-                    </pattern>
-                  </defs>
-                  <rect width="800" height="400" fill="url(#ground)" />
-                  <g class="build-ground">
-                    <path
-                      d="M155 265l260-125 245 125-260 125z"
-                      fill="#b8c8bd"
-                    />
-                    <path
-                      d="M205 265l210-100 195 100-210 105z"
-                      fill="#839d90"
-                    />
-                  </g>
-                  <g class="build-frame">
-                    <path
-                      d="M215 255V135l200-97 185 97v120M315 305V183M415 354V233M515 307V184M215 135l200 98 185-98M315 183l200-98M415 38v195"
-                      fill="none"
-                      stroke="#476b61"
-                      stroke-width="12"
-                      stroke-linejoin="round"
-                    />
-                  </g>
-                  <g class="build-envelope">
-                    <path d="M215 135l200 98v121L215 255z" fill="#c9bda9" />
-                    <path d="M415 233l185-98v120L415 354z" fill="#e0d8c9" />
-                    <path d="M215 135l200-97 185 97-185 98z" fill="#f3eee2" />
-                    <path
-                      d="M440 246l50-26v85l-50 25M515 207l58-30v45l-58 30"
-                      fill="#547d82"
-                    />
-                    <path
-                      d="M245 175l52 25v55l-52-25M327 215l53 25v55l-53-25"
-                      fill="#6d9695"
-                    />
-                  </g>
-                  <g class="build-fitout">
-                    <path
-                      d="M155 285l47-23 32 17-47 23zM600 278l44-20 24 14-44 20z"
-                      fill="#9bb98d"
-                    />
-                    <circle cx="165" cy="255" r="30" fill="#6d8f77" />
-                    <circle cx="645" cy="238" r="25" fill="#91ad80" />
-                  </g></svg
-                ><span class="scene-tag" data-phase-label>03 / Envelope</span>
+                <p
+                  class="construction-photo-fallback"
+                  data-build-fallback
+                  hidden
+                >
+                  Phase photograph unavailable. Project details remain available
+                  below.
+                </p>
               </div>
               <div class="phase-buttons" role="group" aria-label="Build phase">
                 <button
@@ -160,77 +145,215 @@
                   data-phase-button="0"
                   aria-pressed="false"
                 >
-                  <span>01</span>Foundation</button
+                  <span>01 · WK 04</span>Foundation</button
                 ><button
                   type="button"
                   data-phase-button="1"
                   aria-pressed="false"
                 >
-                  <span>02</span>Frame</button
+                  <span>02 · WK 10</span>Structure</button
                 ><button
                   type="button"
                   data-phase-button="2"
                   aria-pressed="true"
                 >
-                  <span>03</span>Envelope</button
+                  <span>03 · WK 16</span>Enclosure</button
                 ><button
                   type="button"
                   data-phase-button="3"
                   aria-pressed="false"
                 >
-                  <span>04</span>Fit-out
+                  <span>04 · WK 22</span>Fit-out</button
+                ><button
+                  type="button"
+                  data-phase-button="4"
+                  aria-pressed="false"
+                >
+                  <span>05 · WK 26</span>Handover
                 </button>
+              </div>
+              <div class="construction-phase-summary">
+                <p data-build-note>
+                  Masonry, roofing and glazing · coordinate weatherproofing and
+                  deliveries.
+                </p>
+                <div
+                  class="construction-completion"
+                  role="progressbar"
+                  aria-label="Sample project progress"
+                  aria-valuenow="62"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  data-build-completion
+                  style="--completion: 0.62"
+                >
+                  <i></i>
+                </div>
+              </div>
+              <div class="construction-document-strip">
+                <b>Document register</b
+                ><span data-build-documents
+                  >Window schedule · delivery log · roof inspection</span
+                >
               </div>
             </section>
             <aside>
               <section class="panel">
                 <div class="panel-head">
-                  <h2>Next on site</h2>
-                  <small>This week</small>
+                  <h2>Phase coordination</h2>
+                  <small>Local sample state</small>
                 </div>
-                <div class="task-list">
-                  <label
-                    ><input type="checkbox" data-site-task /><span
-                      ><b>Envelope inspection</b
-                      ><small>Alex Lim · Site lead</small></span
-                    ></label
-                  ><label
-                    ><input type="checkbox" data-site-task /><span
-                      ><b>Review window schedule</b
-                      ><small>Sam Reyes · Design</small></span
-                    ></label
-                  ><label
-                    ><input type="checkbox" data-site-task /><span
-                      ><b>Confirm supplier delivery</b
-                      ><small>Noor Tan · Procurement</small></span
-                    ></label
-                  ><label
-                    ><input type="checkbox" data-site-task /><span
-                      ><b>Prepare client handover</b
-                      ><small>Isabel Cruz · Delivery</small></span
-                    ></label
-                  >
+                <div class="construction-task-body">
+                  <div class="task-list">
+                    <label
+                      ><input type="checkbox" data-site-task="0" checked /><span
+                        ><b data-site-task-title>Window schedule confirmed</b
+                        ><small data-site-task-owner
+                          >Design coordinator</small
+                        ></span
+                      ></label
+                    ><label
+                      ><input type="checkbox" data-site-task="1" checked /><span
+                        ><b data-site-task-title>Masonry inspection logged</b
+                        ><small data-site-task-owner>QA lead</small></span
+                      ></label
+                    ><label
+                      ><input type="checkbox" data-site-task="2" /><span
+                        ><b data-site-task-title>Roof waterproofing review</b
+                        ><small data-site-task-owner>Site engineer</small></span
+                      ></label
+                    ><label
+                      ><input type="checkbox" data-site-task="3" /><span
+                        ><b data-site-task-title>Glazing delivery checked</b
+                        ><small data-site-task-owner
+                          >Procurement lead</small
+                        ></span
+                      ></label
+                    >
+                  </div>
+                  <p class="muted" data-site-status aria-live="polite">
+                    2 of 4 coordination items recorded
+                  </p>
                 </div>
-                <p class="muted" data-site-status>
-                  0 of 4 coordination tasks complete
-                </p>
               </section>
               <section class="panel">
                 <div class="panel-head">
                   <h2>Milestone timeline</h2>
-                  <small></small>
+                  <small>Sample weeks</small>
                 </div>
-                <ol class="timeline">
-                  <li><b>Site preparation</b><span>Complete</span></li>
-                  <li><b>Structure</b><span>Complete</span></li>
-                  <li class="current">
-                    <b>Envelope</b><span>In progress</span>
+                <ol class="timeline construction-timeline">
+                  <li class="" data-build-milestone="0">
+                    <b>Foundation</b
+                    ><span data-build-milestone-state>Complete</span>
                   </li>
-                  <li><b>Fit-out & handover</b><span>Up next</span></li>
+                  <li class="" data-build-milestone="1">
+                    <b>Structure</b
+                    ><span data-build-milestone-state>Complete</span>
+                  </li>
+                  <li class="current" data-build-milestone="2">
+                    <b>Enclosure</b
+                    ><span data-build-milestone-state>In progress</span>
+                  </li>
+                  <li class="" data-build-milestone="3">
+                    <b>Fit-out</b
+                    ><span data-build-milestone-state>Up next</span>
+                  </li>
+                  <li class="" data-build-milestone="4">
+                    <b>Handover</b
+                    ><span data-build-milestone-state>Up next</span>
+                  </li>
                 </ol>
               </section>
             </aside>
           </div>
+          <p class="construction-disclaimer">
+            Sample programme and progress only · Generated phase illustrations,
+            not actual site evidence or engineering documentation.
+          </p>
+          <script type="application/json" data-construction-phases>
+            [
+              {
+                "id": "foundation",
+                "name": "Foundation",
+                "week": "04",
+                "progress": 15,
+                "open": 12,
+                "gate": "Foundation inspection record",
+                "note": "Earthworks and foundations · release the next work package after review.",
+                "document": "Site survey · approved drawings · inspection request",
+                "tasks": [
+                  ["Survey and set-out record", "Site engineer", true],
+                  ["Reinforcement inspection log", "QA lead", true],
+                  ["Concrete test records", "QA lead", false],
+                  ["Slab release review", "Project lead", false]
+                ]
+              },
+              {
+                "id": "structure",
+                "name": "Structure",
+                "week": "10",
+                "progress": 38,
+                "open": 9,
+                "gate": "Structural work-package review",
+                "note": "Columns, beams and slabs · track inspection evidence and drawing revisions.",
+                "document": "Structural drawings · pour records · site observations",
+                "tasks": [
+                  ["Drawing revision issued", "Design coordinator", true],
+                  ["Concrete pour records", "Site engineer", true],
+                  ["Temporary works review", "Site lead", false],
+                  ["Structural inspection closeout", "QA lead", false]
+                ]
+              },
+              {
+                "id": "enclosure",
+                "name": "Enclosure",
+                "week": "16",
+                "progress": 62,
+                "open": 7,
+                "gate": "Roof and window inspection",
+                "note": "Masonry, roofing and glazing · coordinate weatherproofing and deliveries.",
+                "document": "Window schedule · delivery log · roof inspection",
+                "tasks": [
+                  ["Window schedule confirmed", "Design coordinator", true],
+                  ["Masonry inspection logged", "QA lead", true],
+                  ["Roof waterproofing review", "Site engineer", false],
+                  ["Glazing delivery checked", "Procurement lead", false]
+                ]
+              },
+              {
+                "id": "fitout",
+                "name": "Fit-out",
+                "week": "22",
+                "progress": 84,
+                "open": 5,
+                "gate": "Services testing and defect review",
+                "note": "Services and finishes · record tests, resolve defects and prepare turnover.",
+                "document": "Test reports · finishes schedule · defect register",
+                "tasks": [
+                  ["Finishes sample approved", "Design coordinator", true],
+                  ["Services test records", "MEP coordinator", true],
+                  ["Defect walk-through", "Project lead", false],
+                  ["Turnover documents assembled", "Document controller", false]
+                ]
+              },
+              {
+                "id": "handover",
+                "name": "Handover",
+                "week": "26",
+                "progress": 100,
+                "open": 0,
+                "gate": "Turnover pack complete",
+                "note": "Final closeout · inspection records, owner orientation and documentation.",
+                "document": "As-built records · manuals and warranties · acceptance log",
+                "tasks": [
+                  ["Testing records filed", "MEP coordinator", true],
+                  ["Defect items closed", "QA lead", true],
+                  ["Owner orientation recorded", "Project lead", true],
+                  ["As-builts and manuals issued", "Document controller", true]
+                ]
+              }
+            ]
+          </script>
         </div>
         <p class="demo-footnote">
           Illustrative system and sample people · Demonstration data · No live

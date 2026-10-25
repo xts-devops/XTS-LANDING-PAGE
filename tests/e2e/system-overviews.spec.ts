@@ -23,7 +23,7 @@ for (const d of industryDemos) {
     if (d.id === 'formafield')
       await expect(frame.locator('[data-build-scene]')).toHaveAttribute(
         'data-phase',
-        '3',
+        '4',
       );
     if (d.id === 'brightlane')
       await expect(frame.locator('[data-attendance]')).toHaveValue('Pending');

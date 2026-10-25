@@ -86,9 +86,9 @@ test('construction phase controls and checklist work without automatic motion', 
     'data-phase',
     '3',
   );
-  await page.locator('[data-site-task]').first().check();
+  await page.locator('[data-site-task]').nth(2).check();
   await expect(page.locator('[data-site-status]')).toHaveText(
-    '1 of 4 coordination tasks complete',
+    '3 of 4 coordination items recorded',
   );
 });
 test('school views filter the roster', async ({ page }) => {

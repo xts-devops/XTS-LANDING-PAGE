@@ -1,3 +1,4 @@
+import { constructionBody } from './construction.mjs';
 import { automationOverviews } from './automation-overviews.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -35,23 +36,7 @@ bodies.morrow = `${head('COUNTER / 01', 'A good day starts here.', 'Morning serv
   .join(
     '',
   )}</div><p class="muted" data-product-count>6 products · Tap to add to the ticket</p><div class="daily-strip"><span>Today's specials</span><b>Good coffee. Fresh finds. One checkout.</b><small>Fictional retail concept</small></div></section><aside class="panel ticket"><div class="panel-head"><h2>Current ticket</h2>${pill('Walk-in')}</div><p class="ticket-meta">SAMPLE-0142 · Dine in / takeaway</p><div data-cart class="cart-lines"><p class="empty">Choose something from the menu.</p></div><div class="ticket-total"><span>Total</span><strong data-total>₱0.00</strong></div><p class="muted">Prices shown are demonstration prices. No payment is collected.</p><button class="primary" type="button" data-checkout disabled>Complete sample sale</button><div class="ticket-team">${avatars(['MT'])}<div><b>Maya Tan</b><small>Front-of-house team</small></div></div><button type="button" class="mobile-ticket" data-show-ticket hidden>View ticket</button></aside></div>`;
-bodies.formafield = `${head('PROJECT / FF-024', 'Courtyard House', 'Site coordination · Planning through handover', pill('On schedule', 'green'))}<div class="metrics">${metric('Overall progress', '68%', 'Sample project status')}${metric('Open tasks', '12', '4 due this week')}${metric('Next milestone', 'Envelope', '30 October · Sample date')}${metric('Site team', '8 people', 'Design · Engineering · Delivery')}</div><div class="build-layout"><section class="panel build-panel"><div class="panel-head"><div><h2>From the ground up</h2><small>Concept build sequence · Diagram, not engineering documentation</small></div><button type="button" data-build-play class="soft">Play sequence</button></div><div class="build-scene" data-build-scene data-phase="2"><svg viewBox="0 0 800 400" role="img" aria-label="Building phase diagram"><defs><pattern id="ground" width="40" height="20" patternUnits="userSpaceOnUse"><path d="M0 20L40 0M0 0l40 20" stroke="#dbe2dd" stroke-width=".8"/></pattern></defs><rect width="800" height="400" fill="url(#ground)"/><g class="build-ground"><path d="M155 265l260-125 245 125-260 125z" fill="#b8c8bd"/><path d="M205 265l210-100 195 100-210 105z" fill="#839d90"/></g><g class="build-frame"><path d="M215 255V135l200-97 185 97v120M315 305V183M415 354V233M515 307V184M215 135l200 98 185-98M315 183l200-98M415 38v195" fill="none" stroke="#476b61" stroke-width="12" stroke-linejoin="round"/></g><g class="build-envelope"><path d="M215 135l200 98v121L215 255z" fill="#c9bda9"/><path d="M415 233l185-98v120L415 354z" fill="#e0d8c9"/><path d="M215 135l200-97 185 97-185 98z" fill="#f3eee2"/><path d="M440 246l50-26v85l-50 25M515 207l58-30v45l-58 30" fill="#547d82"/><path d="M245 175l52 25v55l-52-25M327 215l53 25v55l-53-25" fill="#6d9695"/></g><g class="build-fitout"><path d="M155 285l47-23 32 17-47 23zM600 278l44-20 24 14-44 20z" fill="#9bb98d"/><circle cx="165" cy="255" r="30" fill="#6d8f77"/><circle cx="645" cy="238" r="25" fill="#91ad80"/></g></svg><span class="scene-tag" data-phase-label>03 / Envelope</span></div><div class="phase-buttons" role="group" aria-label="Build phase">${['Foundation', 'Frame', 'Envelope', 'Fit-out'].map((p, i) => `<button type="button" data-phase-button="${i}" aria-pressed="${i === 2}"><span>0${i + 1}</span>${p}</button>`).join('')}</div></section><aside>${panel(
-  'Next on site',
-  `<div class="task-list">${[
-    ['Envelope inspection', 'Alex Lim · Site lead'],
-    ['Review window schedule', 'Sam Reyes · Design'],
-    ['Confirm supplier delivery', 'Noor Tan · Procurement'],
-    ['Prepare client handover', 'Isabel Cruz · Delivery'],
-  ]
-    .map(
-      ([t, n]) =>
-        `<label><input type="checkbox" data-site-task><span><b>${t}</b><small>${n}</small></span></label>`,
-    )
-    .join(
-      '',
-    )}</div><p class="muted" data-site-status>0 of 4 coordination tasks complete</p>`,
-  'This week',
-)}${panel('Milestone timeline', `<ol class="timeline"><li><b>Site preparation</b><span>Complete</span></li><li><b>Structure</b><span>Complete</span></li><li class="current"><b>Envelope</b><span>In progress</span></li><li><b>Fit-out & handover</b><span>Up next</span></li></ol>`)}</aside></div>`;
+bodies.formafield = constructionBody;
 bodies.brightlane = `${head('CAMPUS OPERATIONS', 'A clearer school day.', 'Attendance, schedules and people in one place.', pill('Friday, 23 October'))}<div class="metrics">${metric('Present today', '248 / 260', 'Demonstration attendance')}${metric('Scheduled classes', '18', 'Across 6 learning groups')}${metric('Staff on site', '24', 'Teaching and support')}${metric('Action items', '6', '2 need a follow-up')}</div><div class="campus-layout"><section class="panel"><div class="panel-head"><h2>People & attendance</h2>${segments('roster', ['Students', 'Staff'])}</div><div class="filter-row"><label class="search">Search roster<input type="search" data-roster-search placeholder="Name or group…"></label><label class="field">Attendance<select data-attendance><option>All</option><option>Present</option><option>Pending</option></select></label></div><div data-roster="Students">${table(
   ['Student', 'Learning group', 'Arrival', 'Status'],
   [

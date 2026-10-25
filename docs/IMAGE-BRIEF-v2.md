@@ -153,3 +153,15 @@ The six live-demo thumbnails are also exported under `public/demos/media/product
 | `src/assets/photos/robotics/inspection-rig-v2.jpg` | Generated · built-in imagegen | Illustrative circuit-board test fixture; replaces another soldering portrait. Full prompt, source and export: `docs/media-v2/gallery-variety-sources.json`. |
 
 These are generated capability concepts, not client photos or real deployed systems. No Higgsfield calls. Versioned source assets preserve the earlier originals. Gallery exports are lazy responsive AVIF/WebP; full-size inspection uses WebP.
+
+## Construction phase records — 2026-10-25
+
+| File | Source | Licence / prompt |
+|---|---|---|
+| `public/demos/media/construction/foundation.webp` | Generated · built-in imagegen | Foundation snapshot edited from the shared handover reference. Full prompt/source/export: `docs/media-v2/construction-sources.json`. |
+| `public/demos/media/construction/structure.webp` | Generated · built-in imagegen | Concrete frame snapshot edited from the shared handover reference. Full prompt/source/export: `docs/media-v2/construction-sources.json`. |
+| `public/demos/media/construction/enclosure.webp` | Generated · built-in imagegen | Masonry/window installation snapshot edited from the shared handover reference. Full prompt/source/export: `docs/media-v2/construction-sources.json`. |
+| `public/demos/media/construction/fitout.webp` | Generated · built-in imagegen | Late fit-out/services coordination snapshot edited from the shared handover reference. Full prompt/source/export: `docs/media-v2/construction-sources.json`. |
+| `public/demos/media/construction/handover.webp` | Generated · built-in imagegen | Completed residential building used as the reference for all preceding stages. Full prompt/source/export: `docs/media-v2/construction-sources.json`. |
+
+1600×900 WebP photographs are illustrative phase snapshots, not actual client/site evidence, verified engineering geometry or a filmed construction timelapse. Earlier phases use the same finished reference/camera/landmarks. Native system poster remains `src/assets/showcase/industry/formafield.png` at 2880×1800, captured from the local sample. No Higgsfield calls.

@@ -1,0 +1,43 @@
+{
+  "source": "Generated with built-in imagegen",
+  "reference": "handover image generated first; all earlier stages edited from that exact reference",
+  "usage": "Illustrative project snapshots, not client records, exact engineering documentation or an actual site timelapse.",
+  "export": "1600x900 WebP quality 80; source PNGs retained outside runtime",
+  "images": [
+    {
+      "id": "foundation",
+      "source": "exec-1df4511e-102e-4c82-b0f7-a76a5b81ed00.png",
+      "prompt": "Edit this reference photograph into the FOUNDATION stage of the exact same two-storey house, before any above-ground walls or frame. Preserve the locked camera angle, crop, perspective, horizon, sky, palm at left, rear/side perimeter walls, background trees and concrete lane exactly. The final house occupies this precise footprint: replace it with plausible partly poured concrete strip footings and ground beams, compacted earth, localized open trenches with neat rebar cages and starter bars positioned for the future columns. No upper structure, no window frames, no roof or finished stairs; remove finished driveway and lawn within the working plot, use bare graded soil, neat stack of form boards and small rebar bundle at right. Clean organized modest residential construction site, realistic engineering scale, not ruins. No people, vehicles, words, logos or signs. Documentary photorealism, same neutral daylight and sharp natural textures. Landscape 16:9. Illustrative phase snapshot, not engineering documentation.",
+      "file": "public/demos/media/construction/foundation.webp",
+      "bytes": 314496
+    },
+    {
+      "id": "structure",
+      "source": "exec-49c19193-6744-488d-8aaf-088cc0a51049.png",
+      "prompt": "Edit this reference into the STRUCTURAL FRAME stage of this exact same modest two-storey reinforced-concrete house. Preserve the locked elevated camera, framing, building footprint and exact exterior proportions, sky, left palm, rear and side perimeter walls, background trees and access lane. Show the bare reinforced concrete columns and beams of both levels, first-floor slab and partly formed roof slab with temporary shoring below. Open bays show through the skeleton; no completed infill walls, no windows, plaster, paint, balcony railings or landscaping. Include neat timber formwork stacks and small gray block stacks at the right of the bare soil site, minimal plausible temporary scaffolding. The finished entry porch and balcony correspond to the same structural grid as the reference. No workers, vehicles, readable text, signs, logos or decorative overlays. Same sharp neutral daylight documentary photograph, photoreal concrete texture, no miniature or CGI appearance. Landscape 16:9. Illustrative phase snapshot, not engineering documentation.",
+      "file": "public/demos/media/construction/structure.webp",
+      "bytes": 275604
+    },
+    {
+      "id": "enclosure",
+      "source": "exec-845eb7a0-7404-47d3-ae7d-7e096c2b1c83.png",
+      "prompt": "Edit this reference photograph into the ENCLOSURE stage of the exact same two-storey house. Keep the exact locked camera, crop, proportions and house silhouette, palm at left, sky, boundary walls, background and concrete access lane. The concrete frame and flat roof slab are complete; unpainted gray masonry infill walls are built, with the exact same front/side window openings and porch/balcony locations as this reference. Some dark aluminum window frames and glazing are installed, others remain protected/open for ongoing installation; exposed concrete beams visible. No final cream plaster finish, no painted facade, no balcony handrail yet, no finished lawn or driveway. Show a few orderly scaffold frames against the right facade and neat wrapped window panels in the work area. Bare graded ground and clean small material stacks; no people or vehicles. Realistic documentary construction photography in the same neutral daylight, sharp details, no words, logos, text or signs. Landscape16:9. Illustrative phase snapshot, not engineering documentation.",
+      "file": "public/demos/media/construction/enclosure.webp",
+      "bytes": 269644
+    },
+    {
+      "id": "fitout",
+      "source": "exec-c542e379-8d79-4fad-9816-8557d5571089.png",
+      "prompt": "Edit this reference photograph into the LATE FIT-OUT AND SERVICES TESTING stage of this exact same house before handover. Preserve the locked elevated camera, exact building shape, sky, palm at left, boundaries, lane and trees. House is enclosed: roof, windows and most off-white plaster and gray accents complete, but door and windows have partial translucent protective film, no balcony rail installed yet and the front entry step edge remains unfinished. Through the doorway only subtle unoccupied interior work is visible. On the foreground plot, driveway concrete sub-base is laid with one unfinished strip, no finished lawn, just leveled soil and a few stacked rolls of turf and covered material packs at right. One short aluminum scaffold tower at the right edge, a tidy utility test-tool case near the porch; no unsafe dangling wires, people, vehicles, signage or text. Show a believable almost-complete but clearly not handed-over building, same neutral daylight and sharp documentary photo realism, not a render. Landscape16:9. Illustrative sample phase, not engineering documentation.",
+      "file": "public/demos/media/construction/fitout.webp",
+      "bytes": 208436
+    },
+    {
+      "id": "handover",
+      "source": "exec-6eb66e91-2f1f-40d4-8ebb-b9917b346c97.png",
+      "prompt": "Photorealistic construction project documentation photograph, wide landscape 16:9. A modest realistic TWO STOREY rectangular residential house in a subtropical suburban lot, fully completed at project handover. Contemporary practical architecture, pale warm off-white plaster walls, exposed gray concrete accents, flat parapet roof, simple dark aluminum framed rectangular windows, one small second-floor recessed balcony above the left side of the entrance. Building has a rectangular footprint with six clearly legible structural bays, believable proportions, no cantilever extravagance. Three-quarter front-left view from a LOCKED elevated camera about 4m high looking slightly downward, entire house and entire plot visible with roomy margins. Foreground is a straight narrow concrete access lane, same low perimeter wall to rear, one tall palm near rear left boundary, distant low trees and pale blue lightly overcast sky. Clean completed driveway, modest sparse landscaping, no cars, no people, no signs, no logos, no readable text. Crisp daylight neutral realistic material textures, mild warm highlights and sage greenery, no cinematic heavy grading or miniature/CG appearance. This will be the consistent reference for earlier phases of this exact house: maintain strong recognizable building footprint and site landmarks. Single documentary photo, no collage, no borders. This is an illustrative fictional construction project, not an actual client site.",
+      "file": "public/demos/media/construction/handover.webp",
+      "bytes": 205024
+    }
+  ]
+}
