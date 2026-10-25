@@ -11,14 +11,22 @@ export function observePhotoStages(root: ParentNode = document) {
       const { width, height } = entry.contentRect;
       const fit = stage.dataset.fitMode === 'contain' ? Math.min : Math.max;
       const scale = fit(width / nativeWidth, height / nativeHeight);
+      const photo = entry.target.querySelector<HTMLImageElement>(
+        ':scope > picture > img, :scope > img',
+      );
+      const position = photo
+        ? getComputedStyle(photo).objectPosition.split(' ')
+        : [];
+      const fraction = (value: string | undefined) =>
+        value?.endsWith('%') ? Number.parseFloat(value) / 100 : 0.5;
       stage.style.setProperty('--s', String(scale));
       stage.style.setProperty(
         '--photo-x',
-        (width - nativeWidth * scale) / 2 + 'px',
+        (width - nativeWidth * scale) * fraction(position[0]) + 'px',
       );
       stage.style.setProperty(
         '--photo-y',
-        (height - nativeHeight * scale) / 2 + 'px',
+        (height - nativeHeight * scale) * fraction(position[1]) + 'px',
       );
     }
   });

@@ -181,7 +181,14 @@ test('completed visual cover cannot intercept clicks if the UI controller is mis
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('[data-boot-screen]')).toBeVisible();
   await page.evaluate(() =>
-    document.getAnimations().forEach((animation) => animation.finish()),
+    document
+      .getAnimations()
+      .filter(
+        (animation) =>
+          animation instanceof CSSAnimation &&
+          animation.animationName === 'xts-boot-out',
+      )
+      .forEach((animation) => animation.finish()),
   );
   const blocked = await page.evaluate(() =>
     Boolean(

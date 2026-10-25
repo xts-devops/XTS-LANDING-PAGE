@@ -58,6 +58,8 @@ test('automatic rotation runs at 3s, loops, pauses on hover and stops on manual 
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  // This scenario advances 21s of frame-by-frame clock time plus browser actions.
+  test.setTimeout(60_000);
   const start = new Date('2026-10-25T00:00:00Z');
   await page.clock.install({ time: start });
   await page.clock.pauseAt(start);

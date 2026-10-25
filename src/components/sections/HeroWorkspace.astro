@@ -1,0 +1,132 @@
+---
+import { quadMatrix3d } from '../../lib/homography';
+import { heroDirection } from '../../content/hero';
+const copy = heroDirection.workspace;
+const monitor = quadMatrix3d(640, 420, [
+  [1398, 514],
+  [1822, 528],
+  [1822, 818],
+  [1422, 848],
+]);
+const laptop = quadMatrix3d(480, 440, [
+  [1164, 722],
+  [1374, 716],
+  [1416, 916],
+  [1212, 942],
+]);
+---
+
+<div
+  class="on-photo hero-workspace"
+  data-fit-stage="2400"
+  style="width:2400px;height:1400px"
+  aria-hidden="true"
+>
+  <div
+    class="on-photo-screen workspace-monitor"
+    style={`width:640px;height:420px;transform:${monitor}`}
+  >
+    <svg viewBox="0 0 640 420" width="640" height="420" class="workspace-ui">
+      <rect width="640" height="420" class="workspace-bg" />
+      <rect x="0" y="0" width="640" height="55" class="workspace-top" />
+      <circle cx="30" cy="28" r="7" class="workspace-accent" />
+      <text x="48" y="33" class="workspace-eyebrow">
+        {copy.eyebrow}
+      </text>
+      <text x="30" y="104" class="workspace-title">
+        {copy.title}
+      </text>
+      <path d="M202 198H234M406 198H438" class="workspace-wire" />
+      {copy.stages.map((stage, i) => (
+        <g>
+          <rect
+            x={30 + i * 204}
+            y="143"
+            width="172"
+            height="112"
+            rx="12"
+            class={`workspace-node workspace-node-${i}`}
+          />
+          <rect
+            x={48 + i * 204}
+            y="162"
+            width="25"
+            height="25"
+            rx="6"
+            class="workspace-chip"
+          />
+          <path d={`M${54 + i * 204} 170h13m-13 6h9`} class="workspace-glyph" />
+          <text x={48 + i * 204} y="214" class="workspace-node-label">
+            {stage}
+          </text>
+          <text x={48 + i * 204} y="236" class="workspace-detail">
+            {copy.details[i]}
+          </text>
+        </g>
+      ))}
+      <circle cx="218" cy="198" r="4" class="workspace-packet workspace-anim" />
+      <circle
+        cx="422"
+        cy="198"
+        r="4"
+        class="workspace-packet workspace-packet-next workspace-anim"
+      />
+      <rect
+        x="30"
+        y="284"
+        width="580"
+        height="77"
+        rx="10"
+        class="workspace-panel"
+      />
+      <path d="M52 324H580" class="workspace-wire" />
+      {[90, 246, 402, 558].map((x) => (
+        <g>
+          <circle cx={x} cy="324" r="13" class="workspace-step" />
+          <path d={`M${x - 5} 324l3 3 7-7`} class="workspace-glyph" />
+        </g>
+      ))}
+      <text x="30" y="398" class="workspace-detail">
+        {copy.footer}
+      </text>
+    </svg>
+  </div>
+  <div
+    class="on-photo-screen workspace-laptop"
+    style={`width:480px;height:440px;transform:${laptop}`}
+  >
+    <svg viewBox="0 0 480 440" width="480" height="440" class="workspace-ui">
+      <rect width="480" height="440" class="workspace-bg" />
+      <rect width="480" height="58" class="workspace-top" />
+      <circle cx="25" cy="28" r="5" class="workspace-accent" />
+      <text x="44" y="34" class="workspace-editor-title">
+        {copy.editor}
+      </text>
+      {copy.code.map((line, i) => (
+        <g>
+          <text x="24" y={112 + i * 40} class="workspace-code-number">
+            {i + 1}
+          </text>
+          <text
+            x="60"
+            y={112 + i * 40}
+            class={i === 0 ? 'workspace-code-comment' : 'workspace-code-line'}
+          >
+            {line}
+          </text>
+        </g>
+      ))}
+      <rect
+        x="75"
+        y="332"
+        width="8"
+        height="20"
+        class="workspace-caret workspace-anim"
+      />
+      <path d="M24 385H456" class="workspace-wire" />
+      <text x="24" y="415" class="workspace-code-comment">
+        {copy.footer}
+      </text>
+    </svg>
+  </div>
+</div>

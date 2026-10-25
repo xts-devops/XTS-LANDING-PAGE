@@ -4,6 +4,7 @@ import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import Photo from '../media/Photo.astro';
+import HeroWorkspace from './HeroWorkspace.astro';
 import { proof, site } from '../../content/site';
 import { heroDirection as direction } from '../../content/hero';
 import '../../styles/hero.css';
@@ -22,7 +23,9 @@ import '../../styles/hero.css';
           sizes="(min-width: 761px) 100vw, 100vw"
           formats={['webp']}
           eager
-        />
+        >
+          <HeroWorkspace />
+        </Photo>
       </div>
     </div>
     <Container class="hero-main">
@@ -55,6 +58,18 @@ import '../../styles/hero.css';
         <small>{direction.imageNote}</small>
       </div>
     </Container>
+    <button
+      class="hero-motion"
+      type="button"
+      data-workspace-toggle
+      data-pause-label={direction.workspace.pause}
+      data-resume-label={direction.workspace.resume}
+      aria-pressed="false"
+      hidden
+    >
+      <span aria-hidden="true">Ⅱ</span>
+      <span data-workspace-toggle-label>{direction.workspace.pause}</span>
+    </button>
   </div>
   <Container class="hero-footer">
     <nav class="hero-capabilities" aria-label={direction.indexLabel}>

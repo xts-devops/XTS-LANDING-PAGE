@@ -1,0 +1,15 @@
+# Sharp studio screens
+
+The approved panorama, copy and service index stay in place. Two native SVG interfaces replace only the monitor and laptop display areas in the existing studio photo: a connected business-app / automation / device workflow and an illustrative integration editor. Native vector text/lines remain crisp as the page scales. The labels describe a sample architecture, without live telemetry, client figures or actual network activity. The original photo and its provenance are unchanged.
+
+Screen corners are measured in the photo's native 2400×1400 plane and mapped with the existing homography helper. The responsive fitter now respects the image's computed percentage object-position as well as cover/contain cropping. The mobile zoom is applied to the whole photo figure, so the background and overlays move together. Gallery phone and full-photo inspection behavior remain supported by the same fitter.
+
+Two small travelling signals and the editor caret use transform/opacity animations. A visible pause/resume control stops all screen activity; mobile uses an accessible 44px icon control. Reduced motion renders the static interface and hides the unnecessary toggle. IntersectionObserver and document visibility suspend activity when the photographed area is offscreen or the tab is hidden. Manual pause survives those changes; pageshow restores eligible activity. No-JS keeps the original studio photograph as the fallback. No image generator, video, canvas, external API or new dependency is needed.
+
+Checks cover image-plane registration at 375/768/1440, manual pause/resume, offscreen pause and live reduced-motion changes, plus the existing phone/galleries, intro, navigation, accessibility and motion JS budget. Review captures, source-coordinate reference, normal-motion recording and performance logs are under docs/review/hero-workspace (gitignored).
+
+Validation: npm run verify passes with zero errors/warnings; all 173 e2e checks and 3 homepage capture checks pass. The missing-controller intro check now finishes only its own finite exit animation, so the new decorative loops are excluded. The existing carousel clock test gets a 60s case budget because it advances 21s of animation time plus browser actions; its rotation/hover/manual-stop assertions are unchanged. Review captures at 375/768/1440 and workspace-motion.webm were inspected/recorded after the final build.
+
+Tablet widths through 1023px use separate copy and photo rows; the tablet photo is 24rem tall to keep both fitted screens in view. This prevents the sharpened interfaces competing with the summary text. Three mobile Lighthouse runs for the screen pass scored Performance 96/97/96 and Accessibility 100, LCP 1.89–1.94s, CLS 0, TBT 29–60ms. The final tablet-only breakpoint refinement does not alter that mobile layout.
+
+After the final tablet refinement, npm run verify passes again and all 15 focused registration/media/motion checks pass. Final captures at 375/768/1440 were reviewed again.
