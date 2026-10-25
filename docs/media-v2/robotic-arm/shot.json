@@ -1,6 +1,6 @@
 {
   "id": "xts-arm-exploded-01",
-  "status": "higgsfield-generated-integrated-for-review",
+  "status": "1080p-integrated-for-review",
   "inputs": [
     {
       "role": "start",
@@ -23,11 +23,11 @@
   "beats": [
     {
       "start": 0,
-      "end": 0.6,
+      "end": 0.4,
       "action": "hold assembled"
     },
     {
-      "start": 0.6,
+      "start": 0.4,
       "end": 4.8,
       "action": "separate components along local axes, fixed base"
     },
@@ -41,11 +41,18 @@
   "delivery": {
     "preferred": "src/assets/video/arm-exploded.mp4",
     "optional": "src/assets/video/arm-exploded.webm",
-    "webSize": [1280, 768],
-    "allKeyframes": true,
+    "webSize": [1800, 1080],
+    "allKeyframes": false,
     "audio": false,
-    "preferredMaxBytes": 8388608
+    "preferredMaxBytes": 8388608,
+    "keyframeIntervalFrames": 4
   },
   "fallback": "registered-photo-pair",
-  "generationRecord": "generation.json"
+  "generationRecord": "generation-1080p.json",
+  "interaction": {
+    "mode": "finite-viewport-trigger",
+    "secondsPerDirection": 1.8,
+    "replay": true,
+    "continuousScrollRequired": false
+  }
 }

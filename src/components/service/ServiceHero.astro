@@ -10,6 +10,7 @@ interface Props {
   service: Service;
 }
 const { service } = Astro.props;
+const fastHero = service.slug === 'automation' || service.slug === 'robotics';
 const visual =
   presentation.services[service.slug as keyof typeof presentation.services];
 ---
@@ -49,12 +50,8 @@ const visual =
           alt={service.photoAlt}
           ratio="5 / 4"
           sizes="(min-width:900px) 45vw, 100vw"
-          formats={service.slug === 'automation' ? ['webp'] : ['avif', 'webp']}
-          widths={
-            service.slug === 'automation'
-              ? [480, 800, 1200]
-              : [480, 800, 1200, 1600]
-          }
+          formats={fastHero ? ['webp'] : ['avif', 'webp']}
+          widths={fastHero ? [480, 800, 1200] : [480, 800, 1200, 1600]}
           eager
         />
         <div class="svc-visual-caption">

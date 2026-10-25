@@ -106,27 +106,34 @@ test.describe('with reduced motion', () => {
 test.describe('robotics exploded view', () => {
   test.use({ reducedMotion: 'no-preference' });
 
-  test('scrolling through separates the two states', async ({ page }) => {
+  test('entering the compact arm scene completes the transition without more scrolling', async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/services/robotics');
     await page.mouse.move(300, 300);
     await page.waitForTimeout(400);
     const scroller = page.locator('.exploded-scroll');
     const box = await scroller.boundingBox();
-    expect(
-      box?.height ?? 0,
-      'sticky scroll space laid out before paint',
-    ).toBeGreaterThan(900 * 2);
-    for (let i = 0; i < 40; i++) {
-      await page.mouse.wheel(0, 120);
-      await page.waitForTimeout(40);
-    }
-    await page.waitForTimeout(800);
-    const p = await page
-      .locator('.exploded-progress')
-      .evaluate((el) =>
-        Number(getComputedStyle(el).getPropertyValue('--p') || 0),
-      );
-    expect(p, 'scroll progress drives the exploded view').toBeGreaterThan(0.2);
+    expect(box!.height, 'no long sticky scroll runway').toBeLessThan(900);
+    await page.evaluate(() => {
+      const el = document.querySelector('.exploded-stage')!;
+      const top = el.getBoundingClientRect().top + scrollY;
+      scrollTo({
+        top: top - Math.max(104, (innerHeight - el.clientHeight) / 2) + 24,
+        behavior: 'instant',
+      });
+    });
+    await expect
+      .poll(
+        () =>
+          page
+            .locator('.exploded-progress')
+            .evaluate((el) =>
+              Number(getComputedStyle(el).getPropertyValue('--p')),
+            ),
+        { timeout: 10000 },
+      )
+      .toBeGreaterThan(0.98);
   });
 });

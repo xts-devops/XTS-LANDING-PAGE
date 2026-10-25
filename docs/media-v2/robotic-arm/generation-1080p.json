@@ -1,0 +1,77 @@
+{
+  "jobId": "055eb1e9-1838-479a-936e-9b878eccfb46",
+  "status": "integrated-for-review",
+  "provider": "Higgsfield",
+  "quotedCredits": 10,
+  "balanceBefore": 124,
+  "request": {
+    "model": "minimax_hailuo",
+    "variant": "minimax",
+    "duration": 6,
+    "resolution": "1080",
+    "count": 1,
+    "medias": [
+      {
+        "role": "start_image",
+        "value": "7eb856fb-3c9b-421b-ba8b-3453f4d318fc"
+      },
+      {
+        "role": "end_image",
+        "value": "927d11c2-8bd2-4dfd-9d7d-f798b9a95264"
+      }
+    ],
+    "prompt": "Photoreal precision industrial product visualization with crisp machined edges, clearly resolved fine screws, bearing rings and brushed-metal surface detail across the entire arm. Deep focus, no soft focus, no motion blur, no bloom or diffusion. A single completely locked-off tripod shot of the exact six-axis industrial robotic arm in the start reference transitioning to the exact exploded configuration in the end reference. Preserve the rectangular mounting base at exactly the same pixel location, main supporting arm structure, plain dark background, floor, warm key light, camera framing, angle, exposure and scale. Hold assembled for 0.4 seconds; from 0.4 to 4.8 seconds separate only the existing covers, fasteners, shafts, bearings and wrist components along their local mechanical axes into evenly spaced end-reference positions; hold the exploded final state to the end. Controlled smooth rigid-body translation, stable fine detail from frame to frame. No camera motion, zoom, whole-arm rotation, cuts, reverse cycle, extra parts, geometry melting/bending, text, logos, particles, smoke, sparks, music or narration. Illustrative engineering concept, one forward transition only."
+  },
+  "actualCredits": 10,
+  "balanceAfter": 114,
+  "output": {
+    "file": "src/assets/video/arm-exploded.mp4",
+    "masterUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3LAYlCmnljecKN95e5xSTBaB7gS/hf_20261025_040725_055eb1e9-1838-479a-936e-9b878eccfb46.mp4",
+    "webMediaId": "c8000058-d926-4c37-871e-2c86dc530866",
+    "width": 1800,
+    "height": 1080,
+    "aspectRatio": "5:3",
+    "fps": 24,
+    "frames": 142,
+    "durationSeconds": 5.916667,
+    "bytes": 5076759,
+    "sha256": "75c2203657fc1add90d292a7a15fcdfb3a90a84167717bccb8af41084b7074bd",
+    "codec": "H.264",
+    "audio": false,
+    "keyframeIntervalFrames": 4,
+    "bFrames": 0,
+    "faststart": true,
+    "encode": "libx264 preset slow crf 20 g 4 keyint_min 4 sc_threshold 0 bf 0 yuv420p; metadata stripped"
+  },
+  "review": {
+    "sampledFrames": "Reviewed start/intermediate/end contact sheet and 1200px midpoint detail; stable base/framing and sharper surface detail. Generated separation is illustrative, not engineering assembly guidance.",
+    "supersedes": "generation.json (previous 768p delivery)",
+    "limitations": [
+      "Real iOS-device playback remains a release review check.",
+      "AI-generated intermediate components are a visual concept, not CAD-accurate topology."
+    ],
+    "artifacts": "docs/review/arm-hd (gitignored)",
+    "browserWidths": [375, 768, 1440],
+    "validation": {
+      "fullSuiteBeforeFinalBufferGuard": "180 e2e passed",
+      "finalBufferGuard": "15 focused arm/motion/UI passed",
+      "nativePlayback": "1800x1080 verified in all three browser viewports",
+      "duration": "about 1.8 seconds per direction; explicit replay reassembles then explodes",
+      "motionBudget": "70KB gzipped limit passes",
+      "mobilePerformance": {
+        "scores": [94, 94, 94],
+        "accessibility": 100,
+        "lcpMilliseconds": [2750.35, 2736.23, 2744.75],
+        "cls": 0,
+        "tbtMilliseconds": [23, 80, 97],
+        "baseline": {
+          "scores": [92, 93, 94],
+          "lcpMilliseconds": [3082.97, 3019.36, 3018.49]
+        },
+        "limitation": "Robotics hero LCP remains above the internal 2s target and score below 95; report retained for review. Video remains lazy below the hero."
+      },
+      "finalWebPHeroRegression": "26 service/arm/motion checks passed after the hero format refinement",
+      "build": "npm run verify passed with zero errors/warnings"
+    }
+  }
+}

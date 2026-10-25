@@ -2,8 +2,8 @@
 /**
  * Robotics centrepiece (PLAN-v2 §4): a robotic arm that comes apart as you scroll.
  * Media, best available first:
- *   1. video  src/assets/video/arm-exploded.(mp4|webm) → scroll-scrubbed (all-keyframe encode)
- *   2. photos robotics/hero-arm + robotics/arm-exploded → scroll-driven separation between the two
+ *   1. video  src/assets/video/arm-exploded.(mp4|webm) → finite viewport transition (short-GOP encode)
+ *   2. photos robotics/hero-arm + robotics/arm-exploded → finite transition between the two
  *   3. neither yet → placeholders (still laid out, so the page is complete)
  * No JS / reduced motion: both states side by side, static. Lazy: nothing heavy loads before
  * the visitor scrolls near it.
@@ -74,6 +74,10 @@ const copy = site.servicePage;
       <div class="exploded-progress" aria-hidden="true">
         <i data-exploded-bar />
       </div>
+      <button type="button" class="exploded-replay" data-arm-replay hidden>
+        <span aria-hidden="true">↻</span>
+        {copy.replayArm}
+      </button>
     </div>
   </div>
 </section>

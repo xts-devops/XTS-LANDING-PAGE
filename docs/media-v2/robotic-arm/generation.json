@@ -1,6 +1,6 @@
 {
   "jobId": "4f4f5384-ae39-48b8-bfe7-56967afb348c",
-  "status": "completed-integrated-for-review",
+  "status": "superseded-by-1080p",
   "provider": "Higgsfield",
   "quotedCredits": 6,
   "balanceBefore": 130,
@@ -66,5 +66,6 @@
       "Real iOS-device seeking remains a release review check; automated checks used Chromium.",
       "Generated source is 142 frames / 5.917 seconds, billed as the requested 6-second generation."
     ]
-  }
+  },
+  "supersededBy": "generation-1080p.json"
 }

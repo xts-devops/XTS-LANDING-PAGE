@@ -631,7 +631,8 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  height: calc(100% - 1rem);
+  aspect-ratio: 5 / 3;
+  height: auto;
   object-fit: contain;
   border-radius: var(--radius);
   background: var(--color-bg);
@@ -645,14 +646,14 @@
   display: none;
 }
 /* Scroll-driven mode: decided before first paint (.js + motion OK), so nothing shifts when the
-   engine boots. Sticky stage, states layered; scripts/motion drives the progress. */
+   engine boots. Finite viewport transition, states layered; scripts/motion drives playback. */
 @media (prefers-reduced-motion: no-preference) {
   .js .exploded-scroll {
-    height: 260vh;
+    height: auto;
   }
   .js .exploded-stage {
-    position: sticky;
-    top: 6.5rem;
+    position: relative;
+    top: auto;
   }
   .js .exploded-pair {
     grid-template-columns: 1fr;
@@ -685,7 +686,7 @@
 }
 @media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
   .js .exploded-scroll {
-    height: 200vh;
+    height: auto;
   }
 }
 
@@ -1090,5 +1091,38 @@ html:has(.gallery-dialog[open]) {
 @media (max-width: 720px) {
   .gallery-dialog-media.photo {
     height: 60dvh;
+  }
+}
+
+.exploded-replay {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  margin: 1rem 0 0 auto;
+  padding: 0.5rem 1rem;
+  border: var(--border);
+  border-radius: 2rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.exploded-replay[hidden] {
+  display: none;
+}
+.exploded-replay:is(:hover, :focus-visible) {
+  border-color: var(--color-gold-hi);
+}
+.exploded-replay:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .exploded-replay[hidden] {
+    display: flex;
+    visibility: hidden;
   }
 }

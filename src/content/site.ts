@@ -67,7 +67,8 @@ export const site = {
     galleryHeading: 'From the bench to the factory floor',
     explodedHeading: 'Engineered down to every part',
     explodedSummary:
-      'Scroll to take it apart. We design, source and assemble each component, then put it to work.',
+      'See how every part connects. We design, source and assemble each component, then put it to work.',
+    replayArm: 'Replay transition',
     cta: 'Start a project like this',
     prev: 'Previous slide',
     next: 'Next slide',

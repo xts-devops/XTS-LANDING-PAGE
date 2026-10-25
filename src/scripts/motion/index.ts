@@ -94,7 +94,7 @@ async function boot() {
         return initWorkGallery(gsap, ScrollTrigger, smooth?.lenis);
       },
     );
-    const cleanExploded = initExploded(ScrollTrigger);
+    const cleanExploded = initExploded(gsap, ScrollTrigger);
     const cleanGallery = initPhotoGalleryMotion(gsap, ScrollTrigger);
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(() => {
@@ -189,55 +189,111 @@ function initWorkGallery(gsap: Gsap, ScrollTrigger: ST, lenis?: Lenis) {
   };
 }
 
-/** A registered pair crossfades without camera movement or per-frame blur rasterization. */
-function initExploded(ScrollTrigger: ST) {
+/** A short viewport-triggered transition completes without continuous scroll input. */
+function initExploded(gsap: Gsap, ScrollTrigger: ST) {
   const root = document.querySelector<HTMLElement>('[data-exploded]');
   const scroller = root?.querySelector<HTMLElement>('.exploded-scroll');
-  if (!root || !scroller) return;
+  const stage = root?.querySelector<HTMLElement>('.exploded-stage');
+  if (!root || !scroller || !stage) return;
   const bar = root.querySelector<HTMLElement>('.exploded-progress');
   const video = root.querySelector<HTMLVideoElement>('[data-exploded-video]');
+  const replay = root.querySelector<HTMLButtonElement>('[data-arm-replay]');
   const b = root.querySelector<HTMLElement>('.exploded-b');
-  let progress = 0,
-    frame = 0,
-    disposed = false;
+  const saveData = (
+    navigator as Navigator & { connection?: { saveData?: boolean } }
+  ).connection?.saveData;
+  let mediaReady = !video || Boolean(saveData),
+    desired = 0;
+  const state = { progress: 0 };
+  let frame = 0,
+    disposed = false,
+    visible = false;
+  let tween: gsap.core.Tween | undefined;
   const seek = () => {
     frame = 0;
     if (
       disposed ||
       document.hidden ||
+      !visible ||
       !video ||
       !root.classList.contains('has-arm-video') ||
       video.seeking ||
       !Number.isFinite(video.duration)
     )
       return;
-    const time = progress * Math.max(0, video.duration - 0.05);
+    const time = state.progress * Math.max(0, video.duration - 0.05);
     if (Math.abs(video.currentTime - time) > 0.035) video.currentTime = time;
   };
   const schedule = () => {
-    if (!frame && !disposed) frame = requestAnimationFrame(seek);
+    if (!frame && !disposed && visible && !document.hidden)
+      frame = requestAnimationFrame(seek);
+  };
+  const render = () => {
+    bar?.style.setProperty('--p', state.progress.toFixed(3));
+    if (b) b.style.opacity = String(state.progress);
+    schedule();
+  };
+  const move = (target: number, complete?: () => void) => {
+    if (disposed) return;
+    desired = target;
+    if (!mediaReady) return;
+    tween?.kill();
+    if (replay) replay.disabled = true;
+    tween = gsap.to(state, {
+      progress: target,
+      duration: Math.max(0.15, Math.abs(target - state.progress) * 1.8),
+      ease: 'power1.inOut',
+      paused: !visible || document.hidden,
+      onUpdate: render,
+      onComplete: () => {
+        if (replay) replay.disabled = false;
+        complete?.();
+      },
+    });
   };
   const ready = () => {
+    if (disposed || mediaReady || !video || video.readyState < 2) return;
+    // The accelerated transition must not outrun a slowly arriving clip.
+    const last = video.buffered.length - 1;
+    if (last < 0 || video.buffered.end(last) < video.duration - 0.1) return;
     if (!disposed) {
+      mediaReady = true;
       root.classList.add('has-arm-video');
+      move(desired);
       schedule();
     }
   };
-  const failed = () => root.classList.remove('has-arm-video');
-  const visibility = () => {
-    if (document.hidden) {
+  const failed = () => {
+    mediaReady = true;
+    root.classList.remove('has-arm-video');
+    move(desired);
+  };
+  const activity = () => {
+    const paused = !visible || document.hidden;
+    tween?.paused(paused);
+    if (paused) {
       cancelAnimationFrame(frame);
       frame = 0;
       video?.pause();
     } else schedule();
   };
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    activity();
+  });
+  observer.observe(stage);
+  const replayTransition = () => move(0, () => move(1));
+  if (replay) {
+    replay.hidden = false;
+    replay.disabled = !mediaReady;
+    replay.addEventListener('click', replayTransition);
+  }
   video?.addEventListener('loadeddata', ready);
+  video?.addEventListener('progress', ready);
+  video?.addEventListener('canplaythrough', ready);
   video?.addEventListener('seeked', schedule);
   video?.addEventListener('error', failed);
-  document.addEventListener('visibilitychange', visibility);
-  const saveData = (
-    navigator as Navigator & { connection?: { saveData?: boolean } }
-  ).connection?.saveData;
+  document.addEventListener('visibilitychange', activity);
   if (video && !saveData)
     ScrollTrigger.create({
       trigger: scroller,
@@ -252,22 +308,37 @@ function initExploded(ScrollTrigger: ST) {
     });
   ScrollTrigger.create({
     trigger: scroller,
-    start: 'top top+=104',
-    end: 'bottom bottom',
-    onUpdate: (state) => {
-      progress = state.progress;
-      bar?.style.setProperty('--p', progress.toFixed(3));
-      const t = Math.min(1, Math.max(0, (progress - 0.12) / 0.7));
-      if (b) b.style.opacity = String(t * t * (3 - 2 * t));
-      schedule();
+    start: () =>
+      'top ' +
+      (Math.max(104, (innerHeight - stage.offsetHeight) / 2) + 48) +
+      'px',
+    end: 'bottom top',
+    invalidateOnRefresh: true,
+    onEnter: () => move(1),
+    onEnterBack: () => move(1),
+    onLeaveBack: () => move(0),
+    onRefresh: (self) => {
+      const target = self.scroll() >= self.start ? 1 : 0;
+      if (desired !== target) move(target);
     },
   });
+  render();
   return () => {
     disposed = true;
+    tween?.kill();
+    observer.disconnect();
     cancelAnimationFrame(frame);
     root.classList.remove('has-arm-video');
-    document.removeEventListener('visibilitychange', visibility);
+    bar?.style.removeProperty('--p');
+    if (replay) {
+      replay.hidden = true;
+      replay.disabled = false;
+      replay.removeEventListener('click', replayTransition);
+    }
+    document.removeEventListener('visibilitychange', activity);
     video?.removeEventListener('loadeddata', ready);
+    video?.removeEventListener('progress', ready);
+    video?.removeEventListener('canplaythrough', ready);
     video?.removeEventListener('seeked', schedule);
     video?.removeEventListener('error', failed);
     if (video) {
