@@ -1,4 +1,4 @@
-/** Native scroll-snap navigation with visible-only, user-controlled rotation. */
+/** Visible-only rotation; manual navigation gets a quiet six-second reading window. */
 export function initSlides(root: ParentNode = document) {
   root.querySelectorAll<HTMLElement>('[data-slides]').forEach((wrap) => {
     const track = wrap.querySelector<HTMLElement>('[data-slides-track]');
@@ -12,14 +12,19 @@ export function initSlides(root: ParentNode = document) {
     if (slides.length < 2) return;
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     const interval = Math.max(3000, Number(wrap.dataset.interval) || 3000);
-    let current = 0;
-    let paused = preference.matches;
-    let hovering = false;
-    let visible = false;
+    const idleDelay = 6000;
+    let current = 0,
+      paused = false,
+      keyboardFocused = false,
+      pointerActive = false,
+      visible = false,
+      idleUntil = 0;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const eligible = () =>
       !paused &&
-      !hovering &&
+      !preference.matches &&
+      !keyboardFocused &&
+      !pointerActive &&
       visible &&
       !document.hidden &&
       track.clientWidth > 0 &&
@@ -27,26 +32,38 @@ export function initSlides(root: ParentNode = document) {
       !document.querySelector('dialog[open]');
     const syncRotation = () => {
       clearTimeout(timer);
+      const idle = Math.max(0, idleUntil - Date.now());
       const running = eligible();
-      wrap.dataset.rotating = String(running);
-      wrap.dataset.paused = String(paused);
-      label?.setAttribute('aria-live', running ? 'off' : 'polite');
+      wrap.dataset.rotating = String(running && !idle);
+      wrap.dataset.paused = String(
+        paused || preference.matches || keyboardFocused,
+      );
+      wrap.dataset.idle = String(idle > 0);
+      label?.setAttribute('aria-live', running && !idle ? 'off' : 'polite');
       if (rotation) {
         const copy = paused
           ? rotation.dataset.playLabel
           : rotation.dataset.pauseLabel;
+        rotation.hidden = preference.matches;
         rotation.setAttribute('aria-label', copy ?? '');
-        const text = rotation.querySelector('[data-play-label]');
-        if (text) text.textContent = copy ?? '';
+        rotation.setAttribute('aria-pressed', String(paused));
+        rotation.title = copy ?? '';
       }
       if (running)
-        timer = setTimeout(() => {
-          if (eligible()) go((current + 1) % slides.length);
-          syncRotation();
-        }, interval);
+        timer = setTimeout(
+          () => {
+            if (eligible()) {
+              idleUntil = 0;
+              label?.setAttribute('aria-live', 'off');
+              go((current + 1) % slides.length);
+            }
+            syncRotation();
+          },
+          Math.max(interval, idle),
+        );
     };
-    const stop = () => {
-      paused = true;
+    const override = () => {
+      idleUntil = Date.now() + idleDelay;
       syncRotation();
     };
     const update = () => {
@@ -83,45 +100,66 @@ export function initSlides(root: ParentNode = document) {
       .querySelectorAll<HTMLButtonElement>('[data-slide-index]')
       .forEach((button) =>
         button.addEventListener('click', () => {
-          stop();
+          override();
           go(Number(button.dataset.slideIndex));
         }),
       );
     prev?.addEventListener('click', () => {
-      stop();
+      override();
       go(current - 1);
     });
     next?.addEventListener('click', () => {
-      stop();
+      override();
       go(current + 1);
     });
-    let pointerPaused: boolean | undefined;
-    rotation?.addEventListener('pointerdown', () => {
-      pointerPaused = paused;
-    });
     rotation?.addEventListener('click', () => {
-      paused = !(pointerPaused ?? paused);
-      pointerPaused = undefined;
-      hovering = false;
+      paused = !paused;
+      keyboardFocused = false;
+      idleUntil = 0;
       syncRotation();
     });
-    wrap.addEventListener('focusin', stop);
-    wrap.addEventListener('pointerenter', (event) => {
-      if (event.pointerType === 'mouse') {
-        hovering = true;
-        syncRotation();
-      }
-    });
-    wrap.addEventListener('pointerleave', () => {
-      hovering = false;
+    wrap.addEventListener(
+      'pointerdown',
+      () => {
+        pointerActive = true;
+        keyboardFocused = false;
+        override();
+      },
+      { passive: true },
+    );
+    wrap.addEventListener(
+      'pointermove',
+      () => {
+        if (pointerActive) override();
+      },
+      { passive: true },
+    );
+    const release = () => {
+      if (!pointerActive) return;
+      pointerActive = false;
+      syncRotation();
+    };
+    addEventListener('pointerup', release, { passive: true });
+    addEventListener('pointercancel', release, { passive: true });
+    wrap.addEventListener('focusin', () => {
+      keyboardFocused =
+        !pointerActive &&
+        Boolean(document.activeElement?.matches(':focus-visible'));
       syncRotation();
     });
-    track.addEventListener('pointerdown', stop, { passive: true });
-    track.addEventListener('wheel', stop, { passive: true });
+    wrap.addEventListener('focusout', () =>
+      queueMicrotask(() => {
+        if (!wrap.contains(document.activeElement)) {
+          keyboardFocused = false;
+          syncRotation();
+        }
+      }),
+    );
+    track.addEventListener('wheel', override, { passive: true });
     track.addEventListener('keydown', (event) => {
       if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
       event.preventDefault();
-      stop();
+      override();
       go(current + (event.key === 'ArrowRight' ? 1 : -1));
     });
     let raf = 0;
@@ -129,7 +167,10 @@ export function initSlides(root: ParentNode = document) {
       'scroll',
       () => {
         cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(update);
+        raf = requestAnimationFrame(() => {
+          if (idleUntil > Date.now()) idleUntil = Date.now() + idleDelay;
+          update();
+        });
       },
       { passive: true },
     );
@@ -153,7 +194,8 @@ export function initSlides(root: ParentNode = document) {
     document.addEventListener('visibilitychange', syncRotation);
     document.addEventListener('site:preview', syncRotation);
     preference.addEventListener('change', () => {
-      if (preference.matches) stop();
+      idleUntil = 0;
+      syncRotation();
     });
     update();
   });

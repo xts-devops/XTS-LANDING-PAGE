@@ -58,7 +58,6 @@ export const presentation = {
     hint: 'Browse the screens, pause to explore, or open a full-size preview.',
     play: 'Play slideshow',
     pause: 'Pause slideshow',
-    cadence: '3 seconds per view',
     choose: 'Choose a screen',
     preview: 'Screen preview',
     zoom: '100% — Show at actual size',

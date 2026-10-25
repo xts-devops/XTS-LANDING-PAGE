@@ -54,12 +54,11 @@ for (const width of [375, 768, 1440]) {
   }
 }
 
-test('automatic rotation runs at 3s, loops, pauses on hover and stops on manual input', async ({
+test('automatic 3s rotation resumes after 6s idle; explicit pause remains stopped', async ({
   page,
 }) => {
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
-  // This scenario advances 21s of frame-by-frame clock time plus browser actions.
   test.setTimeout(60_000);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   const start = new Date('2026-10-25T00:00:00Z');
   await page.clock.install({ time: start });
   await page.clock.pauseAt(start);
@@ -68,64 +67,72 @@ test('automatic rotation runs at 3s, loops, pauses on hover and stops on manual 
     wrap = panel.locator('[data-slides]'),
     count = panel.locator('[data-count-label]');
   await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
-  await page.mouse.move(0, 0);
   await expect(wrap).toHaveAttribute('data-rotating', 'true');
+  await expect(panel.locator('.slides-timing')).toHaveCount(0);
+  await expect(panel.locator('span[data-play-label]')).toHaveCount(0);
   await page.clock.runFor(2900);
   await expect(count).toHaveText('1 / 6');
   await page.clock.runFor(1100);
   await expect(count).toHaveText('2 / 6');
-  await expect(count).toHaveAttribute('aria-live', 'off');
-  await panel.locator('.slides-stage').hover();
-  await expect(wrap).toHaveAttribute('data-rotating', 'false');
-  await page.clock.runFor(4000);
-  await expect(count).toHaveText('2 / 6');
-  await page.mouse.move(0, 0);
-  await expect(wrap).toHaveAttribute('data-rotating', 'true');
-  await page.clock.runFor(4000);
-  await expect(count).toHaveText('3 / 6');
   await panel.locator('[data-slide-index="5"]').click();
-  await page.clock.runFor(1000);
+  await page.clock.runFor(5000);
   await expect(count).toHaveText('6 / 6');
-  await expect(wrap).toHaveAttribute('data-paused', 'true');
-  await panel
-    .getByRole('button', { name: 'Play slideshow', exact: true })
-    .click();
-  await page.mouse.move(0, 0);
-  await page.clock.runFor(4000);
+  await expect(wrap).toHaveAttribute('data-idle', 'true');
+  await page.clock.runFor(2000);
   await expect(count).toHaveText('1 / 6');
   await panel
     .getByRole('button', { name: 'Pause slideshow', exact: true })
     .click();
-  await page.mouse.move(0, 0);
-  await page.clock.runFor(4000);
+  await page.clock.runFor(7000);
   await expect(count).toHaveText('1 / 6');
+  await panel
+    .getByRole('button', { name: 'Play slideshow', exact: true })
+    .click();
+  await page.clock.runFor(4000);
+  await expect(count).toHaveText('2 / 6');
 });
 
-test('rotation is off under reduced motion and remains stopped after focus or preference changes', async ({
+test('navigation arrows reset the idle window even with the pointer left on them', async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const start = new Date('2026-10-25T00:00:00Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(start);
+  await page.goto('/services/business-systems');
+  const panel = page.getByRole('tabpanel'),
+    count = panel.locator('[data-count-label]');
+  await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
+  await panel.locator('[data-next]').click();
+  await page.clock.runFor(4000);
+  await expect(count).toHaveText('2 / 6');
+  await panel.locator('[data-next]').click();
+  await page.clock.runFor(4000);
+  await expect(count).toHaveText('3 / 6');
+  await page.clock.runFor(3500);
+  await expect(count).toHaveText('4 / 6');
+});
+
+test('reduced motion disables rotation; keyboard focus suspends it until focus leaves', async ({
   page,
 }) => {
   await page.goto('/services/business-systems');
   const panel = page.getByRole('tabpanel'),
     wrap = panel.locator('[data-slides]');
-  await expect(wrap).toHaveAttribute('data-paused', 'true');
   await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
-  await panel
-    .getByRole('button', { name: 'Play slideshow', exact: true })
-    .click();
-  await page.mouse.move(0, 0);
-  await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
+  await expect(wrap).toHaveAttribute('data-rotating', 'false');
+  await expect(panel.locator('[data-slides-play]')).not.toBeVisible();
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(wrap).toHaveAttribute('data-rotating', 'true');
   await panel.locator('[data-slides-track]').focus();
   await expect(wrap).toHaveAttribute('data-paused', 'true');
   await page.locator('h1').click();
-  await expect(wrap).toHaveAttribute('data-paused', 'true');
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await panel.locator('.slides-stage').scrollIntoViewIfNeeded();
-  await panel
-    .getByRole('button', { name: 'Play slideshow', exact: true })
-    .click();
+  await expect(wrap).toHaveAttribute('data-rotating', 'true');
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect(wrap).toHaveAttribute('data-paused', 'true');
+  await expect(wrap).toHaveAttribute('data-rotating', 'false');
+  await expect(panel.locator('[data-slides-play]')).not.toBeVisible();
 });
 
 test('hidden panels and offscreen carousels do not rotate', async ({

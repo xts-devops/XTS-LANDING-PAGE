@@ -60,37 +60,37 @@ const demo = presentation.demo;
             </ul>
           </div>
           <div class="slides" data-slides data-interval="3000">
-            <div class="slides-toolbar">
-              {system.slides.length > 1 && (
-                <button
-                  type="button"
-                  class="slides-play"
-                  data-slides-play
-                  data-play-label={demo.play}
-                  data-pause-label={demo.pause}
-                  aria-label={demo.pause}
-                >
-                  <span class="slides-play-symbol" aria-hidden="true"></span>
-                  <span data-play-label>{demo.pause}</span>
-                </button>
-              )}
-              <span class="slides-timing">{demo.cadence}</span>
-              <span class="slides-count" aria-live="off" data-count-label>
-                1 / {system.slides.length}
-              </span>
-            </div>
-            <div class="slide-picker" aria-label={demo.choose} role="group">
-              {system.slides.map((slide, i) => (
-                <button
-                  type="button"
-                  data-slide-index={i}
-                  aria-pressed={i === 0 ? 'true' : 'false'}
-                  aria-controls={`slides-${system.id}`}
-                >
-                  <span>{String(i + 1).padStart(2, '0')}</span>
-                  {slide.caption.replace('Mobile app: ', '')}
-                </button>
-              ))}
+            <div class="slides-navigation">
+              <div class="slides-toolbar">
+                {system.slides.length > 1 && (
+                  <button
+                    type="button"
+                    class="slides-play"
+                    data-slides-play
+                    data-play-label={demo.play}
+                    data-pause-label={demo.pause}
+                    aria-label={demo.pause}
+                  >
+                    <span class="slides-play-symbol" aria-hidden="true"></span>
+                  </button>
+                )}
+                <span class="slides-count" aria-live="off" data-count-label>
+                  1 / {system.slides.length}
+                </span>
+              </div>
+              <div class="slide-picker" aria-label={demo.choose} role="group">
+                {system.slides.map((slide, i) => (
+                  <button
+                    type="button"
+                    data-slide-index={i}
+                    aria-pressed={i === 0 ? 'true' : 'false'}
+                    aria-controls={`slides-${system.id}`}
+                  >
+                    <span>{String(i + 1).padStart(2, '0')}</span>
+                    {slide.caption.replace('Mobile app: ', '')}
+                  </button>
+                ))}
+              </div>
             </div>
             <div class="slides-stage">
               {system.slides.length > 1 && (

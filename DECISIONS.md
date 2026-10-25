@@ -100,3 +100,6 @@ User requests a sharper 1080p regeneration after checking cost and a faster arm 
 
 ### D31 · 2026-10-25 · user · Higgsfield disabled for subsequent work
 User explicitly says not to use Higgsfield starting now. Do not call its generation, processing, discovery or other MCP tools unless the user explicitly re-enables it. Existing locally saved assets can remain in the site. The hero display correction uses native SVG/CSS only.
+
+### D32 · 2026-10-25 · user + codex · Showcase automatic idle resumption
+User requests removal of the large Play slideshow/cadence block, automatic 3s views, manual navigation override and automatic return after inactivity. Supersede D26 persistent stop after pointer/manual navigation: resume after 6s without further input. Keep a compact persistent Pause/Resume icon beside the count, keyboard-focus suspension, reduced-motion suppression and hidden/offscreen/dialog suspension. Image-side arrows, native swipe, count and named-view selection remain.
