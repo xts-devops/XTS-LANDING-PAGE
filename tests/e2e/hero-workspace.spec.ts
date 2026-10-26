@@ -53,7 +53,7 @@ for (const width of [375, 768, 1440, 2048]) {
       await expect(page.locator('.workspace-portal-heading')).toHaveText(
         'Your workspace',
       );
-      await expect(page.locator('.hero-motion')).not.toBeVisible();
+      await expect(page.locator('.hero-motion')).toHaveCount(0);
       await expect(page.locator('.workspace-title')).toHaveText(
         'Order fulfilment',
       );
@@ -66,27 +66,28 @@ for (const width of [375, 768, 1440, 2048]) {
   );
 }
 
-test('workspace motion pauses on request, offscreen and on live reduced-motion change', async ({
+test('workspace autoplays without a toggle and suspends offscreen and under reduced motion', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#top');
   const hero = page.locator('[data-hero]');
-  const toggle = page.getByRole('button', { name: 'Pause workspace motion' });
+  await expect(page.locator('[data-workspace-toggle]')).toHaveCount(0);
   await expect(hero).toHaveAttribute('data-workspace-active', 'true');
-  await toggle.click();
-  await expect(hero).toHaveAttribute('data-workspace-active', 'false');
-  await expect(page.locator('[data-workspace-toggle]')).toHaveAttribute(
-    'aria-pressed',
-    'true',
+  await expect(page.locator('.workspace-trace')).toHaveCSS(
+    'animation-play-state',
+    'running',
   );
-  await page.getByRole('button', { name: 'Resume workspace motion' }).click();
-  await expect(hero).toHaveAttribute('data-workspace-active', 'true');
   await page.locator('#contact').scrollIntoViewIfNeeded();
   await expect(hero).toHaveAttribute('data-workspace-active', 'false');
   await page.locator('.hero-visual').scrollIntoViewIfNeeded();
   await expect(hero).toHaveAttribute('data-workspace-active', 'true');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(hero).toHaveAttribute('data-workspace-active', 'false');
-  await expect(page.locator('[data-workspace-toggle]')).not.toBeVisible();
+  await expect(page.locator('.workspace-trace')).toHaveCSS(
+    'animation-name',
+    'none',
+  );
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(hero).toHaveAttribute('data-workspace-active', 'true');
 });

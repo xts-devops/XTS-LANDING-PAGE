@@ -141,3 +141,5 @@ _(none)_ — **MVP merged to `main` (PR #6, 2026-10-18)**. #2–#5 closed/merged
 - [ ] **V2-PERFORMANCE Cold-load and interaction performance** — immediate hero display, 33.7% smaller initial JS, broader marketing and 284 checks ... owner: codex · status: review (codex/v2-ui-refinement)
 
 - [ ] **V2-SHOWCASE-LOOPS Looping films and mobile arm** — cyclic showcases and native responsive arm playback ... owner: codex · status: review (codex/v2-ui-refinement)
+
+- [ ] **V2-HERO-AUTO Clean automatic hero workspace** — remove floating playback control, retain automatic visibility-aware motion ... owner: codex · status: review (codex/v2-ui-refinement)

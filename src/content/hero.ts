@@ -41,8 +41,6 @@ export const heroDirection = {
     portalSections: ['Appointments', 'Documents', 'Messages'],
     portalAction: 'Open workspace',
     tools: ['Layout', 'Components', 'Styles'],
-    pause: 'Pause workspace motion',
-    resume: 'Resume workspace motion',
   },
   frameCode: 'XTS / 01',
   frameTitle: 'From possibility to working reality.',

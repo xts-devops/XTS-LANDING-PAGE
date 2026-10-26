@@ -2,6 +2,15 @@
 
 Append-only. Newest at top. Never edit past entries. Format:
 
+## 2026-10-26 · codex · Clean automatic hero workspace ready
+**Task:** V2-HERO-AUTO · owner: codex · status: review · PR #12 / xts-devops main.
+**Done:** Removed the floating hero Pause workspace motion button, associated copy/CSS and manual toggle logic. The illustrative workspace starts automatically while visible; hidden/offscreen and live reduced-motion suspension remain. No media, dependencies or other slideshow controls changed.
+**Validation:** npm run verify passes with zero diagnostics; all5 hero workspace checks pass, including375/768/1440/2048 alignment, absent toggle, actual CSS autoplay and reduced-motion disable/re-enable. Review captures375/768/1440 and logs: docs/review/showcase-loops (gitignored). Production dist refreshed at localhost4380.
+
+## 2026-10-26 · codex · Clean automatic hero workspace claim
+**Task:** V2-HERO-AUTO · owner: codex · status: in-progress.
+**Scope:** Remove the requested floating hero playback button, obsolete labels/styles and manual-toggle logic; retain visible-only automatic workspace motion, page lifecycle and live reduced-motion handling. Update owned hero regression tests. Publish to existing PR #12, destination main and localhost.
+
 ## 2026-10-26 · codex · Looping showcases and mobile arm ready
 **Task:** V2-SHOWCASE-LOOPS · owner: codex · status: review · PR #12 / xts-devops main.
 **Done:** Property/hotel films loop last-to-first with held-frame transitions and one upcoming buffer. Screenshot galleries retain six-second rotation and soften large/wrap jumps with a cancellable opacity fade. The arm now uses native visible-only playback independent of GSAP/pointer interaction, holds the exploded state then dissolves/reset-loops, and has persistent Pause/Resume plus Replay. Touch portrait/landscape keeps normal scroll flow and 44px controls inside the viewport. A 1280×768 derivative is 68.5% lighter and used only when it covers displayed pixels; original1800×1080 is unchanged. No paid generation, new runtime dependencies or per-frame JS loops.
